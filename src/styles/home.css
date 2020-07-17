@@ -42,7 +42,8 @@
     width: 80%;
 }
 
-ul {
-    padding-inline-start: 0px;
-    list-style-type: none;
+#loading {
+    display: flex;
+    background: none;
+    justify-content: center;
 }

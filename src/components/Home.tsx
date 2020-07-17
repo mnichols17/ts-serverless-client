@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Select from 'react-select';
 import makeCalls from '../utils/makeCalls';
-import ReactLoading from 'react-loading';
-import Item from './Item';
+import ReviewList from './ReviewList';
 import Review from '../utils/Review';
 
 import '../styles/home.css';
@@ -10,19 +9,14 @@ import '../styles/home.css';
 const Home: React.FC = () => {
 
     const[query, setQuery] = useState("");
-    const[items, setItems] = useState<Review[]>([]);
-    const[fetchingData, setFetching] = useState(true);
+    const[reviews, setReviews] = useState<Review[]>([]);
     const[itemSkips, setSkips] = useState(0);
 
     useEffect(() => {
-        makeCalls('reviews/all', {skip: itemSkips})
-        .then((res: any) => {
-            console.log(res.data)
-            setItems(res.data)
-            setFetching(false)
-        })
-        .catch(err => console.error(err))
+        getReviews();
     }, [])
+
+    
 
     const options = [
         {value: "default", label: "Best Match (Default)"},
@@ -33,6 +27,15 @@ const Home: React.FC = () => {
     const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
     }
+    
+    const getReviews = async() => {
+        makeCalls('reviews/all', {skip: itemSkips})
+        .then((res: any) => {
+            setSkips(itemSkips+1)
+            setReviews([...reviews, ...res.data])
+        })
+        .catch(err => console.error(err))
+    }
 
     return(
         <div id="content">
@@ -40,7 +43,7 @@ const Home: React.FC = () => {
                 <input type="text" onChange={handleQuery} placeholder="Search by Title, Director or Genre"/>
                 <Select id="filter" label="Sort By" isSearchable={false} options={options} defaultValue={options[0]}/>
             </div>
-            {fetchingData ? <ReactLoading type={'spin'} color={'yellow'}/> : <ul>{items.map(({title, rating}) => <Item key={title} title={title} rating={rating} />)}</ul>}
+            <ReviewList reviews={reviews} getReviews={getReviews}/>
         </div>
     )
 }
