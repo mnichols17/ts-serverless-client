@@ -1,53 +1,51 @@
 import React, {useState, useEffect} from 'react';
-import Select from 'react-select';
-import makeCalls from '../utils/makeCalls';
+import request from '../utils/makeRequest';
 import ReviewList from './ReviewList';
 import Review from '../utils/Review';
+import Search from './Search';
 
 import '../styles/home.css';
 
 const Home: React.FC = () => {
 
-    const[query, setQuery] = useState("");
     const[reviews, setReviews] = useState<Review[]>([]);
-    const[itemSkips, setSkips] = useState(0);
+    const[itemSkips, setSkips] = useState<number>(0);
+	const[empty, setEmpty] = useState<boolean>(false);
+	const[preventRequest, setPrevent] = useState<boolean>(false);
 
     useEffect(() => {
         getReviews();
-    }, [])
+    }, [])    
 
-    
-
-    const options = [
-        {value: "default", label: "Best Match (Default)"},
-        {value: "high", label: "High to Low"},
-        {value: "low", label: "Low to High"},
-    ]
-
-    const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(e.target.value);
+    const queryResults = async(reviews: Review[], reset?: boolean) => {
+		if(reset) getReviews(reset);
+		else if(reviews.length > 0) {
+			setReviews(reviews)
+			if(empty) setEmpty(false);
+			if(!preventRequest) setPrevent(true);
+		}
+		else {
+			setEmpty(true);
+		}
     }
     
-    const getReviews = async() => {
-        makeCalls('reviews/all', {skip: itemSkips})
+    const getReviews = async(reset?: boolean) => {
+        request('reviews/all', {skip: reset? 0 : itemSkips})
         .then((res: any) => {
-            setSkips(itemSkips+1)
-            setReviews([...reviews, ...res.data])
+            setSkips(reset? 1 : itemSkips+1)
+			reset ? setReviews([...res.data]) : setReviews([...reviews, ...res.data])
+			if(preventRequest) setPrevent(false);
         })
         .catch(err => console.error(err))
     }
 
+    console.log(itemSkips)
     return(
         <div id="content">
-            <div id="search">
-                <input type="text" onChange={handleQuery} placeholder="Search by Title, Director or Genre"/>
-                <Select id="filter" label="Sort By" isSearchable={false} options={options} defaultValue={options[0]}/>
-            </div>
-            <ReviewList reviews={reviews} getReviews={getReviews}/>
+            <Search queryResults={queryResults} />
+            {empty ? <h2 id="empty">No results found</h2> : <ReviewList reviews={reviews} getReviews={getReviews} preventRequest={preventRequest}/>}
         </div>
     )
 }
-
-// <ul>{items.map(item => <Item item={item} />)}</ul>
 
 export default Home;

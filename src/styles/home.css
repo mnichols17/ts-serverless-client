@@ -26,7 +26,7 @@
     padding: 10px;
     border-radius: 10px;
     margin: 1em 0px;
-    border: 2px solid #282C34;
+    border: 2px solid #CCCCCC;
 }
 
 #search > input::placeholder {
@@ -35,7 +35,7 @@
 }
 
 #search > input:focus {
-    border: 2px solid cyan;
+    border: 2px solid yellow;
 }
 
 #search > #filter {
@@ -46,4 +46,9 @@
     display: flex;
     background: none;
     justify-content: center;
+    border: none;
+}
+
+#empty {
+    color: yellow;
 }

@@ -1,6 +1,7 @@
 ul {
     padding-inline-start: 0px;
     list-style-type: none;
+    width: 100%;
 }
 
 li {
@@ -12,6 +13,7 @@ li {
     grid-gap: 10px;
     justify-items: center;
     align-items: center;
+    border: 1px solid #CCCCCC;
 }
 
 li > h4 {
