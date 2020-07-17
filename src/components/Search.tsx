@@ -1,49 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Select from 'react-select';
-import Review from '../utils/Review';
-import request from '../utils/makeRequest';
 
 interface SearchProps {
-    queryResults: (reviews: Review[], reset?: boolean) => void;
+    queryRequestCreator: (e: React.ChangeEvent<HTMLInputElement>) => Promise<void>; 
+    changeFilter:  React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Search: React.FC<SearchProps> = ({queryResults}) => {
-
-    const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
+const Search: React.FC<SearchProps> = ({queryRequestCreator, changeFilter}) => {
+    
     const options: object[] = [
-        {value: "default", label: "Best Match (Default)"},
-        {value: "high", label: "High to Low"},
-        {value: "low", label: "Low to High"},
+        {value: "", label: "Best Match (Default)"},
+        {value: "DESC", label: "High to Low"},
+        {value: "ASC", label: "Low to High"},
     ]
-
-    const queryRequestCreator = async(query: string) => new Promise((resolve, reject) => {
-        if(typingTimeout) clearTimeout(typingTimeout)
-
-        setTyping(setTimeout(async() => {
-            try {
-                const res:any = await request(`reviews/search/?query=${query}`)
-                resolve(res.data)
-            } 
-            catch(e) {
-                console.log("ERROR", e);
-            }
-        }, 500))
-    })
-
-    const handleQuery = async(e: React.ChangeEvent<HTMLInputElement>) => {
-        const query = e.target.value;
-        if(query === "") {
-            if(typingTimeout) clearTimeout(typingTimeout)
-            return queryResults([], true);
-        }
-        const res = await queryRequestCreator(e.target.value)
-        queryResults(res as Review[]);
-    }
 
     return(
         <div id="search">
-            <input type="text" onChange={handleQuery} placeholder="Search by Title, Director or Genre"/>
-            <Select id="filter" label="Sort By" isSearchable={false} options={options} defaultValue={options[0]}/>
+            <input type="text" onChange={queryRequestCreator} placeholder="Search by Title, Director or Genre"/>
+            <Select id="filter" label="Sort By" onChange={(e:any) => changeFilter(e.value)} isSearchable={false} options={options} defaultValue={options[0]}/>
         </div>
     )
 }

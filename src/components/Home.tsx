@@ -8,42 +8,51 @@ import '../styles/home.css';
 
 const Home: React.FC = () => {
 
-    const[reviews, setReviews] = useState<Review[]>([]);
+	const[reviews, setReviews] = useState<Review[]>([]);
+	const[url, setUrl] = useState<string>('reviews/all');
+	const[filter, setFilter] = useState<string>("");
     const[itemSkips, setSkips] = useState<number>(0);
 	const[empty, setEmpty] = useState<boolean>(false);
-	const[preventRequest, setPrevent] = useState<boolean>(false);
+	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 
     useEffect(() => {
         getReviews();
-    }, [])    
+	}, []) 
+	
+	useEffect(() => {
+		getReviews(true);
+	}, [url, filter])
 
-    const queryResults = async(reviews: Review[], reset?: boolean) => {
-		if(reset) getReviews(reset);
-		else if(reviews.length > 0) {
-			setReviews(reviews)
-			if(empty) setEmpty(false);
-			if(!preventRequest) setPrevent(true);
-		}
-		else {
-			setEmpty(true);
+	const queryRequestCreator = async(e: React.ChangeEvent<HTMLInputElement>) => {
+		const query = e.target.value;
+		if(typingTimeout) clearTimeout(typingTimeout)
+        if(query === "") {
+			setUrl('reviews/all')
+        } else {
+			setTyping(setTimeout(async() => {
+				setUrl(`reviews/search/?query=${query}`)
+			}, 500))
 		}
     }
-    
-    const getReviews = async(reset?: boolean) => {
-        request('reviews/all', {skip: reset? 0 : itemSkips})
+	
+	const getReviews = async(reset?: boolean) => {
+		console.log(url);
+		if(empty) setEmpty(false);
+        request(url, {filter, skip: reset? 0 : itemSkips})
         .then((res: any) => {
+			if(res.data.length === 0) return setEmpty(true);
+			else if(empty) setEmpty(false)
             setSkips(reset? 1 : itemSkips+1)
-			reset ? setReviews([...res.data]) : setReviews([...reviews, ...res.data])
-			if(preventRequest) setPrevent(false);
+			reset? setReviews(res.data) : setReviews([...reviews, ...res.data]);
         })
         .catch(err => console.error(err))
-    }
+	}
 
     console.log(itemSkips)
     return(
         <div id="content">
-            <Search queryResults={queryResults} />
-            {empty ? <h2 id="empty">No results found</h2> : <ReviewList reviews={reviews} getReviews={getReviews} preventRequest={preventRequest}/>}
+            <Search queryRequestCreator={queryRequestCreator} changeFilter={setFilter}/>
+            {empty ? <h2 id="empty">No results found</h2> : <ReviewList reviews={reviews} getReviews={getReviews}/>}
         </div>
     )
 }

@@ -18,13 +18,13 @@ const ReviewItem: React.FC<Review> = ({title, rating}) => {
 interface ReviewListProps {
     reviews: Review[];
     getReviews: () => void;
-    preventRequest: boolean;
 }
 
-const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews, preventRequest}) => {
+const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews}) => {
+    const LoadingItem = <li id="loading"><ReactLoading type={"spin"} color={"yellow"}/></li>
     return (
         <ul>
-            <InfiniteScroll loader={<li id="loading"><ReactLoading type={"spin"} color={"yellow"}/></li>} dataLength={reviews.length} next={getReviews} hasMore={!preventRequest}>
+            <InfiniteScroll loader={LoadingItem} dataLength={reviews.length} next={getReviews} hasMore={true}>
                 {reviews.map(({title, rating}) => <ReviewItem key={title} title={title} rating={rating}/>)}
             </InfiniteScroll>
         </ul>
