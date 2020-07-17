@@ -1,0 +1,15 @@
+li {
+    background: #F4F6F7;
+    border-radius: 10px;
+    margin: 1em;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: center;
+}
+
+li > h4 {
+    justify-self: flex-start;
+    padding: 8px;
+}
