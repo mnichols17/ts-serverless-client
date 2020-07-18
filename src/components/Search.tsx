@@ -9,9 +9,9 @@ interface SearchProps {
 const Search: React.FC<SearchProps> = ({queryRequestCreator, changeFilter}) => {
     
     const options: object[] = [
-        {value: "", label: "Best Match (Default)"},
-        {value: "DESC", label: "High to Low"},
-        {value: "ASC", label: "Low to High"},
+        {value: "", label: "Best Match"},
+        {value: "ASC", label: "High to Low (Rating)"},
+        {value: "DESC", label: "Low to High (Rating)"},
     ]
 
     return(

@@ -1,8 +1,14 @@
 export default interface Review {
+    rank?: number;
+    movie: string;
+    total: number;
     director?: string;
     genre?: string;
-    language?: string;
-    rating: number;
     subgenre?: string;
-    title: string;
+    universe?: string;
+    subuniverse?: string;
+    character?: string;
+    sportholiday?: string;
+    year?: number;
+    poster?: string;
 }

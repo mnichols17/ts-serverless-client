@@ -6,28 +6,28 @@ import Review from '../utils/Review';
 
 import '../styles/reviewList.css';
 
-const ReviewItem: React.FC<Review> = ({title, rating}) => {
+const ReviewItem: React.FC<Review> = ({movie, total, poster}) => {
     return(
-        <li>
-            <h4>{title}</h4>
-            <h2>{rating}</h2>
-        </li>
+        <div className="movie-card">
+            <img className="movie-poster" src={poster} alt={movie}/>
+            <p className="movie-total">{total}</p>
+            <p className="movie-title">{movie}</p>
+        </div>
     )
 }
 
 interface ReviewListProps {
     reviews: Review[];
-    getReviews: () => void;
+    getReviews: (reset: boolean, fromScroll: boolean) => void;
+    more: boolean;
 }
 
-const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews}) => {
+const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews, more}) => {
     const LoadingItem = <li id="loading"><ReactLoading type={"spin"} color={"yellow"}/></li>
     return (
-        <ul>
-            <InfiniteScroll loader={LoadingItem} dataLength={reviews.length} next={getReviews} hasMore={true}>
-                {reviews.map(({title, rating}) => <ReviewItem key={title} title={title} rating={rating}/>)}
-            </InfiniteScroll>
-        </ul>
+        <InfiniteScroll style={{display: 'flex', flexWrap: 'wrap'}} loader={LoadingItem} dataLength={reviews.length} next={() => getReviews(false, true)} hasMore={more}>
+            {reviews.map(({rank, movie, total, poster}) => <ReviewItem key={rank} movie={movie} total={total} poster={poster} /> )}
+        </InfiniteScroll>
     );
 }
 

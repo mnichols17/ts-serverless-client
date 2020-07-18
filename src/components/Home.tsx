@@ -14,9 +14,10 @@ const Home: React.FC = () => {
     const[itemSkips, setSkips] = useState<number>(0);
 	const[empty, setEmpty] = useState<boolean>(false);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
+	const[more, setMore] = useState<boolean>(true);
 
     useEffect(() => {
-        getReviews();
+		getReviews();
 	}, []) 
 	
 	useEffect(() => {
@@ -35,13 +36,16 @@ const Home: React.FC = () => {
 		}
     }
 	
-	const getReviews = async(reset?: boolean) => {
-		console.log(url);
-		if(empty) setEmpty(false);
+	const getReviews = async(reset?: boolean, fromScroll?: boolean) => {
+		console.log(url, filter);
         request(url, {filter, skip: reset? 0 : itemSkips})
         .then((res: any) => {
-			if(res.data.length === 0) return setEmpty(true);
+			if(!res.data.length){
+				if(!fromScroll) return setEmpty(true)
+				else setMore(false);
+			}
 			else if(empty) setEmpty(false)
+			else if(!more) setMore(true);
             setSkips(reset? 1 : itemSkips+1)
 			reset? setReviews(res.data) : setReviews([...reviews, ...res.data]);
         })
@@ -52,7 +56,7 @@ const Home: React.FC = () => {
     return(
         <div id="content">
             <Search queryRequestCreator={queryRequestCreator} changeFilter={setFilter}/>
-            {empty ? <h2 id="empty">No results found</h2> : <ReviewList reviews={reviews} getReviews={getReviews}/>}
+            {empty ? <h2 id="empty">No results found</h2> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
         </div>
     )
 }
