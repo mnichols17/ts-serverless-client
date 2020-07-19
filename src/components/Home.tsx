@@ -3,6 +3,7 @@ import request from '../utils/makeRequest';
 import ReviewList from './ReviewList';
 import Review from '../utils/Review';
 import Search from './Search';
+import ReactLoading from 'react-loading';
 
 import '../styles/home.css';
 
@@ -10,11 +11,11 @@ const Home: React.FC = () => {
 
 	const[reviews, setReviews] = useState<Review[]>([]);
 	const[url, setUrl] = useState<string>('reviews/all');
-	const[filter, setFilter] = useState<string>("");
+	const[sort, setSort] = useState<string>("");
     const[itemSkips, setSkips] = useState<number>(0);
-	const[empty, setEmpty] = useState<boolean>(false);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[more, setMore] = useState<boolean>(true);
+	const[loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
 		getReviews();
@@ -22,11 +23,12 @@ const Home: React.FC = () => {
 	
 	useEffect(() => {
 		getReviews(true);
-	}, [url, filter])
+	}, [url, sort])
 
-	const queryRequestCreator = async(e: React.ChangeEvent<HTMLInputElement>) => {
-		const query = e.target.value;
+	const queryRequestCreator = async(query: string) => {
+		setLoading(true);
 		if(typingTimeout) clearTimeout(typingTimeout)
+
         if(query === "") {
 			setUrl('reviews/all')
         } else {
@@ -37,17 +39,16 @@ const Home: React.FC = () => {
     }
 	
 	const getReviews = async(reset?: boolean, fromScroll?: boolean) => {
-		console.log(url, filter);
-        request(url, {filter, skip: reset? 0 : itemSkips})
+		console.log(url, sort);
+        request(url, {sort, skip: reset? 0 : itemSkips})
         .then((res: any) => {
-			if(!res.data.length){
-				if(!fromScroll) return setEmpty(true)
-				else setMore(false);
-			}
-			else if(empty) setEmpty(false)
+			setLoading(false);
+			// !res.data.length && fromScroll || <--- Keep just incase
+			if(res.data.length < 30) setMore(false);
 			else if(!more) setMore(true);
-            setSkips(reset? 1 : itemSkips+1)
-			reset? setReviews(res.data) : setReviews([...reviews, ...res.data]);
+
+			setSkips(reset? 1 : itemSkips+1)
+			setReviews(reset? res.data : [...reviews, ...res.data])
         })
         .catch(err => console.error(err))
 	}
@@ -55,8 +56,8 @@ const Home: React.FC = () => {
     console.log(itemSkips)
     return(
 		<div id="content">
-			<Search queryRequestCreator={queryRequestCreator} changeFilter={setFilter}/>
-			{empty ? <h2 id="empty">No results found</h2> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
+			<Search queryRequestCreator={queryRequestCreator} changeSort={setSort}/>
+			{loading? <ReactLoading type={"spin"} color={"yellow"}/> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
 		</div>
     )
 }
