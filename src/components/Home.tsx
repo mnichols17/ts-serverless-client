@@ -54,10 +54,10 @@ const Home: React.FC = () => {
 
     console.log(itemSkips)
     return(
-        <div id="content">
-            <Search queryRequestCreator={queryRequestCreator} changeFilter={setFilter}/>
-            {empty ? <h2 id="empty">No results found</h2> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
-        </div>
+		<div id="content">
+			<Search queryRequestCreator={queryRequestCreator} changeFilter={setFilter}/>
+			{empty ? <h2 id="empty">No results found</h2> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
+		</div>
     )
 }
 
