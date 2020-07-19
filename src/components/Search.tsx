@@ -11,6 +11,7 @@ interface SearchProps {
 const Search: React.FC<SearchProps> = ({queryRequestCreator, changeSort}) => {
 
     const [query, setQuery] = useState("");
+    const [firstQuery, setFirst] = useState(true);
     
     const options: object[] = [
         {value: "", label: "Best Match"},
@@ -19,6 +20,10 @@ const Search: React.FC<SearchProps> = ({queryRequestCreator, changeSort}) => {
     ]
 
     const handleQuery = (e?: React.ChangeEvent<HTMLInputElement>) => {
+        if(firstQuery) {
+            setFirst(false);
+            changeSort("");
+        }
         const input = e? e.target.value : "";
         setQuery(input);
         queryRequestCreator(input);

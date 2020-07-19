@@ -11,7 +11,7 @@ const Home: React.FC = () => {
 
 	const[reviews, setReviews] = useState<Review[]>([]);
 	const[url, setUrl] = useState<string>('reviews/all');
-	const[sort, setSort] = useState<string>("");
+	const[sort, setSort] = useState<string>("ASC");
     const[itemSkips, setSkips] = useState<number>(0);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[more, setMore] = useState<boolean>(true);
