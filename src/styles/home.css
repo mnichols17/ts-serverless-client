@@ -73,27 +73,79 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
 }
 
 .reviewPage-loading {
     margin: 10em;
 }
 
-#reviewPage h2:first-child {
+#reviewPage > h2:first-child {
     color: white;
     padding: 1em;
     text-align: center;
-    margin: 1em 0 0;
+    margin: .8em 0 0;
 }
-
-#reviewPage h2 {
-    color: white;
-    text-align: center;
-    margin: 0 0 .8em;
-}
-
 
 #reviewPage img {
     box-shadow: 0 0 11px 3px black;
+}
+
+#review-card {
+    width: 85%;
+    border-radius: 10px;
+    /* background: #F4F6F7; */
+    margin-bottom: 2em;
+    /* box-shadow: 0px 2px 8px 3px black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#review-card > h2 {
+    color: white;
+    text-align: center;
+    margin: 1em 0 .5em 0;
+    padding: 0;
+}
+
+#review-streaming h3 {
+    color: white; /* Add */
+    text-align: center;
+    margin: 8px 0px 0px 0px;
+}
+
+#review-streaming hr {
+    /* border-color: black; */
+    border-color: white;
+    width: 80%
+}
+
+#review-info {
+    padding: 10px;
+    margin: 1em;
+    width: 90%;
+    box-shadow: 0px 2px 8px 3px black; /*Add*/ 
+    border-radius: 10px;
+}
+
+#review-info td {
+    padding: 5px;
+}
+
+#review-info, #review-info td {
+    border: 1px solid black;
+    border-collapse: collapse; 
+}
+
+#review-info tr {
+    border-radius: 10px 10px 0 0;
+}
+
+#review-info tr:nth-child(odd) {
+    background-color: #f4f6f7;
+}
+
+#review-info tr:nth-child(even) {
+    background-color: #E5E7E8;
+    /* background-color: #FBFBFC; */
 }
