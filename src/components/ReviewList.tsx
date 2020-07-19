@@ -1,24 +1,29 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
-import ReactLoading from 'react-loading';
+import { Link } from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Review from '../utils/Review';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import handleTitle from '../utils/handleTitle';
+import ReactLoading from 'react-loading';
 
 import '../styles/reviewList.css';
 
 const ReviewItem: React.FC<Review> = ({movie, total, poster, rank}) => {
+    if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
+
     return(
         <div className="movie">
-            <img className="movie-poster" src={poster} alt={movie}/>
-            <div className="info">
-                <div className="info-review">
-                    <p className="movie-total"><FontAwesomeIcon className="star" icon={faStar}/>{total}</p>
-                    <p className="movie-rank">#{rank}</p>
+            <Link className="movie-link" to={`/review/${rank}`}>
+                <img className="movie-poster" src={poster} alt={movie}/>
+                <div className="info">
+                    <div className="info-review">
+                        <p className="movie-total"><FontAwesomeIcon className="star" icon={faStar}/>{total}</p>
+                        <p className="movie-rank">#{rank}</p>
+                    </div>
+                    <p className="movie-title">{movie}</p>
                 </div>
-                <p className="movie-title">{movie}</p>
-            </div>
+            </Link>
         </div>
     )
 }

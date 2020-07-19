@@ -10,8 +10,8 @@ interface SearchProps {
 
 const Search: React.FC<SearchProps> = ({queryRequestCreator, changeSort}) => {
 
-    const [query, setQuery] = useState("");
-    const [firstQuery, setFirst] = useState(true);
+    const [query, setQuery] = useState<string>("");
+    const [firstQuery, setFirst] = useState<boolean>(true);
     
     const options: object[] = [
         {value: "", label: "Best Match"},
@@ -35,8 +35,10 @@ const Search: React.FC<SearchProps> = ({queryRequestCreator, changeSort}) => {
                 <input type="text" value={query} onChange={handleQuery} placeholder="Search by Title, Director or Genre"/>
                 <FontAwesomeIcon style={{color: query !== "" ? 'black' : 'white'}} onClick={() => query !== "" ? handleQuery() : null} id="clearSearch" icon={faTimes} size="lg"/>
             </div>
-            {/* <input type="text" onChange={queryRequestCreator} placeholder="Search by Title, Director or Genre"/> */}
-            <Select id="sort" label="Sort By" onChange={(e:any) => changeSort(e.value)} isSearchable={false} options={options} defaultValue={options[0]}/>
+            <div id="sort">
+                <label>Sort By:</label>
+                <Select id="sort" label="Sort By" onChange={(e:any) => changeSort(e.value)} isSearchable={false} options={options} defaultValue={options[0]}/>
+            </div>
         </div>
     )
 }

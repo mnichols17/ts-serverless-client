@@ -48,6 +48,14 @@
     width: 80%;
 }
 
+#sort > label {
+    color: white;
+    align-self: flex-start;
+    font-size: .85em;
+    padding: 4px;
+    margin-bottom: 1em;
+}
+
 #loading {
     display: flex;
     background: none;
@@ -57,4 +65,35 @@
 
 #empty {
     color: yellow;
+}
+
+/* Review Page */
+
+#reviewPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.reviewPage-loading {
+    margin: 10em;
+}
+
+#reviewPage h2:first-child {
+    color: white;
+    padding: 1em;
+    text-align: center;
+    margin: 1em 0 0;
+}
+
+#reviewPage h2 {
+    color: white;
+    text-align: center;
+    margin: 0 0 .8em;
+}
+
+
+#reviewPage img {
+    box-shadow: 0 0 11px 3px black;
 }

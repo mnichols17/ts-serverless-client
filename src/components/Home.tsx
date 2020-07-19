@@ -16,10 +16,6 @@ const Home: React.FC = () => {
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[more, setMore] = useState<boolean>(true);
 	const[loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-		getReviews();
-	}, []) 
 	
 	useEffect(() => {
 		getReviews(true);
@@ -40,10 +36,11 @@ const Home: React.FC = () => {
 	
 	const getReviews = async(reset?: boolean, fromScroll?: boolean) => {
 		console.log(url, sort);
+		if(itemSkips > 16) return; // Limits # of reviews a single route can get (~500)
         request(url, {sort, skip: reset? 0 : itemSkips})
         .then((res: any) => {
 			setLoading(false);
-			// !res.data.length && fromScroll || <--- Keep just incase
+			// !res.data.length && fromScroll <--- Keep just incase
 			if(res.data.length < 30) setMore(false);
 			else if(!more) setMore(true);
 
