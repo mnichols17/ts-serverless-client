@@ -12,12 +12,19 @@
     align-items: center;
 }
 
+#logo {
+    margin-top: 1em;
+    width: 100%;
+    max-width: 470px;
+}
+
 #search {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 80%;
     padding: 1em;
+    max-width: 470px;
 }
 
 #search-input {
@@ -44,16 +51,8 @@
     color: lightgray;
 }
 
-#search > #sort {
-    width: 80%;
-}
-
-#sort > label {
-    color: white;
-    align-self: flex-start;
-    font-size: .85em;
-    padding: 4px;
-    margin-bottom: 1em;
+#clearSearch:hover {
+    cursor: pointer;
 }
 
 #loading {
@@ -65,6 +64,54 @@
 
 #empty {
     color: yellow;
+}
+
+/* Filter Panel */
+
+#filter-show {
+    background: #f4f6f7;
+    border: 2px solid #CCCCCC;
+    padding: 8px;
+    border-radius: 12px;
+    font-size: 1em;
+    width: 25%;
+}
+
+#filter-panel {
+    margin-top: 1em;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    background: #f4f6f7;
+    display: flex;
+    flex-direction: column;
+}
+
+#filter-apply {
+    margin-top: 10px;
+    align-self: center;
+    background: #f4f6f7;
+    border: 2px solid #282C34;
+    padding: 8px;
+    border-radius: 12px;
+    font-size: .9em;
+}
+
+.filter-select {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2px;
+}
+
+.filter-select > label {
+    font-size: .85em;
+    padding-left: 5px;
+    margin-bottom: .2em;
+}
+
+#sort {
+    width: 100%;
 }
 
 /* Review Page */

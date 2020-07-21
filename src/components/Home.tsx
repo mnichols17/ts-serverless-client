@@ -5,21 +5,31 @@ import Review from '../utils/Review';
 import Search from './Search';
 import ReactLoading from 'react-loading';
 
+import Logo from '../media/logo.jpg';
 import '../styles/home.css';
 
 const Home: React.FC = () => {
 
 	const[reviews, setReviews] = useState<Review[]>([]);
 	const[url, setUrl] = useState<string>('reviews/all');
-	const[sort, setSort] = useState<string>("ASC");
+	const[filters, setFilters] = useState<object>({
+		sort: "ASC",
+		genres: "",
+		subgenres: "",
+		universes: "",
+		subuniverses: "",
+		characters: "",
+		sportholidays: ""
+	});
     const[itemSkips, setSkips] = useState<number>(0);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[more, setMore] = useState<boolean>(true);
 	const[loading, setLoading] = useState<boolean>(true);
 	
 	useEffect(() => {
+		if(!loading) setLoading(true);
 		getReviews(true);
-	}, [url, sort])
+	}, [url, filters])
 
 	const queryRequestCreator = async(query: string) => {
 		setLoading(true);
@@ -35,10 +45,11 @@ const Home: React.FC = () => {
     }
 	
 	const getReviews = async(reset?: boolean, fromScroll?: boolean) => {
-		console.log(url, sort);
+		console.log(url, filters);
 		if(itemSkips > 16) return; // Limits # of reviews a single route can get (~500)
-        request(url, {sort, skip: reset? 0 : itemSkips})
+        request(url, {...filters, skip: reset? 0 : itemSkips})
         .then((res: any) => {
+			console.log(res.data)
 			setLoading(false);
 			// !res.data.length && fromScroll <--- Keep just incase
 			if(res.data.length < 30) setMore(false);
@@ -53,7 +64,8 @@ const Home: React.FC = () => {
     console.log(itemSkips)
     return(
 		<div id="content">
-			<Search queryRequestCreator={queryRequestCreator} changeSort={setSort}/>
+			<img id="logo" src={Logo} alt="LOGO" />
+			<Search queryRequestCreator={queryRequestCreator} filters={filters} changeFilters={setFilters}/>
 			{loading? <ReactLoading type={"spin"} color={"yellow"}/> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
 		</div>
     )
