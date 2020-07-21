@@ -48,31 +48,31 @@ const Filters: React.FC<FiltersProps> = ({changeFilters, setOpen}) => {
         <div id="filter-panel">
             <div className="filter-select">
                 <label>Sort By:</label>
-                <Select id="sort" label="Sort By" onChange={(e:any) => changeSort(e.value)} isSearchable={false} options={sortOptions} defaultValue={sortOptions[0]}/>
+                <Select className="sort" label="Sort By" onChange={(e:any) => changeSort(e.value)} isSearchable={false} options={sortOptions} defaultValue={sortOptions[0]}/>
             </div> 
             <div className="filter-select">
                 <label>Genre:</label>
-                <Select id="sort" label="Genre" isMulti onChange={(e:any) => changeSort(e, setGenres)} isSearchable={false} options={genreOptions}/>
+                <Select className="sort" label="Genre" isMulti onChange={(e:any) => changeSort(e, setGenres)} isSearchable={false} options={genreOptions}/>
             </div>
             <div className="filter-select">
                 <label>Sub-Genre:</label>
-                <Select id="sort" label="Sub-Genre" isMulti onChange={(e:any) => changeSort(e, setSubGenre)} isSearchable={false} options={subGenreOptions}/>
+                <Select className="sort" label="Sub-Genre" isMulti onChange={(e:any) => changeSort(e, setSubGenre)} isSearchable={false} options={subGenreOptions}/>
             </div>
             <div className="filter-select">
                 <label>Universe:</label>
-                <Select id="sort" label="Universe" isMulti onChange={(e:any) => changeSort(e, setUniverse)} isSearchable={false} options={universeOptions}/>
+                <Select className="sort" label="Universe" isMulti onChange={(e:any) => changeSort(e, setUniverse)} isSearchable={false} options={universeOptions}/>
             </div>
             <div className="filter-select">
                 <label>Sub-Universe (Ex: MCU, DCEU, Pixar, etc.):</label>
-                <Select id="sort" label="Sub-Universe" isMulti onChange={(e:any) => changeSort(e, setSubU)} isSearchable={false} options={subUniverseOptions}/>
+                <Select className="sort" label="Sub-Universe" isMulti onChange={(e:any) => changeSort(e, setSubU)} isSearchable={false} options={subUniverseOptions}/>
             </div>
             <div className="filter-select">
                 <label>Characters:</label>
-                <Select id="sort" label="Characters" isMulti onChange={(e:any) => changeSort(e, setCharacters)} isSearchable={false} options={characterOptions}/>
+                <Select className="sort" label="Characters" isMulti onChange={(e:any) => changeSort(e, setCharacters)} isSearchable={false} options={characterOptions}/>
             </div>
             <div className="filter-select">
                 <label>Sport/Holiday:</label>
-                <Select id="sort" label="Characters" isMulti onChange={(e:any) => changeSort(e, setSportHoliday)} isSearchable={false} options={sportholidayOptions}/>
+                <Select className="sort" label="Characters" isMulti onChange={(e:any) => changeSort(e, setSportHoliday)} isSearchable={false} options={sportholidayOptions}/>
             </div>
             <button id="filter-apply" onClick={handleFilters}>Apply Filters</button>
         </div>

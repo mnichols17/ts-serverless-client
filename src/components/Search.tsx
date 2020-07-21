@@ -28,7 +28,7 @@ const Search: React.FC<SearchProps> = ({queryRequestCreator, changeFilters, filt
     return(
         <div id="search">
             <div id="search-input">
-                <input type="text" value={query} onChange={handleQuery} placeholder="Search by Title, Director or Genre"/>
+                <input type="text" value={query} onChange={handleQuery} placeholder="Search by Title or Director"/>
                 <FontAwesomeIcon style={{color: query !== "" ? 'black' : 'white'}} onClick={() => query !== "" ? handleQuery() : null} id="clearSearch" icon={faTimes} size="lg"/>
             </div>
             <button id="filter-show" onClick={() => setOpen(!open)}>{open? "Hide" : "Filters"}</button>

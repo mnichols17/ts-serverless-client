@@ -13,8 +13,8 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review}) => {
     return(
         !review.director? <Redirect push to="/" /> :
         <>
-            <h2>{review.movie}</h2>
-            <img style={{maxWidth: '300px'}} src={review.poster} alt="POSTER" />
+            <h2 id="reviewPage-title">{review.movie}</h2>
+            <img id="review-poster" style={{maxWidth: '300px'}} src={review.poster} alt="POSTER" />
             <div id="review-card">
                 <h2>Score: {review.total} (#{review.rank})</h2>
                 <div id="review-streaming">
@@ -90,7 +90,7 @@ const ReviewPage: React.FC = (props) => {
 
     return(
         <div id="reviewPage">
-            {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"} width={'25%'}/> : <ReviewInfo review={review} />}
+            {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"}/> : <ReviewInfo review={review} />}
         </div>
     )
 }
