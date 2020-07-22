@@ -4,6 +4,8 @@ import ReviewList from './ReviewList';
 import Review from '../utils/Review';
 import Search from './Search';
 import ReactLoading from 'react-loading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 import Logo from '../media/logo.jpg';
 import '../styles/home.css';
@@ -25,6 +27,7 @@ const Home: React.FC = () => {
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[more, setMore] = useState<boolean>(true);
 	const[loading, setLoading] = useState<boolean>(true);
+	const[showTop, setTop] = useState<boolean>(false);
 	
 	useEffect(() => {
 		if(!loading) setLoading(true);
@@ -51,7 +54,6 @@ const Home: React.FC = () => {
         .then((res: any) => {
 			console.log(res.data)
 			setLoading(false);
-			// !res.data.length && fromScroll <--- Keep just incase
 			if(res.data.length < 30) setMore(false);
 			else if(!more) setMore(true);
 
@@ -61,12 +63,22 @@ const Home: React.FC = () => {
         .catch(err => console.error(err))
 	}
 
-    console.log(itemSkips)
+	const checkTop = () => {
+		if(!showTop && window.pageYOffset > 400){
+			setTop(true)
+		} else if(showTop && window.pageYOffset <= 400){
+			setTop(false)
+		}
+	}
+
+	window.addEventListener('scroll', checkTop)
+	console.log(itemSkips)
     return(
 		<div id="content">
 			<img id="logo" src={Logo} alt="LOGO" />
-			<Search queryRequestCreator={queryRequestCreator} filters={filters} changeFilters={setFilters}/>
+			<Search queryRequestCreator={queryRequestCreator} changeFilters={setFilters}/>
 			{loading? <ReactLoading type={"spin"} color={"yellow"}/> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
+			<button id="send-top" hidden={!showTop} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
 		</div>
     )
 }

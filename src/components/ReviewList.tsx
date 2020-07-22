@@ -35,10 +35,10 @@ interface ReviewListProps {
 }
 
 const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews, more}) => {
-    const LoadingItem = <li id="loading"><ReactLoading type={"spin"} color={"yellow"}/></li>
+    const LoadingItem = <div id="loading"><ReactLoading type={"spin"} color={"yellow"}/></div>
     return (
         !reviews.length ? <h2 id="empty">No results found</h2> : 
-        <InfiniteScroll style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}} loader={LoadingItem} dataLength={reviews.length} next={() => getReviews(false, true)} hasMore={more}>
+        <InfiniteScroll className="infinitescroll" loader={LoadingItem} dataLength={reviews.length} next={() => getReviews(false, true)} hasMore={more}>
             {reviews.map(({rank, movie, total, poster}) => <ReviewItem key={rank} movie={movie} total={total} poster={poster} rank={rank} /> )}
         </InfiniteScroll>
     );

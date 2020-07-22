@@ -6,20 +6,14 @@ import Filters from './Filters';
 interface SearchProps {
     queryRequestCreator: (query: string) => Promise<void>; 
     changeFilters:  React.Dispatch<React.SetStateAction<object>>;
-    filters: object;
 }
 
-const Search: React.FC<SearchProps> = ({queryRequestCreator, changeFilters, filters}) => {
+const Search: React.FC<SearchProps> = ({queryRequestCreator, changeFilters}) => {
 
     const [query, setQuery] = useState<string>("");
-    const [firstQuery, setFirst] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
 
     const handleQuery = (e?: React.ChangeEvent<HTMLInputElement>) => {
-        if(firstQuery) {
-            setFirst(false);
-            changeFilters({...filters, sort: ""});
-        }
         const input = e? e.target.value : "";
         setQuery(input);
         queryRequestCreator(input);

@@ -48,7 +48,7 @@ const Filters: React.FC<FiltersProps> = ({changeFilters, setOpen}) => {
         <div id="filter-panel">
             <div className="filter-select">
                 <label>Sort By:</label>
-                <Select className="sort" label="Sort By" onChange={(e:any) => changeSort(e.value)} isSearchable={false} options={sortOptions} defaultValue={sortOptions[0]}/>
+                <Select className="sort" label="Sort By" onChange={(e:any) => changeSort(e.value)} isSearchable={false} options={sortOptions} defaultValue={sortOptions[1]}/>
             </div> 
             <div className="filter-select">
                 <label>Genre:</label>
