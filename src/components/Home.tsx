@@ -5,13 +5,14 @@ import Review from '../utils/Review';
 import Search from './Search';
 import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import smoothscroll from 'smoothscroll-polyfill';
 
 import Logo from '../media/logo.jpg';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
 
 const Home: React.FC = () => {
-
+	smoothscroll.polyfill();
 	const[reviews, setReviews] = useState<Review[]>([]);
 	const[url, setUrl] = useState<string>('reviews/all');
 	const[filters, setFilters] = useState<object>({
