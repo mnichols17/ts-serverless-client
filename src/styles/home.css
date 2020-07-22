@@ -161,17 +161,28 @@
     align-items: center;
 }
 
-#review-card > h2 {
+#reviewPage-title {
+    font-size: 1.6em;
+    text-align: center;
+}
+
+#review-rank {
     color: white;
     text-align: center;
-    margin: 1em 0 .5em 0;
-    padding: 0;
+    margin: 0 0 1em 0;
+    font-size: 1.65em;
+}
+
+#review-total {
+    margin: .5em 0;
+    font-size: 2.1em;
+    color: #FEDE16;
 }
 
 #review-streaming h3 {
     color: white;
     text-align: center;
-    margin: 8px 0px 0px 0px;
+    margin: 0px;
 }
 
 #review-streaming hr {
@@ -211,6 +222,17 @@
 }
 
 /* Width Specific */
+
+@media screen and (min-width: 410px) {
+    .movie {
+        width: 120px;
+        margin: .9em .4em;
+    } 
+
+    .movie-poster {
+        height: 160px;
+    }
+}
 
 @media screen and (min-width: 630px) {
     .movie {
@@ -279,8 +301,22 @@
         text-align: center;
     }
 
+    #review-rank {
+        grid-column: 1/3;
+        color: white;
+        text-align: center;
+        margin: 0 0 1em 0;
+        font-size: 1.85em;
+    }
+
+    #review-total {
+        margin: .5em 0;
+        font-size: 2.2em;
+        color: #FEDE16;
+    }
+
     #review-card {
-        grid-row: 2/3;
+        grid-row: 3/4;
         justify-self: end;
         width: 100%;
     }
@@ -292,6 +328,11 @@
 
     #review-info {
         width: 100%;
+    }
+
+    .reviewPage-loading {
+        grid-column: 1/3;
+        justify-self: center;
     }
 }
 

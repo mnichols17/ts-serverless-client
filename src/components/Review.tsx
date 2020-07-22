@@ -9,14 +9,16 @@ interface ReviewInfoProps {
     review: Review;
 }
 
+// style={{fontSize: review.movie.length < 12 ? "2em" : ""}
 const ReviewInfo: React.FC<ReviewInfoProps> = ({review}) => {
     return(
         !review.director? <Redirect push to="/" /> :
         <>
             <h2 id="reviewPage-title">{review.movie}</h2>
+            <h1 id="review-rank">Rank: #{review.rank}</h1>
             <img id="review-poster" style={{maxWidth: '300px'}} src={review.poster} alt="POSTER" />
             <div id="review-card">
-                <h2>Score: {review.total} (#{review.rank})</h2>
+                <h1 id="review-total">Score: {review.total}/100</h1>
                 <div id="review-streaming">
                     <h3>Streaming</h3>
                     <hr />
@@ -90,7 +92,7 @@ const ReviewPage: React.FC = (props) => {
 
     return(
         <div id="reviewPage">
-            {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"}/> : <ReviewInfo review={review} />}
+            {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"} height={"10vh"} width={"10vh"}/> : <ReviewInfo review={review} />}
         </div>
     )
 }
