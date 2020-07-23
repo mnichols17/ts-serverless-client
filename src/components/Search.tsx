@@ -1,22 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import { SearchContext } from '../utils/context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Filters from './Filters';
 
-interface SearchProps {
-    queryRequestCreator: (query: string) => Promise<void>; 
-    changeFilters:  React.Dispatch<React.SetStateAction<object>>;
-}
+const Search: React.FC = () => {
 
-const Search: React.FC<SearchProps> = ({queryRequestCreator, changeFilters}) => {
-
-    const [query, setQuery] = useState<string>("");
+    const {query, currentQuery} = useContext(SearchContext);
     const [open, setOpen] = useState<boolean>(false);
 
     const handleQuery = (e?: React.ChangeEvent<HTMLInputElement>) => {
         const input = e? e.target.value : "";
-        setQuery(input);
-        queryRequestCreator(input);
+        currentQuery(input);
     }
 
     return(
@@ -26,7 +21,7 @@ const Search: React.FC<SearchProps> = ({queryRequestCreator, changeFilters}) => 
                 <FontAwesomeIcon style={{color: query !== "" ? 'black' : 'white'}} onClick={() => query !== "" ? handleQuery() : null} id="clearSearch" icon={faTimes} size="lg"/>
             </div>
             <button id="filter-show" onClick={() => setOpen(!open)}>{open? "Hide" : "Filters"}</button>
-            {open? <Filters changeFilters={changeFilters} setOpen={setOpen}/> : null}
+            {open? <Filters setOpen={setOpen}/> : null}
         </div>
     )
 }

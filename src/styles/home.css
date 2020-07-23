@@ -125,20 +125,24 @@
     flex-direction: column;
 }
 
-#filter-apply {
+#filter-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#filter-apply, #filter-reset {
     margin-top: 10px;
-    align-self: center;
     background: #f4f6f7;
     border: 2px solid #282C34;
-    padding: 8px;
+    padding: 10px;
     border-radius: 12px;
     font-size: .9em;
     box-shadow: 0 0 2px 0px black;
-    width: 50%;
+    width: 40%;
     cursor: pointer;
 }
 
-#filter-apply:hover {
+#filter-apply:hover, #filter-reset:hover {
     background: #E5E7E8;
     box-shadow: 0 0 3px 0px black;
 }
@@ -317,7 +321,7 @@
         width: 80%;
     }
 
-    #filter-apply {
+    #filter-apply, #filter-reset {
         width: 30%
     }
 

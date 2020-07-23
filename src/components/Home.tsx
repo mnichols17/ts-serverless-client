@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import request from '../utils/makeRequest';
 import ReviewList from './ReviewList';
 import Review from '../utils/Review';
@@ -6,24 +6,28 @@ import Search from './Search';
 import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import smoothscroll from 'smoothscroll-polyfill';
+import {SearchContext, FiltersType} from '../utils/context';
 
 import Logo from '../media/logo.jpg';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
 
+const createStrings = ({sort, genres, subGenres, universes, subUniverses, characters, sportholidays}: FiltersType) => ({
+	sort: sort.value,
+	genres: genres.map((select: any) => select.value).join('@'),
+	subGenres: subGenres.map((select: any) => select.value).join('@'),
+	universes: universes.map((select: any) => select.value).join('@'),
+	subUniverses: subUniverses.map((select: any) => select.value).join('@'),
+	characters: characters.map((select: any) => select.value).join('@'),
+	sportholidays: sportholidays.map((select: any) => select.value).join('@'),
+})
+
 const Home: React.FC = () => {
 	smoothscroll.polyfill();
+
+	const {url, filters, currentUrl, query} = useContext(SearchContext);
+
 	const[reviews, setReviews] = useState<Review[]>([]);
-	const[url, setUrl] = useState<string>('reviews/all');
-	const[filters, setFilters] = useState<object>({
-		sort: "ASC",
-		genres: "",
-		subgenres: "",
-		universes: "",
-		subuniverses: "",
-		characters: "",
-		sportholidays: ""
-	});
     const[itemSkips, setSkips] = useState<number>(0);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[more, setMore] = useState<boolean>(true);
@@ -35,25 +39,28 @@ const Home: React.FC = () => {
 		getReviews(true);
 	}, [url, filters])
 
-	const queryRequestCreator = async(query: string) => {
-		setLoading(true);
-		if(typingTimeout) clearTimeout(typingTimeout)
+	useEffect(() => {
+		const queryHandler = async(q: string) => {
+			setLoading(true);
+			if(typingTimeout) clearTimeout(typingTimeout)
 
-        if(query === "") {
-			setUrl('reviews/all')
-        } else {
-			setTyping(setTimeout(async() => {
-				setUrl(`reviews/search/?query=${query}`)
-			}, 500))
+			if(q === "") {
+				currentUrl('reviews/all')
+			} else {
+				setTyping(setTimeout(async() => {
+					currentUrl(`reviews/search/?query=${query}`)
+				}, 600))
+			}
 		}
-    }
+		queryHandler(query)
+	}, [query])
 	
-	const getReviews = async(reset?: boolean, fromScroll?: boolean) => {
-		console.log(url, filters);
+	const getReviews = async(reset?: boolean) => {
+		console.log(reset)
 		if(itemSkips > 16) return; // Limits # of reviews a single route can get (~500)
-        request(url, {...filters, skip: reset? 0 : itemSkips})
+		const stringFilters = createStrings(filters);
+        request(url, {...stringFilters, skip: reset? 0 : itemSkips})
         .then((res: any) => {
-			console.log(res.data)
 			setLoading(false);
 			if(res.data.length < 30) setMore(false);
 			else if(!more) setMore(true);
@@ -73,11 +80,10 @@ const Home: React.FC = () => {
 	}
 
 	window.addEventListener('scroll', checkTop)
-	console.log(itemSkips)
     return(
 		<div id="content">
 			<img id="logo" src={Logo} alt="LOGO" />
-			<Search queryRequestCreator={queryRequestCreator} changeFilters={setFilters}/>
+			<Search />
 			{loading? <ReactLoading type={"spin"} color={"yellow"}/> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
 			<button id="send-top" hidden={!showTop} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
 		</div>

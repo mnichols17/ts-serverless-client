@@ -1,80 +1,80 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import Select from 'react-select';
+import {SearchContext, FiltersType} from '../utils/context';
 import {sortOptions, genreOptions, subGenreOptions, universeOptions, subUniverseOptions, characterOptions, sportholidayOptions} from '../utils/filterData';
 
 interface FiltersProps {
-    changeFilters: React.Dispatch<React.SetStateAction<object>>;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Filters: React.FC<FiltersProps> = ({changeFilters, setOpen}) => {
+const Filters: React.FC<FiltersProps> = ({setOpen}) => {
 
-    const[sort, setSort] = useState<string>("ASC");
-    const[genres, setGenres] = useState<string>("");
-    const[subgenres, setSubGenre] = useState<string>("");
-    const[universes, setUniverse] = useState<string>("");
-    const[subuniverses, setSubU] = useState<string>("");
-    const[characters, setCharacters] = useState<string>("");
-    const[sportholidays, setSportHoliday] = useState<string>("");
+    const {filters, currentFilters} = useContext(SearchContext)
+    const[selectedFilters, setFilters] = useState<FiltersType>(filters)
 
-    const changeSort = (selects: object[] | string, setter?: React.Dispatch<React.SetStateAction<string>>) => {
-        if(setter) setter((selects as object[]).map((select: any) => select.value).join('@'))
-        else setSort(selects as string);
+    const changeFilter = (e: any, key: string) => {
+        setFilters((prevState: FiltersType) => {
+            return {
+                ...prevState,
+                [key]: e || []
+            }
+        })
     }
 
     const handleFilters = () => {
-        changeFilters({
-            sort,
-            genres,
-            subgenres,
-            universes,
-            subuniverses,
-            characters,
-            sportholidays
-        })
-        console.log({
-            sort,
-            genres,
-            subgenres,
-            universes,
-            subuniverses,
-            characters,
-            sportholidays
-        })
+        currentFilters(selectedFilters)
         setOpen(false);
+    }
+
+    const resetFilters = () => {
+        setFilters({
+            sort: {
+                value: "ASC",
+                label: "Rating High to Low"
+            },
+            genres: [],
+            subGenres: [],
+            universes: [],
+            subUniverses: [],
+            characters: [],
+            sportholidays: [],
+        })
     }
 
     return(
         <div id="filter-panel">
             <div className="filter-select">
                 <label>Sort By:</label>
-                <Select className="sort" label="Sort By" onChange={(e:any) => changeSort(e.value)} isSearchable={false} options={sortOptions} defaultValue={sortOptions[1]}/>
+                <Select className="sort" label="Sort By" onChange={(e:any) => changeFilter(e, "sort")} isSearchable={false} options={sortOptions} value={selectedFilters.sort} />
             </div> 
             <div className="filter-select">
                 <label>Genre:</label>
-                <Select className="sort" label="Genre" isMulti onChange={(e:any) => changeSort(e, setGenres)} isSearchable={false} options={genreOptions}/>
+                <Select className="sort" label="Genre" isMulti onChange={(e:any) => changeFilter(e, 'genres')} isSearchable={false} options={genreOptions} value={selectedFilters.genres} />
             </div>
             <div className="filter-select">
                 <label>Sub-Genre:</label>
-                <Select className="sort" label="Sub-Genre" isMulti onChange={(e:any) => changeSort(e, setSubGenre)} isSearchable={false} options={subGenreOptions}/>
+                <Select className="sort" label="Sub-Genre" isMulti onChange={(e:any) => changeFilter(e, 'subGenres')} isSearchable={false} options={subGenreOptions} value={selectedFilters.subGenres}/>
             </div>
             <div className="filter-select">
                 <label>Universe:</label>
-                <Select className="sort" label="Universe" isMulti onChange={(e:any) => changeSort(e, setUniverse)} isSearchable={false} options={universeOptions}/>
+                <Select className="sort" label="Universe" isMulti onChange={(e:any) => changeFilter(e, 'universes')} isSearchable={false} options={universeOptions} value={selectedFilters.universes}/>
             </div>
             <div className="filter-select">
                 <label>Sub-Universe (Ex: MCU, DCEU, Pixar, etc.):</label>
-                <Select className="sort" label="Sub-Universe" isMulti onChange={(e:any) => changeSort(e, setSubU)} isSearchable={false} options={subUniverseOptions}/>
+                <Select className="sort" label="Sub-Universe" isMulti onChange={(e:any) => changeFilter(e, 'subUniverses')} isSearchable={false} options={subUniverseOptions} value={selectedFilters.subUniverses}/>
             </div>
             <div className="filter-select">
                 <label>Characters:</label>
-                <Select className="sort" label="Characters" isMulti onChange={(e:any) => changeSort(e, setCharacters)} isSearchable={false} options={characterOptions}/>
+                <Select className="sort" label="Characters" isMulti onChange={(e:any) => changeFilter(e, 'characters')} isSearchable={false} options={characterOptions} value={selectedFilters.characters}/>
             </div>
             <div className="filter-select">
                 <label>Sport/Holiday:</label>
-                <Select className="sort" label="Characters" isMulti onChange={(e:any) => changeSort(e, setSportHoliday)} isSearchable={false} options={sportholidayOptions}/>
+                <Select className="sort" label="Characters" isMulti onChange={(e:any) => changeFilter(e, 'sportholidays')} isSearchable={false} options={sportholidayOptions} value={selectedFilters.sportholidays}/>
             </div>
-            <button id="filter-apply" onClick={handleFilters}>Apply Filters</button>
+            <div id="filter-buttons">
+                <button id="filter-apply" onClick={handleFilters}>Apply Filters</button>
+                <button id="filter-reset" onClick={resetFilters}>Reset Filters</button>
+            </div>
         </div>
     )
 }

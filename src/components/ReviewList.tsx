@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Review from '../utils/Review';
@@ -30,16 +30,19 @@ const ReviewItem: React.FC<Review> = ({movie, total, poster, rank}) => {
 
 interface ReviewListProps {
     reviews: Review[];
-    getReviews: (reset: boolean, fromScroll: boolean) => void;
+    getReviews: () => void;
     more: boolean;
 }
 
 const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews, more}) => {
+    console.log("HIT RL", reviews.length)
     const LoadingItem = <div id="loading"><ReactLoading type={"spin"} color={"yellow"}/></div>
+
     return (
         !reviews.length ? <h2 id="empty">No results found</h2> : 
-        <InfiniteScroll className="infinitescroll" loader={LoadingItem} dataLength={reviews.length} next={() => getReviews(false, true)} hasMore={more}>
-            {reviews.map(({rank, movie, total, poster}) => <ReviewItem key={rank} movie={movie} total={total} poster={poster} rank={rank} /> )}
+        <InfiniteScroll className="infinitescroll" loader={LoadingItem} dataLength={reviews.length} next={getReviews} hasMore={more}>
+            {reviews.map(({rank, movie, total, poster}) => 
+                <ReviewItem key={rank} movie={movie} total={total} poster={poster} rank={rank} /> )}
         </InfiniteScroll>
     );
 }
