@@ -12,7 +12,8 @@ import Logo from '../media/logo.jpg';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
 
-const createStrings = ({sort, genres, subGenres, universes, subUniverses, characters, sportholidays}: FiltersType) => ({
+const createStrings = ({sort, directors, genres, subGenres, universes, subUniverses, characters, sportholidays}: FiltersType) => ({
+	directors: directors.map((select: any) => select.value).join('@'),
 	sort: sort.value,
 	genres: genres.map((select: any) => select.value).join('@'),
 	subGenres: subGenres.map((select: any) => select.value).join('@'),

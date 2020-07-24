@@ -2,6 +2,7 @@ import React from 'react';
 import { createContext, useState, useContext, useCallback } from 'react';
 
 export type FiltersType = {
+    directors: object[],
     sort: {value: string, label: string},
     genres: object[],
     subGenres: object[],
@@ -25,6 +26,7 @@ export const SearchContext = createContext<Search>({
     url: 'reviews/all',
     query: "",
     filters: {
+        directors: [],
 		sort: {value: "ASC", label: "Rating High to Low"},
 		genres: [],
 		subGenres: [],
@@ -46,6 +48,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
     const[url, setUrl] = useState<string>('reviews/all');
     const[query, setQuery] = useState<string>("");
     const[filters, setFilters] = useState<FiltersType>({
+        directors: [],
         sort: {
             value: "ASC",
             label: "Rating High to Low"
