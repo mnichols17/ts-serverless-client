@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import Select from 'react-select';
 import {SearchContext, FiltersType} from '../utils/context';
-import {sortOptions, directorOptions, genreOptions, subGenreOptions, universeOptions, subUniverseOptions, characterOptions, sportholidayOptions, yearOptions} from '../utils/filterData';
+import {sortOptions, directorOptions, genreOptions, subGenreOptions, universeOptions, subUniverseOptions, characterOptions, sportholidayOptions, yearOptions, decadeOptions} from '../utils/filterData';
 
 interface FiltersProps {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,7 +39,8 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
             subUniverses: [],
             characters: [],
             sportholidays: [],
-            years: []
+            years: [],
+            decades: []
         })
     }
 
@@ -80,6 +81,10 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
             <div className="filter-select">
                 <label>Year:</label>
                 <Select className="sort" label="Year" isMulti onChange={(e:any) => changeFilter(e, 'years')} isSearchable={false} options={yearOptions} value={selectedFilters.years}/>
+            </div>
+            <div className="filter-select">
+                <label>Decade:</label>
+                <Select className="sort" label="Decade" isMulti onChange={(e:any) => changeFilter(e, 'decades')} isSearchable={false} options={decadeOptions} value={selectedFilters.decades}/>
             </div>
             <div id="filter-buttons">
                 <button id="filter-apply" onClick={handleFilters}>Apply Filters</button>

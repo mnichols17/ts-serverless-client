@@ -12,7 +12,7 @@ import Logo from '../media/logo.jpg';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
 
-const createStrings = ({sort, directors, genres, subGenres, universes, subUniverses, characters, sportholidays, years}: FiltersType) => ({
+const createStrings = ({sort, directors, genres, subGenres, universes, subUniverses, characters, sportholidays, years, decades}: FiltersType) => ({
 	directors: directors.map((select: any) => select.value).join('@'),
 	sort: sort.value,
 	genres: genres.map((select: any) => select.value).join('@'),
@@ -22,6 +22,7 @@ const createStrings = ({sort, directors, genres, subGenres, universes, subUniver
 	characters: characters.map((select: any) => select.value).join('@'),
 	sportholidays: sportholidays.map((select: any) => select.value).join('@'),
 	years: years.map((select: any) => select.value).join('@'),
+	decades: decades.map((select: any) => select.value).join('@'),
 })
 
 const Home: React.FC = () => {
