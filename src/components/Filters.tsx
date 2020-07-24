@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import Select from 'react-select';
 import {SearchContext, FiltersType} from '../utils/context';
-import {sortOptions, directorOptions, genreOptions, subGenreOptions, universeOptions, subUniverseOptions, characterOptions, sportholidayOptions} from '../utils/filterData';
+import {sortOptions, directorOptions, genreOptions, subGenreOptions, universeOptions, subUniverseOptions, characterOptions, sportholidayOptions, yearOptions} from '../utils/filterData';
 
 interface FiltersProps {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,6 +39,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
             subUniverses: [],
             characters: [],
             sportholidays: [],
+            years: []
         })
     }
 
@@ -50,7 +51,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
             </div> 
             <div className="filter-select">
                 <label>Directors:</label>
-                <Select className="sort" label="Genre" isMulti onChange={(e:any) => changeFilter(e, 'directors')} isSearchable={false} options={directorOptions} value={selectedFilters.directors} />
+                <Select className="sort" label="Directors" isMulti onChange={(e:any) => changeFilter(e, 'directors')} isSearchable={false} options={directorOptions} value={selectedFilters.directors} />
             </div>
             <div className="filter-select">
                 <label>Genre:</label>
@@ -70,11 +71,15 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
             </div>
             <div className="filter-select">
                 <label>Characters:</label>
-                <Select className="sort" label="Characters" isMulti onChange={(e:any) => changeFilter(e, 'characters')} isSearchable={false} options={characterOptions} value={selectedFilters.characters}/>
+                <Select className="sort" label="Character" isMulti onChange={(e:any) => changeFilter(e, 'characters')} isSearchable={false} options={characterOptions} value={selectedFilters.characters}/>
             </div>
             <div className="filter-select">
                 <label>Sport/Holiday:</label>
-                <Select className="sort" label="Characters" isMulti onChange={(e:any) => changeFilter(e, 'sportholidays')} isSearchable={false} options={sportholidayOptions} value={selectedFilters.sportholidays}/>
+                <Select className="sort" label="Sport/Holiday" isMulti onChange={(e:any) => changeFilter(e, 'sportholidays')} isSearchable={false} options={sportholidayOptions} value={selectedFilters.sportholidays}/>
+            </div>
+            <div className="filter-select">
+                <label>Year:</label>
+                <Select className="sort" label="Year" isMulti onChange={(e:any) => changeFilter(e, 'years')} isSearchable={false} options={yearOptions} value={selectedFilters.years}/>
             </div>
             <div id="filter-buttons">
                 <button id="filter-apply" onClick={handleFilters}>Apply Filters</button>
