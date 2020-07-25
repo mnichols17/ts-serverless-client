@@ -15,7 +15,7 @@ const ReviewItem: React.FC<Review> = ({movie, total, poster, rank}) => {
     return(
         <div className="movie">
             <Link className="movie-link" to={`/review/${rank}`}>
-                <img className="movie-poster" src={poster} alt={movie}/>
+                <img className="movie-poster" src={`https://image.tmdb.org/t/p//w220_and_h330_face${poster}`} alt={movie}/>
                 <div className="info">
                     <div className="info-review">
                         <p className="movie-total"><FontAwesomeIcon className="star" icon={faStar}/>{total}/100</p>

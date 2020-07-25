@@ -16,7 +16,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review}) => {
         <>
             <h2 id="reviewPage-title">{review.movie}</h2>
             <h1 id="review-rank">Rank: #{review.rank}</h1>
-            <img id="review-poster" style={{maxWidth: '300px'}} src={review.poster} alt="POSTER" />
+            <img id="review-poster" style={{maxWidth: '300px'}} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <div id="review-card">
                 <h1 id="review-total">Score: {review.total}/100</h1>
                 <div id="review-streaming">
@@ -82,9 +82,10 @@ const ReviewPage: React.FC = (props) => {
             if(!res.data) {
                 alert("No Movie Found!")
             } else {
-                const {movie} = res.data
-                if(movie.substring(movie.length-5).toLowerCase() === ", the") res.data.movie = handleTitle(movie);
-                setReview(res.data);
+                const {movie} = res.data[0]
+                if(movie.substring(movie.length-5).toLowerCase() === ", the") res.data[0].movie = handleTitle(movie);
+                console.log(res.data)
+                setReview(res.data[0]);
             }
             setLoading(false);
         })

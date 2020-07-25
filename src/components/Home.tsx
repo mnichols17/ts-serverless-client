@@ -75,9 +75,9 @@ const Home: React.FC = () => {
 	}
 
 	const checkTop = () => {
-		if(!showTop && window.pageYOffset > 400){
+		if(!showTop && window.pageYOffset > 750){
 			setTop(true)
-		} else if(showTop && window.pageYOffset <= 400){
+		} else if(showTop && window.pageYOffset <= 750){
 			setTop(false)
 		}
 	}

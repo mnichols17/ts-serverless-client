@@ -10,5 +10,8 @@ export default interface Review {
     character?: string;
     sportholiday?: string;
     year?: number;
+    decade?: number
     poster?: string;
+    plot?: string;
+    actors?: string;
 }

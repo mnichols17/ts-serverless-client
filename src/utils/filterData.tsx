@@ -298,7 +298,6 @@ export const directorOptions: object[] = [
     {value: "Akiva Schaffer", label: "Schaffer, Akiva"},
     {value: "Joel Schumacher", label: "Schumacher, Joel"},
     {value: "Robert Schwentke", label: "Schwentke, Robert"},
-    {value: "Martin Scorcese", label: "Scorcese, Martin"},
     {value: "Martin Scorsese", label: "Scorsese, Martin"},
     {value: "Ridley Scott", label: "Scott, Ridley"},
     {value: "Tony Scott", label: "Scott, Tony"},
@@ -400,7 +399,6 @@ export const genreOptions: object[] = [
     {value: "Family", label: "Family"},
     {value: "Fantasy", label: "Fantasy"},
     {value: "Horror", label: "Horror"},
-    {value: "Music", label: "Music"},
     {value: "Musical", label: "Musical"},
     {value: "Mystery", label: "Mystery"},
     {value: "Romance", label: "Romance"},
@@ -428,8 +426,6 @@ export const subGenreOptions: object[] = [
     {value: "Family Dynamics", label: "Family Dynamics"},
     {value: "Fast Cars & Getaways", label: "Fast Cars & Getaways"},
     {value: "Gangster, Mob, & Mafia", label: "Gangster, Mob, & Mafia"},
-    {value: "Gangster, Mob, & Mafia ", label: "Gangster, Mob, & Mafia "},
-    {value: "Gangsters, Mob, & Mafia", label: "Gangsters, Mob, & Mafia"},
     {value: "Haunted & Paranormal", label: "Haunted & Paranormal"},
     {value: "Heist", label: "Heist"},
     {value: "Kids & Family", label: "Kids & Family"},
@@ -817,7 +813,7 @@ export const decadeOptions: object[] = [
 ]
 
 export const sortOptions: object[] = [
-    {value: "", label: "Best Match"},
     {value: "ASC", label: "Rating High to Low"},
     {value: "DESC", label: "Rating Low to High"},
+    {value: "", label: "Best Match"},
 ]

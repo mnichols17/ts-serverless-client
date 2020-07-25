@@ -63,11 +63,11 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
                 <Select className="sort" label="Sub-Genre" isMulti onChange={(e:any) => changeFilter(e, 'subGenres')} isSearchable={false} options={subGenreOptions} value={selectedFilters.subGenres}/>
             </div>
             <div className="filter-select">
-                <label>Universe (Disney, Star Wars, DC, Marvel, etc.):</label>
+                <label>Universe: (Disney, Star Wars, DC, Marvel, etc.)</label>
                 <Select className="sort" label="Universe" isMulti onChange={(e:any) => changeFilter(e, 'universes')} isSearchable={false} options={universeOptions} value={selectedFilters.universes}/>
             </div>
             <div className="filter-select">
-                <label>Sub-Universe (MCU, DCEU, Pixar, etc.):</label>
+                <label>Sub-Universe: (MCU, DCEU, Pixar, etc.)</label>
                 <Select className="sort" label="Sub-Universe" isMulti onChange={(e:any) => changeFilter(e, 'subUniverses')} isSearchable={false} options={subUniverseOptions} value={selectedFilters.subUniverses}/>
             </div>
             <div className="filter-select">
