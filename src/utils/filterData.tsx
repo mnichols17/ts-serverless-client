@@ -670,6 +670,7 @@ export const characterOptions: object[] = [
     {value: "Man with No Name", label: "Man with No Name"},
     {value: "Michael Myers", label: "Michael Myers"},
     {value: "Mummy", label: "Mummy"},
+    {value: "Pee-wee", label: "Pee-wee"},
     {value: "Predator", label: "Predator"},
     {value: "Punisher", label: "Punisher"},
     {value: "Rambo", label: "Rambo"},

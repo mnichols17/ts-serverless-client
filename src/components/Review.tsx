@@ -7,10 +7,27 @@ import ReactLoading from 'react-loading';
 
 interface ReviewInfoProps {
     review: Review;
+    providers: object[];
+}
+
+interface ProviderLogosProps {
+    providers: object[];
+}
+
+const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
+    let logos = [];
+    for (const [key, value] of Object.entries(providers)) {
+        logos.push(<a target="_blank" rel="noopener noreferrer" href={value.toString()} key={key}><img className="provider" src={require(`../media/providers/${key}.png`)} /></a>)
+    }
+    return (
+        <div style={{display: 'flex', justifyContent: 'center', flexWrap: "wrap"}}>
+            {logos.map(l => l)}
+        </div>
+    )
 }
 
 // style={{fontSize: review.movie.length < 12 ? "2em" : ""}
-const ReviewInfo: React.FC<ReviewInfoProps> = ({review}) => {
+const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers}) => {
     return(
         !review.director? <Redirect push to="/" /> :
         <>
@@ -19,13 +36,16 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review}) => {
             <img id="review-poster" style={{maxWidth: '300px'}} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <div id="review-card">
                 <h1 id="review-total">Score: {review.total}/100</h1>
+                <p>{review.plot}</p>
                 <div id="review-streaming">
                     <h3>Streaming</h3>
                     <hr />
                     <div style={{color: "gray"}}>
-                        {"{{Streaming Options Will Go Here}}"}
                     </div>
                 </div>
+                <ProviderLogos providers={providers} />
+                <h4>Cast</h4>
+                <p>{review.actors}</p>
                 <table id="review-info">
                     <tbody>
                         <tr>
@@ -71,10 +91,11 @@ const ReviewPage: React.FC = (props) => {
 
     const {rank} = useParams();
     const[loading, setLoading] = useState<boolean>(true);
-    const [review, setReview] = useState<Review>({
+    const[review, setReview] = useState<Review>({
         movie: "",
         total: -1
     })
+    const[providers, setProviders] = useState<object[]>([])
 
     useEffect(() => {
         request(`reviews/movie/${rank}`)
@@ -86,6 +107,7 @@ const ReviewPage: React.FC = (props) => {
                 if(movie.substring(movie.length-5).toLowerCase() === ", the") res.data[0].movie = handleTitle(movie);
                 console.log(res.data)
                 setReview(res.data[0]);
+                setProviders(res.data[1]);
             }
             setLoading(false);
         })
@@ -93,7 +115,7 @@ const ReviewPage: React.FC = (props) => {
 
     return(
         <div id="reviewPage">
-            {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"} height={"10vh"} width={"10vh"}/> : <ReviewInfo review={review} />}
+            {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"} height={"10vh"} width={"10vh"}/> : <ReviewInfo review={review} providers={providers} />}
         </div>
     )
 }
