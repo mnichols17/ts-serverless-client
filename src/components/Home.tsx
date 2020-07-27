@@ -74,6 +74,7 @@ const Home: React.FC = () => {
         .catch(err => console.error(err))
 	}
 
+	// Memory Leak here
 	const checkTop = () => {
 		if(!showTop && window.pageYOffset > 750){
 			setTop(true)

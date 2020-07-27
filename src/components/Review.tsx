@@ -4,6 +4,7 @@ import request from '../utils/makeRequest';
 import Review from '../utils/Review';
 import handleTitle from '../utils/handleTitle';
 import ReactLoading from 'react-loading';
+import ReactPlayer from 'react-player/youtube';
 
 interface ReviewInfoProps {
     review: Review;
@@ -15,74 +16,76 @@ interface ProviderLogosProps {
 }
 
 const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
-    let logos = [];
+    const main:number[] = [8,15,9,337,384,27,386,387,78,350,43]
+    let logos:any[] = [];
     for (const [key, value] of Object.entries(providers)) {
-        logos.push(<a target="_blank" rel="noopener noreferrer" href={value.toString()} key={key}><img className="provider" src={require(`../media/providers/${key}.png`)} /></a>)
+        const logo = <a target="_blank" rel="noopener noreferrer" href={value.toString()} key={key}><img className="provider" src={require(`../media/providers/${key}.png`)} alt={key}/></a>
+        console.log(main.includes(parseInt(key)), key, value)
+        main.includes(parseInt(key))? logos.push(logo) : logos.unshift(logo);
     }
     return (
         <div style={{display: 'flex', justifyContent: 'center', flexWrap: "wrap"}}>
-            {logos.map(l => l)}
+            {logos.slice().reverse().map(l => l)}
         </div>
     )
 }
 
-// style={{fontSize: review.movie.length < 12 ? "2em" : ""}
 const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers}) => {
     return(
         !review.director? <Redirect push to="/" /> :
         <>
             <h2 id="reviewPage-title">{review.movie}</h2>
             <h1 id="review-rank">Rank: #{review.rank}</h1>
-            <img id="review-poster" style={{maxWidth: '300px'}} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
+            <img id="review-poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <div id="review-card">
                 <h1 id="review-total">Score: {review.total}/100</h1>
-                <p>{review.plot}</p>
+                <p id="review-plot">{review.plot}</p>
+                <h3 style={{color: '#FEDE16'}}>Director</h3>
+                <p className="review-people">{review.director}</p>
+                <h3 style={{color: '#FEDE16'}}>Starring</h3>
+                <p className="review-people">{review.actors}</p>
                 <div id="review-streaming">
-                    <h3>Streaming</h3>
+                    <h3 style={{color: '#FEDE16'}}>Streaming Options</h3>
                     <hr />
-                    <div style={{color: "gray"}}>
-                    </div>
+                    <p>Click to Watch</p>
+                    <ProviderLogos providers={providers} />
                 </div>
-                <ProviderLogos providers={providers} />
-                <h4>Cast</h4>
-                <p>{review.actors}</p>
-                <table id="review-info">
-                    <tbody>
-                        <tr>
-                            <td>Director:</td>
-                            <td>{review.director}</td>
-                        </tr>
-                        <tr>
-                            <td>Year Released:</td>
-                            <td>{review.year}</td>
-                        </tr>
-                        <tr>
-                            <td>Genre:</td>
-                            <td>{review.genre}</td>
-                        </tr>
-                        <tr>
-                            <td>Sub-Genre:</td>
-                            <td>{review.subgenre || "N/A"}</td>
-                        </tr>
-                        <tr>
-                            <td>Universe:</td>
-                            <td>{review.universe || "N/A"}</td>
-                        </tr>
-                        <tr>
-                            <td>Sub-Universe:</td>
-                            <td>{review.subuniverse || "N/A"}</td>
-                        </tr>
-                        <tr>
-                            <td>Character:</td>
-                            <td>{review.character || "N/A"}</td>
-                        </tr>
-                        <tr>
-                            <td>Sport/Holiday:</td>
-                            <td>{review.sportholiday || "N/A"}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div id="review-trailer-wrapper">
+                    <ReactPlayer className="react-player" url={`https://www.youtube.com/watch?v=${review.video_key}`} height="100%" width="100%" controls={true}/>
+                </div>
             </div>
+            <table id="review-info">
+                <tbody>
+                    <tr>
+                        <td>Year Released:</td>
+                        <td>{review.year}</td>
+                    </tr>
+                    <tr>
+                        <td>Genre:</td>
+                        <td>{review.genre}</td>
+                    </tr>
+                    <tr>
+                        <td>Sub-Genre:</td>
+                        <td>{review.subgenre || "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Universe:</td>
+                        <td>{review.universe || "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Sub-Universe:</td>
+                        <td>{review.subuniverse || "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Character:</td>
+                        <td>{review.character || "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Sport/Holiday:</td>
+                        <td>{review.sportholiday || "N/A"}</td>
+                    </tr>
+                </tbody>
+            </table>
         </>
     )
 }
@@ -105,7 +108,6 @@ const ReviewPage: React.FC = (props) => {
             } else {
                 const {movie} = res.data[0]
                 if(movie.substring(movie.length-5).toLowerCase() === ", the") res.data[0].movie = handleTitle(movie);
-                console.log(res.data)
                 setReview(res.data[0]);
                 setProviders(res.data[1]);
             }

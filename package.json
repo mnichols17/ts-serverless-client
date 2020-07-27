@@ -16,6 +16,7 @@
     "react-dom": "^16.13.1",
     "react-infinite-scroll-component": "^5.0.5",
     "react-loading": "^2.0.3",
+    "react-player": "^2.6.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0",

@@ -1,5 +1,5 @@
 import React from 'react';
-import { createContext, useState, useContext, useCallback } from 'react';
+import { createContext, useState, useCallback } from 'react';
 
 export type FiltersType = {
     directors: object[],

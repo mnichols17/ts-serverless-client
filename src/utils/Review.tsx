@@ -14,4 +14,5 @@ export default interface Review {
     poster?: string;
     plot?: string;
     actors?: string;
+    video_key?: string;
 }
