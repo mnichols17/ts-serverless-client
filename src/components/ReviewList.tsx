@@ -35,7 +35,6 @@ interface ReviewListProps {
 }
 
 const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews, more}) => {
-    console.log("HIT RL", reviews.length)
     const LoadingItem = <div id="loading"><ReactLoading type={"spin"} color={"yellow"}/></div>
 
     return (

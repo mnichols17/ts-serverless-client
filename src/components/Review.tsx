@@ -20,7 +20,6 @@ const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
     let logos:any[] = [];
     for (const [key, value] of Object.entries(providers)) {
         const logo = <a target="_blank" rel="noopener noreferrer" href={value.toString()} key={key}><img className="provider" src={require(`../media/providers/${key}.png`)} alt={key}/></a>
-        console.log(main.includes(parseInt(key)), key, value)
         main.includes(parseInt(key))? logos.push(logo) : logos.unshift(logo);
     }
     return (

@@ -36,6 +36,14 @@ const Home: React.FC = () => {
 	const[more, setMore] = useState<boolean>(true);
 	const[loading, setLoading] = useState<boolean>(true);
 	const[showTop, setTop] = useState<boolean>(false);
+
+	useEffect(() => {
+		window.addEventListener('scroll', checkTop)
+
+		return () => {
+			window.removeEventListener('scroll', checkTop)
+		}
+	}, [showTop])
 	
 	useEffect(() => {
 		if(!loading) setLoading(true);
@@ -59,7 +67,6 @@ const Home: React.FC = () => {
 	}, [query])
 	
 	const getReviews = async(reset?: boolean) => {
-		console.log(reset)
 		if(itemSkips > 16) return; // Limits # of reviews a single route can get (~500)
 		const stringFilters = createStrings(filters);
         request(url, {...stringFilters, skip: reset? 0 : itemSkips})
@@ -83,7 +90,6 @@ const Home: React.FC = () => {
 		}
 	}
 
-	window.addEventListener('scroll', checkTop)
     return(
 		<div id="content">
 			<img id="logo" src={Logo} alt="LOGO" />
