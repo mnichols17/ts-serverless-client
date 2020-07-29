@@ -7,7 +7,7 @@ import Filters from './Filters';
 const Search: React.FC = () => {
 
     const {query, currentQuery} = useContext(SearchContext);
-    const [open, setOpen] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(false); // Might need to move to home page for a long filter panel
 
     const handleQuery = (e?: React.ChangeEvent<HTMLInputElement>) => {
         const input = e? e.target.value : "";

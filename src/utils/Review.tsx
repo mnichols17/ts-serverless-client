@@ -15,4 +15,5 @@ export default interface Review {
     plot?: string;
     actors?: string;
     video_key?: string;
+    runtime?: number;
 }

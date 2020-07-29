@@ -48,6 +48,7 @@
     margin-top: 1em;
     width: 100%;
     max-width: 470px;
+    cursor: pointer;
 }
 
 #search {
@@ -88,6 +89,29 @@
     cursor: pointer;
 }
 
+#filters-applied {
+    text-align: center;
+    color: white;
+    margin: 0 0 1em;
+    font-size: .85em;
+    padding: 0 10px;
+}
+
+#filters-applied > span {
+    color: #FEDE16;
+}
+
+#filters-applied-total {
+    text-align: center;
+    color: white;
+    margin: 0 0 1em;
+    padding: 5px;
+}
+
+#filters-applied-total > span {
+    color: #FEDE16;
+}
+
 #loading {
     display: flex;
     background: none;
@@ -97,7 +121,7 @@
 }
 
 #empty {
-    color: yellow;
+    color: white;
 }
 
 /* Filter Panel */
@@ -307,6 +331,10 @@
         font-size: 1em;
     }
 
+    #filters-applied {
+        font-size: .9em;
+    }
+
     .movie {
         width: 120px;
         margin: .9em .4em;
@@ -322,6 +350,10 @@
         width: 80%;
         height: 300px;
         align-self: center;
+    }
+
+    #filters-applied {
+        font-size: .95em;
     }
 }
 

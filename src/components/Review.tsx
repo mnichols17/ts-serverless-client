@@ -60,6 +60,10 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers}) => {
                         <td>{review.year}</td>
                     </tr>
                     <tr>
+                        <td>Runtime:</td>
+                        <td>{review.runtime} minutes</td>
+                    </tr>
+                    <tr>
                         <td>Genre:</td>
                         <td>{review.genre}</td>
                     </tr>

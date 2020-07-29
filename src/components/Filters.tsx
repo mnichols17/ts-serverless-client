@@ -7,6 +7,20 @@ interface FiltersProps {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface SelectProps {
+    label: string;
+    onChange: (e: any) => void;
+    options: object[];
+    value: object[];
+}
+
+const FilterSelect:React.FC<SelectProps> = ({label, onChange, options, value}) => (
+    <div className="filter-select">
+        <label>{label}</label>
+        <Select className="sort" label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} isSearchable={true} options={options} value={value} />
+    </div>
+)
+
 const Filters: React.FC<FiltersProps> = ({setOpen}) => {
 
     const {filters, currentFilters} = useContext(SearchContext)
@@ -21,13 +35,8 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         })
     }
 
-    const handleFilters = () => {
-        currentFilters(selectedFilters)
-        setOpen(false);
-    }
-
-    const resetFilters = () => {
-        setFilters({
+    const handleFilters = (reset?: boolean) => {
+        currentFilters(!reset? selectedFilters : {
             directors: [],
             sort: {
                 value: "ASC",
@@ -42,7 +51,20 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
             years: [],
             decades: []
         })
+        setOpen(false);
     }
+
+    const selects = [
+        {label: "Directors:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors},
+        {label: "Genre: (Action, Comedy, Drama, etc.)", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres},
+        {label: "Sub-Genre: (Comic, Heist, Romantic Comedy, etc.)", onChange: (e:any) => changeFilter(e, 'subGenres'), options: subGenreOptions, value: selectedFilters.subGenres},
+        {label: "Universe: (Disney, Star Wars, DC, Marvel, etc.)", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes},
+        {label: "Sub-Universe: (MCU, DCEU, Pixar, etc.)", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses},
+        {label: "Characters:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters},
+        {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays},
+        {label: "Year:", onChange: (e:any) => changeFilter(e, 'years'), options: yearOptions, value: selectedFilters.years},
+        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
+    ]
 
     return(
         <div id="filter-panel">
@@ -50,45 +72,10 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
                 <label>Sort By:</label>
                 <Select className="sort" label="Sort By" onChange={(e:any) => changeFilter(e, "sort")} isSearchable={false} options={sortOptions} value={selectedFilters.sort} />
             </div> 
-            <div className="filter-select">
-                <label>Directors:</label>
-                <Select className="sort" label="Directors" isMulti onChange={(e:any) => changeFilter(e, 'directors')} isSearchable={false} options={directorOptions} value={selectedFilters.directors} />
-            </div>
-            <div className="filter-select">
-                <label>Genre:</label>
-                <Select className="sort" label="Genre" isMulti onChange={(e:any) => changeFilter(e, 'genres')} isSearchable={false} options={genreOptions} value={selectedFilters.genres} />
-            </div>
-            <div className="filter-select">
-                <label>Sub-Genre:</label>
-                <Select className="sort" label="Sub-Genre" isMulti onChange={(e:any) => changeFilter(e, 'subGenres')} isSearchable={false} options={subGenreOptions} value={selectedFilters.subGenres}/>
-            </div>
-            <div className="filter-select">
-                <label>Universe: (Disney, Star Wars, DC, Marvel, etc.)</label>
-                <Select className="sort" label="Universe" isMulti onChange={(e:any) => changeFilter(e, 'universes')} isSearchable={false} options={universeOptions} value={selectedFilters.universes}/>
-            </div>
-            <div className="filter-select">
-                <label>Sub-Universe: (MCU, DCEU, Pixar, etc.)</label>
-                <Select className="sort" label="Sub-Universe" isMulti onChange={(e:any) => changeFilter(e, 'subUniverses')} isSearchable={false} options={subUniverseOptions} value={selectedFilters.subUniverses}/>
-            </div>
-            <div className="filter-select">
-                <label>Characters:</label>
-                <Select className="sort" label="Character" isMulti onChange={(e:any) => changeFilter(e, 'characters')} isSearchable={false} options={characterOptions} value={selectedFilters.characters}/>
-            </div>
-            <div className="filter-select">
-                <label>Sport/Holiday:</label>
-                <Select className="sort" label="Sport/Holiday" isMulti onChange={(e:any) => changeFilter(e, 'sportholidays')} isSearchable={false} options={sportholidayOptions} value={selectedFilters.sportholidays}/>
-            </div>
-            <div className="filter-select">
-                <label>Year:</label>
-                <Select className="sort" label="Year" isMulti onChange={(e:any) => changeFilter(e, 'years')} isSearchable={false} options={yearOptions} value={selectedFilters.years}/>
-            </div>
-            <div className="filter-select">
-                <label>Decade:</label>
-                <Select className="sort" label="Decade" isMulti onChange={(e:any) => changeFilter(e, 'decades')} isSearchable={false} options={decadeOptions} value={selectedFilters.decades}/>
-            </div>
+            {selects.map(({label, onChange, options, value}) => <FilterSelect key={label} label={label} onChange={onChange} options={options} value={value} />)}
             <div id="filter-buttons">
-                <button id="filter-apply" onClick={handleFilters}>Apply Filters</button>
-                <button id="filter-reset" onClick={resetFilters}>Reset Filters</button>
+                <button id="filter-apply" onClick={() => handleFilters()}>Apply Filters</button>
+                <button id="filter-reset" onClick={() => handleFilters(true)}>Reset Filters</button>
             </div>
         </div>
     )

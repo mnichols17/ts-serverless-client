@@ -308,7 +308,6 @@ export const directorOptions: object[] = [
     {value: "Lynn Shelton", label: "Shelton, Lynn"},
     {value: "Ron Shelton", label: "Shelton, Ron"},
     {value: "M. Night Shyamalan", label: "Shyamalan, M. Night"},
-    {value: "M. Night Shymalan", label: "Shymalan, M. Night"},
     {value: "Bryan Singer", label: "Singer, Bryan"},
     {value: "Tarsem Singh", label: "Singh, Tarsem"},
     {value: "Charles Martin Smith", label: "Smith, Charles Martin"},
@@ -353,7 +352,7 @@ export const directorOptions: object[] = [
     {value: "Matthew Vaughn", label: "Vaughn, Matthew"},
     {value: "Gore Verbinski", label: "Verbinski, Gore"},
     {value: "Paul Verhoeven", label: "Verhoeven, Paul"},
-    {value: "Dennis Villeneuve", label: "Villeneuve, Dennis"},
+    {value: "Denis Villeneuve", label: "Villeneuve, Denis"},
     {value: "Lana Wachowski & Lilly Wachowski", label: "Wachowski, Lana & Wachowski, Lilly"},
     {value: "Jeff Wadlow", label: "Wadlow, Jeff"},
     {value: "David Wain", label: "Wain, David"},
@@ -468,7 +467,7 @@ export const subGenreOptions: object[] = [
 export const universeOptions: object[] = [
     {value: "20th Century Animation", label: "20th Century Animation"},
     {value: "A Nightmare on Elm Street", label: "A Nightmare on Elm Street"},
-    {value: "Aardman", label: "Aardman"},
+    {value: "Aardman Animation", label: "Aardman Animation"},
     {value: "Ace Ventura", label: "Ace Ventura"},
     {value: "Adult Swim", label: "Adult Swim"},
     {value: "Alien", label: "Alien"},
@@ -502,8 +501,8 @@ export const universeOptions: object[] = [
     {value: "Godfather", label: "Godfather"},
     {value: "Halloween", label: "Halloween"},
     {value: "Hannibal Lecter", label: "Hannibal Lecter"},
-    {value: "Happy Madison", label: "Happy Madison"},
     {value: "Harold & Kumar", label: "Harold & Kumar"},
+    {value: "HBO Original", label: "HBO Original"},
     {value: "Home Alone", label: "Home Alone"},
     {value: "Huhu Animation", label: "Huhu Animation"},
     {value: "Illumination", label: "Illumination"},
@@ -528,6 +527,7 @@ export const universeOptions: object[] = [
     {value: "Monster Universe", label: "Monster Universe"},
     {value: "Monty Python", label: "Monty Python"},
     {value: "National Lampoon", label: "National Lampoon"},
+    {value: "Netflix Original", label: "Netflix Original"},
     {value: "Nicholas Sparks", label: "Nicholas Sparks"},
     {value: "Nickelodeon", label: "Nickelodeon"},
     {value: "Ninja Turtles", label: "Ninja Turtles"},
@@ -574,6 +574,7 @@ export const universeOptions: object[] = [
 ]
 
 export const subUniverseOptions: object[] = [
+    {value: "Adam Sandler-verse", label: "Adam Sandler-verse"},
     {value: "DCEU", label: "DCEU"},
     {value: "Disney Animation", label: "Disney Animation"},
     {value: "Dr. Seuss", label: "Dr. Seuss"},
@@ -622,7 +623,7 @@ export const subUniverseOptions: object[] = [
     {value: "Star Wars Prequel", label: "Star Wars Prequel"},
     {value: "Star Wars Sequel", label: "Star Wars Sequel"},
     {value: "Star Wars Standalone", label: "Star Wars Standalone"},
-    {value: "Stark Trek Next Generation", label: "Stark Trek Next Generation"},
+    {value: "Star Trek Next Generation", label: "Star Trek Next Generation"},
     {value: "Transformers Michael Bay", label: "Transformers Michael Bay"},
     {value: "Transformers Standalone", label: "Transformers Standalone"},
     {value: "Tron", label: "Tron"},
@@ -631,6 +632,7 @@ export const subUniverseOptions: object[] = [
 ]
 
 export const characterOptions: object[] = [
+    {value: "Adam Sandler", label: "Adam Sandler"},
     {value: "Ant-Man", label: "Ant-Man"},
     {value: "Aquaman", label: "Aquaman"},
     {value: "Avengers", label: "Avengers"},
@@ -661,7 +663,7 @@ export const characterOptions: object[] = [
     {value: "Hulk", label: "Hulk"},
     {value: "Indiana Jones", label: "Indiana Jones"},
     {value: "Iron Man", label: "Iron Man"},
-    {value: "Jason Vorhees", label: "Jason Vorhees"},
+    {value: "Jason Voorhees", label: "Jason Voorhees"},
     {value: "Joker", label: "Joker"},
     {value: "Jonah Hex", label: "Jonah Hex"},
     {value: "Justice League", label: "Justice League"},
@@ -815,6 +817,5 @@ export const decadeOptions: object[] = [
 
 export const sortOptions: object[] = [
     {value: "ASC", label: "Rating High to Low"},
-    {value: "DESC", label: "Rating Low to High"},
-    {value: "", label: "Best Match"},
+    {value: "DESC", label: "Rating Low to High"}
 ]
