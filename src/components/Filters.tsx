@@ -1,7 +1,9 @@
 import React, {useState, useContext} from 'react';
 import Select from 'react-select';
 import {SearchContext, FiltersType} from '../utils/context';
-import {sortOptions, directorOptions, genreOptions, subGenreOptions, universeOptions, subUniverseOptions, characterOptions, sportholidayOptions, yearOptions, decadeOptions} from '../utils/filterData';
+import {sortOptions, directorOptions, genreOptions, subGenreOptions, 
+    universeOptions, subUniverseOptions, characterOptions, sportholidayOptions, 
+    yearOptions, decadeOptions, providerOptions} from '../utils/filterData';
 
 interface FiltersProps {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -49,7 +51,8 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
             characters: [],
             sportholidays: [],
             years: [],
-            decades: []
+            decades: [],
+            providers: []
         })
         setOpen(false);
     }
@@ -64,6 +67,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays},
         {label: "Year:", onChange: (e:any) => changeFilter(e, 'years'), options: yearOptions, value: selectedFilters.years},
         {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
+        {label: "Providers: (Netflix, Hulu, etc.)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
     ]
 
     return(

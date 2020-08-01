@@ -802,6 +802,38 @@ export const yearOptions: object[] = [
     {value: "2020", label: "2020"},
 ]
 
+const streamingOptions: object[] = [
+    {value: "9", label: "Amazon (Stream)"},
+    {value: "78", label: "CBS"},
+    {value: "337", label: "Disney+"},
+    {value: "27@31", label: "HBO"},
+    {value: "384", label: "HBO Max"},
+    {value: "15", label: "Hulu"},
+    {value: "8", label: "Netflix"},
+    {value: "386", label: "Peacock"},
+    {value: "387", label: "Peacock Premium"},
+    {value: "37", label: "Showtime"},
+    {value: "43", label: "Starz"},
+]
+
+const buyrentOptions: object[] = [
+    {value: "10", label: "Amazon (Buy/Rent)"},
+    {value: "2", label: "Apple (Buy/Rent)"},
+    {value: "3", label: "Google "},
+    {value: "192", label: "YouTube"},
+]
+
+export const providerOptions: object[] = [
+    {
+        label: 'Streaming',
+        options: streamingOptions,
+    },
+    {
+        label: 'Buy/Rent',
+        options: buyrentOptions,
+    },
+]
+
 export const decadeOptions: object[] = [
     {value: "1930", label: "1930"},
     {value: "1940", label: "1940"},
@@ -814,6 +846,8 @@ export const decadeOptions: object[] = [
     {value: "2010", label: "2010"},
     {value: "2020", label: "2020"},
 ]
+
+
 
 export const sortOptions: object[] = [
     {value: "ASC", label: "Rating High to Low"},

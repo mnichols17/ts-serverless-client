@@ -11,7 +11,9 @@ export type FiltersType = {
     characters: object[],
     sportholidays: object[],
     years: object[],
-    decades: object[]
+    decades: object[],
+    providers: object[]
+
 }
 
 interface Search {
@@ -37,7 +39,8 @@ export const SearchContext = createContext<Search>({
 		characters: [],
         sportholidays: [],
         years: [],
-        decades: []
+        decades: [],
+        providers: [],
     },
     currentUrl: () => {},
     currentQuery: () => {},
@@ -64,7 +67,8 @@ export const SearchProvider = ({children}: ProviderProps) => {
         characters: [],
         sportholidays: [],
         years: [],
-        decades: []
+        decades: [],
+        providers: [],
     });
 
     const currentUrl = useCallback((newUrl: string) => {

@@ -12,7 +12,7 @@ import Logo from '../media/logo.jpg';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
 
-const createStrings = ({sort, directors, genres, subGenres, universes, subUniverses, characters, sportholidays, years, decades}: FiltersType) => ({
+const createStrings = ({sort, directors, genres, subGenres, universes, subUniverses, characters, sportholidays, years, decades, providers}: FiltersType) => ({
 	directors: directors.map((select: any) => select.value).join('@'),
 	sort: sort.value,
 	genres: genres.map((select: any) => select.value).join('@'),
@@ -23,6 +23,7 @@ const createStrings = ({sort, directors, genres, subGenres, universes, subUniver
 	sportholidays: sportholidays.map((select: any) => select.value).join('@'),
 	years: years.map((select: any) => select.value).join('@'),
 	decades: decades.map((select: any) => select.value).join('@'),
+	providers: providers.map((select: any) => select.value).join('@'),
 })
 
 interface FiltersAppliedProps {
@@ -33,6 +34,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	let directedBy = "";
 	let type = "";
 	let fromYears = "";
+	let watchOn = "";
 	let total = 0;
 	for(const[key, value] of Object.entries(filters)){
 		if((value as object[]).length){
@@ -40,6 +42,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 				total++;
 				if(key === 'directors') directedBy += ` ${v.value},` 
 				else if(key === "years" || key === "decades") fromYears += ` ${v.value},`
+				else if(key === "providers") watchOn += ` ${v.label},`
 				else (type += ` ${v.label},`)
 			})
 		}
@@ -50,7 +53,8 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	type = type.substr(0,type.length-1)
 	directedBy = directedBy.substr(0,directedBy.length-1)
 	fromYears = fromYears.substr(0,fromYears.length-1)
-	const applied = <p id="filters-applied"><span>{type}</span>{type.length? " movies":"Movies"}{directedBy.length? " by":""}<span>{directedBy}</span>{fromYears.length? " from":""}<span>{fromYears}</span></p>
+	watchOn = watchOn.substr(0,watchOn.length-1)
+	const applied = <p id="filters-applied"><span>{type}</span>{type.length? " movies":"Movies"}{directedBy.length? " by":""}<span>{directedBy}</span>{fromYears.length? " from":""}<span>{fromYears}</span>{watchOn.length? " on":""}<span>{watchOn}</span></p>
 
 	return (total > 0)? applied : null
 }
@@ -111,7 +115,8 @@ const Home:React.FC = () => {
             characters: [],
             sportholidays: [],
             years: [],
-            decades: []
+            decades: [],
+            providers: []
         })
 	}
 	

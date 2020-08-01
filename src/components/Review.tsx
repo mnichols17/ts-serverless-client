@@ -18,13 +18,16 @@ interface ProviderLogosProps {
 const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
     const main:number[] = [8,15,9,337,384,27,386,387,78,350,43]
     let logos:any[] = [];
-    for (const [key, value] of Object.entries(providers)) {
-        const logo = <a target="_blank" rel="noopener noreferrer" href={value.toString()} key={key}><img className="provider" src={require(`../media/providers/${key}.png`)} alt={key}/></a>
-        main.includes(parseInt(key))? logos.push(logo) : logos.unshift(logo);
-    }
+    providers.forEach((provider:any) => {
+        const logo = <a target="_blank" rel="noopener noreferrer" href={provider.url} key={provider.provider_id}>
+                        <img className="provider" src={require(`../media/providers/${provider.provider_id}.png`)} alt={provider.provider_id}/>
+                    </a>
+
+        main.includes(parseInt(provider.provider_id))? logos.push(logo) : logos.unshift(logo);
+    })
     return (
         <div style={{display: 'flex', justifyContent: 'center', flexWrap: "wrap"}}>
-            {logos.slice().reverse().map(l => l)}
+            {providers.length? logos.slice().reverse().map(l => l) : <h1>No Streaming Options Available</h1>}
         </div>
     )
 }
