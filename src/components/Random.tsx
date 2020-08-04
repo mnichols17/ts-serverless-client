@@ -1,0 +1,82 @@
+import React, {useState} from 'react';
+import Select from 'react-select';
+import {Redirect} from 'react-router-dom';
+import {genreOptions, decadeOptions, providerOptions} from '../utils/filterData';
+import request from '../utils/makeRequest';
+import ReactLoading from 'react-loading';
+
+import Logo from '../media/logo.jpg';
+
+interface RandomSelectProps {
+    label: string;
+    onChange: (e: any) => void;
+    options: object[];
+}
+
+const RandomFilterSelect:React.FC<RandomSelectProps> = ({label, onChange, options}) => (
+    <div className="filter-select random-select">
+        <label>{label}</label>
+        <Select className="sort" label={label} onChange={onChange} isSearchable={true} options={options} />
+    </div>
+)
+
+type RandomFilter = {
+    genre: string,
+    decade: string,
+    provider: string
+}
+
+const Random: React.FC = (props:any) => {
+
+    const[error, setError] = useState<string>('');
+    const[loading, setLoading] = useState<boolean>(false);
+    const[randomFilters, setRandomFilters] = useState<RandomFilter>({
+        genre: '',
+        decade: '',
+        provider: ''
+    })
+
+    const changeFilter = (e: any, key: string) => {
+        setRandomFilters((prevState: RandomFilter) => {
+            return {
+                ...prevState,
+                [key]: e.value
+            }
+        })
+    }
+
+    const getRandom = () => {
+        const {genre, decade, provider} = randomFilters;
+        if(!genre || !decade || !provider) setError('Please enter a choice for all three options')
+        else {
+            setLoading(true); 
+            if(error) setError('');
+            request('reviews/random', {genre, decade, provider})
+            .then(async(res: any) => {
+                setLoading(false);
+                if(!res.data) setError('Sorry, there are no reviews that match those categories');
+                else props.history.push(`/review/${res.data.rank}`)
+            })
+            .catch(err => console.error(err))
+        }
+    }
+
+    const selects = [
+        {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genre'), options: genreOptions},
+        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decade'), options: decadeOptions},
+        {label: "Provider:", onChange: (e:any) => changeFilter(e, 'provider'), options: providerOptions},
+    ]
+
+	return (
+		<div className="random" id="content">
+            <img id="logo" src={Logo} onClick={() => props.history.push(`/`)} alt="LOGO" />
+            <h2>Find a random movie based on <br /><span>Genre</span>, <span>Decade</span> and <span>Streaming Provider</span></h2>
+            <h4 id="random-error" hidden={!error}>{error}</h4>
+            {selects.map(({label, onChange, options}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} />)}
+            <button id="randomize" onClick={getRandom}>Randomize</button>
+            {loading? <ReactLoading className="random-loading" type={"spin"} color={"yellow"}/>: null}
+        </div>
+	)
+}
+
+export default Random;

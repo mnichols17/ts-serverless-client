@@ -6,6 +6,7 @@ export type FiltersType = {
     sort: {value: string, label: string},
     genres: object[],
     subGenres: object[],
+    studiocompanies: object[],
     universes: object[],
     subUniverses: object[],
     characters: object[],
@@ -13,6 +14,8 @@ export type FiltersType = {
     years: object[],
     decades: object[],
     providers: object[]
+    oscars: object[]
+    goldenglobes: object[]
 
 }
 
@@ -33,14 +36,17 @@ export const SearchContext = createContext<Search>({
         directors: [],
 		sort: {value: "ASC", label: "Rating High to Low"},
 		genres: [],
-		subGenres: [],
-		universes: [],
-		subUniverses: [],
-		characters: [],
+        subGenres: [],
+        universes: [],
+        subUniverses: [],
+        studiocompanies: [],
+        characters: [],
         sportholidays: [],
         years: [],
         decades: [],
         providers: [],
+        oscars: [],
+        goldenglobes: []
     },
     currentUrl: () => {},
     currentQuery: () => {},
@@ -64,11 +70,14 @@ export const SearchProvider = ({children}: ProviderProps) => {
         subGenres: [],
         universes: [],
         subUniverses: [],
+        studiocompanies: [],
         characters: [],
         sportholidays: [],
         years: [],
         decades: [],
         providers: [],
+        oscars: [],
+        goldenglobes: []
     });
 
     const currentUrl = useCallback((newUrl: string) => {

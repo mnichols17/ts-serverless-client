@@ -12,11 +12,12 @@ import Logo from '../media/logo.jpg';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
 
-const createStrings = ({sort, directors, genres, subGenres, universes, subUniverses, characters, sportholidays, years, decades, providers}: FiltersType) => ({
+const createStrings = ({sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, oscars, goldenglobes}: FiltersType) => ({
 	directors: directors.map((select: any) => select.value).join('@'),
 	sort: sort.value,
 	genres: genres.map((select: any) => select.value).join('@'),
 	subGenres: subGenres.map((select: any) => select.value).join('@'),
+	studiocompanies: studiocompanies.map((select: any) => select.value).join('@'),
 	universes: universes.map((select: any) => select.value).join('@'),
 	subUniverses: subUniverses.map((select: any) => select.value).join('@'),
 	characters: characters.map((select: any) => select.value).join('@'),
@@ -24,6 +25,8 @@ const createStrings = ({sort, directors, genres, subGenres, universes, subUniver
 	years: years.map((select: any) => select.value).join('@'),
 	decades: decades.map((select: any) => select.value).join('@'),
 	providers: providers.map((select: any) => select.value).join('@'),
+	oscars: oscars.map((select: any) => select.value).join('@'),
+	goldenglobes: goldenglobes.map((select: any) => select.value).join('@'),
 })
 
 interface FiltersAppliedProps {
@@ -109,14 +112,17 @@ const Home:React.FC = () => {
                 label: "Rating High to Low"
             },
             genres: [],
-            subGenres: [],
-            universes: [],
-            subUniverses: [],
-            characters: [],
-            sportholidays: [],
-            years: [],
-            decades: [],
-            providers: []
+			subGenres: [],
+			universes: [],
+			subUniverses: [],
+			studiocompanies: [],
+			characters: [],
+			sportholidays: [],
+			years: [],
+			decades: [],
+			providers: [],
+			oscars: [],
+			goldenglobes: []
         })
 	}
 	

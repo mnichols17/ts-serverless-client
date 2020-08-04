@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-do
 
 import Home from './Home';
 import ReviewPage from './Review';
+import RandomPage from './Random';
 
 const App: React.FC = () => {
 	return (
@@ -10,6 +11,7 @@ const App: React.FC = () => {
 			<Switch>
 				<Route path="/" exact component={Home} />
 				<Route path="/review/:rank" component={ReviewPage} />
+				<Route path="/random" component={RandomPage} />
 				<Redirect to="/" />
 			</Switch>
 		</Router>

@@ -1,9 +1,9 @@
 import React, {useState, useContext} from 'react';
 import Select from 'react-select';
 import {SearchContext, FiltersType} from '../utils/context';
-import {sortOptions, directorOptions, genreOptions, subGenreOptions, 
+import {sortOptions, directorOptions, genreOptions, subGenreOptions, studiocompanyOptions, 
     universeOptions, subUniverseOptions, characterOptions, sportholidayOptions, 
-    yearOptions, decadeOptions, providerOptions} from '../utils/filterData';
+    yearOptions, decadeOptions, providerOptions, oscarOptions, globesOptions} from '../utils/filterData';
 
 interface FiltersProps {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -48,11 +48,14 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
             subGenres: [],
             universes: [],
             subUniverses: [],
+            studiocompanies: [],
             characters: [],
             sportholidays: [],
             years: [],
             decades: [],
-            providers: []
+            providers: [],
+            oscars: [],
+            goldenglobes: []
         })
         setOpen(false);
     }
@@ -61,13 +64,16 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         {label: "Directors:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors},
         {label: "Genre: (Action, Comedy, Drama, etc.)", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres},
         {label: "Sub-Genre: (Comic, Heist, Romantic Comedy, etc.)", onChange: (e:any) => changeFilter(e, 'subGenres'), options: subGenreOptions, value: selectedFilters.subGenres},
-        {label: "Universe: (Disney, Star Wars, DC, Marvel, etc.)", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes},
-        {label: "Sub-Universe: (MCU, DCEU, Pixar, etc.)", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses},
+        {label: "Studio/Company: (A24, Disney, Marvel, Netflix, etc.)", onChange: (e:any) => changeFilter(e, 'studiocompanies'), options: studiocompanyOptions, value: selectedFilters.studiocompanies},
+        {label: "Universe: (DCEU, Disney Animated, MCU, Star Wars, etc.)", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes},
+        {label: "Sub-Universe: (Harry Potter, Lord of the Rings Pixar, etc.)", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses},
         {label: "Characters:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters},
         {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays},
         {label: "Year:", onChange: (e:any) => changeFilter(e, 'years'), options: yearOptions, value: selectedFilters.years},
         {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
-        {label: "Providers: (Netflix, Hulu, etc.)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
+        {label: "Provider: (Netflix, Hulu, etc.)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
+        {label: "Oscars:", onChange: (e:any) => changeFilter(e, 'oscars'), options: oscarOptions, value: selectedFilters.oscars},
+        {label: "Golden Globes:", onChange: (e:any) => changeFilter(e, 'goldenglobes'), options: globesOptions, value: selectedFilters.goldenglobes},
     ]
 
     return(

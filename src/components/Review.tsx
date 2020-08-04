@@ -46,6 +46,9 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers}) => {
                 <p className="review-people">{review.director}</p>
                 <h3 style={{color: '#FEDE16'}}>Starring</h3>
                 <p className="review-people">{review.actors}</p>
+                <h3 style={{color: '#FEDE16'}}>Awards</h3>
+                <p className="review-people">{review.oscars? `${review.oscars} at The Oscars` : null}</p>
+                <p className="review-people">{review.goldenglobes? `${review.goldenglobes} at The Golden Globes` : null}</p>
                 <div id="review-streaming">
                     <h3 style={{color: '#FEDE16'}}>Streaming Options</h3>
                     <hr />
@@ -73,6 +76,10 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers}) => {
                     <tr>
                         <td>Sub-Genre:</td>
                         <td>{review.subgenre || "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Studio/Company:</td>
+                        <td>{review.studiocompany || "N/A"}</td>
                     </tr>
                     <tr>
                         <td>Universe:</td>

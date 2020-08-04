@@ -5,6 +5,7 @@ export default interface Review {
     director?: string;
     genre?: string;
     subgenre?: string;
+    studiocompany?: string;
     universe?: string;
     subuniverse?: string;
     character?: string;
@@ -16,4 +17,6 @@ export default interface Review {
     actors?: string;
     video_key?: string;
     runtime?: number;
+    oscars?: number;
+    goldenglobes?: number;
 }
