@@ -49,7 +49,7 @@ const Random: React.FC = (props:any) => {
     const getRandom = () => {
         const {genres, decades, providers} = randomFilters;
         console.log(genres, decades, providers)
-        if(!genres.length || !decades.length) setError('Please enter a choice for all three options')
+        if(!genres.length || !decades.length) setError('Please enter at least once choice in both Genre and Decade')
         else {
             setLoading(true); 
             if(error) setError('');

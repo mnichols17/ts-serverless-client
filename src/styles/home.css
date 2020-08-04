@@ -194,14 +194,47 @@
 }
 
 .filter-select > label {
-    font-size: .85em;
+    font-size: 1em;
     padding-left: 5px;
     margin-bottom: .2em;
 }
 
 .sort {
     width: 100%;
+    margin-bottom: .2em;
 }
+
+.filter-info {
+    cursor: pointer;
+    position: relative; 
+}
+
+.filter-icon {
+    color: #282C34;
+    margin-left: 8px;
+}
+
+.filter-icon-open {
+    color: #FEDE16;
+    margin-left: 8px;
+}
+
+.tooltip {
+    font-size: .95em;
+    width: 300px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 8px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -56px;
+}
+
 
 /* Review Page */
 
@@ -393,6 +426,24 @@
 
 /* Width Specific */
 
+@media screen and (max-width: 370px) {
+    #search-input > input::placeholder {
+        font-size: .81em;
+    }
+    
+    #to-random {
+        width: 100%;
+    }
+
+    .tooltip {
+        width: 230px;
+    }
+    
+    #reviewPage-title, #review-poster {
+        width: 90%;
+    }
+}
+
 @media screen and (min-width: 410px) {
     #search-input > input::placeholder {
         font-size: 1em;
@@ -425,6 +476,11 @@
 }
 
 @media screen and (min-width: 630px) {
+    .tooltip {
+        width: 260px;
+        margin-left: -50px;
+    }
+
     .movie {
         width: 130px;
         padding: 0;
@@ -489,9 +545,13 @@
     }
 
     #filter-apply, #filter-reset {
-        width: 20%;
+        width: 40%;
         margin: 0 10px;
         max-width: 115px;
+    }
+
+    .sort {
+        margin-bottom: 0em;
     }
 }
 
@@ -596,6 +656,12 @@
 }
 
 @media screen and (min-width: 800px) {
+
+    .tooltip {
+        width: auto;
+        white-space: nowrap;
+        margin-left: -50px;
+    }
 
     #review-poster {
         max-width: 300px;
