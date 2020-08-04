@@ -47,8 +47,9 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers}) => {
                 <h3 style={{color: '#FEDE16'}}>Starring</h3>
                 <p className="review-people">{review.actors}</p>
                 <h3 style={{color: '#FEDE16'}}>Awards</h3>
-                <p className="review-people">{review.oscars? `${review.oscars} at The Oscars` : null}</p>
-                <p className="review-people">{review.goldenglobes? `${review.goldenglobes} at The Golden Globes` : null}</p>
+                {(review.oscars || review.goldenglobes)? <><p className="review-people">{review.oscars? `${review.oscars} at The Oscars` : null}</p>
+                <p className="review-people">{review.goldenglobes? `${review.goldenglobes} at The Golden Globes` : null}</p></> : 
+                <p className="review-people">N/A</p>}
                 <div id="review-streaming">
                     <h3 style={{color: '#FEDE16'}}>Streaming Options</h3>
                     <hr />

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import smoothscroll from 'smoothscroll-polyfill';
 import {SearchContext, FiltersType} from '../utils/context';
 
+
 import Logo from '../media/logo.jpg';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
@@ -62,7 +63,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	return (total > 0)? applied : null
 }
 
-const Home:React.FC = () => {
+const Home:React.FC = (props: any) => {
 	smoothscroll.polyfill();
 
 	const {url, filters, query, currentUrl, currentFilters, currentQuery} = useContext(SearchContext);
@@ -152,6 +153,7 @@ const Home:React.FC = () => {
     return(
 		<div id="content">
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
+			<button id="to-random" onClick={() => props.history.push(`/random`)}>Random Movie Generator</button>
 			<Search />
 			<FiltersApplied filters={filters} />
 			{loading? <ReactLoading type={"spin"} color={"yellow"}/> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}

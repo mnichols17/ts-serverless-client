@@ -51,6 +51,19 @@
     cursor: pointer;
 }
 
+#to-random {
+    margin: 1.2em 0em 0em;
+    background: #f4f6f7;
+    border: 2px solid #282C34;
+    border-radius: 12px;
+    font-size: .9em;
+    box-shadow: 0 0 1px 0px black;
+    width: 60%;
+    padding: 10px;
+    cursor: pointer;
+    max-width: 200px;
+}
+
 #search {
     display: flex;
     flex-direction: column;

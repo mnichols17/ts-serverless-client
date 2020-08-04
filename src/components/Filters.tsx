@@ -71,7 +71,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays},
         {label: "Year:", onChange: (e:any) => changeFilter(e, 'years'), options: yearOptions, value: selectedFilters.years},
         {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
-        {label: "Provider: (Netflix, Hulu, etc.)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
+        {label: "Streaming Provider:", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
         {label: "Oscars:", onChange: (e:any) => changeFilter(e, 'oscars'), options: oscarOptions, value: selectedFilters.oscars},
         {label: "Golden Globes:", onChange: (e:any) => changeFilter(e, 'goldenglobes'), options: globesOptions, value: selectedFilters.goldenglobes},
     ]

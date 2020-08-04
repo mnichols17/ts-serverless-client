@@ -16,14 +16,14 @@ interface RandomSelectProps {
 const RandomFilterSelect:React.FC<RandomSelectProps> = ({label, onChange, options}) => (
     <div className="filter-select random-select">
         <label>{label}</label>
-        <Select className="sort" label={label} onChange={onChange} isSearchable={true} options={options} />
+        <Select className="sort" label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} isSearchable={true} options={options} />
     </div>
 )
 
 type RandomFilter = {
-    genre: string,
-    decade: string,
-    provider: string
+    genres: object[],
+    decades: object[],
+    providers: object[]
 }
 
 const Random: React.FC = (props:any) => {
@@ -31,27 +31,29 @@ const Random: React.FC = (props:any) => {
     const[error, setError] = useState<string>('');
     const[loading, setLoading] = useState<boolean>(false);
     const[randomFilters, setRandomFilters] = useState<RandomFilter>({
-        genre: '',
-        decade: '',
-        provider: ''
+        genres: [],
+        decades: [],
+        providers: []
     })
 
     const changeFilter = (e: any, key: string) => {
+        console.log(e)
         setRandomFilters((prevState: RandomFilter) => {
             return {
                 ...prevState,
-                [key]: e.value
+                [key]: e || []
             }
         })
     }
 
     const getRandom = () => {
-        const {genre, decade, provider} = randomFilters;
-        if(!genre || !decade || !provider) setError('Please enter a choice for all three options')
+        const {genres, decades, providers} = randomFilters;
+        console.log(genres, decades, providers)
+        if(!genres.length || !decades.length) setError('Please enter a choice for all three options')
         else {
             setLoading(true); 
             if(error) setError('');
-            request('reviews/random', {genre, decade, provider})
+            request('reviews/random', {genres: genres.map((select: any) => select.value).join('@'), decades: decades.map((select: any) => select.value).join('@'), providers: providers.map((select: any) => select.value).join('@')})
             .then(async(res: any) => {
                 setLoading(false);
                 if(!res.data) setError('Sorry, there are no reviews that match those categories');
@@ -62,9 +64,9 @@ const Random: React.FC = (props:any) => {
     }
 
     const selects = [
-        {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genre'), options: genreOptions},
-        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decade'), options: decadeOptions},
-        {label: "Provider:", onChange: (e:any) => changeFilter(e, 'provider'), options: providerOptions},
+        {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions},
+        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions},
+        {label: "Provider: (Optional)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions},
     ]
 
 	return (
