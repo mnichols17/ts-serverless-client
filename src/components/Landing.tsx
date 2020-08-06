@@ -1,19 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react';
 import request from '../utils/makeRequest';
-import ReviewList from './ReviewList';
 import Review from '../utils/Review';
-import Search from './Search';
 import ReactLoading from 'react-loading';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import smoothscroll from 'smoothscroll-polyfill';
-import {SearchContext, FiltersType} from '../utils/context';
-
-
+import {SearchContext} from '../utils/context';
 import {ReviewItem} from './ReviewList';
-
-import Logo from '../media/logo.jpg';
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
-import '../styles/home.css';
 
 const Landing:React.FC = (props: any) => {
 
@@ -62,9 +52,3 @@ const Landing:React.FC = (props: any) => {
 }
 
 export default Landing;
-
-{/* <h3 className="landing-title">Jeff's Picks of the Week:</h3>
-        {<div id="test">
-            {reviews[1].map(({rank, movie, total, poster}) => 
-                <ReviewItem key={rank} movie={movie} total={total} poster={poster} rank={rank} /> )}
-        </div>} */}

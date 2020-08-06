@@ -2,16 +2,9 @@ import React, {useState, useEffect, useContext} from 'react';
 import request from '../utils/makeRequest';
 import ReviewList from './ReviewList';
 import Review from '../utils/Review';
-import Search from './Search';
 import ReactLoading from 'react-loading';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import smoothscroll from 'smoothscroll-polyfill';
 import {SearchContext, FiltersType} from '../utils/context';
-
-
-import Logo from '../media/logo.jpg';
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
-import '../styles/home.css';
 
 const createStrings = ({sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, oscars, goldenglobes}: FiltersType) => ({
 	directors: directors.map((select: any) => select.value).join('@'),
@@ -29,39 +22,6 @@ const createStrings = ({sort, directors, genres, subGenres, studiocompanies, uni
 	oscars: oscars.map((select: any) => select.value).join('@'),
 	goldenglobes: goldenglobes.map((select: any) => select.value).join('@'),
 })
-
-interface FiltersAppliedProps {
-	filters: FiltersType
-}
-
-const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
-	let directedBy = "";
-	let type = "";
-	let fromYears = "";
-	let watchOn = "";
-	let total = 0;
-	for(const[key, value] of Object.entries(filters)){
-		if((value as object[]).length){
-			(value as object[]).forEach((v:any) => {
-				total++;
-				if(key === 'directors') directedBy += ` ${v.value},` 
-				else if(key === "years" || key === "decades") fromYears += ` ${v.value},`
-				else if(key === "providers") watchOn += ` ${v.label},`
-				else (type += ` ${v.label},`)
-			})
-		}
-	}
-
-	if(total >= 7) return <p id="filters-applied-total"><span>{total}</span> filters applied</p>
-	
-	type = type.substr(0,type.length-1)
-	directedBy = directedBy.substr(0,directedBy.length-1)
-	fromYears = fromYears.substr(0,fromYears.length-1)
-	watchOn = watchOn.substr(0,watchOn.length-1)
-	const applied = <p id="filters-applied"><span>{type}</span>{type.length? " movies":"Movies"}{directedBy.length? " by":""}<span>{directedBy}</span>{fromYears.length? " from":""}<span>{fromYears}</span>{watchOn.length? " on":""}<span>{watchOn}</span></p>
-
-	return (total > 0)? applied : null
-}
 
 const List:React.FC = () => {
 	smoothscroll.polyfill();

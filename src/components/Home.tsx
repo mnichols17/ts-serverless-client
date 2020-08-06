@@ -1,14 +1,8 @@
-import React, {useState, useEffect, useContext, useRef} from 'react';
-import request from '../utils/makeRequest';
-import ReviewList from './ReviewList';
-import Review from '../utils/Review';
+import React, {useState, useEffect, useContext} from 'react';
 import Search from './Search';
-import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import smoothscroll from 'smoothscroll-polyfill';
 import {SearchContext, FiltersType} from '../utils/context';
-
-
 import List from './List';
 import Landing from './Landing';
 
