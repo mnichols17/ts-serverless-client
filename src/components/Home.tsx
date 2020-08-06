@@ -52,13 +52,8 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 const Home:React.FC = (props: any) => {
     smoothscroll.polyfill();
     
-    const {loading, viewList, url, filters, query, isLoading, currentView, currentUrl, currentFilters, currentQuery} = useContext(SearchContext);
-    const initial = useRef(true);
-
-	const[reviews, setReviews] = useState<Review[]>([]);
-    const[itemSkips, setSkips] = useState<number>(0);
+    const {viewList, filters, query, isLoading, currentView, currentUrl, currentFilters, currentQuery} = useContext(SearchContext);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
-	const[more, setMore] = useState<boolean>(true);
 	const[showTop, setTop] = useState<boolean>(false);
     const[open, setOpen] = useState<boolean>(false);
 
@@ -124,7 +119,7 @@ const Home:React.FC = (props: any) => {
     return(
 		<div id="content">
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
-			{/* <button id="to-random" onClick={() => props.history.push(`/random`)}>Random Movie Generator</button> */}
+			<button id="to-random" onClick={() => props.history.push(`/random`)}>Random Movie Generator</button>
 			<Search open={open} setOpen={setOpen}/>	
             <FiltersApplied filters={filters} />
             {viewList? <List />: <Landing />}

@@ -63,10 +63,10 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	return (total > 0)? applied : null
 }
 
-const List:React.FC = (props: any) => {
+const List:React.FC = () => {
 	smoothscroll.polyfill();
 
-	const {loading, url, filters, query, isLoading, currentUrl, currentFilters, currentQuery} = useContext(SearchContext);
+	const {loading, url, filters, isLoading} = useContext(SearchContext);
 
 	const[reviews, setReviews] = useState<Review[]>([]);
     const[itemSkips, setSkips] = useState<number>(0);
@@ -94,14 +94,6 @@ const List:React.FC = (props: any) => {
 
     return(
 		loading? <ReactLoading type={"spin"} color={"yellow"}/> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>
-		// <div id="content">
-		// 	<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
-		// 	<button id="to-random" onClick={() => props.history.push(`/random`)}>Random Movie Generator</button>
-		// 	<Search open={open} setOpen={setOpen}/>
-		// 	<FiltersApplied filters={filters} />
-		// 	{loading? <ReactLoading type={"spin"} color={"yellow"}/> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
-		// 	<button id="send-top" hidden={!showTop} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
-		// </div>
     )
 }
 

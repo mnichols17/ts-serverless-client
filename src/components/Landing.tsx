@@ -48,9 +48,9 @@ const Landing:React.FC = (props: any) => {
             {reviews.map(r => {
                 const index = reviews.indexOf(r);
                 return(
-                    <div className="test-container" key={index}>
+                    <div className="landing-container" key={index}>
                         <h3 className="landing-title">{landingTitles[index]}</h3>
-                        <div className="test">
+                        <div className="landing-list">
                             {r.map(({rank, movie, total, poster}) => 
                                 <ReviewItem key={rank} movie={movie} total={total} poster={poster} rank={rank} /> )}
                         </div>

@@ -26,8 +26,13 @@ const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
         main.includes(parseInt(provider.provider_id))? logos.push(logo) : logos.unshift(logo);
     })
     return (
-        <div style={{display: 'flex', justifyContent: 'center', flexWrap: "wrap"}}>
-            {providers.length? logos.slice().reverse().map(l => l) : <h1>No Streaming Options Available</h1>}
+        <div id="review-streaming">
+            <h3 style={{color: '#FEDE16'}}>Streaming Options</h3>
+            <hr />
+            {providers.length? <><p>Click to Watch</p>
+            <div style={{display: 'flex', justifyContent: 'center', flexWrap: "wrap"}}>
+                {logos.slice().reverse().map(l => l)}
+            </div></> : <h2>No Streaming Options Available</h2>}
         </div>
     )
 }
@@ -50,12 +55,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers}) => {
                 {(review.oscars || review.goldenglobes)? <><p className="review-people">{review.oscars? `${review.oscars} at The Oscars` : null}</p>
                 <p className="review-people">{review.goldenglobes? `${review.goldenglobes} at The Golden Globes` : null}</p></> : 
                 <p className="review-people">N/A</p>}
-                <div id="review-streaming">
-                    <h3 style={{color: '#FEDE16'}}>Streaming Options</h3>
-                    <hr />
-                    <p>Click to Watch</p>
-                    <ProviderLogos providers={providers} />
-                </div>
+                <ProviderLogos providers={providers} />
                 <div id="review-trailer-wrapper">
                     <ReactPlayer className="react-player" url={`https://www.youtube.com/watch?v=${review.video_key}`} height="100%" width="100%" controls={true}/>
                 </div>
