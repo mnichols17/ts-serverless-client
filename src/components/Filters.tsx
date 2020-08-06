@@ -21,9 +21,7 @@ interface SelectProps {
 }
 
 const FilterSelect:React.FC<SelectProps> = ({label, onChange, options, value, info}) => {
-    
     const[open, setOpen] = useState<boolean>(false);
-    console.log(info)
     return(
         <div className="filter-select">
             <label className="filter-info">{label}<FontAwesomeIcon className={open? "filter-icon-open" : "filter-icon"} visibility={info? 'visible':'hidden'} onClick={() => setOpen(!open)} icon={faInfoCircle} /><span hidden={!open} className="tooltip">{info}</span></label>
@@ -34,7 +32,7 @@ const FilterSelect:React.FC<SelectProps> = ({label, onChange, options, value, in
 
 const Filters: React.FC<FiltersProps> = ({setOpen}) => {
 
-    const {filters, currentFilters} = useContext(SearchContext)
+    const {viewList, filters, currentView, currentFilters} = useContext(SearchContext)
     const[selectedFilters, setFilters] = useState<FiltersType>(filters)
 
     const changeFilter = (e: any, key: string) => {
@@ -66,6 +64,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
             oscars: [],
             goldenglobes: []
         })
+        if(!viewList) currentView(true);
         setOpen(false);
     }
 

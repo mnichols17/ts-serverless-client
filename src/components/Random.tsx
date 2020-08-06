@@ -66,7 +66,7 @@ const Random: React.FC = (props:any) => {
     const selects = [
         {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions},
         {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions},
-        {label: "Provider: (Optional)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions},
+        {label: "Streaming Provider: (Optional)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions},
     ]
 
 	return (

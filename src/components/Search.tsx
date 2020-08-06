@@ -1,13 +1,17 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import { SearchContext } from '../utils/context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Filters from './Filters';
 
-const Search: React.FC = () => {
+interface SearchProps {
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Search: React.FC<SearchProps> = ({open, setOpen}) => {
 
     const {query, currentQuery} = useContext(SearchContext);
-    const [open, setOpen] = useState<boolean>(false); // Might need to move to home page for a long filter panel
 
     const handleQuery = (e?: React.ChangeEvent<HTMLInputElement>) => {
         const input = e? e.target.value : "";

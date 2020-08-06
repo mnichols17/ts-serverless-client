@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import request from '../utils/makeRequest';
 import ReviewList from './ReviewList';
 import Review from '../utils/Review';
@@ -9,26 +9,12 @@ import smoothscroll from 'smoothscroll-polyfill';
 import {SearchContext, FiltersType} from '../utils/context';
 
 
+import List from './List';
+import Landing from './Landing';
+
 import Logo from '../media/logo.jpg';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
-
-const createStrings = ({sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, oscars, goldenglobes}: FiltersType) => ({
-	directors: directors.map((select: any) => select.value).join('@'),
-	sort: sort.value,
-	genres: genres.map((select: any) => select.value).join('@'),
-	subGenres: subGenres.map((select: any) => select.value).join('@'),
-	studiocompanies: studiocompanies.map((select: any) => select.value).join('@'),
-	universes: universes.map((select: any) => select.value).join('@'),
-	subUniverses: subUniverses.map((select: any) => select.value).join('@'),
-	characters: characters.map((select: any) => select.value).join('@'),
-	sportholidays: sportholidays.map((select: any) => select.value).join('@'),
-	years: years.map((select: any) => select.value).join('@'),
-	decades: decades.map((select: any) => select.value).join('@'),
-	providers: providers.map((select: any) => select.value).join('@'),
-	oscars: oscars.map((select: any) => select.value).join('@'),
-	goldenglobes: goldenglobes.map((select: any) => select.value).join('@'),
-})
 
 interface FiltersAppliedProps {
 	filters: FiltersType
@@ -64,16 +50,17 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 }
 
 const Home:React.FC = (props: any) => {
-	smoothscroll.polyfill();
-
-	const {url, filters, query, currentUrl, currentFilters, currentQuery} = useContext(SearchContext);
+    smoothscroll.polyfill();
+    
+    const {loading, viewList, url, filters, query, isLoading, currentView, currentUrl, currentFilters, currentQuery} = useContext(SearchContext);
+    const initial = useRef(true);
 
 	const[reviews, setReviews] = useState<Review[]>([]);
     const[itemSkips, setSkips] = useState<number>(0);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[more, setMore] = useState<boolean>(true);
-	const[loading, setLoading] = useState<boolean>(true);
 	const[showTop, setTop] = useState<boolean>(false);
+    const[open, setOpen] = useState<boolean>(false);
 
 	useEffect(() => {
 		window.addEventListener('scroll', checkTop)
@@ -81,16 +68,11 @@ const Home:React.FC = (props: any) => {
 		return () => {
 			window.removeEventListener('scroll', checkTop)
 		}
-	}, [showTop])
-	
-	useEffect(() => {
-		if(!loading) setLoading(true);
-		getReviews(true);
-	}, [url, filters])
+    }, [showTop, open])
 
 	useEffect(() => {
 		const queryHandler = async(q: string) => {
-			setLoading(true);
+            isLoading(true);
 			if(typingTimeout) clearTimeout(typingTimeout)
 
 			if(q === "") {
@@ -98,6 +80,7 @@ const Home:React.FC = (props: any) => {
 			} else {
 				setTyping(setTimeout(async() => {
 					currentUrl(`reviews/search/?query=${query}`)
+                    if(!viewList) currentView(true);
 				}, 600))
 			}
 		}
@@ -105,47 +88,35 @@ const Home:React.FC = (props: any) => {
 	}, [query])
 
 	const logoClick = async() => {
-		await currentQuery("")
-		currentFilters({
-            directors: [],
-            sort: {
-                value: "ASC",
-                label: "Rating High to Low"
-            },
-            genres: [],
-			subGenres: [],
-			universes: [],
-			subUniverses: [],
-			studiocompanies: [],
-			characters: [],
-			sportholidays: [],
-			years: [],
-			decades: [],
-			providers: [],
-			oscars: [],
-			goldenglobes: []
-        })
-	}
-	
-	const getReviews = async(reset?: boolean) => {
-		if(itemSkips > 33) return; // Limits # of reviews a single route can get (990)
-		const stringFilters = createStrings(filters);
-        request(url, {...stringFilters, skip: reset? 0 : itemSkips})
-        .then(async(res: any) => {
-			setLoading(false);
-			if(res.data.length < 30) setMore(false);
-			else if(!more) setMore(true);
-
-			setSkips(reset? 1 : itemSkips+1)
-			setReviews(reset? res.data : [...reviews, ...res.data])
-        })
-        .catch(err => console.error(err))
-	}
-
+        if(viewList) {
+            currentView(false);
+            await currentQuery("")
+            currentFilters({
+                directors: [],
+                sort: {
+                    value: "ASC",
+                    label: "Rating High to Low"
+                },
+                genres: [],
+                subGenres: [],
+                universes: [],
+                subUniverses: [],
+                studiocompanies: [],
+                characters: [],
+                sportholidays: [],
+                years: [],
+                decades: [],
+                providers: [],
+                oscars: [],
+                goldenglobes: []
+            })
+        }
+    }
+    
 	const checkTop = () => {
-		if(!showTop && window.pageYOffset > 750){
+		if(!showTop && window.pageYOffset > (open? 1500:700)){
 			setTop(true)
-		} else if(showTop && window.pageYOffset <= 750){
+		} else if(showTop && window.pageYOffset <= (open? 1500:700)){
 			setTop(false)
 		}
 	}
@@ -153,11 +124,11 @@ const Home:React.FC = (props: any) => {
     return(
 		<div id="content">
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
-			<button id="to-random" onClick={() => props.history.push(`/random`)}>Random Movie Generator</button>
-			<Search />
-			<FiltersApplied filters={filters} />
-			{loading? <ReactLoading type={"spin"} color={"yellow"}/> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>}
-			<button id="send-top" hidden={!showTop} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
+			{/* <button id="to-random" onClick={() => props.history.push(`/random`)}>Random Movie Generator</button> */}
+			<Search open={open} setOpen={setOpen}/>	
+            <FiltersApplied filters={filters} />
+            {viewList? <List />: <Landing />}
+			<button id="send-top" hidden={!(showTop && viewList)} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
 		</div>
     )
 }

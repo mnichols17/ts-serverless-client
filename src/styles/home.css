@@ -723,97 +723,27 @@
     }
 }
 
-/*#reviewPage {
-        display: grid;
-        grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-        justify-content: center;
-        align-items: start;
-        margin: 2em;
-    }
+/* Landing Page */
 
-    .reviewPage-loading {
-        grid-column: 3/4;
-        justify-self: center;
-    }
+.landing-title {
+    color: #FEDE16;
+    margin: 0em 1em;
+    align-self: flex-start;
+    font-size: 1.25em;
+}
 
-    #reviewPage-title {
-        grid-column: 2/5;
-        font-size: 2em;
-        text-align: center;
-        margin-top: 0em;
-        color: white;
-    }
+.test-container {
+    width: 100%;
+    margin: .5em 0em;
+}
 
-    #review-rank {
-        grid-column: 2/5;
-        font-size: 1.85em;
-    }
+.test {
+    padding: 0% 2%;
+    display: flex;
+    overflow: auto;
+    flex-shrink: 0;
+}
 
-    #review-poster {
-        grid-column: 2/3;
-        align-self: start;
-        justify-self: end;
-        margin: 0;
-    }
-
-    #review-card {
-        width: 90%;
-        grid-column: 3/5;
-        grid-row: 3/6;
-        max-width: 90%; /*This
-        justify-self: center;
-        align-items: start;
-    }
-
-    #review-plot {
-        font-size: .95em;
-        margin: 0;
-    }
-
-    #review-card > h3 {
-        color: white;
-        align-self: flex-start;
-        margin: 1em 0em .5em;
-    }
-
-    .review-people {
-        font-size: 1.1em;
-        margin: 0em;
-    }
-
-    #review-streaming {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #review-streaming > p {
-        margin: 0 0 10px 0;
-        font-size: 1.1em;
-    }
-
-    #review-streaming > h3 {
-        font-size: 1.3em;
-        margin: 1em 0 0em 0;
-    }
-
-    #review-streaming > hr {
-        width: 40%;
-        margin: .5em;
-    }
-
-    .provider {
-        width: 70px;
-        margin: 5px;
-    }
-
-    #review-info {
-        max-width: 300px;
-        width: 100%;
-        grid-row: 4/5;
-        grid-column: 2/3;
-        margin: 1em 0 0 0;
-        padding: 0px;
-        justify-self: end;
-    }*/
+.test .movie { /* Gonna need to adjust this on different screen sizes */
+    min-width: 120px;
+}

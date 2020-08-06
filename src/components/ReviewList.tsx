@@ -9,7 +9,7 @@ import ReactLoading from 'react-loading';
 
 import '../styles/reviewList.css';
 
-const ReviewItem: React.FC<Review> = ({movie, total, poster, rank}) => {
+export const ReviewItem: React.FC<Review> = ({movie, total, poster, rank}) => {
     if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
 
     return(
