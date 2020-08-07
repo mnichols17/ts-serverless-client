@@ -1,4 +1,5 @@
-/* Font styling here (Move to SASS) */
+/* Font styling here */
+
 body {
   margin: 0;
   font-family: 'Noto Sans', sans-serif;
@@ -9,4 +10,13 @@ body {
 
 * {
   font-family: 'Noto Sans', sans-serif;
+}
+
+.title-font {
+  font-family: 'Big Noodle', Arial, serif;
+}
+
+@font-face {
+  font-family: 'Big Noodle';
+  src: local('Big Noodle'), url(./styles/big_noodle_titling.ttf) format('opentype');
 }

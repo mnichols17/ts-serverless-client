@@ -7,6 +7,7 @@ import List from './List';
 import Landing from './Landing';
 
 import Logo from '../media/logo.jpg';
+import Random from '../media/random.png';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
 
@@ -78,6 +79,7 @@ const Home:React.FC = (props: any) => {
 
 	const logoClick = async() => {
         if(viewList) {
+			isLoading(true);
             currentView(false);
             await currentQuery("")
             currentFilters({
@@ -113,11 +115,12 @@ const Home:React.FC = (props: any) => {
     return(
 		<div id="content">
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
-			<button id="to-random" onClick={() => props.history.push(`/random`)}>Random Movie Generator</button>
+			<img id="to-random" src={Random} alt="Random" onClick={() => props.history.push(`/random`)} />
+			{/* <button id="to-random" onClick={() => props.history.push(`/random`)}>Random Movie Generator</button> */}
 			<Search open={open} setOpen={setOpen}/>	
             <FiltersApplied filters={filters} />
             {viewList? <List />: <Landing />}
-			<button id="send-top" hidden={!(showTop && viewList)} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
+			<button id="send-top" className="title-font" hidden={!(showTop && viewList)} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
 		</div>
     )
 }

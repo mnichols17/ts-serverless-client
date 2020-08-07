@@ -37,7 +37,9 @@
     border-radius: 10px;
     padding: 10px;
     width: 100px;
-    font-size: 1.3em;
+    font-size: 1.8em;
+    letter-spacing: 1px;
+    color: #643C11
 }
 
 #send-top:hover {
@@ -52,17 +54,16 @@
 }
 
 #to-random {
+    width: 70%;
     margin: 1.2em 0em 0em;
-    background: #FEDE16;
-    border: 2px solid #282C34;
     border-radius: 12px;
-    font-size: 1em;
-    font-weight: 500;
-    box-shadow: 0 0 1px 0px black;
-    width: 60%;
-    padding: 10px;
+    border: 2px solid #282C34;
     cursor: pointer;
-    max-width: 220px;
+    max-width: 250px;
+}
+
+#to-random:hover {
+    opacity: 0.8;
 }
 
 #search {
@@ -107,7 +108,7 @@
     text-align: center;
     color: white;
     margin: 0 0 1em;
-    font-size: .85em;
+    font-size: .9em;
     padding: 0 10px;
 }
 
@@ -140,16 +141,22 @@
 
 /* Landing Page */
 
+.landing-label {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
 .landing-title {
+    margin: 0 .5em 0 .8em;
     color: #FEDE16;
-    margin: 0em 1em;
-    align-self: flex-start;
-    font-size: 1em;
+    font-size: 1.4em;
 }
 
 .landing-toList {
+    margin: 0 0 .1em;
     color: white;
-    font-size: 1em;
+    font-size: 1.1em;
     cursor: pointer;
 }
 
@@ -323,8 +330,9 @@
 #review-rank {
     color: white;
     text-align: center;
-    margin: 0 0 1em 0;
-    font-size: 1.65em;
+    margin: 0 0 .8em 0;
+    font-size: 1.9em;
+    letter-spacing: 1px;
 }
 
 #review-poster {
@@ -342,8 +350,9 @@
 }
 
 #review-total {
-    margin: .5em 0;
-    font-size: 2.1em;
+    margin: .5em 0 .3em;
+    font-size: 2.3em;
+    letter-spacing: 1px;
     color: #FEDE16;
 }
 
@@ -354,8 +363,10 @@
     padding: 5px;
 }
 
-#review-card > h3 {
-    color: white;
+.review-detail {
+    color: #FEDE16;
+    font-size: 1.4em;
+    letter-spacing: 1px;
     align-self: flex-start;
     margin: .5em 1em .5em 1.5em;
 }
@@ -369,22 +380,27 @@
 
 #review-streaming {
     margin-top: 1em;
-    width: 100%;
+    width: 375px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+#streaming-title {
+    color: #FEDE16;
+    font-size: 1.6em;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0px;
+}
+
+#review-streaming > div {
+    width: 100%;
+}
+
 #review-streaming > p {
     margin: 0 0 .5em 0;
     font-size: 1.1em;
-}
-
-#review-streaming > h3 {
-    font-size: 1.3em;
-    color: white;
-    text-align: center;
-    margin: 0px;
 }
 
 #review-streaming > h2 {
@@ -422,6 +438,14 @@
 
 #review-info td {
     padding: 5px;
+}
+
+.review-info-button {
+    padding: 0;
+    text-align: start;
+    background: inherit;
+    font-size: inherit;
+    border: none;
 }
 
 #review-info, #review-info td {
@@ -585,11 +609,13 @@
     }
 
     .landing-title {
-        font-size: .9em;
+        font-size: 1.15em;
+        letter-spacing: 1px;
     }
     
     .landing-toList {
-        font-size: 1em;
+        margin: 0 0;
+        font-size: .95em;
     }
 
     .tooltip {
@@ -615,11 +641,12 @@
     }
 
     .landing-title {
-        font-size: 1.1em;
+        font-size: 1.5em;
+        letter-spacing: .6px;
     }
     
     .landing-toList {
-        font-size: 1em;
+        font-size: 1.1em;
     }
 
     .landing-list .movie { /* Gonna need to adjust this on different screen sizes */
@@ -653,21 +680,20 @@
 }
 
 @media screen and (min-width: 630px) {
-    .landing-title {
-        margin: 0em 1.5em;
-    }
-
     .tooltip {
         width: 260px;
         margin-left: -50px;
     }
 
     .landing-title {
-        font-size: 1.15em;
+        margin: 0em .5em 0 1.1em;
+        font-size: 1.5em;
+        letter-spacing: 1px;
     }
     
     .landing-toList {
-        font-size: .95em;
+        font-size: 1.05em;
+        margin: 0 0 .2em;
     }
 
     .landing-list .movie { /* Gonna need to adjust this on different screen sizes */
@@ -855,7 +881,11 @@
 
 @media screen and (min-width: 800px) {
     .landing-title {
-        margin: 0em 1.75em;
+        margin: 0em .5em 0 1.75em;
+    }
+
+    .landing-toList {
+        font-size: 1.15em;
     }
 
     .tooltip {
