@@ -144,7 +144,21 @@
     color: #FEDE16;
     margin: 0em 1em;
     align-self: flex-start;
-    font-size: 1.25em;
+    font-size: 1em;
+}
+
+.landing-toList {
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.landing-toList:hover {
+    color: #FEDE16;
+}
+
+.toList-icon {
+    color: #FEDE16;
 }
 
 .landing-container {
@@ -492,6 +506,7 @@
     color: white;
     grid-column: 1/3;
     text-align: center;
+    width: 325px;
 }
 
 #random-title {
@@ -499,6 +514,7 @@
     text-align: center;
     margin: 0;
     grid-column: 1/3;
+    padding: 0 6px;
 }
 
 #random-poster {
@@ -569,7 +585,11 @@
     }
 
     .landing-title {
-        font-size: 1.17em;
+        font-size: .9em;
+    }
+    
+    .landing-toList {
+        font-size: 1em;
     }
 
     .tooltip {
@@ -592,6 +612,14 @@
 
     #random-title {
         padding: 8px;
+    }
+
+    .landing-title {
+        font-size: 1.1em;
+    }
+    
+    .landing-toList {
+        font-size: 1em;
     }
 
     .landing-list .movie { /* Gonna need to adjust this on different screen sizes */
@@ -632,6 +660,14 @@
     .tooltip {
         width: 260px;
         margin-left: -50px;
+    }
+
+    .landing-title {
+        font-size: 1.15em;
+    }
+    
+    .landing-toList {
+        font-size: .95em;
     }
 
     .landing-list .movie { /* Gonna need to adjust this on different screen sizes */
