@@ -41,8 +41,8 @@ const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
 interface ReviewInfoProps {
     review: Review;
     providers: object[];
-    fromCategory: (category: string, value: string) => void
-    navClick: (e: any) => void
+    fromCategory: (category?: string, value?: string) => void
+    navClick: () => void
 }
 
 const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory, navClick}) => {
@@ -52,7 +52,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
             <div id="review-navbar">
                 <div id="navbar-content">
                     <img id="nav-back" onClick={navClick} className="img-button" src={Back} alt="Back" />
-                    <img id="nav-home" onClick={navClick} className="img-button" src={Home} alt="Home" /> 
+                    <img id="nav-home" onClick={() => fromCategory()} className="img-button" src={Home} alt="Home" /> 
                 </div>
             </div>
             <h2 id="reviewPage-title">{review.movie}</h2>
@@ -124,7 +124,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
 const ReviewPage: React.FC = (props:any) => {
 
     const {rank} = useParams();
-    const {currentView, currentUrl, currentQuery ,currentFilters} = useContext(SearchContext);
+    const {currentView, resetPage} = useContext(SearchContext);
     
     const[loading, setLoading] = useState<boolean>(true);
     const[review, setReview] = useState<Review>({
@@ -148,24 +148,13 @@ const ReviewPage: React.FC = (props:any) => {
         })
     }, [rank])
 
-    const navClick = (e: any) => {
-        if(e.target.id === "nav-home") {
-            currentView(false);
-            props.history.push('/')
-        }
-        else {
-            props.history.goBack();
-        }
+    const navClick = () => {
+        props.history.goBack();
     }
 
-    const fromCategory = (category: string, value?: string) => {
-        // currentView(true);
-        // currentUrl('reviews/all')
-        // currentQuery('')
-        // currentFilters({
-        //     ...filterReset,
-        //     [category]: [{value, label: value}]
-        // })
+    const fromCategory = (category?: string, value?: string) => {
+        if(category && value) resetPage({[category]: [{value, label: value}]})
+        else resetPage();
         props.history.push('/');
     }
 

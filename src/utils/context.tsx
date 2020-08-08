@@ -30,6 +30,7 @@ interface Search {
     currentUrl: (newUrl: string) => void;
     currentQuery: (newQuery: string) => void;
     currentFilters: (newFilters: object) => void;
+    resetPage: (newFilters?: object) => void;
 }
 
 
@@ -59,6 +60,7 @@ export const SearchContext = createContext<Search>({
     currentUrl: () => {},
     currentQuery: () => {},
     currentFilters: () => {},
+    resetPage: () => {},
 });
 
 interface ProviderProps {
@@ -66,11 +68,7 @@ interface ProviderProps {
 }
 
 export const SearchProvider = ({children}: ProviderProps) => {
-    const[loading, setLoading] = useState<boolean>(true);
-    const[viewList, setView] = useState<boolean>(false);
-    const[url, setUrl] = useState<string>('reviews/all');
-    const[query, setQuery] = useState<string>("");
-    const[filters, setFilters] = useState<FiltersType>({
+    const emptyFilters: FiltersType = {
         directors: [],
         sort: {
             value: "ASC",
@@ -88,7 +86,13 @@ export const SearchProvider = ({children}: ProviderProps) => {
         providers: [],
         oscars: [],
         goldenglobes: []
-    });
+    }
+
+    const[loading, setLoading] = useState<boolean>(true);
+    const[viewList, setView] = useState<boolean>(false);
+    const[url, setUrl] = useState<string>('reviews/all');
+    const[query, setQuery] = useState<string>("");
+    const[filters, setFilters] = useState<FiltersType>(emptyFilters);
 
     const isLoading = useCallback((l: boolean) => {
         setLoading(l);
@@ -110,8 +114,21 @@ export const SearchProvider = ({children}: ProviderProps) => {
         setFilters(newFilters as FiltersType);
     }, [])
 
+    const resetPage = useCallback((newFilters?: object) => {
+        setLoading(true);
+        setUrl('reviews/all');
+        setQuery("");
+        setFilters(newFilters? {
+            ...emptyFilters,
+            ...newFilters
+        }: {
+            ...emptyFilters,
+        });
+        setView(!!newFilters)
+    }, [])
+
     return (
-        <SearchContext.Provider value={{loading, viewList, url, query, filters, isLoading, currentView, currentUrl, currentQuery, currentFilters}}>
+        <SearchContext.Provider value={{loading, viewList, url, query, filters, isLoading, currentView, currentUrl, currentQuery, currentFilters, resetPage}}>
             {children}
         </SearchContext.Provider>
     )
