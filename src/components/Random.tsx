@@ -31,7 +31,7 @@ interface RandomReviewProps {
 
 const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectNew, getRandom}) => (
         <div id="random-content">
-            <h3 id="random-info">Click on the poster for full review and streaming options</h3>
+            <h3 id="random-info">Click on the poster to see the full review and streaming options</h3>
             <img id="random-poster" onClick={() => passedProps.history.push(`/review/${review.rank}`)} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <h1 id="random-title">{review.movie}</h1>
             <h1 id="random-total" className="title-font">Score: {review.total}/100</h1>

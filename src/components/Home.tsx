@@ -115,8 +115,7 @@ const Home:React.FC = (props: any) => {
     return(
 		<div id="content">
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
-			<img id="to-random" src={Random} alt="Random" onClick={() => props.history.push(`/random`)} />
-			{/* <button id="to-random" onClick={() => props.history.push(`/random`)}>Random Movie Generator</button> */}
+			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={() => props.history.push(`/random`)} />
 			<Search open={open} setOpen={setOpen}/>	
             <FiltersApplied filters={filters} />
             {viewList? <List />: <Landing />}

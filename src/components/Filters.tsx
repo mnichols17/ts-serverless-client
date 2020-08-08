@@ -20,15 +20,14 @@ interface SelectProps {
     info?: string;
 }
 
-const FilterSelect:React.FC<SelectProps> = ({label, onChange, options, value, info}) => {
-    const[open, setOpen] = useState<boolean>(false);
-    return(
-        <div className="filter-select">
-            <label className="filter-info">{label}<FontAwesomeIcon className={open? "filter-icon-open" : "filter-icon"} visibility={info? 'visible':'hidden'} onClick={() => setOpen(!open)} icon={faInfoCircle} /><span hidden={!open} className="tooltip">{info}</span></label>
-            <Select className="sort" label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} isSearchable={true} options={options} value={value} />
-        </div>
-    )
-}
+const FilterSelect:React.FC<SelectProps> = ({label, onChange, options, value, info}) => (
+    //const[open, setOpen] = useState<boolean>(false);
+    //<FontAwesomeIcon className={open? "filter-icon-open" : "filter-icon"} visibility={'hidden'} onClick={() => setOpen(!open)} icon={faInfoCircle} /><span hidden={!open} className="tooltip">{info}</span>
+    <div className="filter-select">
+        <label className="filter-info">{label}</label>
+        <Select className="sort" placeholder={info || "Select..."} label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} isSearchable={true} options={options} value={value} />
+    </div>
+)
 
 const Filters: React.FC<FiltersProps> = ({setOpen}) => {
 
@@ -69,17 +68,17 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
     }
 
     const selects = [
+        {label: "Streaming Provider:", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
         {label: "Director:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors},
         {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres, info: 'Ex: Action, Comedy, Drama, etc.'},
-        {label: "Sub-Genre:", onChange: (e:any) => changeFilter(e, 'subGenres'), options: subGenreOptions, value: selectedFilters.subGenres, info: 'Ex: Comic, Heist, Romantic Comedy, etc.'},
-        {label: "Studio/Company:", onChange: (e:any) => changeFilter(e, 'studiocompanies'), options: studiocompanyOptions, value: selectedFilters.studiocompanies, info: 'Ex: A24, Disney, Marvel, Netflix, etc.'},
-        {label: "Universe:", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes, info: 'Ex: DCEU, Disney Animated, MCU, Star Wars, etc.'},
-        {label: "Sub-Universe:", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses, info: 'Ex: Harry Potter, Lord of the Rings, Pixar, etc.'},
+        {label: "Sub-Genre:", onChange: (e:any) => changeFilter(e, 'subGenres'), options: subGenreOptions, value: selectedFilters.subGenres, info: 'Ex: Comic, Romantic Comedy, etc.'},
+        {label: "Studio/Company:", onChange: (e:any) => changeFilter(e, 'studiocompanies'), options: studiocompanyOptions, value: selectedFilters.studiocompanies, info: 'Ex: A24, Disney, Netflix, etc.'},
+        {label: "Universe:", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes, info: 'Ex: Disney Animated, MCU, etc.'},
+        {label: "Sub-Universe:", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses, info: 'Ex: Harry Potter, Pixar, etc.'},
         {label: "Character:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters},
         {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays},
         {label: "Year:", onChange: (e:any) => changeFilter(e, 'years'), options: yearOptions, value: selectedFilters.years},
         {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
-        {label: "Streaming Provider:", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
         {label: "Oscars:", onChange: (e:any) => changeFilter(e, 'oscars'), options: oscarOptions, value: selectedFilters.oscars},
         {label: "Golden Globes:", onChange: (e:any) => changeFilter(e, 'goldenglobes'), options: globesOptions, value: selectedFilters.goldenglobes},
     ]

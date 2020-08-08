@@ -6,12 +6,11 @@ import handleTitle from '../utils/handleTitle';
 import ReactLoading from 'react-loading';
 import ReactPlayer from 'react-player/youtube';
 import {SearchContext} from '../utils/context';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-interface ReviewInfoProps {
-    review: Review;
-    providers: object[];
-    fromCategory: (category: string, value: string) => void
-}
+import Back from '../media/back.png';
+import Home from '../media/home.png';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 interface ProviderLogosProps {
     providers: object[];
@@ -32,17 +31,30 @@ const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
             <h3 id="streaming-title" className="title-font">Streaming Options</h3>
             <hr />
             {providers.length? <><p>Click to Watch</p>
-            <div style={{display: 'flex', justifyContent: 'center', flexWrap: "wrap"}}>
+            <div>
                 {logos.slice().reverse().map(l => l)}
             </div></> : <h2>No Streaming Options Available</h2>}
         </div>
     )
 }
 
-const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory}) => {
+interface ReviewInfoProps {
+    review: Review;
+    providers: object[];
+    fromCategory: (category: string, value: string) => void
+    navClick: (e: any) => void
+}
+
+const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory, navClick}) => {
     return(
         !review.director? <Redirect push to="/" /> :
         <>
+            <div id="review-navbar">
+                <div id="navbar-content">
+                    <img id="nav-back" onClick={navClick} className="img-button" src={Back} alt="Back" />
+                    <img id="nav-home" onClick={navClick} className="img-button" src={Home} alt="Home" /> 
+                </div>
+            </div>
             <h2 id="reviewPage-title">{review.movie}</h2>
             <h1 id="review-rank" className="title-font">Rank: #{review.rank}</h1>
             <img id="review-poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
@@ -59,6 +71,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory}
                 <p className="review-people">N/A</p>}
                 <ProviderLogos providers={providers} />
                 <div id="review-trailer-wrapper">
+                    <h3 className="review-detail title-font">Trailer</h3>
                     <ReactPlayer className="react-player" url={`https://www.youtube.com/watch?v=${review.video_key}`} height="100%" width="100%" controls={true}/>
                 </div>
             </div>
@@ -74,43 +87,36 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory}
                     </tr>
                     <tr>
                         <td>Genre:</td>
-                        {/* <td onClick={() => fromCategory('genres', review.genre as string)}>{review.genre || "N/A"}</td> */}
-                        <td>{review.genre? <button className="review-info-button" onClick={() => fromCategory('genres', review.genre as string)}>{review.genre}</button> : "N/A"}</td>
+                        <td>{review.genre? <button className="review-info-button search-icon" onClick={() => fromCategory('genres', review.genre as string)}>{review.genre} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
 
                     </tr>
                     <tr>
                         <td>Sub-Genre:</td>
-                        {/* <td onClick={() => fromCategory('subGenres', review.subgenre as string)}>{review.subgenre || "N/A"}</td> */}
-                        <td>{review.subgenre? <button className="review-info-button" onClick={() => fromCategory('subGenres', review.subgenre as string)}>{review.subgenre}</button> : "N/A"}</td>
+                        <td>{review.subgenre? <button className="review-info-button search-icon" onClick={() => fromCategory('subGenres', review.subgenre as string)}>{review.subgenre} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
                         <td>Studio/Company:</td>
-                        {/* <td onClick={() => fromCategory('studiocompanies', review.studiocompany as string)}>{review.studiocompany || "N/A"}</td> */}
-                        <td>{review.studiocompany? <button className="review-info-button" onClick={() => fromCategory('studiocompanies', review.studiocompany as string)}>{review.studiocompany}</button> : "N/A"}</td>
+                        <td>{review.studiocompany? <button className="review-info-button search-icon" onClick={() => fromCategory('studiocompanies', review.studiocompany as string)}>{review.studiocompany} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
 
                     </tr>
                     <tr>
                         <td>Universe:</td>
-                        {/* <td onClick={() => fromCategory('universes', review.universe as string)}>{review.universe || "N/A"}</td> */}
-                        <td>{review.universe? <button className="review-info-button" onClick={() => fromCategory('universes', review.universe as string)}>{review.universe}</button> : "N/A"}</td>
+                        <td>{review.universe? <button className="review-info-button search-icon" onClick={() => fromCategory('universes', review.universe as string)}>{review.universe} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
                         <td>Sub-Universe:</td>
-                        {/* <td onClick={() => fromCategory('subUniverses', review.subuniverse as string)}>{review.subuniverse || "N/A"}</td> */}
-                        <td>{review.subuniverse? <button className="review-info-button" onClick={() => fromCategory('subUniverses', review.subuniverse as string)}>{review.subuniverse}</button> : "N/A"}</td>
+                        <td>{review.subuniverse? <button className="review-info-button search-icon" onClick={() => fromCategory('subUniverses', review.subuniverse as string)}>{review.subuniverse} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
                         <td>Character:</td>
-                        {/* <td onClick={() => fromCategory('characters', review.character as string)}>{review.character || "N/A"}</td> */}
-                        <td>{review.character? <button className="review-info-button" onClick={() => fromCategory('characters', review.character as string)}>{review.character}</button> : "N/A"}</td>
+                        <td>{review.character? <button className="review-info-button search-icon" onClick={() => fromCategory('characters', review.character as string)}>{review.character} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
                         <td>Sport/Holiday:</td>
-                        {/* <td onClick={() => fromCategory('sportholidays', review.sportholiday as string)}>{review.sportholiday || "N/A"}</td> */}
-                        <td>{review.sportholiday? <button className="review-info-button" onClick={() => fromCategory('sportholidays', review.sportholiday as string)}>{review.sportholiday}</button> : "N/A"}</td>
+                        <td>{review.sportholiday? <button className="review-info-button search-icon" onClick={() => fromCategory('sportholidays', review.sportholiday as string)}>{review.sportholiday} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> 
         </>
     )
 }
@@ -142,41 +148,76 @@ const ReviewPage: React.FC = (props:any) => {
         })
     }, [rank])
 
-    const fromCategory = (category: string, value: string) => {
-        const filterReset = {
-            directors: [],
-            sort: {
-                value: "ASC",
-                label: "Rating High to Low"
-            },
-            genres: [],
-            subGenres: [],
-            universes: [],
-            subUniverses: [],
-            studiocompanies: [],
-            characters: [],
-            sportholidays: [],
-            years: [],
-            decades: [],
-            providers: [],
-            oscars: [],
-            goldenglobes: []
+    const navClick = (e: any) => {
+        if(e.target.id === "nav-home") {
+            currentView(false);
+            props.history.push('/')
         }
-        currentView(true);
-        currentUrl('reviews/all')
-        currentQuery('')
-        currentFilters({
-            ...filterReset,
-            [category]: [{value, label: value}]
-        })
+        else {
+            props.history.goBack();
+        }
+    }
+
+    const fromCategory = (category: string, value?: string) => {
+        // currentView(true);
+        // currentUrl('reviews/all')
+        // currentQuery('')
+        // currentFilters({
+        //     ...filterReset,
+        //     [category]: [{value, label: value}]
+        // })
         props.history.push('/');
     }
 
     return(
         <div id="reviewPage">
-            {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"} height={"10vh"} width={"10vh"}/> : <ReviewInfo review={review} providers={providers} fromCategory={fromCategory} />}
+            {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"} height={"10vh"} width={"10vh"}/> 
+                : <ReviewInfo review={review} providers={providers} fromCategory={fromCategory} navClick={navClick} />}
         </div>
     )
 }
 
 export default ReviewPage;
+
+{/* <table id="review-info">
+                <tbody>
+                    <tr>
+                        <td>Year Released:</td>
+                        <td>{review.year}</td>
+                    </tr>
+                    <tr>
+                        <td>Runtime:</td>
+                        <td>{review.runtime} minutes</td>
+                    </tr>
+                    <tr>
+                        <td>Genre:</td>
+                        <td>{review.genre? <button className="review-info-button" onClick={() => fromCategory('genres', review.genre as string)}>{review.genre}</button> : "N/A"}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Sub-Genre:</td>
+                        <td>{review.subgenre? <button className="review-info-button" onClick={() => fromCategory('subGenres', review.subgenre as string)}>{review.subgenre}</button> : "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Studio/Company:</td>
+                        <td>{review.studiocompany? <button className="review-info-button" onClick={() => fromCategory('studiocompanies', review.studiocompany as string)}>{review.studiocompany}</button> : "N/A"}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Universe:</td>
+                        <td>{review.universe? <button className="review-info-button" onClick={() => fromCategory('universes', review.universe as string)}>{review.universe}</button> : "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Sub-Universe:</td>
+                        <td>{review.subuniverse? <button className="review-info-button" onClick={() => fromCategory('subUniverses', review.subuniverse as string)}>{review.subuniverse}</button> : "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Character:</td>
+                        <td>{review.character? <button className="review-info-button" onClick={() => fromCategory('characters', review.character as string)}>{review.character}</button> : "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Sport/Holiday:</td>
+                        <td>{review.sportholiday? <button className="review-info-button" onClick={() => fromCategory('sportholidays', review.sportholiday as string)}>{review.sportholiday}</button> : "N/A"}</td>
+                    </tr>
+                </tbody>
+            </table> */}
