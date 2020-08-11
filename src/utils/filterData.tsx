@@ -944,16 +944,33 @@ export const providerOptions: object[] = [
     },
 ]
 
-export const oscarOptions: object[] = [
+const oscarOptions: object[] = [
     {value: "Best Picture (Nominated)", label: "Best Picture (Nominated)"},
     {value: "Best Picture (Winner)", label: "Best Picture (Winner)"},
 ]
 
-export const globesOptions: object[] = [
+const globesOptions: object[] = [
     {value: "Best Picture: Drama (Nomination)", label: "Best Picture: Drama (Nomination)"},
     {value: "Best Picture: Drama (Winner)", label: "Best Picture: Drama (Winner)"},
     {value: "Best Picture: Musical or Comedy (Nominated)", label: "Best Picture: Musical or Comedy (Nominated)"},
     {value: "Best Picture: Musical or Comedy (Winner)", label: "Best Picture: Musical or Comedy (Winner)"},
+]
+
+export const awardOptions: object[] = [
+    {
+        label: 'Oscars',
+        options: oscarOptions,
+    },
+    {
+        label: 'Golden Globes',
+        options: globesOptions,
+    },
+]
+
+export const ratingOptions: object[] = [
+    {value: "avg", label: "Average"},
+    {value: "jeff", label: "Jeff D. Lowe"},
+    {value: "kenjac", label: "KenJac"}
 ]
 
 export const sortOptions: object[] = [

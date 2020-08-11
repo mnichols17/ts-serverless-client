@@ -22,34 +22,44 @@
 }
 
 .info {
-    height: 80px; /* Play with this but should be good */
+    height: 100px;
     display: flex;
     flex-direction: column;
 }
 
 .info-review {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items:  center;
     margin-bottom: 5px;
     padding: 0px 4px;
 }
 
-.star {
-    color: #ECBF08;
-    margin-right: 2px;
+.butter {
+    height: 22px;
+    margin-right: 3px;
 }
 
 .movie-total {
     margin: 0;
-    font-size: .8em;
+    font-size: .78em;
     display: flex;
     align-items: center;
 }
 
-.movie-rank {
+.rank-type-icon, .rank-type-star{
     margin: 0;
+    font-size: .78em;
+    margin-left: auto;
     padding-right: 2px;
-    font-size: .8em;
+}
+
+.rank-type-icon {
+    height: 22px;
+}
+
+.rank-type-star {
+    color: #ecbf08;
 }
 
 .movie-title {
@@ -63,5 +73,26 @@
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: .95rem;
+    font-size: .82rem;
+}
+
+.movie-accolades {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 5px;
+    margin-top: auto;
+    margin-bottom: .3em;
+}
+
+.movie-accolades > img {
+    margin-right: 5px;
+    height: 20px;
+}
+
+.movie-rank {
+    margin: 0;
+    font-size: .76em;
+    margin-left: auto;
+    padding-right: 2px;
 }

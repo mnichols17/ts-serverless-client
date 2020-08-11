@@ -32,9 +32,9 @@ interface RandomReviewProps {
 const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectNew, getRandom}) => (
         <div id="random-content">
             <h3 id="random-info">Click on the poster to see the full review and streaming options</h3>
-            <img id="random-poster" onClick={() => passedProps.history.push(`/review/${review.rank}`)} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
+            <img id="random-poster" onClick={() => passedProps.history.push(`/review/${review.id}`)} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <h1 id="random-title">{review.movie}</h1>
-            <h1 id="random-total" className="title-font">Score: {review.total}/100</h1>
+            <h1 id="random-total" className="title-font">Score: {review.avgtotal}/100</h1>
             <button className="random-buttons" onClick={selectNew}>Select New Filters</button>
             <button className="random-buttons" onClick={getRandom}>Randomize Again</button>
         </div>
@@ -52,7 +52,7 @@ const Random: React.FC = (props:any) => {
     const[loading, setLoading] = useState<boolean>(false);
     const[random, setRandom] = useState<Review>({
         movie: "",
-        total: -1
+        avgtotal: -1
     });
     const[randomFilters, setRandomFilters] = useState<RandomFilter>({
         genres: [],
@@ -80,10 +80,9 @@ const Random: React.FC = (props:any) => {
                 setLoading(false);
                 if(!res.data) setError('Sorry, there are no reviews that match those categories');
                 else {
-                    let {movie, poster, rank, total} = res.data
+                    let {movie, poster, avgtotal, jeff, kenjac, id} = res.data
                     if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
-
-                    setRandom({movie, poster, rank, total})
+                    setRandom({movie, poster, avgtotal , jeff, kenjac, id})
                 }
             })
             .catch(err => console.error(err))
@@ -93,7 +92,7 @@ const Random: React.FC = (props:any) => {
     const selectNew = () => {
         setRandom({
             movie: "",
-            total: -1
+            avgtotal: -1
         })
     }
 
@@ -107,7 +106,7 @@ const Random: React.FC = (props:any) => {
 		<div className="random" id="content">
             <img id="logo" src={Logo} onClick={() => props.history.push(`/`)} alt="LOGO" />
             {loading? <ReactLoading className="random-loading" type={"spin"} color={"yellow"}/>:
-                random.total >= 0? <RandomReview passedProps={props} review={random} selectNew={selectNew} getRandom={getRandom} /> : <>
+                random.avgtotal >= 0? <RandomReview passedProps={props} review={random} selectNew={selectNew} getRandom={getRandom} /> : <>
                     <h2>Find a random movie based on <br /><span>Genre</span>, <span>Decade</span> and <span>Streaming Provider</span></h2>
                     <h4 id="random-error" hidden={!error}>{error}</h4>
                     {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}

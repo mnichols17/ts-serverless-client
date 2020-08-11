@@ -2,6 +2,7 @@ import React from 'react';
 import { createContext, useState, useCallback } from 'react';
 
 export type FiltersType = {
+    ratings: {value: string, label: string},
     directors: object[],
     sort: {value: string, label: string},
     genres: object[],
@@ -14,9 +15,7 @@ export type FiltersType = {
     years: object[],
     decades: object[],
     providers: object[]
-    oscars: object[]
-    goldenglobes: object[]
-
+    awards: []
 }
 
 interface Search {
@@ -40,6 +39,7 @@ export const SearchContext = createContext<Search>({
     url: 'reviews/all',
     query: "",
     filters: {
+        ratings: {value: "avg", label: "Average"},
         directors: [],
 		sort: {value: "ASC", label: "Rating High to Low"},
 		genres: [],
@@ -52,8 +52,7 @@ export const SearchContext = createContext<Search>({
         years: [],
         decades: [],
         providers: [],
-        oscars: [],
-        goldenglobes: []
+        awards: []
     },
     isLoading: () => {},
     currentView: () => {},
@@ -69,6 +68,10 @@ interface ProviderProps {
 
 export const SearchProvider = ({children}: ProviderProps) => {
     const emptyFilters: FiltersType = {
+        ratings: {
+            value: "avg",
+            label: "Average"
+        },
         directors: [],
         sort: {
             value: "ASC",
@@ -84,8 +87,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
         years: [],
         decades: [],
         providers: [],
-        oscars: [],
-        goldenglobes: []
+        awards: [],
     }
 
     const[loading, setLoading] = useState<boolean>(true);

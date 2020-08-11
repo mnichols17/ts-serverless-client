@@ -5,8 +5,10 @@ import Review from '../utils/Review';
 import ReactLoading from 'react-loading';
 import smoothscroll from 'smoothscroll-polyfill';
 import {SearchContext, FiltersType} from '../utils/context';
+import { ratingOptions } from '../utils/filterData';
 
-const createStrings = ({sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, oscars, goldenglobes}: FiltersType) => ({
+const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards}: FiltersType) => ({
+	ratings: ratings.value,
 	directors: directors.map((select: any) => select.value).join('@'),
 	sort: sort.value,
 	genres: genres.map((select: any) => select.value).join('@'),
@@ -19,8 +21,7 @@ const createStrings = ({sort, directors, genres, subGenres, studiocompanies, uni
 	years: years.map((select: any) => select.value).join('@'),
 	decades: decades.map((select: any) => select.value).join('@'),
 	providers: providers.map((select: any) => select.value).join('@'),
-	oscars: oscars.map((select: any) => select.value).join('@'),
-	goldenglobes: goldenglobes.map((select: any) => select.value).join('@'),
+	awards: awards.map((select: any) => select.value).join('@'),
 })
 
 const List:React.FC = () => {

@@ -83,6 +83,7 @@ const Home:React.FC = (props: any) => {
             currentView(false);
             await currentQuery("")
             currentFilters({
+				ratings: {value: "avg", label: "Average"},
                 directors: [],
                 sort: {
                     value: "ASC",
@@ -98,8 +99,7 @@ const Home:React.FC = (props: any) => {
                 years: [],
                 decades: [],
                 providers: [],
-                oscars: [],
-                goldenglobes: []
+                awards: []
             })
         }
     }

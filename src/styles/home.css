@@ -141,6 +141,34 @@
 
 /* Landing Page */
 
+#landing-glossary {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 1em;
+} 
+
+#landing-glossary > h2 {
+    color: white;
+    font-size: 1.17em;
+    display: flex;
+    align-items: center;
+    margin: .5em 1em;
+} 
+
+.glossary-img {
+    height: 28px;
+    margin-right: 4px;
+}
+
+.glossary-icon {
+    color: #ecbf08;
+    margin-right: 4px;
+}
+
 .landing-label {
     display: flex;
     align-items: center;
@@ -330,6 +358,7 @@
     display: flex;
     width: 100vw;
     justify-content: space-between;
+    margin-top: .5em;
     padding: 5px 10px;
 }
 
@@ -682,6 +711,22 @@
     #review-poster, #random-poster  {
         width: 85%;
     }
+
+    .butter {
+        height: 20px;
+    }
+    
+    .movie-total {
+        font-size: .75em;
+    }
+    
+    .movie-rank {
+        font-size: .72em;
+    }
+
+    .movie-title {
+        font-size: .8em;
+    }
 }
 
 @media screen and (min-width: 410px) {
@@ -717,6 +762,22 @@
 
     .movie-poster {
         height: 170px;
+    }
+
+    .butter {
+        height: 24px;
+    }
+    
+    .movie-total {
+        font-size: .82em;
+    }
+    
+    .movie-rank {
+        font-size: .78em;
+    }
+    
+    .movie-title {
+        font-size: .82rem;
     }
 
     #nav-back, #nav-home {

@@ -56,10 +56,10 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                 </div>
             </div>
             <h2 id="reviewPage-title">{review.movie}</h2>
-            <h1 id="review-rank" className="title-font">Rank: #{review.rank}</h1>
+            <h1 id="review-rank" className="title-font">Rank: #{review.avgrank}</h1>
             <img id="review-poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <div id="review-card">
-                <h1 id="review-total" className="title-font">Score: {review.total}/100</h1>
+                <h1 id="review-total" className="title-font">Score: {review.avgtotal}/100</h1>
                 <p id="review-plot">{review.plot}</p>
                 <h3 className="review-detail title-font">Director</h3>
                 <p className="review-people">{review.director}</p>
@@ -129,16 +129,17 @@ const ReviewPage: React.FC = (props:any) => {
     const[loading, setLoading] = useState<boolean>(true);
     const[review, setReview] = useState<Review>({
         movie: "",
-        total: -1
+        avgtotal: -1
     })
     const[providers, setProviders] = useState<object[]>([])
 
     useEffect(() => {
         request(`reviews/movie/${rank}`)
         .then((res: any) => {
-            if(!res.data) {
+            if(!res.data[0]) {
                 alert("No Movie Found!")
             } else {
+                console.log(res.data)
                 const {movie} = res.data[0]
                 if(movie.substring(movie.length-5).toLowerCase() === ", the") res.data[0].movie = handleTitle(movie);
                 setReview(res.data[0]);

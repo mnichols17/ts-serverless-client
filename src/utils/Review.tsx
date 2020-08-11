@@ -1,7 +1,13 @@
 export default interface Review {
-    rank?: number;
+    id?: number;
+    avgrank?: number;
     movie: string;
-    total: number;
+    avgtotal: number;
+    jlrank?: number;
+    jeff?: number;
+    kjrank?: number;
+    kenjac?: number;
+    buttered?: boolean;
     director?: string;
     genre?: string;
     subgenre?: string;
@@ -17,6 +23,6 @@ export default interface Review {
     actors?: string;
     video_key?: string;
     runtime?: number;
-    oscars?: number;
-    goldenglobes?: number;
+    oscars?: string;
+    goldenglobes?: string;
 }
