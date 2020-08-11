@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a149a223f7156476a4b77cc8701d465a",
+    "revision": "36e9338a19898900aa8bf1b2620920ec",
     "url": "/index.html"
   },
   {
-    "revision": "19f5b9e08ff03e98b831",
-    "url": "/static/css/main.23a0c772.chunk.css"
+    "revision": "f555ce015421ab1fd1ef",
+    "url": "/static/css/main.05392ad0.chunk.css"
   },
   {
-    "revision": "0b685db250041c328ed7",
-    "url": "/static/js/2.7800edcb.chunk.js"
+    "revision": "c6ee3732461d0d502717",
+    "url": "/static/js/2.577cb876.chunk.js"
   },
   {
     "revision": "e23d72e353070f497294c1592aa53554",
-    "url": "/static/js/2.7800edcb.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.577cb876.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "19f5b9e08ff03e98b831",
-    "url": "/static/js/main.7c766db9.chunk.js"
+    "revision": "f555ce015421ab1fd1ef",
+    "url": "/static/js/main.664f73c5.chunk.js"
   },
   {
     "revision": "49cb89da10f542d4efa3",
@@ -124,11 +124,35 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/big_noodle_titling.ff78c5e2.ttf"
   },
   {
+    "revision": "8459831058c860970a657f85bb115b06",
+    "url": "/static/media/buttered.84598310.png"
+  },
+  {
+    "revision": "23776821e9161a2c20fedae79c3cbfb9",
+    "url": "/static/media/globes_logo.23776821.png"
+  },
+  {
     "revision": "ff64f5559ed89ec03a2ed1b126f7d297",
     "url": "/static/media/home.ff64f555.png"
   },
   {
+    "revision": "f1b59a368dcd19dc5672b20a57c8df9e",
+    "url": "/static/media/jdl.f1b59a36.png"
+  },
+  {
+    "revision": "4d72b4b943bd4b2457c47d570ff41ca0",
+    "url": "/static/media/kenjac.4d72b4b9.png"
+  },
+  {
     "revision": "577ce152c1b8a7528f6217dec717fe3c",
     "url": "/static/media/logo.577ce152.jpg"
+  },
+  {
+    "revision": "fb6b035ba3ea6178af4de260590c5987",
+    "url": "/static/media/not_buttered.fb6b035b.png"
+  },
+  {
+    "revision": "59711e011e1e11670c38512a6b93184f",
+    "url": "/static/media/oscars_logo.59711e01.png"
   }
 ]);

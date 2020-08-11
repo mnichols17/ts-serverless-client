@@ -10,7 +10,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Back from '../media/back.png';
 import Home from '../media/home.png';
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import JDL from '../media/jdl.png';
+import KenJac from '../media/kenjac.png';
+// import OscarsLogo from '../media/oscars_logo.png';
+// import GlobesLogo from '../media/globes_logo.png';
+// import Buttered from '../media/buttered.png';
+// import NotButtered from '../media/not_buttered.png';
+import { faStar, faSearch } from '@fortawesome/free-solid-svg-icons'
+
+interface ScoreTableProps {
+    icon: string;
+    score: number;
+    rank: number
+}
+
+export const ScoreTable: React.FC<ScoreTableProps> = ({icon, score, rank}) => {
+    return (
+        <div className="score-row">
+            {icon === "avg"? <FontAwesomeIcon className="score-icon" size={'3x'} icon={faStar} /> : <img className="score-img" alt='icon' src={icon} /> }
+            <h1 className="title-font">#{rank}</h1>
+            <h1 className="title-font">{score}/100</h1>
+        </div>
+    )
+}
 
 interface ProviderLogosProps {
     providers: object[];
@@ -46,6 +68,13 @@ interface ReviewInfoProps {
 }
 
 const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory, navClick}) => {
+
+    const scores = [
+        {icon: JDL, score: review.jeff, rank: review.jlrank},
+        {icon: KenJac, score: review.kenjac, rank: review.kjrank},
+        {icon: "avg", score: review.avgtotal, rank: review.avgrank}
+    ]
+
     return(
         !review.director? <Redirect push to="/" /> :
         <>
@@ -56,10 +85,14 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                 </div>
             </div>
             <h2 id="reviewPage-title">{review.movie}</h2>
-            <h1 id="review-rank" className="title-font">Rank: #{review.avgrank}</h1>
+            {/* <h1 id="review-rank" className="title-font">Rank: #{review.avgrank}</h1> */}
             <img id="review-poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <div id="review-card">
-                <h1 id="review-total" className="title-font">Score: {review.avgtotal}/100</h1>
+                <div id="review-total">
+                    {scores.map(({icon, score, rank}) => {
+                        return <ScoreTable icon={icon} score={score as number} rank={rank as number} />
+                    })}
+                </div>
                 <p id="review-plot">{review.plot}</p>
                 <h3 className="review-detail title-font">Director</h3>
                 <p className="review-people">{review.director}</p>
