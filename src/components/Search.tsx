@@ -20,6 +20,7 @@ const Search: React.FC<SearchProps> = ({open, setOpen}) => {
 
     return(
         <>
+            <h3>Use the filter to find a movie, where to watch it, and more...</h3>
             <div id="search">
                 <div id="search-input">
                     <input type="text" value={query} onChange={handleQuery} placeholder="Search by Title, Director or Actor"/>

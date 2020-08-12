@@ -8,6 +8,7 @@ import handleTitle from '../utils/handleTitle';
 import {ScoreTable} from './Review';
 
 import Logo from '../media/logo.jpg';
+import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
 import KenJac from '../media/kenjac.png';
 
@@ -113,7 +114,7 @@ const Random: React.FC = (props:any) => {
     const scores = [
         {icon: JDL, score: random.jeff as number, rank: random.jlrank as number},
         {icon: KenJac, score: random.kenjac as number, rank: random.kjrank as number},
-        {icon: "avg", score: random.avgtotal as number, rank: random.avgrank as number}
+        {icon: Average, score: random.avgtotal as number, rank: random.avgrank as number}
     ]
 
 	return (

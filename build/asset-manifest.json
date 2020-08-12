@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.05392ad0.chunk.css",
-    "main.js": "/static/js/main.664f73c5.chunk.js",
-    "main.js.map": "/static/js/main.664f73c5.chunk.js.map",
+    "main.css": "/static/css/main.6e993eeb.chunk.css",
+    "main.js": "/static/js/main.aa0b05f6.chunk.js",
+    "main.js.map": "/static/js/main.aa0b05f6.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.270950e9.js",
     "runtime-main.js.map": "/static/js/runtime-main.270950e9.js.map",
-    "static/js/2.577cb876.chunk.js": "/static/js/2.577cb876.chunk.js",
-    "static/js/2.577cb876.chunk.js.map": "/static/js/2.577cb876.chunk.js.map",
+    "static/js/2.c8ff68cd.chunk.js": "/static/js/2.c8ff68cd.chunk.js",
+    "static/js/2.c8ff68cd.chunk.js.map": "/static/js/2.c8ff68cd.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.55b47dab2ac3b988a9b21de74ae64852.js": "/precache-manifest.55b47dab2ac3b988a9b21de74ae64852.js",
+    "precache-manifest.dcc98b760e88b6d5932e2e6cfc84018b.js": "/precache-manifest.dcc98b760e88b6d5932e2e6cfc84018b.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.05392ad0.chunk.css.map": "/static/css/main.05392ad0.chunk.css.map",
-    "static/js/2.577cb876.chunk.js.LICENSE.txt": "/static/js/2.577cb876.chunk.js.LICENSE.txt",
+    "static/css/main.6e993eeb.chunk.css.map": "/static/css/main.6e993eeb.chunk.css.map",
+    "static/js/2.c8ff68cd.chunk.js.LICENSE.txt": "/static/js/2.c8ff68cd.chunk.js.LICENSE.txt",
     "static/media/10.png": "/static/media/10.20c3d93e.png",
     "static/media/105.png": "/static/media/105.bf778e69.png",
     "static/media/123.png": "/static/media/123.07d8d41b.png",
@@ -35,6 +35,7 @@
     "static/media/73.png": "/static/media/73.8f5b61e2.png",
     "static/media/78.png": "/static/media/78.384908c0.png",
     "static/media/9.png": "/static/media/9.68d8440e.png",
+    "static/media/average.png": "/static/media/average.84ebfe6c.png",
     "static/media/back.png": "/static/media/back.71d1c389.png",
     "static/media/index.css": "/static/media/big_noodle_titling.ff78c5e2.ttf",
     "static/media/buttered.png": "/static/media/buttered.84598310.png",
@@ -48,8 +49,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.270950e9.js",
-    "static/js/2.577cb876.chunk.js",
-    "static/css/main.05392ad0.chunk.css",
-    "static/js/main.664f73c5.chunk.js"
+    "static/js/2.c8ff68cd.chunk.js",
+    "static/css/main.6e993eeb.chunk.css",
+    "static/js/main.aa0b05f6.chunk.js"
   ]
 }
