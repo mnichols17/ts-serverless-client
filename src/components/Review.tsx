@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Back from '../media/back.png';
 import Home from '../media/home.png';
+import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
 import KenJac from '../media/kenjac.png';
 // import OscarsLogo from '../media/oscars_logo.png';
@@ -27,8 +28,8 @@ interface ScoreTableProps {
 export const ScoreTable: React.FC<ScoreTableProps> = ({icon, score, rank}) => {
     return (
         <div className="score-row">
-            {icon === "avg"? <FontAwesomeIcon className="score-icon" size={'3x'} icon={faStar} /> : <img className="score-img" alt='icon' src={icon} /> }
             <h1 className="title-font">#{rank}</h1>
+            <img className="score-img" alt='icon' src={icon} />
             <h1 className="title-font">{score}/100</h1>
         </div>
     )
@@ -72,7 +73,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
     const scores = [
         {icon: JDL, score: review.jeff, rank: review.jlrank},
         {icon: KenJac, score: review.kenjac, rank: review.kjrank},
-        {icon: "avg", score: review.avgtotal, rank: review.avgrank}
+        {icon: Average, score: review.avgtotal, rank: review.avgrank}
     ]
 
     return(

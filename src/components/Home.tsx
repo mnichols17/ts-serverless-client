@@ -115,6 +115,7 @@ const Home:React.FC = (props: any) => {
     return(
 		<div id="content">
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
+			<h1 className="title-font">What to watch, and where to watch it.</h1>
 			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={() => props.history.push(`/random`)} />
 			<Search open={open} setOpen={setOpen}/>	
             <FiltersApplied filters={filters} />

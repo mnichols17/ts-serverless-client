@@ -64,16 +64,16 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
 
     const selects = [
         {label: "Streaming Provider:", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
-        {label: "Director:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors},
+        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
         {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres, info: 'Ex: Action, Comedy, Drama, etc.'},
         {label: "Sub-Genre:", onChange: (e:any) => changeFilter(e, 'subGenres'), options: subGenreOptions, value: selectedFilters.subGenres, info: 'Ex: Comic, Romantic Comedy, etc.'},
+        {label: "Director:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors},
         {label: "Studio/Company:", onChange: (e:any) => changeFilter(e, 'studiocompanies'), options: studiocompanyOptions, value: selectedFilters.studiocompanies, info: 'Ex: A24, Disney, Netflix, etc.'},
         {label: "Universe:", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes, info: 'Ex: Disney Animated, MCU, etc.'},
         {label: "Sub-Universe:", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses, info: 'Ex: Pixar, Disney Remake, etc.'},
         {label: "Character:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters},
         {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays},
         {label: "Year:", onChange: (e:any) => changeFilter(e, 'years'), options: yearOptions, value: selectedFilters.years},
-        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
         {label: "Awards:", onChange: (e:any) => changeFilter(e, 'awards'), options: awardOptions, value: selectedFilters.awards},
     ]
 
@@ -84,7 +84,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
                 <Select className="sort" label="Sort By" onChange={(e:any) => changeFilter(e, "sort")} isSearchable={false} options={sortOptions} value={selectedFilters.sort} />
             </div> 
             <div className="filter-select">
-                <label>Scores/Ratings:</label>
+                <label>Ratings (Average or Individual):</label>
                 <Select className="sort" label="Ratings" onChange={(e:any) => changeFilter(e, "ratings")} isSearchable={false} options={ratingOptions} value={selectedFilters.ratings} />
             </div>
             {selects.map(({label, onChange, options, value, info}) => <FilterSelect key={label} label={label} onChange={onChange} options={options} value={value} info={info} />)}

@@ -53,9 +53,17 @@
     cursor: pointer;
 }
 
+#content > h1 {
+    color: #FEF8D6;
+    letter-spacing: 1px;
+    margin: .5em;
+    text-align: center;
+    font-size: 1.5em;
+}
+
 #to-random {
     width: 70%;
-    margin: 1.2em 0em 0em;
+    margin: .45em 0em 0em;
     border-radius: 12px;
     border: 2px solid #282C34;
     max-width: 250px;
@@ -66,12 +74,19 @@
     cursor: pointer;
 }
 
+#content > h3 {
+    color:#FCFCFC;
+    margin: 1em 0 0;
+    font-size: .9em;
+    text-align: center;
+}
+
 #search {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 80%;
-    padding: 1em;
+    padding: .5em;
     max-width: 470px;
 }
 
@@ -141,32 +156,52 @@
 
 /* Landing Page */
 
-#landing-glossary {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 1em;
-} 
-
-#landing-glossary > h2 {
-    color: white;
-    font-size: 1.17em;
+#glossary-content {
     display: flex;
+    flex-direction: column;
+    color: #FEDE16;
     align-items: center;
-    margin: .5em 1em;
-} 
+    font-size: 1.2em;
+    letter-spacing: .8px;
+}
+
+.glossary-title {
+    margin: .5em 0 0;
+}
+
+#glossary-top > h2:first-child {
+    margin-right: 5px;
+}
+
+#glossary-detail {
+    color: white;
+    font-size: .8em;
+    text-align: center;
+}
+
+#glossary-icons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: .5em;
+    flex-wrap: wrap;
+}
 
 .glossary-img {
-    height: 28px;
-    margin-right: 4px;
+    height: 55px;
+    margin: 8px;
+    border: 2px solid #282C34;
+    border-radius: 50%;
 }
 
 .glossary-icon {
     color: #ecbf08;
-    margin-right: 4px;
+    margin: 8px;
+    border: 2px solid #282C34;
+    border-radius: 50%;
+}
+
+.glossary-selected {
+    border: 2px solid #FEDE16;
 }
 
 .landing-label {
@@ -211,6 +246,8 @@
     padding: 0 1%;
     display: flex;
     overflow: auto;
+    /* background: #3E4147;
+    border-radius:  */
 }
 
 .landing-list::after {
@@ -728,6 +765,14 @@
         width: 90%;
         font-size: .9em;
     }
+    
+    .glossary-title {
+        font-size: 1.25em;
+    }
+
+    #glossary-detail {
+        font-size: .72em;
+    }
 
     .landing-title {
         font-size: 1.15em;
@@ -880,6 +925,10 @@
         margin-left: -50px;
     }
 
+    .glossary-title {
+        margin: 0;
+    }
+
     .landing-title {
         margin: 0em .5em 0 1.1em;
         font-size: 1.5em;
@@ -1012,10 +1061,11 @@
 
     #reviewPage-title {
         grid-column: 1/3;
-        font-size: 2em;
+        font-size: 2.75em;
         text-align: center;
         margin-top: 0em;
         color: white;
+        padding: 15px;
     }
 
     #review-rank {

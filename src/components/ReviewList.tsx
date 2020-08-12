@@ -17,7 +17,6 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
     if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
     const total = avgtotal;
     const rank = avgrank;
-    console.log(actors);
     return(
         <div className="movie">
             <Link className="movie-link" to={`/review/${id}`}>
@@ -26,7 +25,7 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
                     <div className="info-review">
                         <img className="butter" alt="butter" src={buttered? ButteredIcon : NotButteredIcon} />
                         <p className="movie-total">{total}/100</p>
-                        {actors === 'avg'? <FontAwesomeIcon className="rank-type-star" icon={faStar} /> : <img className='rank-type-icon' alt="rank-type" src={require(`../media/${actors}.png`)} />}
+                        <img className='rank-type-icon' alt="rank-type" src={require(`../media/${actors}.png`)} />
                     </div>
                     <p className="movie-title">{movie}</p>
                     <div className="movie-accolades">
@@ -54,7 +53,7 @@ const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews, more}) => {
         <InfiniteScroll className="infinitescroll" loader={LoadingItem} dataLength={reviews.length} next={getReviews} hasMore={more}>
             {reviews.map(({id, avgrank, jlrank, kjrank, avgtotal, jeff, kenjac, movie, poster, buttered, oscars, goldenglobes}) =>
                 <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal} 
-                    poster={poster} buttered={buttered} actors={jeff? "jdl" : kenjac? 'kenjac' : 'avg'} oscars={oscars} goldenglobes={goldenglobes} />)}
+                    poster={poster} buttered={buttered} actors={jeff? "jdl" : kenjac? 'kenjac' : 'average'} oscars={oscars} goldenglobes={goldenglobes} />)}
         </InfiniteScroll>
     );
 }
