@@ -29,9 +29,9 @@ interface ScoreTableProps {
 export const ScoreTable: React.FC<ScoreTableProps> = ({icon, score, rank}) => {
     return (
         <div className="score-row">
-            <h1 className="title-font">#{rank}</h1>
+            <h1 className="title-font">{rank !== null? `#${rank}` : 'N/A'}</h1>
             <img className="score-img" alt='icon' src={icon} />
-            <h1 className="title-font">{score}/100</h1>
+            <h1 className="title-font">{rank !== null? `${score}/100` : "N/A"}</h1>
         </div>
     )
 }
@@ -76,7 +76,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
         {icon: KenJac, score: review.kenjac, rank: review.kjrank},
         {icon: review.id !== 13767? Average : GV, score: review.avgtotal, rank: review.avgrank}
     ]
-
+    console.log(review.kenjac)
     return(
         !review.director? <Redirect push to="/" /> :
         <>
@@ -113,7 +113,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                 <tbody>
                     <tr>
                         <td>Butterd Status:</td>
-                        <td><span id="butter-row">{review.buttered? "Officially Buttered" : "Not Buttered"} <img alt="butter" src={Buttered} /></span></td>
+                        <td><span id="butter-row">{review.buttered? "Officially Buttered" : "Not Buttered"} <img alt="butter" src={review.buttered? Buttered : NotButtered} /></span></td>
                     </tr>
                     <tr>
                         <td>Year Released:</td>

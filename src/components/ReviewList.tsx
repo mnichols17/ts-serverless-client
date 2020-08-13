@@ -22,7 +22,7 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
                 <div className="info">
                     <div className="info-review">
                         <img className="butter" alt="butter" src={buttered? ButteredIcon : NotButteredIcon} />
-                        <p className="movie-total">{total}/100</p>
+                        <p className="movie-total">{total !== null? `${total}/100` : "N/A"}</p>
                         <img className='rank-type-icon' alt="rank-type" src={require(`../media/${actors}.png`)} />
                     </div>
                     <p className="movie-title">{movie}</p>
@@ -49,9 +49,11 @@ const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews, more}) => {
     return (
         !reviews.length ? <h2 id="empty">No results found</h2> : 
         <InfiniteScroll className="infinitescroll" loader={LoadingItem} dataLength={reviews.length} next={getReviews} hasMore={more}>
-            {reviews.map(({id, avgrank, jlrank, kjrank, avgtotal, jeff, kenjac, movie, poster, buttered, oscars, goldenglobes}) =>
-                <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal} 
-                    poster={poster} buttered={buttered} actors={jeff? "jdl" : kenjac? 'kenjac' : 'average'} oscars={oscars} goldenglobes={goldenglobes} />)}
+            {reviews.map(({id, avgrank, jlrank, kjrank, avgtotal, jeff, kenjac, movie, poster, buttered, oscars, goldenglobes}) => {
+                    const total = (jeff as number) >= 0? jeff as number : (kenjac as number) >= 0? kenjac as number : avgtotal;
+                    return <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={total} 
+                        poster={poster} buttered={buttered} actors={(jeff as number) >= 0? "jdl" : (kenjac as number) >= 0? 'kenjac' : 'average'} oscars={oscars} goldenglobes={goldenglobes} />
+                })}
         </InfiniteScroll>
     );
 }
