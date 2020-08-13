@@ -19,7 +19,7 @@ const Landing:React.FC = (props: any) => {
 
     const {loading, isLoading, currentView, resetPage} = useContext(SearchContext);
     const [reviews, setReviews] = useState<Review[][]>([]);
-    const [iconDetail, setDetail] = useState<string>("Click/Hover on each Icon to learn about it");
+    const [iconDetail, setDetail] = useState<string>("Click/hover on each icon to learn about it");
 
     const landingTitles = [
         "Top 10 All-Time",
@@ -69,7 +69,7 @@ const Landing:React.FC = (props: any) => {
                 <h2 id="glossary-detail">{iconDetail}</h2>
                 <div id="glossary-icons">
                     {glossaryIcons.map(({detail, source}) => {
-                        return <img onMouseEnter={() => setDetail(detail)} onMouseLeave={() => setDetail("Click/Hover on each Icon to learn about it")} className={iconDetail === detail? "glossary-img glossary-selected" : "glossary-img"} alt={detail} src={source} />
+                        return <img key={source} onMouseEnter={() => setDetail(detail)} onMouseLeave={() => setDetail("Click/hover on each icon to learn about it")} className={iconDetail === detail? "glossary-img glossary-selected" : "glossary-img"} alt={detail} src={source} />
                     })}
                 </div>
             </div>

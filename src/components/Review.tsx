@@ -17,7 +17,7 @@ import KenJac from '../media/kenjac.png';
 // import GlobesLogo from '../media/globes_logo.png';
 // import Buttered from '../media/buttered.png';
 // import NotButtered from '../media/not_buttered.png';
-import { faStar, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 interface ScoreTableProps {
     icon: string;
@@ -86,12 +86,11 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                 </div>
             </div>
             <h2 id="reviewPage-title">{review.movie}</h2>
-            {/* <h1 id="review-rank" className="title-font">Rank: #{review.avgrank}</h1> */}
             <img id="review-poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <div id="review-card">
                 <div id="review-total">
                     {scores.map(({icon, score, rank}) => {
-                        return <ScoreTable icon={icon} score={score as number} rank={rank as number} />
+                        return <ScoreTable key={icon} icon={icon} score={score as number} rank={rank as number} />
                     })}
                 </div>
                 <p id="review-plot">{review.plot}</p>

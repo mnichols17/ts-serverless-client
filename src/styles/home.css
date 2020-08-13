@@ -77,7 +77,7 @@
 #content > h3 {
     color:#FCFCFC;
     margin: 2em 0 0;
-    font-size: .9em;
+    font-size: .78em;
     text-align: center;
 
 }
@@ -167,6 +167,7 @@
 }
 
 .glossary-title {
+    font-size: 1.3em;
     margin: .5em 0 0;
 }
 
@@ -188,7 +189,7 @@
 }
 
 .glossary-img {
-    height: 55px;
+    height: 33px;
     margin: 8px;
     border: 2px solid #282C34;
     border-radius: 50%;
@@ -768,11 +769,15 @@
     }
     
     .glossary-title {
-        font-size: 1.25em;
+        font-size: 1.17em;
     }
 
     #glossary-detail {
-        font-size: .72em;
+        font-size: .7em;
+    }
+
+    .glossary-img {
+        height: 25px;
     }
 
     .landing-title {
@@ -928,6 +933,10 @@
 
     .glossary-title {
         margin: 0;
+    }
+
+    .glossary-img {
+        height: 55px;
     }
 
     .landing-title {

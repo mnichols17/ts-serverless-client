@@ -39,25 +39,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
     }
 
     const handleFilters = (reset?: boolean) => {
-        currentFilters(!reset? selectedFilters : {
-            ratings: {value: "avg", label: "Average"},
-            directors: [],
-            sort: {
-                value: "ASC",
-                label: "Rating High to Low"
-            },
-            genres: [],
-            subGenres: [],
-            universes: [],
-            subUniverses: [],
-            studiocompanies: [],
-            characters: [],
-            sportholidays: [],
-            years: [],
-            decades: [],
-            providers: [],
-            awards: []
-        })
+        currentFilters(!reset? selectedFilters : {}, reset)
         if(!viewList) currentView(true);
         setOpen(false);
     }
@@ -84,7 +66,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
                 <Select className="sort" label="Sort By" onChange={(e:any) => changeFilter(e, "sort")} isSearchable={false} options={sortOptions} value={selectedFilters.sort} />
             </div> 
             <div className="filter-select">
-                <label>Ratings (Average or Individual):</label>
+                <label>Ratings (Avg., Jeff's or KenJac's):</label>
                 <Select className="sort" label="Ratings" onChange={(e:any) => changeFilter(e, "ratings")} isSearchable={false} options={ratingOptions} value={selectedFilters.ratings} />
             </div>
             {selects.map(({label, onChange, options, value, info}) => <FilterSelect key={label} label={label} onChange={onChange} options={options} value={value} info={info} />)}

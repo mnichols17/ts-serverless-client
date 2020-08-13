@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Review from '../utils/Review';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
 import handleTitle from '../utils/handleTitle';
 import ReactLoading from 'react-loading';
 

@@ -47,7 +47,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 const Home:React.FC = (props: any) => {
     smoothscroll.polyfill();
     
-    const {viewList, filters, query, isLoading, currentView, currentUrl, currentFilters, currentQuery} = useContext(SearchContext);
+    const {viewList, filters, query, isLoading, currentView, currentUrl, currentQuery, currentFilters, currentRandom,} = useContext(SearchContext);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[showTop, setTop] = useState<boolean>(false);
     const[open, setOpen] = useState<boolean>(false);
@@ -102,7 +102,12 @@ const Home:React.FC = (props: any) => {
                 awards: []
             })
         }
-    }
+	}
+	
+	const toRandom = () => {
+		currentRandom({}, true);
+		props.history.push(`/random`)
+	}
     
 	const checkTop = () => {
 		if(!showTop && window.pageYOffset > (open? 1500:700)){
@@ -116,7 +121,7 @@ const Home:React.FC = (props: any) => {
 		<div id="content">
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
 			<h1 className="title-font">What to watch, and where to watch it.</h1>
-			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={() => props.history.push(`/random`)} />
+			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
 			<Search open={open} setOpen={setOpen}/>	
             <FiltersApplied filters={filters} />
             {viewList? <List />: <Landing />}

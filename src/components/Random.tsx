@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Select from 'react-select';
 import {genreOptions, decadeOptions, providerOptions} from '../utils/filterData';
 import request from '../utils/makeRequest';
@@ -6,7 +6,10 @@ import ReactLoading from 'react-loading';
 import Review from '../utils/Review';
 import handleTitle from '../utils/handleTitle';
 import {ScoreTable} from './Review';
+import {SearchContext, RandomType} from '../utils/context';
 
+import Back from '../media/back.png';
+import Home from '../media/home.png';
 import Logo from '../media/logo.jpg';
 import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
@@ -41,7 +44,7 @@ const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectN
             <h1 id="random-title">{review.movie}</h1>
             <div id="random-total">
                 {scores.map(({icon, score, rank}) => {
-                    return <ScoreTable icon={icon} score={score as number} rank={rank as number} />
+                    return <ScoreTable key={icon} icon={icon} score={score as number} rank={rank as number} />
                 })}
             </div>
             <button className="random-buttons" onClick={selectNew}>Select New Filters</button>
@@ -49,28 +52,19 @@ const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectN
         </div>
 )
 
-type RandomFilter = {
-    genres: object[],
-    decades: object[],
-    providers: object[]
-}
-
 const Random: React.FC = (props:any) => {
 
+    const {randomFilters, currentRandom, resetPage} = useContext(SearchContext);
     const[error, setError] = useState<string>('');
     const[loading, setLoading] = useState<boolean>(false);
     const[random, setRandom] = useState<Review>({
         movie: "",
         avgtotal: -1
     });
-    const[randomFilters, setRandomFilters] = useState<RandomFilter>({
-        genres: [],
-        decades: [],
-        providers: []
-    })
+    const[selectedFilters, setFilters] = useState<RandomType>(randomFilters)
 
     const changeFilter = (e: any, key: string) => {
-        setRandomFilters((prevState: RandomFilter) => {
+        setFilters((prevState: RandomType) => {
             return {
                 ...prevState,
                 [key]: e || []
@@ -79,8 +73,9 @@ const Random: React.FC = (props:any) => {
     }
 
     const getRandom = () => {
-        const {genres, decades, providers} = randomFilters;
-        if(!genres.length || !decades.length) setError('Please enter at least once choice in both Genre and Decade')
+        currentRandom(selectedFilters);
+        const {genres, decades, providers} = selectedFilters;
+        if(!genres.length) setError('Please enter at least once choice in Genre')
         else {
             setLoading(true); 
             if(error) setError('');
@@ -105,10 +100,18 @@ const Random: React.FC = (props:any) => {
         })
     }
 
+    const navClick = (e: any) => {
+        if(e.target.id === "nav-back"){
+            props.history.goBack();
+        } else {
+            props.history.push("/");
+        }
+    }
+
     const selects = [
-        {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: randomFilters.genres},
-        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: randomFilters.decades},
-        {label: "Streaming Provider: (Optional)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: randomFilters.providers},
+        {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres},
+        {label: "Decade: (Optional)", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
+        {label: "Streaming Provider: (Optional)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
     ]
 
     const scores = [
@@ -119,7 +122,13 @@ const Random: React.FC = (props:any) => {
 
 	return (
 		<div className="random" id="content">
-            <img id="logo" src={Logo} onClick={() => props.history.push(`/`)} alt="LOGO" />
+            <div id="review-navbar">
+                <div id="navbar-content">
+                    <img id="nav-back" onClick={navClick} className="img-button" src={Back} alt="Back" />
+                    <img id="nav-home" onClick={navClick} className="img-button" src={Home} alt="Home" /> 
+                </div>
+            </div>
+            <img id="logo" src={Logo} onClick={navClick} alt="LOGO" />
             {loading? <ReactLoading className="random-loading" type={"spin"} color={"yellow"}/>:
                 random.avgtotal >= 0? <RandomReview passedProps={props} review={random} selectNew={selectNew} getRandom={getRandom} scores={scores}/> : <>
                     <h2>Find a random movie based on <br /><span>Genre</span>, <span>Decade</span> and <span>Streaming Provider</span></h2>
