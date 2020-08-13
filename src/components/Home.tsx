@@ -8,6 +8,13 @@ import Landing from './Landing';
 
 import Logo from '../media/logo.jpg';
 import Random from '../media/random.png';
+import Average from '../media/average.png';
+import JDL from '../media/jdl.png';
+import KenJac from '../media/kenjac.png';
+import OscarsLogo from '../media/oscars_logo.png';
+import GlobesLogo from '../media/globes_logo.png';
+import Buttered from '../media/buttered.png';
+import NotButtered from '../media/not_buttered.png';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
 
@@ -50,7 +57,18 @@ const Home:React.FC = (props: any) => {
     const {viewList, filters, query, isLoading, currentView, currentUrl, currentQuery, currentFilters, currentRandom,} = useContext(SearchContext);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[showTop, setTop] = useState<boolean>(false);
-    const[open, setOpen] = useState<boolean>(false);
+	const[open, setOpen] = useState<boolean>(false);
+	const [iconDetail, setDetail] = useState<string>("Click/hover on each icon to learn about it");
+	
+	const glossaryIcons: {detail: string, source: string}[] = [
+        {detail: "Average Rating", source: Average},
+        {detail: "Jeff D. Lowe's Rating", source: JDL},
+        {detail: "KenJac's Rating", source: KenJac},
+        {detail: "Buttered (69 or above)", source: Buttered},
+        {detail: "Not Buttered (68 or below)", source: NotButtered},
+        {detail: "Best Picture (Oscars)", source: OscarsLogo},
+        {detail: "Best Picture (Golden Globes)", source: GlobesLogo},
+    ]
 
 	useEffect(() => {
 		window.addEventListener('scroll', checkTop)
@@ -124,6 +142,15 @@ const Home:React.FC = (props: any) => {
 			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
 			<Search open={open} setOpen={setOpen}/>	
             <FiltersApplied filters={filters} />
+			<div id="glossary-content">
+                <h2 className="title-font glossary-title">Icons Glossary</h2>
+                <h2 id="glossary-detail">{iconDetail}</h2>
+                <div id="glossary-icons">
+                    {glossaryIcons.map(({detail, source}) => {
+                        return <img key={source} onMouseEnter={() => setDetail(detail)} onMouseLeave={() => setDetail("Click/hover on each icon to learn about it")} className={iconDetail === detail? "glossary-img glossary-selected" : "glossary-img"} alt={detail} src={source} />
+                    })}
+                </div>
+            </div>
             {viewList? <List />: <Landing />}
 			<button id="send-top" className="title-font" hidden={!(showTop && viewList)} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
 		</div>

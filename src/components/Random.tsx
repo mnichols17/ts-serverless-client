@@ -40,6 +40,8 @@ interface RandomReviewProps {
 const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectNew, getRandom, scores}) => (
         <div id="random-content">
             <h3 id="random-info">Click on the poster to see the full review and streaming options</h3>
+            <button className="random-nav random-btn title-font" onClick={selectNew}>New Filters</button>
+            <button className="random-nav random-btn title-font" onClick={getRandom}>Randomize</button>
             <img id="random-poster" onClick={() => passedProps.history.push(`/review/${review.id}`)} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <h1 id="random-title">{review.movie}</h1>
             <div id="random-total">
@@ -47,8 +49,6 @@ const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectN
                     return <ScoreTable key={icon} icon={icon} score={score as number} rank={rank as number} />
                 })}
             </div>
-            <button className="random-buttons" onClick={selectNew}>Select New Filters</button>
-            <button className="random-buttons" onClick={getRandom}>Randomize Again</button>
         </div>
 )
 
@@ -134,7 +134,7 @@ const Random: React.FC = (props:any) => {
                     <h2>Find a random movie based on <br /><span>Genre</span>, <span>Decade</span> and <span>Streaming Provider</span></h2>
                     <h4 id="random-error" hidden={!error}>{error}</h4>
                     {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}
-                    <button id="randomize" onClick={getRandom}>Randomize</button>
+                    <button id="randomize" className="random-btn title-font" onClick={getRandom}>Randomize</button>
                 </>
             }
         </div>

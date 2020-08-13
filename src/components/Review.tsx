@@ -13,10 +13,11 @@ import Home from '../media/home.png';
 import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
 import KenJac from '../media/kenjac.png';
+import GV from '../media/gv.png';
 // import OscarsLogo from '../media/oscars_logo.png';
 // import GlobesLogo from '../media/globes_logo.png';
-// import Buttered from '../media/buttered.png';
-// import NotButtered from '../media/not_buttered.png';
+import Buttered from '../media/buttered.png';
+import NotButtered from '../media/not_buttered.png';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 interface ScoreTableProps {
@@ -73,7 +74,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
     const scores = [
         {icon: JDL, score: review.jeff, rank: review.jlrank},
         {icon: KenJac, score: review.kenjac, rank: review.kjrank},
-        {icon: Average, score: review.avgtotal, rank: review.avgrank}
+        {icon: review.id !== 13767? Average : GV, score: review.avgtotal, rank: review.avgrank}
     ]
 
     return(
@@ -110,6 +111,10 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
             </div>
             <table id="review-info">
                 <tbody>
+                    <tr>
+                        <td>Butterd Status:</td>
+                        <td><span id="butter-row">{review.buttered? "Officially Buttered" : "Not Buttered"} <img alt="butter" src={Buttered} /></span></td>
+                    </tr>
                     <tr>
                         <td>Year Released:</td>
                         <td>{review.year}</td>

@@ -61,6 +61,10 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
 
     return(
         <div id="filter-panel">
+            <div id="filter-buttons">
+                <button id="filter-apply" onClick={() => handleFilters()}>Apply Filters</button>
+                <button id="filter-reset" onClick={() => handleFilters(true)}>Reset Filters</button>
+            </div>
             <div className="filter-select">
                 <label>Sort By:</label>
                 <Select className="sort" label="Sort By" onChange={(e:any) => changeFilter(e, "sort")} isSearchable={false} options={sortOptions} value={selectedFilters.sort} />
@@ -70,10 +74,6 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
                 <Select className="sort" label="Ratings" onChange={(e:any) => changeFilter(e, "ratings")} isSearchable={false} options={ratingOptions} value={selectedFilters.ratings} />
             </div>
             {selects.map(({label, onChange, options, value, info}) => <FilterSelect key={label} label={label} onChange={onChange} options={options} value={value} info={info} />)}
-            <div id="filter-buttons">
-                <button id="filter-apply" onClick={() => handleFilters()}>Apply Filters</button>
-                <button id="filter-reset" onClick={() => handleFilters(true)}>Reset Filters</button>
-            </div>
         </div>
     )
 }
