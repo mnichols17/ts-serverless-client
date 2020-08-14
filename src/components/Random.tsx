@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import Select from 'react-select';
-import {genreOptions, decadeOptions, providerOptions} from '../utils/filterData';
+import {genreOptions, subGenreOptions, decadeOptions, providerOptions} from '../utils/filterData';
 import request from '../utils/makeRequest';
 import ReactLoading from 'react-loading';
 import Review from '../utils/Review';
@@ -24,8 +24,8 @@ interface RandomSelectProps {
 
 const RandomFilterSelect:React.FC<RandomSelectProps> = ({label, onChange, options, value}) => (
     <div className="filter-select random-select">
-        <label>{label}</label>
-        <Select className="sort" label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} isSearchable={true} options={options} value={value}/>
+        <label className="random-label">{label}</label>
+        <Select className="sort" placeholder={'ALL'} label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} isSearchable={true} options={options} value={value}/>
     </div>
 )
 
@@ -74,23 +74,20 @@ const Random: React.FC = (props:any) => {
 
     const getRandom = () => {
         currentRandom(selectedFilters);
-        const {genres, decades, providers} = selectedFilters;
-        if(!genres.length) setError('Please enter at least once choice in Genre')
-        else {
-            setLoading(true); 
-            if(error) setError('');
-            request('reviews/random', {genres: genres.map((select: any) => select.value).join('@'), decades: decades.map((select: any) => select.value).join('@'), providers: providers.map((select: any) => select.value).join('@')})
-            .then(async(res: any) => {
-                setLoading(false);
-                if(!res.data) setError('Sorry, there are no reviews that match those categories');
-                else {
-                    let {movie, poster, avgtotal, jeff, kenjac, avgrank, jlrank, kjrank, id} = res.data
-                    if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
-                    setRandom({movie, poster, avgtotal, jeff, kenjac, avgrank, jlrank, kjrank, id})
-                }
-            })
-            .catch(err => console.error(err))
-        }
+        const {genres, subGenres, decades, providers} = selectedFilters;
+        setLoading(true); 
+        if(error) setError('');
+        request('reviews/random', {genres: genres.map((select: any) => select.value).join('@'), subgenres: subGenres.map((select: any) => select.value).join('@'), decades: decades.map((select: any) => select.value).join('@'), providers: providers.map((select: any) => select.value).join('@')})
+        .then(async(res: any) => {
+            setLoading(false);
+            if(!res.data) setError('Sorry, there are no reviews that match those categories');
+            else {
+                let {movie, poster, avgtotal, jeff, kenjac, avgrank, jlrank, kjrank, id} = res.data
+                if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
+                setRandom({movie, poster, avgtotal, jeff, kenjac, avgrank, jlrank, kjrank, id})
+            }
+        })
+        .catch(err => console.error(err))
     }
 
     const selectNew = () => {
@@ -110,8 +107,9 @@ const Random: React.FC = (props:any) => {
 
     const selects = [
         {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres},
-        {label: "Decade: (Optional)", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
-        {label: "Streaming Provider: (Optional)", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
+        {label: "Sub-Genre:", onChange: (e:any) => changeFilter(e, 'subGenres'), options: subGenreOptions, value: selectedFilters.subGenres},
+        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
+        {label: "Streaming Provider:", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
     ]
 
     const scores = [
@@ -131,11 +129,10 @@ const Random: React.FC = (props:any) => {
             <img id="logo" src={Logo} onClick={navClick} alt="LOGO" />
             {loading? <ReactLoading className="random-loading" type={"spin"} color={"yellow"}/>:
                 random.avgtotal >= 0? <RandomReview passedProps={props} review={random} selectNew={selectNew} getRandom={getRandom} scores={scores}/> : <>
-                    <h2>Find a random movie based on <br /><span>Genre</span>, <span>Decade</span> and <span>Streaming Provider</span></h2>
+                    <h2>Find a random movie based on</h2>
+                    {/* <br /><span>Genre</span>, <span>Sub-Genre</span>, <span>Decade</span> and <span>Streaming Provider</span> */}
                     <h4 id="random-error" hidden={!error}>{error}</h4>
-                    {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}
-                    <input id="random-slider" type="range" min="1" max="100" onChange={() => console.log('?')} />
-                    <button id="randomize" className="random-btn title-font" onClick={getRandom}>Randomize</button>
+                    {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}                    <button id="randomize" className="random-btn title-font" onClick={getRandom}>Randomize</button>
                 </>
             }
         </div>

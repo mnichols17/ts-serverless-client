@@ -76,7 +76,6 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
         {icon: KenJac, score: review.kenjac, rank: review.kjrank},
         {icon: review.id !== 13767? Average : GV, score: review.avgtotal, rank: review.avgrank}
     ]
-    console.log(review.kenjac)
     return(
         !review.director? <Redirect push to="/" /> :
         <>
@@ -162,7 +161,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
 const ReviewPage: React.FC = (props:any) => {
 
     const {rank} = useParams();
-    const {currentView, resetPage} = useContext(SearchContext);
+    const {resetPage} = useContext(SearchContext);
     
     const[loading, setLoading] = useState<boolean>(true);
     const[review, setReview] = useState<Review>({
@@ -177,7 +176,6 @@ const ReviewPage: React.FC = (props:any) => {
             if(!res.data[0]) {
                 alert("No Movie Found!")
             } else {
-                console.log(res.data)
                 const {movie} = res.data[0]
                 if(movie.substring(movie.length-5).toLowerCase() === ", the") res.data[0].movie = handleTitle(movie);
                 setReview(res.data[0]);

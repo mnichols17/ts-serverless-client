@@ -355,22 +355,9 @@
     margin-left: 4px;
 }
 
-.tooltip {
-    font-size: .95em;
-    width: 300px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    padding: 8px;
-    border-radius: 8px;
-
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -56px;
+.css-1rhbuit-multiValue img {
+    width: 20px;
 }
-
 
 /* Review Page */
 
@@ -605,18 +592,19 @@
 }
 
 .random-select > label {
-    font-size: 1em;
-    color: white;
+    font-size: 1.1em;
+    color: #FEDE16;
+    font-weight: 600;
 }
 
 .random > h2{
-    margin: 2em 0em 1em;
-    font-size: 1.2em;
+    margin: 1em 0;
+    font-size: 1.5em;
     color: white;
     text-align: center;
 }
 
-.random span {
+.random > h2 span {
     color: #FEDE16;
 }
 
@@ -624,43 +612,6 @@
     margin: .5em;
     color: tomato;
     text-align: center;
-}
-
-#random-slider {
-    -webkit-appearance: none;
-    width: 80%;
-    max-width: 305px;
-    height: 15px;
-    border-radius: 12px;
-    background: #FEDE16;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-    margin-top: 1em;
-
-}
-
-#random-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 35px;
-    height: 35px;
-    background-image: url('../media/buttered.png');
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    cursor: pointer;
-}
-  
-#random-slider::-moz-range-thumb {
-    width: 35px;
-    height: 35px;
-    background-image: url('../media/buttered.png');
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    cursor: pointer;
 }
 
 #randomize {
