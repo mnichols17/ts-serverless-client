@@ -22,7 +22,8 @@ export type RandomType = {
     genres: object[],
     subGenres: object[],  
     decades: object[], 
-    providers: object[]
+    providers: object[],
+    min: number,
 }
 
 interface Search {
@@ -63,7 +64,7 @@ export const SearchContext = createContext<Search>({
         providers: [],
         awards: []
     },
-    randomFilters: {genres: [], subGenres: [], decades: [], providers: []},
+    randomFilters: {genres: [], subGenres: [], decades: [], providers: [], min: 0},
     isLoading: () => {},
     currentView: () => {},
     currentUrl: () => {},
@@ -111,6 +112,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
         subGenres: [],
         decades: [],
         providers: [],
+        min: 0
     });
 
     const isLoading = useCallback((l: boolean) => {
@@ -134,7 +136,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
     }, [])
 
     const currentRandom = useCallback((newRandom: object, reset?: boolean) => {
-        setRandom(reset? {genres: [], subGenres: [], decades: [], providers: []}: newRandom as RandomType);
+        setRandom(reset? {genres: [], subGenres: [], decades: [], providers: [], min: 0}: newRandom as RandomType);
     }, [])
 
     const resetPage = useCallback((newFilters?: object) => {

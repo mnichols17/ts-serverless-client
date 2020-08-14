@@ -20,7 +20,7 @@ const Search: React.FC<SearchProps> = ({open, setOpen}) => {
 
     return(
         <>
-            <h3>Use filters to find movies, where they're streaming, and more...</h3>
+            <h3>Use filters to find where movies are streaming, and more...</h3>
             <div id="search">
                 <button id="filter-show" onClick={() => setOpen(!open)}>{open? "Hide" : "Filters"} <FontAwesomeIcon icon={faSort} /></button>
                 <div id="search-input">
