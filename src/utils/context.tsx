@@ -2,7 +2,7 @@ import React from 'react';
 import { createContext, useState, useCallback } from 'react';
 
 export type FiltersType = {
-    ratings: {value: string, label: string},
+    ratings: {value: string, label: string | JSX.Element},
     directors: object[],
     sort: {value: string, label: string},
     genres: object[],
@@ -47,7 +47,7 @@ export const SearchContext = createContext<Search>({
     url: 'reviews/all',
     query: "",
     filters: {
-        ratings: {value: "avg", label: "Average"},
+        ratings: {value: "avg", label: <span className="filter-flex">Average <img className="filter-provider" src={require(`../media/average.png`)} alt={'test'}/></span>},
         directors: [],
 		sort: {value: "ASC", label: "Rating High to Low"},
 		genres: [],
@@ -80,7 +80,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
     const emptyFilters: FiltersType = {
         ratings: {
             value: "avg",
-            label: "Average"
+            label: <span className="filter-flex">Average <img className="filter-provider" src={require(`../media/average.png`)} alt={'test'}/></span>
         },
         directors: [],
         sort: {

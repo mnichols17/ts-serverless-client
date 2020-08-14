@@ -5,7 +5,6 @@ import Review from '../utils/Review';
 import ReactLoading from 'react-loading';
 import smoothscroll from 'smoothscroll-polyfill';
 import {SearchContext, FiltersType} from '../utils/context';
-import { ratingOptions } from '../utils/filterData';
 
 const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards}: FiltersType) => ({
 	ratings: ratings.value,

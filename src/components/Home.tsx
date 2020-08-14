@@ -5,6 +5,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 import {SearchContext, FiltersType} from '../utils/context';
 import List from './List';
 import Landing from './Landing';
+import {provider_names} from '../utils/filterData';
 
 import Logo from '../media/logo.jpg';
 import Random from '../media/random.png';
@@ -28,14 +29,15 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	let fromYears = "";
 	let watchOn = "";
 	let total = 0;
+
 	for(const[key, value] of Object.entries(filters)){
 		if((value as object[]).length){
 			(value as object[]).forEach((v:any) => {
 				total++;
 				if(key === 'directors') directedBy += ` ${v.value},` 
 				else if(key === "years" || key === "decades") fromYears += ` ${v.value},`
-				else if(key === "providers") watchOn += ` ${v.label},`
-				else (type += ` ${v.label},`)
+				else if(key === "providers") watchOn += ` ${provider_names[v.value]},`
+				else (type += ` ${v.value},`)
 			})
 		}
 	}
@@ -101,7 +103,7 @@ const Home:React.FC = (props: any) => {
             currentView(false);
             await currentQuery("")
             currentFilters({
-				ratings: {value: "avg", label: "Average"},
+				ratings: {value: "avg", label: <span className="filter-flex">Average <img className="filter-icon" src={require(`../media/average.png`)} alt={'test'}/></span>},
                 directors: [],
                 sort: {
                     value: "ASC",
@@ -141,7 +143,6 @@ const Home:React.FC = (props: any) => {
 			<h1 className="title-font">What to watch, and where to watch it.</h1>
 			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
 			<Search open={open} setOpen={setOpen}/>	
-            <FiltersApplied filters={filters} />
 			<div id="glossary-content">
                 <h2 className="title-font glossary-title">Icons Glossary</h2>
                 <h2 id="glossary-detail">{iconDetail}</h2>
@@ -151,6 +152,7 @@ const Home:React.FC = (props: any) => {
                     })}
                 </div>
             </div>
+            <FiltersApplied filters={filters} />
             {viewList? <List />: <Landing />}
 			<button id="send-top" className="title-font" hidden={!(showTop && viewList)} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
 		</div>

@@ -134,6 +134,7 @@ const Random: React.FC = (props:any) => {
                     <h2>Find a random movie based on <br /><span>Genre</span>, <span>Decade</span> and <span>Streaming Provider</span></h2>
                     <h4 id="random-error" hidden={!error}>{error}</h4>
                     {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}
+                    <input id="random-slider" type="range" min="1" max="100" onChange={() => console.log('?')} />
                     <button id="randomize" className="random-btn title-font" onClick={getRandom}>Randomize</button>
                 </>
             }

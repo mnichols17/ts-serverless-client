@@ -112,7 +112,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
             <table id="review-info">
                 <tbody>
                     <tr>
-                        <td>Butterd Status:</td>
+                        <td>Buttered Status:</td>
                         <td><span id="butter-row">{review.buttered? "Officially Buttered" : "Not Buttered"} <img alt="butter" src={review.buttered? Buttered : NotButtered} /></span></td>
                     </tr>
                     <tr>
@@ -206,46 +206,3 @@ const ReviewPage: React.FC = (props:any) => {
 }
 
 export default ReviewPage;
-
-{/* <table id="review-info">
-                <tbody>
-                    <tr>
-                        <td>Year Released:</td>
-                        <td>{review.year}</td>
-                    </tr>
-                    <tr>
-                        <td>Runtime:</td>
-                        <td>{review.runtime} minutes</td>
-                    </tr>
-                    <tr>
-                        <td>Genre:</td>
-                        <td>{review.genre? <button className="review-info-button" onClick={() => fromCategory('genres', review.genre as string)}>{review.genre}</button> : "N/A"}</td>
-
-                    </tr>
-                    <tr>
-                        <td>Sub-Genre:</td>
-                        <td>{review.subgenre? <button className="review-info-button" onClick={() => fromCategory('subGenres', review.subgenre as string)}>{review.subgenre}</button> : "N/A"}</td>
-                    </tr>
-                    <tr>
-                        <td>Studio/Company:</td>
-                        <td>{review.studiocompany? <button className="review-info-button" onClick={() => fromCategory('studiocompanies', review.studiocompany as string)}>{review.studiocompany}</button> : "N/A"}</td>
-
-                    </tr>
-                    <tr>
-                        <td>Universe:</td>
-                        <td>{review.universe? <button className="review-info-button" onClick={() => fromCategory('universes', review.universe as string)}>{review.universe}</button> : "N/A"}</td>
-                    </tr>
-                    <tr>
-                        <td>Sub-Universe:</td>
-                        <td>{review.subuniverse? <button className="review-info-button" onClick={() => fromCategory('subUniverses', review.subuniverse as string)}>{review.subuniverse}</button> : "N/A"}</td>
-                    </tr>
-                    <tr>
-                        <td>Character:</td>
-                        <td>{review.character? <button className="review-info-button" onClick={() => fromCategory('characters', review.character as string)}>{review.character}</button> : "N/A"}</td>
-                    </tr>
-                    <tr>
-                        <td>Sport/Holiday:</td>
-                        <td>{review.sportholiday? <button className="review-info-button" onClick={() => fromCategory('sportholidays', review.sportholiday as string)}>{review.sportholiday}</button> : "N/A"}</td>
-                    </tr>
-                </tbody>
-            </table> */}

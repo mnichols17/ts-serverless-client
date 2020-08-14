@@ -1,4 +1,8 @@
-export const directorOptions: object[] = [
+import React from 'react';
+
+type DropdownOption = {value: string, label: string | JSX.Element}
+
+export const directorOptions: DropdownOption[] = [
     {value: "J.J. Abrams", label: "Abrams, J.J."},
     {value: "Ben Affleck", label: "Affleck, Ben"},
     {value: "Alexandre Aja", label: "Aja, Alexandre"},
@@ -60,7 +64,7 @@ export const directorOptions: object[] = [
     {value: "Bob Clark", label: "Clark, Bob"},
     {value: "Ron Clements & John Musker", label: "Clements, Ron & Musker, John"},
     {value: "George Clooney", label: "Clooney, George"},
-    {value: "oen Brothers ", label: "Coen Brothers"},
+    {value: "Coen Brothers ", label: "Coen Brothers"},
     {value: "Rob Cohen", label: "Cohen, Rob"},
     {value: "Jaume Collet-Serra", label: "Collet-Serra, Jaume"},
     {value: "Chris Columbus", label: "Columbus, Chris"},
@@ -226,7 +230,7 @@ export const directorOptions: object[] = [
     {value: "Les Mayfield", label: "Mayfield, Les"},
     {value: "Tom McCarthy", label: "McCarthy, Tom"},
     {value: "Martin McDonagh", label: "McDonagh, Martin"},
-    {value: "cG ", label: "McG"},
+    {value: "McG ", label: "McG"},
     {value: "Paul McGuigan", label: "McGuigan, Paul"},
     {value: "Adam McKay", label: "McKay, Adam"},
     {value: "Sean McNamara", label: "McNamara, Sean"},
@@ -403,7 +407,7 @@ export const directorOptions: object[] = [
     {value: "Edward Zwick", label: "Zwick, Edward"}
 ]
 
-export const genreOptions: object[] = [
+export const genreOptions: DropdownOption[] = [
     {value: "Action", label: "Action"},
     {value: "Adventure", label: "Adventure"},
     {value: "Animation", label: "Animation"},
@@ -421,7 +425,7 @@ export const genreOptions: object[] = [
     {value: "Sci-Fi", label: "Sci-Fi"},
 ]
 
-export const subGenreOptions: object[] = [
+export const subGenreOptions: DropdownOption[] = [
     {value: "Action Comedy", label: "Action Comedy"},
     {value: "Action Thriller", label: "Action Thriller"},
     {value: "Adult Animation", label: "Adult Animation"},
@@ -485,7 +489,7 @@ export const subGenreOptions: object[] = [
     {value: "Young Adult", label: "Young Adult"},
 ]
 
-export const studiocompanyOptions: object[] = [
+export const studiocompanyOptions: DropdownOption[] = [
     {value: "20th Century Studios", label: "20th Century Studios"},
     {value: "A24", label: "A24"},
     {value: "Aardman Animation", label: "Aardman Animation"},
@@ -537,7 +541,7 @@ export const studiocompanyOptions: object[] = [
     {value: "Warner Bros.", label: "Warner Bros."},
 ]
 
-export const universeOptions: object[] = [
+export const universeOptions: DropdownOption[] = [
     {value: "A Nightmare on Elm Street", label: "A Nightmare on Elm Street"},
     {value: "Ace Ventura", label: "Ace Ventura"},
     {value: "Adam Sandler-verse", label: "Adam Sandler-verse"},
@@ -681,7 +685,7 @@ export const universeOptions: object[] = [
     {value: "xXx", label: "xXx"},
 ]
 
-export const subUniverseOptions: object[] = [
+export const subUniverseOptions: DropdownOption[] = [
     {value: "Disney Animation Studios", label: "Disney Animation Studios"},
     {value: "Disney Live-Action Remake", label: "Disney Live-Action Remake"},
     {value: "Fantastic Beasts", label: "Fantastic Beasts"},
@@ -720,7 +724,7 @@ export const subUniverseOptions: object[] = [
     {value: "Vacation", label: "Vacation"},
 ]
 
-export const characterOptions: object[] = [
+export const characterOptions: DropdownOption[] = [
     {value: "Adam Sandler", label: "Adam Sandler"},
     {value: "Ant-Man", label: "Ant-Man"},
     {value: "Aquaman", label: "Aquaman"},
@@ -792,7 +796,7 @@ export const characterOptions: object[] = [
     {value: "Xander Cage", label: "Xander Cage"},
 ]
 
-export const sportholidayOptions: object[] = [
+export const sportholidayOptions: DropdownOption[] = [
     {value: "Baseball", label: "Baseball"},
     {value: "Basketball", label: "Basketball"},
     {value: "Billiards", label: "Billiards"},
@@ -820,7 +824,7 @@ export const sportholidayOptions: object[] = [
     {value: "Wrestling", label: "Wrestling"},
 ]
 
-export const yearOptions: object[] = [
+export const yearOptions: DropdownOption[] = [
     {value: "1937", label: "1937"},
     {value: "1939", label: "1939"},
     {value: "1940", label: "1940"},
@@ -899,7 +903,7 @@ export const yearOptions: object[] = [
     {value: "2020", label: "2020"},
 ]
 
-export const decadeOptions: object[] = [
+export const decadeOptions: DropdownOption[] = [
     {value: "1930-1939", label: "1930-1939"},
     {value: "1940-1949", label: "1940-1949"},
     {value: "1950-1959", label: "1950-1959"},
@@ -912,7 +916,25 @@ export const decadeOptions: object[] = [
     {value: "2020-2029", label: "2020-2029"},
 ]
 
-const streamingOptions: object[] = [
+export const provider_names: {[key:string]: string} = {
+    "9": "Amazon (Stream)",
+    "78": "CBS",
+    "337": "Disney+",
+    "27@31": "HBO",
+    "384": "HBO Max",
+    "15": "Hulu",
+    "8": "Netflix",
+    "386": "Peacock",
+    "387": "Peacock Premium",
+    "37": "Showtime",
+    "43": "Starz",
+    "10": "Amazon (Buy/Rent)",
+    "2": "Apple",
+    "3": "Google",
+    "192": "YouTube",
+}
+
+const streamingOptions: DropdownOption[] = [
     {value: "9", label: "Amazon (Stream)"},
     {value: "78", label: "CBS"},
     {value: "337", label: "Disney+"},
@@ -926,34 +948,38 @@ const streamingOptions: object[] = [
     {value: "43", label: "Starz"},
 ]
 
-const buyrentOptions: object[] = [
+const buyrentOptions: DropdownOption[] = [
     {value: "10", label: "Amazon (Buy/Rent)"},
     {value: "2", label: "Apple"},
-    {value: "3", label: "Google "},
+    {value: "3", label: "Google"},
     {value: "192", label: "YouTube"},
 ]
 
 export const providerOptions: object[] = [
     {
         label: 'Streaming',
-        options: streamingOptions,
+        options: streamingOptions.map(({value, label}) => {
+            return {value: value, label: <span className="filter-flex">{label} <img className="filter-icon" src={require(`../media/providers/${value !== '27@31'? value : 27}.png`)} alt={value}/></span>}
+        }),
     },
     {
         label: 'Buy/Rent',
-        options: buyrentOptions,
+        options: buyrentOptions.map(({value, label}) => {
+            return {value: value, label: <span className="filter-flex">{label} <img className="filter-icon" src={require(`../media/providers/${value}.png`)} alt={value}/></span>}
+        }),
     },
 ]
 
-const oscarOptions: object[] = [
+const oscarOptions: DropdownOption[] = [
     {value: "Best Picture (Nominated)", label: "Best Picture (Nominated)"},
-    {value: "Best Picture (Winner)", label: "Best Picture (Winner)"},
+    {value: "Best Picture (Winner)", label: <span className="filter-flex">Best Picture (Winner) <img className="filter-icon" src={require(`../media/oscars_logo.png`)} alt={'test'}/></span>},
 ]
 
-const globesOptions: object[] = [
+const globesOptions: DropdownOption[] = [
     {value: "Best Picture: Drama (Nomination)", label: "Best Picture: Drama (Nomination)"},
-    {value: "Best Picture: Drama (Winner)", label: "Best Picture: Drama (Winner)"},
+    {value: "Best Picture: Drama (Winner)", label: <span className="filter-flex">Best Picture: Drama (Winner) <img className="filter-icon" src={require(`../media/globes_logo.png`)} alt={'test'}/></span>},
     {value: "Best Picture: Musical or Comedy (Nominated)", label: "Best Picture: Musical or Comedy (Nominated)"},
-    {value: "Best Picture: Musical or Comedy (Winner)", label: "Best Picture: Musical or Comedy (Winner)"},
+    {value: "Best Picture: Musical or Comedy (Winner)", label: <span className="filter-flex">Best Picture: Musical or Comedy (Winner) <img className="filter-icon" src={require(`../media/globes_logo.png`)} alt={'test'}/></span>},
 ]
 
 export const awardOptions: object[] = [
@@ -967,13 +993,13 @@ export const awardOptions: object[] = [
     },
 ]
 
-export const ratingOptions: object[] = [
-    {value: "avg", label: "Average"},
-    {value: "jeff", label: "Jeff D. Lowe"},
-    {value: "kenjac", label: "KenJac"}
+export const ratingOptions: DropdownOption[] = [
+    {value: "avg", label: <span className="filter-flex">Average <img className="filter-icon" src={require(`../media/average.png`)} alt={'test'}/></span>},
+    {value: "jeff", label: <span className="filter-flex">Jeff D. Lowe <img className="filter-icon" src={require(`../media/jdl.png`)} alt={'test'}/></span>},
+    {value: "kenjac", label: <span className="filter-flex">KenJac <img className="filter-icon" src={require(`../media/kenjac.png`)} alt={'test'}/></span>}
 ]
 
-export const sortOptions: object[] = [
+export const sortOptions: DropdownOption[] = [
     {value: "ASC", label: "Rating High to Low"},
     {value: "DESC", label: "Rating Low to High"}
 ]

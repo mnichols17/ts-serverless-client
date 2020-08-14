@@ -341,19 +341,18 @@
     margin-bottom: .2em;
 }
 
-.filter-info {
-    cursor: pointer;
-    position: relative; 
+.bold {
+    font-weight: 600;
 }
 
-.filter-icon {
-    color: #282C34;
-    margin-left: 8px;
+.filter-flex {
+    display: flex;
+    align-items: center;
 }
 
-.filter-icon-open {
-    color: #FEDE16;
-    margin-left: 8px;
+.filter-flex > img {
+    width: 30px;
+    margin-left: 4px;
 }
 
 .tooltip {
@@ -625,6 +624,43 @@
     margin: .5em;
     color: tomato;
     text-align: center;
+}
+
+#random-slider {
+    -webkit-appearance: none;
+    width: 80%;
+    max-width: 305px;
+    height: 15px;
+    border-radius: 12px;
+    background: #FEDE16;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin-top: 1em;
+
+}
+
+#random-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    background-image: url('../media/buttered.png');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
+}
+  
+#random-slider::-moz-range-thumb {
+    width: 35px;
+    height: 35px;
+    background-image: url('../media/buttered.png');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 #randomize {
@@ -929,9 +965,6 @@
         max-width: 430px;
     } 
 
-    .random-nav {
-    }
-
     #filters-applied {
         font-size: .95em;
     }
@@ -996,7 +1029,7 @@
 
     #search {
         display: grid;
-        grid-template-columns: 70% 30%;
+        grid-template-columns: 30% 70%;
         justify-items: center;
         width: 100%;
     }

@@ -10,17 +10,22 @@ interface FiltersProps {
 }
 
 interface SelectProps {
+    index: number;
     label: string;
     onChange: (e: any) => void;
     options: object[];
-    value: object[];
-    info?: string;
+    value: object[] | {
+        value: string;
+        label: string | JSX.Element;
+    };
+    multi: boolean;
+    info?: string | JSX.Element;
 }
 
-const FilterSelect:React.FC<SelectProps> = ({label, onChange, options, value, info}) => (
+const FilterSelect:React.FC<SelectProps> = ({index, label, onChange, options, value, multi, info}) => (
     <div className="filter-select">
-        <label className="filter-info">{label}</label>
-        <Select className="sort" placeholder={info || "Select..."} label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} isSearchable={true} options={options} value={value} />
+        <label className={index <= 1? "filter-info bold" : "filter-info"}>{label}</label>
+        <Select className="sort" placeholder={info || "Select..."} label={label} isMulti={multi} closeMenuOnSelect={!multi} blurInputOnSelect={!multi} onChange={onChange} isSearchable={multi} options={options} value={value} />
     </div>
 )
 
@@ -44,19 +49,29 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         setOpen(false);
     }
 
+    const providerInfo = <div className="filter-flex">
+        <img style={{marginLeft: 0}} className="filter-provider" src={require(`../media/providers/8.png`)} alt={'test'}/>
+        <img className="filter-provider" src={require(`../media/providers/15.png`)} alt={'test'}/>
+        <img className="filter-provider" src={require(`../media/providers/337.png`)} alt={'test'}/>
+        <img style={{marginRight: "4px"}} className="filter-provider" src={require(`../media/providers/384.png`)} alt={'test'}/>
+        + more
+    </div>
+
     const selects = [
-        {label: "Streaming Provider:", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers},
-        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades},
-        {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres, info: 'Ex: Action, Comedy, Drama, etc.'},
-        {label: "Sub-Genre:", onChange: (e:any) => changeFilter(e, 'subGenres'), options: subGenreOptions, value: selectedFilters.subGenres, info: 'Ex: Comic, Romantic Comedy, etc.'},
-        {label: "Director:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors},
-        {label: "Studio/Company:", onChange: (e:any) => changeFilter(e, 'studiocompanies'), options: studiocompanyOptions, value: selectedFilters.studiocompanies, info: 'Ex: A24, Disney, Netflix, etc.'},
-        {label: "Universe:", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes, info: 'Ex: Disney Animated, MCU, etc.'},
-        {label: "Sub-Universe:", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses, info: 'Ex: Pixar, Disney Remake, etc.'},
-        {label: "Character:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters},
-        {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays},
-        {label: "Year:", onChange: (e:any) => changeFilter(e, 'years'), options: yearOptions, value: selectedFilters.years},
-        {label: "Awards:", onChange: (e:any) => changeFilter(e, 'awards'), options: awardOptions, value: selectedFilters.awards},
+        {label: "Streaming Provider:", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers, multi: true, info: providerInfo},
+        {label: "Ratings (Avg., Jeff's or KenJac's):", onChange: (e:any) => changeFilter(e, 'ratings'), options: ratingOptions, value: selectedFilters.ratings, multi: false},
+        {label: "Sort Ratings (Highest or Lowest):", onChange: (e:any) => changeFilter(e, 'sort'), options: sortOptions, value: selectedFilters.sort, multi: false},
+        {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades, multi: true},
+        {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres, multi: true, info: 'Ex: Action, Comedy, Drama, etc.'},
+        {label: "Sub-Genre:", onChange: (e:any) => changeFilter(e, 'subGenres'), options: subGenreOptions, value: selectedFilters.subGenres, multi: true, info: 'Ex: Comic, Romantic Comedy, etc.'},
+        {label: "Director:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors, multi: true},
+        {label: "Studio/Company:", onChange: (e:any) => changeFilter(e, 'studiocompanies'), options: studiocompanyOptions, value: selectedFilters.studiocompanies, multi: true, info: 'Ex: A24, Disney, Netflix, etc.'},
+        {label: "Universe:", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes, multi: true, info: 'Ex: Disney Animated, MCU, etc.'},
+        {label: "Sub-Universe:", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses, multi: true, info: 'Ex: Pixar, Disney Remake, etc.'},
+        {label: "Character:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters, multi: true},
+        {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays, multi: true},
+        {label: "Year:", onChange: (e:any) => changeFilter(e, 'years'), options: yearOptions, value: selectedFilters.years, multi: true},
+        {label: "Awards:", onChange: (e:any) => changeFilter(e, 'awards'), options: awardOptions, value: selectedFilters.awards, multi: true},
     ]
 
     return(
@@ -65,15 +80,15 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
                 <button id="filter-apply" onClick={() => handleFilters()}>Apply Filters</button>
                 <button id="filter-reset" onClick={() => handleFilters(true)}>Reset Filters</button>
             </div>
-            <div className="filter-select">
-                <label>Sort By:</label>
-                <Select className="sort" label="Sort By" onChange={(e:any) => changeFilter(e, "sort")} isSearchable={false} options={sortOptions} value={selectedFilters.sort} />
-            </div> 
-            <div className="filter-select">
+            {/* <div className="filter-select">
                 <label>Ratings (Avg., Jeff's or KenJac's):</label>
                 <Select className="sort" label="Ratings" onChange={(e:any) => changeFilter(e, "ratings")} isSearchable={false} options={ratingOptions} value={selectedFilters.ratings} />
             </div>
-            {selects.map(({label, onChange, options, value, info}) => <FilterSelect key={label} label={label} onChange={onChange} options={options} value={value} info={info} />)}
+            <div className="filter-select">
+                <label>Sort By:</label>
+                <Select className="sort" label="Sort By" onChange={(e:any) => changeFilter(e, "sort")} isSearchable={false} options={sortOptions} value={selectedFilters.sort} />
+            </div>  */}
+            {selects.map(({label, onChange, options, value, multi, info}, index) => <FilterSelect key={index} index={index} label={label} onChange={onChange} options={options} value={value} multi={multi} info={info} />)}
         </div>
     )
 }
