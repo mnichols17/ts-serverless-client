@@ -101,6 +101,7 @@ const Random: React.FC = (props:any) => {
         if(e.target.id === "nav-back"){
             props.history.goBack();
         } else {
+            resetPage();
             props.history.push("/");
         }
     }

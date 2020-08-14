@@ -15,11 +15,11 @@ const Landing:React.FC = (props: any) => {
 
     const landingTitles = [
         "Top 10 All-Time",
-        "Top 10 of 2020",
-        "Jeff D. Lowe's Top 10",
-        "KenJac's Top 10",
         "Jeff D. Lowe's Picks of the Week",
+        "Jeff D. Lowe's Top 10",
         "KenJac's Picks of the Week",
+        "KenJac's Top 10",
+        "Top 10 of 2020",
     ]
 
     useEffect(() => {
@@ -27,9 +27,19 @@ const Landing:React.FC = (props: any) => {
     }, [])
 
     const showList = (e: any) => {
-        if(e.target.id === '1') resetPage({years: [{value: '2020', label: '2020'}]})
-        else if( e.target.id !== "0" && parseInt(e.target.id) % 2 === 0) resetPage({ratings: {value: 'jeff', label: 'Jeff D. Lowe'}})
-        else if(parseInt(e.target.id) % 2 === 1) resetPage({ratings: {value: 'kenjac', label: 'KenJac'}})
+        switch(e.target.id){
+            case('2'):
+                resetPage({ratings: {value: 'jeff', label: 'Jeff D. Lowe'}})
+                break;
+            case('4'):
+                resetPage({ratings: {value: 'kenjac', label: 'KenJac'}})
+                break;
+            case('5'):
+                resetPage({years: [{value: '2020', label: '2020'}]})
+                break;
+            default:
+                break;
+        }
         isLoading(true);
         currentView(true); 
     }
@@ -52,12 +62,12 @@ const Landing:React.FC = (props: any) => {
                     <div className="landing-container" key={index}>
                         <div className="landing-label">
                             <h3 className="landing-title title-font">{landingTitles[index]}</h3>
-                            <h3 id={`${index}`} className="landing-toList" hidden={index > 3} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
+                            <h3 id={`${index}`} className="landing-toList" hidden={index === 1 || index === 3} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
                         </div>
                         <div className="landing-list">
                             {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscars, goldenglobes}) => 
                                 <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal}  poster={poster} 
-                                buttered={buttered} oscars={oscars} goldenglobes={goldenglobes} actors={index < 2? 'average' : index % 2 === 0? 'jdl' : "kenjac"} /> )}
+                                buttered={buttered} oscars={oscars} goldenglobes={goldenglobes} actors={(index === 0 || index === 5)? 'average' : index < 3? 'jdl' : "kenjac"} /> )}
                         </div>
                     </div>
                 )
