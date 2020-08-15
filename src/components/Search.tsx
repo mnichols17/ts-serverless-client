@@ -24,8 +24,8 @@ const Search: React.FC<SearchProps> = ({open, setOpen}) => {
             <div id="search">
                 <button id="filter-show" onClick={() => setOpen(!open)}>{open? "Hide" : "Filters"} <FontAwesomeIcon icon={faSort} /></button>
                 <div id="search-input">
-                    <input type="text" value={query} onChange={handleQuery} placeholder="Search by Title, Director or Actor"/>
-                    <FontAwesomeIcon style={{color: query !== "" ? 'black' : 'white'}} onClick={() => query !== "" ? handleQuery() : null} id="clearSearch" icon={faTimes} size="lg"/>
+                    <input type="text" value={query} onChange={handleQuery} placeholder="Search by Title, Director, Actor..."/>
+                    <FontAwesomeIcon style={{display: query !== "" ? 'block' : 'none'}} onClick={() => query !== "" ? handleQuery() : null} id="clearSearch" icon={faTimes} size="lg"/>
                 </div>
             </div>
             {open? <Filters setOpen={setOpen}/> : null}
