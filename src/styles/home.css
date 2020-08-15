@@ -352,8 +352,12 @@
 }
 
 .filter-flex > img {
-    width: 30px;
+    width: 26px;
     margin-left: 4px;
+}
+
+.placeholder-flex > img {
+    opacity: .5;
 }
 
 .css-1rhbuit-multiValue img {
@@ -472,6 +476,11 @@
     align-self: flex-start;
     margin: 0em 1em .8em 1em;
 } 
+
+#review-director:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 #review-streaming {
     margin-top: 1em;

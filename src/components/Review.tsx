@@ -65,7 +65,7 @@ const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
 interface ReviewInfoProps {
     review: Review;
     providers: object[];
-    fromCategory: (category?: string, value?: string) => void
+    fromCategory: (category?: string, value?: string | number) => void
     navClick: () => void
 }
 
@@ -95,7 +95,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                 </div>
                 <p id="review-plot">{review.plot}</p>
                 <h3 className="review-detail title-font">Director</h3>
-                <p className="review-people">{review.director}</p>
+                <p id="review-director" className="review-people" onClick={() => fromCategory('directors', review.director)}>{review.director} <FontAwesomeIcon icon={faSearch} /></p>
                 <h3 className="review-detail title-font">Starring</h3>
                 <p className="review-people">{review.actors}</p>
                 <h3 className="review-detail title-font">Awards</h3>
@@ -116,7 +116,11 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                     </tr>
                     <tr>
                         <td>Year Released:</td>
-                        <td>{review.year}</td>
+                        <td><button className="review-info-button search-icon" onClick={() => fromCategory('years', review.year as number)}>{review.year} <FontAwesomeIcon icon={faSearch} /></button></td>
+                    </tr>
+                    <tr>
+                        <td>Decade Released:</td>
+                        <td><button className="review-info-button search-icon" onClick={() => fromCategory('decades', review.decade as number)}>{review.decade} <FontAwesomeIcon icon={faSearch} /></button></td>
                     </tr>
                     <tr>
                         <td>Runtime:</td>
@@ -178,6 +182,7 @@ const ReviewPage: React.FC = (props:any) => {
             } else {
                 const {movie} = res.data[0]
                 if(movie.substring(movie.length-5).toLowerCase() === ", the") res.data[0].movie = handleTitle(movie);
+                document.title = `${res.data[0].movie} | The Movie Ranking Database`;
                 setReview(res.data[0]);
                 setProviders(res.data[1]);
             }
@@ -189,7 +194,7 @@ const ReviewPage: React.FC = (props:any) => {
         props.history.goBack();
     }
 
-    const fromCategory = (category?: string, value?: string) => {
+    const fromCategory = (category?: string, value?: string | number) => {
         if(category && value) resetPage({[category]: [{value, label: value}]})
         else resetPage();
         props.history.push('/');

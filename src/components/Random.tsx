@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import Select from 'react-select';
 import {genreOptions, subGenreOptions, decadeOptions, providerOptions} from '../utils/filterData';
 import request from '../utils/makeRequest';
@@ -25,7 +25,7 @@ interface RandomSelectProps {
 const RandomFilterSelect:React.FC<RandomSelectProps> = ({label, onChange, options, value}) => (
     <div className="filter-select random-select">
         <label className="random-label">{label}</label>
-        <Select className="sort" placeholder={'ALL'} label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} isSearchable={true} options={options} value={value}/>
+        <Select className="sort" placeholder={'ALL'} label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} options={options} value={value}/>
     </div>
 )
 
@@ -77,6 +77,10 @@ const Random: React.FC = (props:any) => {
         {icon: Average, score: random.avgtotal as number, rank: random.avgrank as number}
     ]
 
+    useEffect(() => {
+        document.title = `Random Movie Generator | The Movie Ranking Database`;
+    }, [])
+
     const changeFilter = (e: any, key: string) => {
         setFilters((prevState: RandomType) => {
             return {
@@ -123,7 +127,7 @@ const Random: React.FC = (props:any) => {
     const handleChange = (e:any) => {
         setMin(e.target.value)
     }
-    
+
 	return (
 		<div className="random" id="content">
             <div id="review-navbar">

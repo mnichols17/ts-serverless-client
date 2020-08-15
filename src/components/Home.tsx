@@ -70,7 +70,11 @@ const Home:React.FC = (props: any) => {
         {detail: "Not Buttered (68 or below)", source: NotButtered},
         {detail: "Best Picture (Oscars)", source: OscarsLogo},
         {detail: "Best Picture (Golden Globes)", source: GlobesLogo},
-    ]
+	]
+	
+	useEffect(() => {
+		document.title = `The Movie Ranking Database`;
+	}, []);
 
 	useEffect(() => {
 		window.addEventListener('scroll', checkTop)
