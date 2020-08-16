@@ -25,7 +25,7 @@ interface RandomSelectProps {
 const RandomFilterSelect:React.FC<RandomSelectProps> = ({label, onChange, options, value}) => (
     <div className="filter-select random-select">
         <label className="random-label">{label}</label>
-        <Select className="sort" placeholder={'ALL'} label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} onChange={onChange} options={options} value={value}/>
+        <Select className="sort" placeholder={'ALL'} label={label} isMulti closeMenuOnSelect={false} blurInputOnSelect={false} isSearchable={false} onChange={onChange} options={options} value={value}/>
     </div>
 )
 
@@ -39,11 +39,20 @@ interface RandomReviewProps {
 
 const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectNew, getRandom, scores}) => (
         <div id="random-content">
+            <h1 id="random-title">{review.movie}</h1>
             <h3 id="random-info">Click on the poster to see the full review and streaming options</h3>
             <button className="random-nav random-btn title-font" onClick={selectNew}>New Filters</button>
             <button className="random-nav random-btn title-font" onClick={getRandom}>Randomize</button>
             <img id="random-poster" onClick={() => passedProps.history.push(`/review/${review.id}`)} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
-            <h1 id="random-title">{review.movie}</h1>
+            {/* <div id="random-total">
+                {scores.map(({icon, score, rank}) => {
+                    return <div>
+                        <img alt={icon} src={icon} />
+                        <p className="title-font">{score? `${score}/100` : 'N/A'}</p>
+                        <p className="title-font">{rank? `#${rank}`: 'N/A'}</p>
+                    </div>
+                })}
+            </div> */}
             <div id="random-total">
                 {scores.map(({icon, score, rank}) => {
                     return <ScoreTable key={icon} icon={icon} score={score as number} rank={rank as number} />
@@ -136,7 +145,7 @@ const Random: React.FC = (props:any) => {
                     <img id="nav-home" onClick={navClick} className="img-button" src={Home} alt="Home" /> 
                 </div>
             </div>
-            <img id="logo" src={Logo} onClick={navClick} alt="LOGO" />
+            <img id="logo" hidden={random.avgtotal > -1} src={Logo} onClick={navClick} alt="LOGO" />
             {loading? <ReactLoading className="random-loading" type={"spin"} color={"yellow"}/>:
                 random.avgtotal >= 0? <RandomReview passedProps={props} review={random} selectNew={selectNew} getRandom={getRandom} scores={scores}/> : <>
                     <h2>Find a random movie based on</h2>

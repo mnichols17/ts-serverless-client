@@ -257,7 +257,7 @@
     color: #282C34;
 }
 
-.landing-list .movie { /* Gonna need to adjust this on different screen sizes */
+.landing-list .movie {
     min-width: 110px;
 }
 
@@ -274,6 +274,33 @@
 
 .landing-list::-webkit-scrollbar-thumb:hover {
     background: #FEDE16; 
+}
+
+#landing-credit {
+    color: white;
+    width: 330px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 2em;
+    justify-items: center;
+    align-items: center;
+}
+
+#landing-credit > h4 {
+    grid-column: 1/4;
+    text-align: center;
+}
+
+#landing-credit img {
+    width: 140px;
+}
+
+/* #landing-credit img {
+    width: 170px;
+} */
+
+#landing-omdb {
+    border-radius: 8px;
 }
 
 /* Filter Panel */
@@ -666,10 +693,15 @@
 
 /* Random Movie Page */
 
+.random > #logo {
+    max-width: 320px;
+}
+
 .random-select {
     width: 80%;
     margin: .5em;
     max-width: 305px;
+    font-size: .95em;
 }
 
 .random-select > label {
@@ -685,8 +717,8 @@
 }
 
 .random > h2{
-    margin: .75em 0;
-    font-size: 1.3em;
+    margin: .75em 0 .4em;
+    font-size: 1.2em;
     color: white;
     text-align: center;
 }
@@ -766,7 +798,7 @@
     grid-template-columns: 1fr 1fr;
     justify-items: center;
     grid-gap: 10px;
-    margin-bottom: 3em;
+    margin: 0 1em 3em;
 }
 
 #random-info {
@@ -774,22 +806,25 @@
     grid-column: 1/3;
     text-align: center;
     width: 96vw;
-    margin-bottom: .5em;
+    font-size: .7em;
+    margin: 0 0 .3em;
 }
 
 #random-title {
     color: white;
     text-align: center;
-    margin: 0 0 .1em;
+    margin: .5em 0 0;
     grid-column: 1/3;
     padding: 0 6px;
+    font-size: 1.4em;
 }
 
 #random-poster {
     box-shadow: 0 0 11px 3px black;
-    max-width: 300px;
+    max-width: 180px;
     cursor: pointer;
     grid-column: 1/3;
+    margin-bottom: .4em;
 }
 
 #random-choice {
@@ -805,10 +840,16 @@
     grid-column: 1/3;
     width: 100%;
     max-width: 480px;
+    font-size: .9em;
+}
+
+#random-btn-row {
+    margin-top: 1em;
+    grid-column: 1/3;
 }
 
 .random-nav {
-    margin: 0 .2em .4em;
+    margin: .2em .2em;
     border: 2px solid #282C34;
     padding: 6px 10px;
     border-radius: 12px;
@@ -867,14 +908,6 @@
     #random-total {
         font-size: 1.3em;
     }
-
-    .random-nav {
-        margin: 0;
-        padding: 8px;
-        border-radius: 12px;
-        width: 90%;
-        font-size: .9em;
-    }
     
     .glossary-title {
         font-size: 1.17em;
@@ -896,6 +929,14 @@
     .landing-toList {
         margin: 0 0;
         font-size: .95em;
+    }
+
+    #landing-credit {
+        width: 300px;
+    }
+
+    #landing-credit img {
+        width: 110px;
     }
 
     .css-1wa3eu0-placeholder {
@@ -973,8 +1014,20 @@
         font-size: .95em;
     }
 
+    #random-content {
+        grid-gap: 5px;
+    }
+
+    #random-poster {
+        max-width: 220px;
+    }
+    
+    .random-nav {
+        margin: .4em .2em
+    }
+
     #random-title {
-        padding: 8px;
+        padding: 4px;
     }
 
     .landing-title {
@@ -988,6 +1041,10 @@
 
     .landing-list .movie { /* Gonna need to adjust this on different screen sizes */
         min-width: 120px;
+    }
+
+    #landing-credit {
+        width: 350px;
     }
 
     .movie {
@@ -1185,6 +1242,39 @@
 
     .random #navbar-content {
         margin-bottom: .8em;
+    }
+
+    #random-title {
+        font-size: 1.85em;
+    }
+
+    #random-info {
+        font-size: .9em;
+    }
+
+    #random-poster {
+        grid-column: 1/2;
+        max-width: 270px;
+        justify-self: end;
+        margin: .9em 1.2em 0 0;
+    }
+
+    #random-total {
+        grid-column: 2/3;
+        max-width: 320px;
+        justify-self: start;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #random-total >.score-row{
+        flex-direction: row;
+        align-items: center;
+        margin: 1.2em;
+    }
+
+    #random-total >.score-row > h1 {
+        margin: 0 .5em;
     }
 }
 
