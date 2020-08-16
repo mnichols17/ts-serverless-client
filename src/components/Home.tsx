@@ -29,6 +29,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	let fromYears = "";
 	let watchOn = "";
 	let total = 0;
+	const runtime = parseInt(filters.runtime.label) < 209? ` ${filters.runtime.label} minutes` : "";
 
 	for(const[key, value] of Object.entries(filters)){
 		if((value as object[]).length){
@@ -48,15 +49,17 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	directedBy = directedBy.substr(0,directedBy.length-1)
 	fromYears = fromYears.substr(0,fromYears.length-1)
 	watchOn = watchOn.substr(0,watchOn.length-1)
-	const applied = <p id="filters-applied"><span>{type}</span>{type.length? " movies":"Movies"}{directedBy.length? " by":""}<span>{directedBy}</span>{fromYears.length? " from":""}<span>{fromYears}</span>{watchOn.length? " on":""}<span>{watchOn}</span></p>
+	const applied = <p id="filters-applied"><span>{type}</span>{type.length? " movies":"Movies"}{directedBy.length? " by":""}
+		<span>{directedBy}</span>{fromYears.length? " from":""}<span>{fromYears}</span>{watchOn.length? " on":""}
+		<span>{watchOn}</span>{runtime.length? " under":""}<span>{runtime}</span></p>
 
-	return (total > 0)? applied : null
+	return (total > 0 || runtime.length)? applied : null
 }
 
 const Home:React.FC = (props: any) => {
     smoothscroll.polyfill();
     
-    const {viewList, filters, query, isLoading, currentView, currentUrl, currentQuery, currentFilters, currentRandom,} = useContext(SearchContext);
+    const {viewList, filters, query, isLoading, currentView, currentUrl, currentQuery, currentFilters, currentRandom, resetPage} = useContext(SearchContext);
 	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 	const[showTop, setTop] = useState<boolean>(false);
 	const[open, setOpen] = useState<boolean>(false);
@@ -103,28 +106,7 @@ const Home:React.FC = (props: any) => {
 
 	const logoClick = async() => {
         if(viewList) {
-			isLoading(true);
-            currentView(false);
-            await currentQuery("")
-            currentFilters({
-				ratings: {value: "avg", label: <span className="filter-flex">Average <img className="filter-icon" src={require(`../media/average.png`)} alt={'test'}/></span>},
-                directors: [],
-                sort: {
-                    value: "ASC",
-                    label: "Rating High to Low"
-                },
-                genres: [],
-                subGenres: [],
-                universes: [],
-                subUniverses: [],
-                studiocompanies: [],
-                characters: [],
-                sportholidays: [],
-                years: [],
-                decades: [],
-                providers: [],
-                awards: []
-            })
+			resetPage();
         }
 	}
 	

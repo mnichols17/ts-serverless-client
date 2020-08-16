@@ -6,7 +6,7 @@ import ReactLoading from 'react-loading';
 import smoothscroll from 'smoothscroll-polyfill';
 import {SearchContext, FiltersType} from '../utils/context';
 
-const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards}: FiltersType) => ({
+const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sports, holidays, years, decades, providers, awards, runtime}: FiltersType) => ({
 	ratings: ratings.value,
 	directors: directors.map((select: any) => select.value).join('@'),
 	sort: sort.value,
@@ -16,11 +16,12 @@ const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompa
 	universes: universes.map((select: any) => select.value).join('@'),
 	subUniverses: subUniverses.map((select: any) => select.value).join('@'),
 	characters: characters.map((select: any) => select.value).join('@'),
-	sportholidays: sportholidays.map((select: any) => select.value).join('@'),
+	sportholidays: sports.concat(holidays).map((select: any) => select.value).join('@'),
 	years: years.map((select: any) => select.value).join('@'),
 	decades: decades.map((select: any) => select.value).join('@'),
 	providers: providers.map((select: any) => select.value).join('@'),
 	awards: awards.map((select: any) => select.value).join('@'),
+	runtime: runtime.value
 })
 
 const List:React.FC = () => {

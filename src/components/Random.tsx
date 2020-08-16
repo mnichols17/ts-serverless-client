@@ -144,7 +144,7 @@ const Random: React.FC = (props:any) => {
                     {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}
                     <div className="filter-select random-select">
                         <label className="random-label">Average Rating: {min < 100? `${min} -` : ''}100</label>
-                        <input id="random-range" type='range' min='0' max='100' defaultValue={min} onChange={handleChange} />
+                        <input id="random-range" className="range" type='range' min='0' max='100' defaultValue={min} onChange={handleChange} />
                     </div>
                     <button id="randomize" className="random-btn title-font" onClick={getRandom}>Randomize</button>
                 </>

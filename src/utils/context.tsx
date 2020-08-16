@@ -11,11 +11,13 @@ export type FiltersType = {
     universes: object[],
     subUniverses: object[],
     characters: object[],
-    sportholidays: object[],
+    sports: object[],
+    holidays: object[],
     years: object[],
     decades: object[],
     providers: object[]
-    awards: []
+    awards: object[],
+    runtime: {value: string, label: string},
 }
 
 export type RandomType = {
@@ -58,11 +60,13 @@ export const SearchContext = createContext<Search>({
         subUniverses: [],
         studiocompanies: [],
         characters: [],
-        sportholidays: [],
+        sports: [],
+        holidays: [],
         years: [],
         decades: [],
         providers: [],
-        awards: []
+        awards: [],
+        runtime: {value: "209", label: "209"},
     },
     randomFilters: {genres: [], subGenres: [], decades: [], providers: [], min: 0},
     isLoading: () => {},
@@ -95,11 +99,13 @@ export const SearchProvider = ({children}: ProviderProps) => {
         subUniverses: [],
         studiocompanies: [],
         characters: [],
-        sportholidays: [],
+        sports: [],
+        holidays: [],
         years: [],
         decades: [],
         providers: [],
         awards: [],
+        runtime: {value: "209", label: "209"},
     }
 
     const[loading, setLoading] = useState<boolean>(true);

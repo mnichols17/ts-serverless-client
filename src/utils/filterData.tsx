@@ -555,7 +555,7 @@ export const universeOptions: DropdownOption[] = [
     {value: "Alien vs. Predator", label: "Alien vs. Predator"},
     {value: "American Pie", label: "American Pie"},
     {value: "Amityville", label: "Amityville"},
-    {value: "Anchroman", label: "Anchroman"},
+    {value: "Anchorman", label: "Anchorman"},
     {value: "Arthur", label: "Arthur"},
     {value: "Austin Powers", label: "Austin Powers"},
     {value: "Baby Geniuses", label: "Baby Geniuses"},
@@ -802,7 +802,7 @@ export const characterOptions: DropdownOption[] = [
     {value: "Xander Cage", label: "Xander Cage"},
 ]
 
-export const sportholidayOptions: DropdownOption[] = [
+export const sportOptions: DropdownOption[] = [
     {value: "Baseball", label: "Baseball"},
     {value: "Basketball", label: "Basketball"},
     {value: "Billiards", label: "Billiards"},
@@ -810,7 +810,6 @@ export const sportholidayOptions: DropdownOption[] = [
     {value: "Boxing", label: "Boxing"},
     {value: "Cheerleading", label: "Cheerleading"},
     {value: "Chess", label: "Chess"},
-    {value: "Christmas", label: "Christmas"},
     {value: "Dodgeball", label: "Dodgeball"},
     {value: "Football", label: "Football"},
     {value: "Golf", label: "Golf"},
@@ -827,6 +826,10 @@ export const sportholidayOptions: DropdownOption[] = [
     {value: "Tennis", label: "Tennis"},
     {value: "Volleyball", label: "Volleyball"},
     {value: "Wrestling", label: "Wrestling"},
+]
+
+export const holidayOptions: DropdownOption[] = [
+    {value: "Christmas", label: "Christmas"},
 ]
 
 export const yearOptions: DropdownOption[] = [
