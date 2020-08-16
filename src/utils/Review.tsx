@@ -25,4 +25,7 @@ export default interface Review {
     runtime?: number;
     oscars?: string;
     goldenglobes?: string;
+    rt?: string;
+    imdb?: string;
+    metacritic?: string;
 }

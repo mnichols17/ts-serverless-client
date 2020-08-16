@@ -477,7 +477,7 @@
     margin: 0em 1em .8em 1em;
 } 
 
-#review-director:hover {
+#review-director {
     text-decoration: underline;
     cursor: pointer;
 }
@@ -538,6 +538,77 @@
     box-shadow: 0 0 12px 3px black;
     max-height: 220px;
 }
+
+#review-other-scores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    margin-top: .5em;
+}
+
+#review-other-scores > h3 {
+    margin-right: auto;
+}
+
+#review-other-scores > span {
+    display: flex;
+    font-size: 2.4em;
+    color: #FEDE16;
+    align-items: center;
+    margin: 0;
+    width: 255px;
+    height: 70px;
+}
+
+#review-other-scores a {
+    width: 158px;
+    display: flex;
+    cursor: pointer;
+}
+
+#review-other-scores p {
+    margin: 0;
+}
+
+#review-other-scores img {
+    width: 150px;
+    height: 70px;
+}
+
+/* #review-other-scores > p {
+    display: flex;
+    font-size: 2.4em;
+    color: #FEDE16;
+    align-items: center;
+    margin: 0;
+    width: 250px;
+}
+
+#review-other-scores img {
+    width: 60%;
+    margin-right: 10px;
+} */
+
+/* #other-scores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+#other-scores > p {
+    font-size: 2.5em;
+    color: #FEDE16;
+    margin: 0 10px;
+    justify-self: start;
+}
+
+#other-scores > img {
+    margin: 1em 0;
+    width: 140px;
+    cursor: pointer;
+} */
 
 #review-info {
     padding: 10px;
@@ -1161,7 +1232,7 @@
 
     #review-card {
         grid-column: 2/3;
-        grid-row: 3/7;
+        grid-row: 3/8;
         width: 95%;
         max-width: 900px;
         align-items: start;
@@ -1238,6 +1309,18 @@
         align-self: start;
         justify-self: end;
         font-size: .9em;
+    }
+
+    #review-other-scores {
+        width: 300px;
+        justify-self: end;
+        font-size: .9em;
+    }
+
+    #review-other-scores > .review-detail{
+        font-size: 2em;
+        align-self: center;
+        margin: 10px 0;
     }
 }
 

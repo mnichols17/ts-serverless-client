@@ -18,6 +18,9 @@ import GV from '../media/gv.png';
 // import GlobesLogo from '../media/globes_logo.png';
 import Buttered from '../media/buttered.png';
 import NotButtered from '../media/not_buttered.png';
+import RT from '../media/rt.png';
+import IMDB from '../media/imdb.png';
+import Metacritic from '../media/metacritic.png';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 interface ScoreTableProps {
@@ -108,6 +111,12 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                     <ReactPlayer className="react-player" url={`https://www.youtube.com/watch?v=${review.video_key}`} height="100%" width="100%" controls={true}/>
                 </div>
             </div>
+            <div id="review-other-scores">
+                <h3 className="review-detail title-font">Other Scores</h3>
+                <span><a href="https://www.rottentomatoes.com/" target="_blank" rel="noopener noreferrer"><img alt="RT" src={RT}/></a> <p className="title-font">{review.rt || "N/A"}</p></span> 
+                <span><a href="https://www.imdb.com/" target="_blank" rel="noopener noreferrer"><img alt="IMDB" src={IMDB}/></a> <p className="title-font">{review.imdb? `${review.imdb}/10` : "N/A"}</p></span>
+                <span><a href="https://www.metacritic.com/" target="_blank" rel="noopener noreferrer"><img alt="MC" src={Metacritic} /></a> <p className="title-font">{review.metacritic? `${review.metacritic}/100` : "N/A"}</p></span>
+            </div>
             <table id="review-info">
                 <tbody>
                     <tr>
@@ -182,7 +191,7 @@ const ReviewPage: React.FC = (props:any) => {
             } else {
                 const {movie} = res.data[0]
                 if(movie.substring(movie.length-5).toLowerCase() === ", the") res.data[0].movie = handleTitle(movie);
-                document.title = `${res.data[0].movie} | The Movie Ranking Database`;
+                document.title = `${res.data[0].movie} (${res.data[0].year}) | The Movie Ranking Database`;
                 setReview(res.data[0]);
                 setProviders(res.data[1]);
             }

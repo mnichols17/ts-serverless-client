@@ -21,9 +21,9 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
                 <img className="movie-poster" src={`https://image.tmdb.org/t/p//w220_and_h330_face${poster}`} alt={movie}/>
                 <div className="info">
                     <div className="info-review">
-                        <img className="butter" alt="butter" src={buttered? ButteredIcon : NotButteredIcon} />
-                        <p className="movie-total">{total !== null? `${total}/100` : "N/A"}</p>
                         <img className='rank-type-icon' alt="rank-type" src={require(`../media/${actors}.png`)} />
+                        <p className="movie-total">{total !== null? `${total}/100` : "N/A"}</p>
+                        <img className="butter" alt="butter" src={total >= 69 ? ButteredIcon : NotButteredIcon} />
                     </div>
                     <p className="movie-title">{movie}</p>
                     <div className="movie-accolades">

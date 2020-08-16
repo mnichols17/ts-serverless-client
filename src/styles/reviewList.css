@@ -35,11 +35,6 @@
     padding: 0px 4px;
 }
 
-.butter {
-    height: 22px;
-    margin-right: 3px;
-}
-
 .movie-total {
     margin: 0;
     font-size: .78em;
@@ -47,21 +42,16 @@
     align-items: center;
 }
 
-.rank-type-icon, .rank-type-star{
+.rank-type-icon {
     margin: 0;
     font-size: .78em;
+    height: 22px;
+    margin-right: 4px;
+}
+
+.butter {
+    height: 22px;
     margin-left: auto;
-    padding-right: 2px;
-    height: 22px;
-}
-
-.rank-type-icon {
-    height: 22px;
-}
-
-.rank-type-star {
-    margin-top: -2%;
-    color: #ecbf08;
 }
 
 .movie-title {
