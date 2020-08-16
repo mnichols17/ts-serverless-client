@@ -39,20 +39,11 @@ interface RandomReviewProps {
 
 const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectNew, getRandom, scores}) => (
         <div id="random-content">
-            <h1 id="random-title">{review.movie}</h1>
             <h3 id="random-info">Click on the poster to see the full review and streaming options</h3>
             <button className="random-nav random-btn title-font" onClick={selectNew}>New Filters</button>
             <button className="random-nav random-btn title-font" onClick={getRandom}>Randomize</button>
+            <h1 id="random-title">{review.movie}</h1>
             <img id="random-poster" onClick={() => passedProps.history.push(`/review/${review.id}`)} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
-            {/* <div id="random-total">
-                {scores.map(({icon, score, rank}) => {
-                    return <div>
-                        <img alt={icon} src={icon} />
-                        <p className="title-font">{score? `${score}/100` : 'N/A'}</p>
-                        <p className="title-font">{rank? `#${rank}`: 'N/A'}</p>
-                    </div>
-                })}
-            </div> */}
             <div id="random-total">
                 {scores.map(({icon, score, rank}) => {
                     return <ScoreTable key={icon} icon={icon} score={score as number} rank={rank as number} />
