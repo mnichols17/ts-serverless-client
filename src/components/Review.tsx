@@ -79,6 +79,11 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
         {icon: KenJac, score: review.kenjac, rank: review.kjrank},
         {icon: review.id !== 13767? Average : GV, score: review.avgtotal, rank: review.avgrank}
     ]
+
+    const img_src = review.poster? false
+    : review.id === 6969? "https://lh3.googleusercontent.com/-hE37W6LEh0M/XzoUom1xj1I/AAAAAAAAApc/X5_tkwnlmEsCVgNgFaUxEdOyIRgTUteiACK8BGAsYHg/s512/2020-08-16.jpg"
+    : 'https://pbs.twimg.com/media/ELsOD8iWwAEd_9b.jpg:large'
+
     return(
         !review.director? <Redirect push to="/" /> :
         <>
@@ -89,7 +94,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                 </div>
             </div>
             <h2 id="reviewPage-title">{review.movie}</h2>
-            <img id="review-poster" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
+            <img id="review-poster" src={img_src || `https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <div id="review-card">
                 <div id="review-total">
                     {scores.map(({icon, score, rank}) => {
@@ -102,7 +107,11 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                 <h3 className="review-detail title-font">Starring</h3>
                 <p className="review-people">{review.actors}</p>
                 <h3 className="review-detail title-font">Awards</h3>
-                {(review.oscars || review.goldenglobes)? <><p className="review-people">{review.oscars? `${review.oscars} at The Oscars` : null}</p>
+                {(review.oscar_winner || review.goldenglobes)? <><p hidden={!review.oscars} className="review-people">{review.oscars} at The Oscars</p>
+                <p hidden={!review.oscars_animated} className="review-people">{review.oscars_animated} at The Oscars</p>
+                <p hidden={!review.oscars_director} className="review-people">Best Director (Oscars): {review.oscars_director}</p>
+                <p hidden={!review.best_actor} className="review-people">Best Actor (Oscars): {review.best_actor}</p>
+                <p hidden={!review.support_actor} className="review-people">Best Supporting Actor (Oscars): {review.support_actor}</p>
                 <p className="review-people">{review.goldenglobes? `${review.goldenglobes} at The Golden Globes` : null}</p></> : 
                 <p className="review-people">N/A</p>}
                 <ProviderLogos providers={providers} />
@@ -162,8 +171,12 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                         <td>{review.character? <button className="review-info-button search-icon" onClick={() => fromCategory('characters', review.character as string)}>{review.character} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
-                        <td>Sport/Holiday:</td>
-                        <td>{review.sportholiday? <button className="review-info-button search-icon" onClick={() => fromCategory('sportholidays', review.sportholiday as string)}>{review.sportholiday} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
+                        <td>Spor:</td>
+                        <td>{review.sport? <button className="review-info-button search-icon" onClick={() => fromCategory('sports', review.sport as string)}>{review.holiday} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
+                    </tr>
+                    <tr>
+                        <td>Holiday:</td>
+                        <td>{review.holiday? <button className="review-info-button search-icon" onClick={() => fromCategory('holidays', review.holiday as string)}>{review.holiday} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                 </tbody>
             </table> 

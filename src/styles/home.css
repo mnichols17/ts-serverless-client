@@ -56,9 +56,14 @@
 #content > h1 {
     color: #FEF8D6;
     letter-spacing: 1px;
-    margin: .5em;
+    margin: .5em 0 .2em;
     text-align: center;
     font-size: 1.4em;
+}
+
+#content > h6 {
+    color: tomato;
+    margin: 0 0 .5em;
 }
 
 #to-random {
@@ -441,6 +446,7 @@
 
 #review-poster {
     box-shadow: 0 0 11px 3px black;
+    width: 300px;
     max-width: 300px;
     margin-top: .5em;
 }
@@ -485,7 +491,7 @@
 #review-plot {
     margin: 0 0 .5em;
     font-size: 1em;
-    align-self: center;
+    align-self: flex-start;
     padding: 0 1em;
 }
 

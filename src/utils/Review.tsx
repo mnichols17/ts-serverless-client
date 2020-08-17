@@ -15,7 +15,8 @@ export default interface Review {
     universe?: string;
     subuniverse?: string;
     character?: string;
-    sportholiday?: string;
+    sport?: string;
+    holiday?: string;
     year?: number;
     decade?: number
     poster?: string;
@@ -23,7 +24,14 @@ export default interface Review {
     actors?: string;
     video_key?: string;
     runtime?: number;
+    oscar_winner?: boolean;
     oscars?: string;
+    oscars_animated?: string;
+    oscars_director?: string;
+    best_actor?: string;
+    best_actress?: string;
+    support_actor?: string;
+    support_actress?: string;
     goldenglobes?: string;
     rt?: string;
     imdb?: string;

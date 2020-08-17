@@ -37,20 +37,26 @@ interface RandomReviewProps {
     scores: {icon: string, score: number, rank: number}[]
 }
 
-const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectNew, getRandom, scores}) => (
+const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectNew, getRandom, scores}) => {
+    const img_src = review.poster? false
+    : review.id === 6969? "https://lh3.googleusercontent.com/-hE37W6LEh0M/XzoUom1xj1I/AAAAAAAAApc/X5_tkwnlmEsCVgNgFaUxEdOyIRgTUteiACK8BGAsYHg/s512/2020-08-16.jpg"
+    : 'https://pbs.twimg.com/media/ELsOD8iWwAEd_9b.jpg:large'
+
+    return(        
         <div id="random-content">
             <h3 id="random-info">Click on the poster to see the full review and streaming options</h3>
             <button className="random-nav random-btn title-font" onClick={selectNew}>New Filters</button>
             <button className="random-nav random-btn title-font" onClick={getRandom}>Randomize</button>
             <h1 id="random-title">{review.movie}</h1>
-            <img id="random-poster" onClick={() => passedProps.history.push(`/review/${review.id}`)} src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
+            <img id="random-poster" onClick={() => passedProps.history.push(`/review/${review.id}`)} src={img_src || `https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
             <div id="random-total">
                 {scores.map(({icon, score, rank}) => {
                     return <ScoreTable key={icon} icon={icon} score={score as number} rank={rank as number} />
                 })}
             </div>
         </div>
-)
+    )
+}
 
 const Random: React.FC = (props:any) => {
 
