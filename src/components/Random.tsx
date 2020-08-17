@@ -14,6 +14,7 @@ import Logo from '../media/logo.jpg';
 import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
 import KenJac from '../media/kenjac.png';
+import { string } from 'prop-types';
 
 interface RandomSelectProps {
     label: string;
@@ -98,10 +99,18 @@ const Random: React.FC = (props:any) => {
 
     const getRandom = () => {
         currentRandom({...selectedFilters, min});
-        const {genres, subGenres, decades, providers} = selectedFilters;
+        const {genres, subGenres, decades, providers, runtime} = selectedFilters;
+        const headers = {
+            runtime: runtime.label,
+            min, 
+            genres: genres.map((select: any) => select.value).join('@'), 
+            subgenres: subGenres.map((select: any) => select.value).join('@'), 
+            decades: decades.map((select: any) => select.value).join('@'), 
+            providers: providers.map((select: any) => select.value).join('@')
+        }
         setLoading(true); 
         if(error) setError('');
-        request('reviews/random', {min, genres: genres.map((select: any) => select.value).join('@'), subgenres: subGenres.map((select: any) => select.value).join('@'), decades: decades.map((select: any) => select.value).join('@'), providers: providers.map((select: any) => select.value).join('@')})
+        request('reviews/random', headers)
         .then(async(res: any) => {
             setLoading(false);
             if(!res.data) setError('Sorry, there are no reviews that match those categories');
@@ -149,8 +158,12 @@ const Random: React.FC = (props:any) => {
                     <h4 id="random-error" hidden={!error}>{error}</h4>
                     {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}
                     <div className="filter-select random-select">
-                        <label className="random-label">Average Rating: {min < 100? `${min} -` : ''}100</label>
+                        <label className="random-label">Average Rating: {min < 100? `${min} - ` : ''}100</label>
                         <input id="random-range" className="range" type='range' min='0' max='100' defaultValue={min} onChange={handleChange} />
+                    </div>
+                    <div className="filter-select random-select">
+                        <label className="random-label">Runtime: <span>Under</span> {selectedFilters.runtime.value} <span>minutes</span></label>
+                        <input id="random-range" className="range" type='range' min='15' max='209' defaultValue={selectedFilters.runtime.value} onChange={(e:any) => changeFilter({label: e.target.value, value: e.target.value}, 'runtime')} />
                     </div>
                     <button id="randomize" className="random-btn title-font" onClick={getRandom}>Randomize</button>
                 </>

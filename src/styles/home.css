@@ -716,6 +716,10 @@
     font-weight: 600;
 }
 
+.random-label > span {
+    color: white;
+}
+
 .random-select .css-1wa3eu0-placeholder{
     color: black;
     font-size: 1.1em;
