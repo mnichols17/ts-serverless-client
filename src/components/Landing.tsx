@@ -66,9 +66,9 @@ const Landing:React.FC = (props: any) => {
                             <h3 id={`${index}`} className="landing-toList" hidden={index === 1 || index === 3} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
                         </div>
                         <div className="landing-list">
-                            {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscars, goldenglobes}) => 
+                            {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscar_winner, goldenglobes}) => 
                                 <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal}  poster={poster} 
-                                buttered={buttered} oscars={oscars} goldenglobes={goldenglobes} actors={(index === 0 || index === 5)? 'average' : index < 3? 'jdl' : "kenjac"} /> )}
+                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(index === 0 || index === 5)? 'average' : index < 3? 'jdl' : "kenjac"} /> )}
                         </div>
                     </div>
                 )

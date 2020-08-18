@@ -46,6 +46,7 @@ interface ProviderLogosProps {
 const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
     const main:number[] = [8,15,9,337,384,27,386,387,78,350,43]
     let logos:any[] = [];
+    console.log(providers)
     providers.forEach((provider:any) => {
         const logo = <a target="_blank" rel="noopener noreferrer" href={provider.url} key={provider.provider_id}>
                         <img className="provider" src={require(`../media/providers/${provider.provider_id}.png`)} alt={provider.provider_id}/>
@@ -171,8 +172,8 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                         <td>{review.character? <button className="review-info-button search-icon" onClick={() => fromCategory('characters', review.character as string)}>{review.character} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
-                        <td>Spor:</td>
-                        <td>{review.sport? <button className="review-info-button search-icon" onClick={() => fromCategory('sports', review.sport as string)}>{review.holiday} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
+                        <td>Sport:</td>
+                        <td>{review.sport? <button className="review-info-button search-icon" onClick={() => fromCategory('sports', review.sport as string)}>{review.sport} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
                         <td>Holiday:</td>

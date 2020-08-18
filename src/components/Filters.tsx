@@ -27,7 +27,7 @@ const FilterSelect:React.FC<SelectProps> = ({index, label, onChange, options, va
     <div className="filter-select">
         {label === 'runtime'? 
         <><label className="filter-info">Runtime: Under {info as string} minutes</label>
-        <input id="filter-range" className="range" type='range' min='15' max='209' defaultValue={info as string} onChange={onChange} /></>
+        <input id="filter-range" className="range" type='range' min='63' max='209' defaultValue={info as string} onChange={onChange} /></>
         : <><label className={index <= 1? "filter-info bold" : "filter-info"}>{label}</label>
         <Select className="sort" placeholder={info || "Select..."} label={label} isMulti={multi} closeMenuOnSelect={!multi} blurInputOnSelect={!multi} onChange={onChange} isSearchable={search} options={options} value={value} /></>}
     </div>
@@ -70,7 +70,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         {label: "Year:", onChange: (e:any) => changeFilter(e, 'years'), options: yearOptions, value: selectedFilters.years, multi: true, search: true},
         {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres, multi: true, search: false, info: 'Ex: Action, Comedy, Drama, etc.'},
         {label: "Sub-Genre:", onChange: (e:any) => changeFilter(e, 'subGenres'), options: subGenreOptions, value: selectedFilters.subGenres, multi: true, search: false, info: 'Ex: Comic, Romantic Comedy, etc.'},
-        {label: "Director:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors, multi: true, search: true},
+        {label: "Director:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors, multi: true, search: true, info: "Minimum 3 movies in database"},
         {label: "Studio/Company:", onChange: (e:any) => changeFilter(e, 'studiocompanies'), options: studiocompanyOptions, value: selectedFilters.studiocompanies, multi: true, search: false, info: 'Ex: A24, Disney, Netflix, etc.'},
         {label: "Universe:", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes, multi: true, search: false, info: 'Ex: Disney Animated, MCU, etc.'},
         {label: "Sub-Universe:", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses, multi: true, search: false, info: 'Ex: Pixar, Disney Remake, etc.'},
