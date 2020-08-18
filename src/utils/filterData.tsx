@@ -451,7 +451,6 @@ export const genreOptions: DropdownOption[] = [
     {value: "Musical", label: "Musical"},
     {value: "Mystery", label: "Mystery"},
     {value: "Romance", label: "Romance"},
-    {value: "Sci-FI", label: "Sci-FI"},
     {value: "Sci-Fi", label: "Sci-Fi"},
 ]
 

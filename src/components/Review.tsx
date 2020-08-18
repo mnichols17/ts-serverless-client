@@ -7,6 +7,7 @@ import ReactLoading from 'react-loading';
 import ReactPlayer from 'react-player/youtube';
 import {SearchContext} from '../utils/context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {ReviewItem} from './ReviewList';
 
 import Back from '../media/back.png';
 import Home from '../media/home.png';
@@ -46,7 +47,6 @@ interface ProviderLogosProps {
 const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
     const main:number[] = [8,15,9,337,384,27,386,387,78,350,43]
     let logos:any[] = [];
-    console.log(providers)
     providers.forEach((provider:any) => {
         const logo = <a target="_blank" rel="noopener noreferrer" href={provider.url} key={provider.provider_id}>
                         <img className="provider" src={require(`../media/providers/${provider.provider_id}.png`)} alt={provider.provider_id}/>
@@ -69,11 +69,12 @@ const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
 interface ReviewInfoProps {
     review: Review;
     providers: object[];
+    similar: Review[];
     fromCategory: (category?: string, value?: string | number) => void
     navClick: () => void
 }
 
-const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory, navClick}) => {
+const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, fromCategory, navClick}) => {
 
     const scores = [
         {icon: JDL, score: review.jeff, rank: review.jlrank},
@@ -181,6 +182,14 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, fromCategory,
                     </tr>
                 </tbody>
             </table> 
+            <div id="review-similar" className="landing-container">
+                <h3 className="review-detail title-font">Similar Movies</h3>
+                <div className="landing-list">
+                    {similar.map(({id, avgrank, movie, avgtotal, poster, oscar_winner, goldenglobes}) => 
+                                <ReviewItem key={id} id={id} movie={movie} avgrank={avgrank} avgtotal={avgtotal}  poster={poster} 
+                                oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={'average'} /> )}
+                </div>
+            </div>
         </>
     )
 }
@@ -196,8 +205,10 @@ const ReviewPage: React.FC = (props:any) => {
         avgtotal: -1
     })
     const[providers, setProviders] = useState<object[]>([])
+    const[similar, setSimilar] = useState<Review[]>([])
 
     useEffect(() => {
+        if(review.id !== rank && review.id !== undefined) setLoading(true);
         request(`reviews/movie/${rank}`)
         .then((res: any) => {
             if(!res.data[0]) {
@@ -208,6 +219,7 @@ const ReviewPage: React.FC = (props:any) => {
                 document.title = `${res.data[0].movie} (${res.data[0].year}) | The Movie Ranking Database`;
                 setReview(res.data[0]);
                 setProviders(res.data[1]);
+                setSimilar(res.data[2]);
             }
             setLoading(false);
         })
@@ -226,7 +238,7 @@ const ReviewPage: React.FC = (props:any) => {
     return(
         <div id="reviewPage">
             {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"} height={"10vh"} width={"10vh"}/> 
-                : <ReviewInfo review={review} providers={providers} fromCategory={fromCategory} navClick={navClick} />}
+                : <ReviewInfo review={review} providers={providers} similar={similar} fromCategory={fromCategory} navClick={navClick} />}
         </div>
     )
 }
