@@ -27,7 +27,7 @@ const FilterSelect:React.FC<SelectProps> = ({index, label, onChange, options, va
     <div className="filter-select">
         {label === 'runtime'? 
         <><label className="filter-info">Runtime: Under {info as string} minutes</label>
-        <input id="filter-range" className="range" type='range' min='63' max='209' defaultValue={info as string} onChange={onChange} /></>
+        <input id="filter-range" className="range" type='range' min='63' max='229' defaultValue={info as string} onChange={onChange} /></>
         : <><label className={index <= 1? "filter-info bold" : "filter-info"}>{label}</label>
         <Select className="sort" placeholder={info || "Select..."} label={label} isMulti={multi} closeMenuOnSelect={!multi} blurInputOnSelect={!multi} onChange={onChange} isSearchable={search} options={options} value={value} /></>}
     </div>
@@ -77,7 +77,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         {label: "Sport:", onChange: (e:any) => changeFilter(e, 'sports'), options: sportOptions, value: selectedFilters.sports, multi: true, search: false},
         {label: "Holiday:", onChange: (e:any) => changeFilter(e, 'holidays'), options: holidayOptions, value: selectedFilters.holidays, multi: true, search: false},
         {label: "Awards:", onChange: (e:any) => changeFilter(e, 'awards'), options: awardOptions, value: selectedFilters.awards, multi: true, search: false},
-        {label: "Character:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters, multi: true, search: false},
+        {label: "Character/Actor:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters, multi: true, search: false},
     ]
 
     return(

@@ -67,7 +67,7 @@ export const SearchContext = createContext<Search>({
         decades: [],
         providers: [],
         awards: [],
-        runtime: {value: "209", label: "209"},
+        runtime: {value: "229", label: "229"},
     },
     randomFilters: {genres: [], subGenres: [], decades: [], providers: [], min: 0, runtime: {value: '209', label:'209'}},
     isLoading: () => {},
@@ -106,7 +106,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
         decades: [],
         providers: [],
         awards: [],
-        runtime: {value: "209", label: "209"},
+        runtime: {value: "229", label: "229"},
     }
 
     const[loading, setLoading] = useState<boolean>(true);
@@ -120,7 +120,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
         decades: [],
         providers: [],
         min: 0,
-        runtime: {value: '209', label:'209'}
+        runtime: {value: '229', label:'229'}
     });
 
     const isLoading = useCallback((l: boolean) => {
@@ -144,7 +144,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
     }, [])
 
     const currentRandom = useCallback((newRandom: object, reset?: boolean) => {
-        setRandom(reset? {genres: [], subGenres: [], decades: [], providers: [], min: 0, runtime: {value: '209', label:'209'}}: newRandom as RandomType);
+        setRandom(reset? {genres: [], subGenres: [], decades: [], providers: [], min: 0, runtime: {value: '229', label:'229'}}: newRandom as RandomType);
     }, [])
 
     const resetPage = useCallback((newFilters?: object) => {

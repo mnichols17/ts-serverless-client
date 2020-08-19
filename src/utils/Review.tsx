@@ -27,6 +27,7 @@ export default interface Review {
     oscar_winner?: boolean;
     oscars?: string;
     oscars_animated?: string;
+    oscars_foreign?: string;
     oscars_director?: string;
     best_actor?: string;
     best_actress?: string;

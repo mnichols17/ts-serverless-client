@@ -2,7 +2,7 @@ import React from 'react';
 
 type DropdownOption = {value: string, label: string | JSX.Element}
 
-export const directorOptions: object[] = [
+export const directorOptions: DropdownOption[] = [
     {value: "J.J. Abrams", label: "Abrams, J.J."},
     {value: "Ben Affleck", label: "Affleck, Ben"},
     {value: "Alexandre Aja", label: "Aja, Alexandre"},
@@ -176,7 +176,9 @@ export const directorOptions: object[] = [
     {value: "Jared Hess", label: "Hess, Jared"},
     {value: "Peter Hewitt", label: "Hewitt, Peter"},
     {value: "Tim Hill", label: "Hill, Tim"},
+    {value: "Walter Hill", label: "Hill, Walter"},
     {value: "Oliver Hirschbiegel", label: "Hirschbiegel, Oliver"},
+    {value: "Alfred Hitchcock", label: "Hitchcock, Alfred"},
     {value: "Bong Joon Ho", label: "Ho, Bong Joon"},
     {value: "Paul Hoen", label: "Hoen, Paul"},
     {value: "Gavin Hood", label: "Hood, Gavin"},
@@ -198,6 +200,7 @@ export const directorOptions: object[] = [
     {value: "Terry Jones", label: "Jones, Terry"},
     {value: "Spike Jonze", label: "Jonze, Spike"},
     {value: "Neil Jordan", label: "Jordan, Neil"},
+    {value: "Gil Junger", label: "Junger, Gil"},
     {value: "Jake Kasdan", label: "Kasdan, Jake"},
     {value: "Gil Kenan", label: "Kenan, Gil"},
     {value: "David Koepp", label: "Koepp, David"},
@@ -240,6 +243,7 @@ export const directorOptions: object[] = [
     {value: "Baz Luhrmann", label: "Luhrmann, Baz"},
     {value: "Robert Luketic", label: "Luketic, Robert"},
     {value: "Sidney Lumet", label: "Lumet, Sidney"},
+    {value: "David Lynch", label: "Lynch, David"},
     {value: "Kevin Macdonald", label: "Macdonald, Kevin"},
     {value: "John Madden", label: "Madden, John"},
     {value: "Terrence Malick", label: "Malick, Terrence"},
@@ -557,6 +561,7 @@ export const studiocompanyOptions: DropdownOption[] = [
     {value: "Rainmaker Animation", label: "Rainmaker Animation"},
     {value: "Reel FX Animation", label: "Reel FX Animation"},
     {value: "STX Animation", label: "STX Animation"},
+    {value: "Screen Gems", label: "Screen Gems"},
     {value: "Searchlight Pictures", label: "Searchlight Pictures"},
     {value: "Sony Animation", label: "Sony Animation"},
     {value: "Sony Pictures", label: "Sony Pictures"},
@@ -679,7 +684,6 @@ export const universeOptions: DropdownOption[] = [
     {value: "Paranormal Activity", label: "Paranormal Activity"},
     {value: "Pathé Animation", label: "Pathé Animation"},
     {value: "Pitch Perfect", label: "Pitch Perfect"},
-    {value: "Pixar", label: "Pixar"},
     {value: "Planet of the Apes", label: "Planet of the Apes"},
     {value: "PlayStation", label: "PlayStation"},
     {value: "Pokemon", label: "Pokemon"},
@@ -717,6 +721,7 @@ export const universeOptions: DropdownOption[] = [
     {value: "Twilight", label: "Twilight"},
     {value: "Tyler Perry-verse", label: "Tyler Perry-verse"},
     {value: "Unbreakable Trilogy", label: "Unbreakable Trilogy"},
+    {value: "Underworld", label: "Underworld"},
     {value: "Unfriended", label: "Unfriended"},
     {value: "View Askewniverse", label: "View Askewniverse"},
     {value: "Whole Yards Universe", label: "Whole Yards Universe"},

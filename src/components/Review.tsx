@@ -111,9 +111,12 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                 <h3 className="review-detail title-font">Awards</h3>
                 {(review.oscar_winner || review.goldenglobes)? <><p hidden={!review.oscars} className="review-people">{review.oscars} at The Oscars</p>
                 <p hidden={!review.oscars_animated} className="review-people">{review.oscars_animated} at The Oscars</p>
+                <p hidden={!review.oscars_foreign} className="review-people">{review.oscars_foreign} at The Oscars</p>
                 <p hidden={!review.oscars_director} className="review-people">Best Director (Oscars): {review.oscars_director}</p>
                 <p hidden={!review.best_actor} className="review-people">Best Actor (Oscars): {review.best_actor}</p>
                 <p hidden={!review.support_actor} className="review-people">Best Supporting Actor (Oscars): {review.support_actor}</p>
+                <p hidden={!review.best_actress} className="review-people">Best Actress (Oscars): {review.best_actress}</p>
+                <p hidden={!review.support_actress} className="review-people">Best Supporting Actress (Oscars): {review.support_actress}</p>
                 <p className="review-people">{review.goldenglobes? `${review.goldenglobes} at The Golden Globes` : null}</p></> : 
                 <p className="review-people">N/A</p>}
                 <ProviderLogos providers={providers} />
@@ -169,7 +172,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                         <td>{review.subuniverse? <button className="review-info-button search-icon" onClick={() => fromCategory('subUniverses', review.subuniverse as string)}>{review.subuniverse} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
-                        <td>Character:</td>
+                        <td>Character/Actor:</td>
                         <td>{review.character? <button className="review-info-button search-icon" onClick={() => fromCategory('characters', review.character as string)}>{review.character} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
