@@ -38,7 +38,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 				if(key === 'directors') directedBy += ` ${v.value},` 
 				else if(key === "years" || key === "decades") fromYears += ` ${v.value},`
 				else if(key === "providers") watchOn += ` ${provider_names[v.value]},`
-				else (type += ` ${v.value},`)
+				else (type += ` ${v.label},`)
 			})
 		}
 	}

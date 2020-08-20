@@ -88,3 +88,27 @@
     margin-left: auto;
     padding-right: 2px;
 }
+
+#list-break {
+    width: 60%;
+}
+
+#list-pagination {
+    margin: 1em 0 10em;
+}
+
+#list-pagination > button {
+    cursor: pointer;
+    background: #282C34;
+    color: #FEDE16;
+    border: 1px solid #FEDE16;
+    border-radius: 5px;
+    margin: 0 .5em;
+    padding: 2px 8px;
+    font-size: 1em;
+}
+
+#list-pagination .current, #list-pagination > button:hover {
+    color: #282C34;
+    background: #FEDE16;
+}
