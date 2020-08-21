@@ -481,7 +481,6 @@ export const subGenreOptions: DropdownOption[] = [
     {value: "Dance & Music", label: "Dance & Music"},
     {value: "Dark Comedy", label: "Dark Comedy"},
     {value: "Demons & Possession", label: "Demons & Possession"},
-    {value: "Disaster", label: "Disaster"},
     {value: "Disaster & Apocalypse", label: "Disaster & Apocalypse"},
     {value: "Dystopian", label: "Dystopian"},
     {value: "Family Comedy", label: "Family Comedy"},
@@ -814,6 +813,7 @@ export const characterOptions: DropdownOption[] = [
     {value: "Hulk", label: "Hulk"},
     {value: "Indiana Jones", label: "Indiana Jones"},
     {value: "Iron Man", label: "Iron Man"},
+    {value: "James Bond", label: "James Bond"},
     {value: "Jason Voorhees", label: "Jason Voorhees"},
     {value: "Jaws", label: "Jaws"},
     {value: "Jigsaw", label: "Jigsaw"},
@@ -836,12 +836,14 @@ export const characterOptions: DropdownOption[] = [
     {value: "Predator", label: "Predator"},
     {value: "Punisher", label: "Punisher"},
     {value: "Rambo", label: "Rambo"},
+    {value: "Riddick", label: "Riddick"},
     {value: "Rocky Balboa", label: "Rocky Balboa"},
     {value: "Ron Burgundy", label: "Ron Burgundy"},
     {value: "Scooby-Doo", label: "Scooby-Doo"},
     {value: "Shazam!", label: "Shazam!"},
     {value: "Shrek", label: "Shrek"},
     {value: "Simpsons", label: "Simpsons"},
+    {value: "Snake Plissken", label: "Snake Plissken"},
     {value: "Spider-Man", label: "Spider-Man"},
     {value: "Suicide Squad", label: "Suicide Squad"},
     {value: "Supergirl", label: "Supergirl"},
@@ -858,7 +860,7 @@ export const characterOptions: DropdownOption[] = [
     {value: "Xander Cage", label: "Xander Cage"},
 ]
 
-export const sportOptions: DropdownOption[] = [
+const sportOptions: DropdownOption[] = [
     {value: "Baseball", label: "Baseball"},
     {value: "Basketball", label: "Basketball"},
     {value: "Billiards", label: "Billiards"},
@@ -886,9 +888,20 @@ export const sportOptions: DropdownOption[] = [
     {value: "X-Games", label: "X-Games"},
 ]
 
-export const holidayOptions: DropdownOption[] = [
+const holidayOptions: DropdownOption[] = [
     {value: "Christmas", label: "Christmas"},
     {value: "Halloween", label: "Halloween"},
+]
+
+export const sportholidayOptions: object[] = [
+    {
+        label: 'Holidays',
+        options: holidayOptions,
+    },
+    {
+        label: 'Sports',
+        options: sportOptions,
+    },
 ]
 
 export const yearOptions: DropdownOption[] = [
@@ -1039,16 +1052,16 @@ export const providerOptions: object[] = [
 ]
 
 const oscarOptions: DropdownOption[] = [
-    {value: "Best Animated Picture (Nominated)", label: "Best Animated Picture (Nominated)"},
+    {value: "Best Animated Picture (Nominated)@Best Animated Picture (Winner)", label: "Best Animated Picture (Nominated)"},
     {value: "Best Animated Picture (Winner)", label: "Best Animated Picture (Winner)"},
-    {value: "Best Picture (Nominated)", label: "Best Picture (Nominated)"},
+    {value: "Best Picture (Nominated)@Best Picture (Winner)", label: "Best Picture (Nominated)"},
     {value: "Best Picture (Winner)", label: "Best Picture (Winner)"},
 ]
 
 const globesOptions: DropdownOption[] = [
-    {value: "Best Picture: Drama (Nominated)", label: "Best Picture: Drama (Nominated)"},
+    {value: "Best Picture: Drama (Nominated)@Best Picture: Drama (Winner)", label: "Best Picture: Drama (Nominated)"},
     {value: "Best Picture: Drama (Winner)", label: "Best Picture: Drama (Winner)"},
-    {value: "Best Picture: Musical or Comedy (Nominated)", label: "Best Picture: Musical or Comedy (Nominated)"},
+    {value: "Best Picture: Musical or Comedy (Nominated)@Best Picture: Musical or Comedy (Winner)", label: "Best Picture: Musical or Comedy (Nominated)"},
     {value: "Best Picture: Musical or Comedy (Winner)", label: "Best Picture: Musical or Comedy (Winner)"},
 ]
 

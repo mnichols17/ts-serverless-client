@@ -15,27 +15,29 @@ const Landing:React.FC = (props: any) => {
     const [reviews, setReviews] = useState<Review[][]>([]);
 
     const landingTitles = [
-        "Top 10 All-Time",
+        "Newest Releases",
         "Jeff D. Lowe's Picks of the Week",
-        "Jeff D. Lowe's Top 10",
         "KenJac's Picks of the Week",
+        "Top 10 All-Time",
+        "Jeff D. Lowe's Top 10",
         "KenJac's Top 10",
         "Top 10 of 2020",
     ]
 
     useEffect(() => {
+        isLoading(true);
         getReviews();
     }, [])
 
     const showList = (e: any) => {
         switch(e.target.id){
-            case('2'):
-                resetPage({ratings: {value: 'jeff', label: 'Jeff D. Lowe'}})
-                break;
             case('4'):
-                resetPage({ratings: {value: 'kenjac', label: 'KenJac'}})
+                resetPage({ratings: {value: 'jeff', label: <span className="filter-flex">Jeff D. Lowe <img className="filter-icon" src={require(`../media/jdl.png`)} alt={'test'}/></span>}})
                 break;
             case('5'):
+                resetPage({ratings: {value: 'kenjac', label: <span className="filter-flex">KenJac <img className="filter-icon" src={require(`../media/kenjac.png`)} alt={'test'}/></span>}})
+                break;
+            case('6'):
                 resetPage({years: [{value: '2020', label: '2020'}]})
                 break;
             default:
@@ -46,7 +48,7 @@ const Landing:React.FC = (props: any) => {
     }
 
     const getReviews = async() => {
-        request('reviews/landing', {skip: 0}) // Remove skip?
+        request('reviews/landing')
         .then(async(res: any) => {
             setReviews(res.data)
             isLoading(false);
@@ -63,12 +65,12 @@ const Landing:React.FC = (props: any) => {
                     <div className="landing-container" key={index}>
                         <div className="landing-label">
                             <h3 className="landing-title title-font">{landingTitles[index]}</h3>
-                            <h3 id={`${index}`} className="landing-toList" hidden={index === 1 || index === 3} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
+                            <h3 id={`${index}`} className="landing-toList" hidden={index < 3} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
                         </div>
                         <div className="landing-list">
                             {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscar_winner, goldenglobes}) => 
                                 <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal}  poster={poster} 
-                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(index === 0 || index === 5)? 'average' : index < 3? 'jdl' : "kenjac"} /> )}
+                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(index % 3 === 0)? 'average' : (index === 1 || index === 4)? 'jdl' : "kenjac"} /> )}
                         </div>
                     </div>
                 )
