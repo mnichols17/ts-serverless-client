@@ -10,12 +10,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 3em;
 }
 
 .infinitescroll {
     display: flex; 
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 3em;
 }
 
 .infinitescroll::-webkit-scrollbar {
@@ -394,6 +396,10 @@
     width: 20px;
 }
 
+.sort > .css-26l3qy-menu {
+    z-index: 3;
+}
+
 /* Review Page */
 
 #reviewPage {
@@ -720,7 +726,7 @@
 }
 
 #filter-range {
-    margin: 1em 0;
+    margin: 13px 0;
     width: 100%;
     background-color: #FEDE16;
 }
@@ -761,22 +767,20 @@
 /* DOUBLE INPUT SLIDER */
 
 .double-range {
-    margin-top: 1.55em;
+    margin-top: 10em;
     margin-bottom: 13px;
     width: 100%;
     position: relative
 }
 
-#filter-panel .double-range {
-    margin-top: 23px;
+.filter-select > .double-range {
+    margin: 13px 0 20px;
 }
 
 .double-range input[type=range] {
     -webkit-appearance: none;
     height: 8px;
     position: absolute;
-    left: 0;
-    bottom: 0;
     width: 100%;
     border-radius: 12px;
     outline: none;
@@ -785,6 +789,7 @@
 
 #filter-panel .double-range input[type=range] {
     background: #FEDE16;
+    margin: 0;
 }
  
 .double-range input[type=range]:focus::-webkit-slider-runnable-track, 
@@ -802,7 +807,7 @@
 }
 
 .double-range input[type=range]::-webkit-slider-thumb {
-    z-index: 2;
+    z-index: 1;
     position: relative;
     height: 34px;
     width: 34px;
@@ -1612,6 +1617,3 @@
         right: 16%;
     }
 }
-
-
-

@@ -30,10 +30,10 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	let watchOn = "";
 	let total = 0;
 	const runtime = parseInt(filters.runtime.label) < 209? ` ${filters.runtime.label} minutes` : "";
-	//const maxRating = parseInt(filters.maxRating.label) < 100? ` ${filters.maxRating.label}` : "";
+	const ratingRange = (filters.ratingRange[0] > 0 || filters.ratingRange[1] < 100);
 
 	for(const[key, value] of Object.entries(filters)){
-		if((value as object[]).length){
+		if((value as object[]).length && key !== "ratingRange"){
 			(value as object[]).forEach((v:any) => {
 				total++;
 				if(key === 'directors') directedBy += ` ${v.value},` 
@@ -52,9 +52,10 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	watchOn = watchOn.substr(0,watchOn.length-1)
 	const applied = <p id="filters-applied"><span>{type}</span>{type.length? " movies":"Movies"}{directedBy.length? " by":""}
 		<span>{directedBy}</span>{fromYears.length? " from":""}<span>{fromYears}</span>{watchOn.length? " on":""}
-		<span>{watchOn}</span>{runtime.length? " under":""}<span>{runtime}</span></p>
+		<span>{watchOn}</span>{runtime.length? " under":""}<span>{runtime}</span>
+		{ratingRange? " with a rating between":""}<span hidden={!ratingRange}>{` ${filters.ratingRange[0]} and ${filters.ratingRange[1]}`}</span></p>
 
-	return (total > 0 || runtime.length)? applied : null
+	return (total > 0 || runtime.length || ratingRange)? applied : null
 }
 
 const Home:React.FC = (props: any) => {
