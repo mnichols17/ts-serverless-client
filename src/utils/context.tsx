@@ -17,7 +17,7 @@ export type FiltersType = {
     providers: object[]
     awards: object[],
     runtime: {value: string, label: string},
-    maxRating: {value: string, label: string},
+    ratingRange: number[],
 }
 
 export type RandomType = {
@@ -67,7 +67,7 @@ export const SearchContext = createContext<Search>({
         providers: [],
         awards: [],
         runtime: {value: "229", label: "229"},
-        maxRating: {value: "100", label: "100"},
+        ratingRange: [0, 100],
     },
     randomFilters: {genres: [], subGenres: [], decades: [], providers: [], min: 0, runtime: {value: '209', label:'209'}},
     isLoading: () => {},
@@ -106,7 +106,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
         providers: [],
         awards: [],
         runtime: {value: "229", label: "229"},
-        maxRating: {value: "100", label: "100"},
+        ratingRange: [0, 100],
     }
 
     const[loading, setLoading] = useState<boolean>(true);

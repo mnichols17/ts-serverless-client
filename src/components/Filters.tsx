@@ -9,15 +9,38 @@ import {sortOptions, ratingOptions, directorOptions, genreOptions, subGenreOptio
 interface FilterSliderProps {
     label: string;
     onChange: (e: any) => void;
-    info: string;
+    info: string | number[];
 }
 
 const FilterSlider:React.FC<FilterSliderProps> = ({label, onChange, info}) => {
+
     const runtime = label === "Runtime";
+
+    const rangeChange = (e:any) => {
+        const value = parseInt(e.target.value)
+        if(e.target.id === "dr-1") {
+            if(value === 100) onChange([100, 100])
+            else if(value >= info[1]) onChange([value, value+1])
+            else onChange([value, info[1]])
+        }
+        else {
+            if(value === 0) onChange([0, 0])
+            else if(value <= info[0]) onChange([value-1, value])
+            else onChange([info[0], value])
+        }
+    }
+
     return(
+        runtime? <>
+            <label className="filter-info">{label}: Under {info} minutes</label>
+            <input id="filter-range" className="range" type='range' min={'63'} max={'229'} defaultValue={info as string} onChange={onChange} />
+        </> :
         <>
-            <label className="filter-info">{label}: {runtime? `Under ${info} minutes` : info !== "0"? `0 - ${info}` : info}</label>
-            <input id="filter-range" className="range" type='range' min={runtime? '63' : '0'} max={runtime? '229' : '100'} defaultValue={info} onChange={onChange} />
+            <label className="filter-info">Rating: {info[0]} - {info[1]}</label>
+            <div className="double-range">
+                <input hidden={info[1] === 0} id="dr-1" className="double-input-range" type='range' min='0' max='100' value={info[0]} onChange={rangeChange}/> 
+                <input hidden={info[0] === 100} id="dr-2" className="double-input-range" type='range' min='0' max='100' value={info[1]} onChange={rangeChange}/>
+            </div>
         </>
     )
 }
@@ -30,12 +53,12 @@ interface SelectProps {
     value: object[] | { value: string; label: string | JSX.Element; };
     multi: boolean;
     search: boolean;
-    info?: string | JSX.Element;
+    info?: string | JSX.Element | number[];
 }
 
 const FilterSelect:React.FC<SelectProps> = ({index, label, onChange, options, value, multi, search, info}) => (
     <div className="filter-select">
-        {!options.length? <FilterSlider label={label} onChange={onChange} info={info as string}/>
+        {!options.length? <FilterSlider label={label} onChange={onChange} info={info as (string | number[])}/>
         : <><label className={index <= 1? "filter-info bold" : "filter-info"}>{label}</label>
         <Select className="sort" placeholder={info || "Select..."} label={label} isMulti={multi} closeMenuOnSelect={!multi} blurInputOnSelect={!multi} onChange={onChange} isSearchable={search} options={options} value={value} /></>}
     </div>
@@ -79,7 +102,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         {label: "Sort Ratings (Highest or Lowest):", onChange: (e:any) => changeFilter(e, 'sort'), options: sortOptions, value: selectedFilters.sort, multi: false, search: false},
         {label: "Awards:", onChange: (e:any) => changeFilter(e, 'awards'), options: awardOptions, value: selectedFilters.awards, multi: true, search: false, info: 'Ex: Oscars, Golden Globes'},
         
-        {label: "Max Rating", onChange: (e:any) => changeFilter({value: e.target.value, label: e.target.value}, 'maxRating'), options: [], value: [], multi: false, search: false, info: selectedFilters.maxRating.value},
+        {label: "Rating", onChange: (newRange: number[]) => changeFilter(newRange, 'ratingRange'), options: [], value: [], multi: false, search: false, info: selectedFilters.ratingRange},
         {label: "Runtime", onChange: (e:any) => changeFilter({value: e.target.value, label: e.target.value}, 'runtime'), options: [], value: [], multi: false, search: false, info: selectedFilters.runtime.value},
         
         {label: "Decade:", onChange: (e:any) => changeFilter(e, 'decades'), options: decadeOptions, value: selectedFilters.decades, multi: true, search: false},
@@ -91,7 +114,6 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         {label: "Universe:", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes, multi: true, search: false, info: 'Ex: Disney Animated, MCU, etc.'},
         {label: "Sub-Universe:", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses, multi: true, search: false, info: 'Ex: Pixar, Disney Remake, etc.'},
         {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays, multi: true, search: false, info: 'Ex: Football, Christmas, etc.'},
-        // {label: "Awards:", onChange: (e:any) => changeFilter(e, 'awards'), options: awardOptions, value: selectedFilters.awards, multi: true, search: false},
         {label: "Character/Actor:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters, multi: true, search: false, info: 'Ex: Batman, Nic Cage, etc.'},
     ]
 

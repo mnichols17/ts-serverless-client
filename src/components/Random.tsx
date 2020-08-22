@@ -14,7 +14,6 @@ import Logo from '../media/logo.jpg';
 import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
 import KenJac from '../media/kenjac.png';
-import { string } from 'prop-types';
 
 interface RandomSelectProps {
     label: string;
@@ -69,7 +68,9 @@ const Random: React.FC = (props:any) => {
         avgtotal: -1
     });
     const[selectedFilters, setFilters] = useState<RandomType>(randomFilters)
-    const[min, setMin] = useState<number>(randomFilters.min);
+    // const[min, setMin] = useState<number>(randomFilters.min);
+    const[min, setMin] = useState<number>(0);
+    const[max, setMax] = useState<number>(100);
 
     const selects = [
         {label: "Genre:", onChange: (e:any) => changeFilter(e, 'genres'), options: genreOptions, value: selectedFilters.genres},
@@ -139,8 +140,18 @@ const Random: React.FC = (props:any) => {
         }
     }
 
-    const handleChange = (e:any) => {
-        setMin(e.target.value)
+    const handleMin = (e:any) => {
+        const newMin = parseInt(e.target.value)
+        if(newMin === 100) setMax(100)
+        else if(newMin >= max) setMax(newMin+1)
+        setMin(newMin)
+    }
+
+    const handleMax = (e:any) => {
+        const newMax = parseInt(e.target.value)
+        if(newMax === 0) setMin(0)
+        else if(newMax <= min) setMin(newMax-1)
+        setMax(newMax)
     }
 
 	return (
@@ -157,14 +168,22 @@ const Random: React.FC = (props:any) => {
                     <h2>Find a random movie based on</h2>
                     <h4 id="random-error" hidden={!error}>{error}</h4>
                     {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}
-                    <div className="filter-select random-select">
+                    {/* <div className="filter-select random-select">
                         <label className="random-label">Average Rating: {min < 100? `${min} - ` : ''}100</label>
                         <input id="random-range" className="range" type='range' min='0' max='100' defaultValue={min} onChange={handleChange} />
+                    </div> */}
+                    <div className="filter-select random-select">
+                        <label className="random-label">Range: {min} - {max}</label>
+                        <div className="double-range">
+                            <input hidden={max === 0} id="dr-1" className="double-input-range" type='range' min='0' max='100' value={min} onChange={handleMin} /> 
+                            <input hidden={min === 100} id="dr-2" className="double-input-range" type='range' min='0' max='100' value={max} onChange={handleMax} />
+                        </div>
                     </div>
                     <div className="filter-select random-select">
                         <label className="random-label">Runtime: <span>Under</span> {selectedFilters.runtime.value} <span>minutes</span></label>
                         <input id="random-range" className="range" type='range' min='63' max='229' defaultValue={selectedFilters.runtime.value} onChange={(e:any) => changeFilter({label: e.target.value, value: e.target.value}, 'runtime')} />
                     </div>
+
                     <button id="randomize" className="random-btn title-font" onClick={getRandom}>Randomize</button>
                 </>
             }
@@ -172,4 +191,6 @@ const Random: React.FC = (props:any) => {
 	)
 }
 
+//setRange(prevState => [e.target.value, prevState[1]])} /></div>
+//{label: e.target.value, value: e.target.value}, 'test'
 export default Random;

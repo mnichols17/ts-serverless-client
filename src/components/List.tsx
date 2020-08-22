@@ -6,7 +6,7 @@ import ReactLoading from 'react-loading';
 import smoothscroll from 'smoothscroll-polyfill';
 import {SearchContext, FiltersType} from '../utils/context';
 
-const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards, runtime, maxRating}: FiltersType) => ({
+const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards, runtime}: FiltersType) => ({
 	ratings: ratings.value,
 	directors: directors.map((select: any) => select.value).join('@'),
 	sort: sort.value,
@@ -22,7 +22,7 @@ const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompa
 	providers: providers.map((select: any) => select.value).join('@'),
 	awards: awards.map((select: any) => select.value).join('@'),
 	runtime: runtime.value,
-	maxRating: maxRating.value
+	// maxRating: maxRating.value
 })
 
 const List:React.FC = () => {
