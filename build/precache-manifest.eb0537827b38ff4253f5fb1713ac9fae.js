@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "12785ac255de40a5e862660098f21e3c",
+    "revision": "72827395b6151fb98aab6952b9aaeee0",
     "url": "/index.html"
   },
   {
-    "revision": "57d546ae137955d87cdb",
-    "url": "/static/css/main.050aab58.chunk.css"
+    "revision": "3f541b488263c555b097",
+    "url": "/static/css/main.056ec25a.chunk.css"
   },
   {
-    "revision": "47bf58f5a6cc8c73d60b",
-    "url": "/static/js/2.b4a2fb8d.chunk.js"
+    "revision": "ba532a95544b4e87653c",
+    "url": "/static/js/2.b214c7d4.chunk.js"
   },
   {
     "revision": "e23d72e353070f497294c1592aa53554",
-    "url": "/static/js/2.b4a2fb8d.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.b214c7d4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "57d546ae137955d87cdb",
-    "url": "/static/js/main.9916b357.chunk.js"
+    "revision": "3f541b488263c555b097",
+    "url": "/static/js/main.025188dc.chunk.js"
   },
   {
     "revision": "49cb89da10f542d4efa3",
@@ -152,12 +152,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/home.ff64f555.png"
   },
   {
+    "revision": "78c96986332d266bf91ceb472117293c",
+    "url": "/static/media/itunes.78c96986.jpg"
+  },
+  {
     "revision": "f1b59a368dcd19dc5672b20a57c8df9e",
     "url": "/static/media/jdl.f1b59a36.png"
   },
   {
     "revision": "4d72b4b943bd4b2457c47d570ff41ca0",
     "url": "/static/media/kenjac.4d72b4b9.png"
+  },
+  {
+    "revision": "5515ef8667b7e3717742f222de3b5d8e",
+    "url": "/static/media/left.5515ef86.png"
   },
   {
     "revision": "577ce152c1b8a7528f6217dec717fe3c",
@@ -180,11 +188,27 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/oscars_logo.59711e01.png"
   },
   {
+    "revision": "b6481741b3c192a1b2aa4b4f2ed638dc",
+    "url": "/static/media/podcast.b6481741.jpg"
+  },
+  {
+    "revision": "b35dfe8b12218c835da59ea5841b3d55",
+    "url": "/static/media/right.b35dfe8b.png"
+  },
+  {
     "revision": "995bbea2a80b05c3a353a61011dee2e6",
     "url": "/static/media/rt.995bbea2.png"
   },
   {
     "revision": "3cab98c37eda5a26ca030d53198e4aae",
     "url": "/static/media/slider.3cab98c3.png"
+  },
+  {
+    "revision": "cf7f868327e50fb2c215d177d996173b",
+    "url": "/static/media/spotify.cf7f8683.jpg"
+  },
+  {
+    "revision": "ca227c72a4bcd78911462e74dab3208a",
+    "url": "/static/media/subscribe.ca227c72.jpg"
   }
 ]);
