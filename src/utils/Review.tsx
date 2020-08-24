@@ -37,4 +37,6 @@ export default interface Review {
     rt?: string;
     imdb?: string;
     metacritic?: string;
+    itunes?: string;
+    spotify?: string;
 }

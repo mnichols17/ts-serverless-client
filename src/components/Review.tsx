@@ -22,6 +22,9 @@ import NotButtered from '../media/not_buttered.png';
 import RT from '../media/rt.png';
 import IMDB from '../media/imdb.png';
 import Metacritic from '../media/metacritic.png';
+import Podcast from '../media/podcast.jpg';
+import Spotify from '../media/spotify.jpg';
+import iTunes from '../media/itunes.jpg';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 interface ScoreTableProps {
@@ -185,6 +188,11 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                     </tr>
                 </tbody>
             </table> 
+            <div style={{display: review.spotify? 'grid' : 'none'}} id="review-pod" className="pod-grid">
+                <img alt="subscribe" src={Podcast} />
+                <a href={`https://open.spotify.com/episode/${review.spotify}`} target="_blank" rel="noopener noreferrer"><img alt="spotify" src={Spotify} /></a>
+                <a href={`https://podcasts.apple.com/us/podcast/lights-camera-barstool/id1279516571?i=${review.itunes}`} target="_blank" rel="noopener noreferrer"><img alt="itunes" src={iTunes} /></a>
+            </div>
             <div id="review-similar" className="landing-container">
                 <h3 className="review-detail title-font">Similar Movies</h3>
                 <div className="landing-list">

@@ -61,8 +61,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 const Home:React.FC = (props: any) => {
     smoothscroll.polyfill();
     
-    const {viewList, filters, query, isLoading, currentView, currentUrl, currentQuery, currentFilters, currentRandom, resetPage} = useContext(SearchContext);
-	const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
+    const {viewList, filters, currentRandom, resetPage} = useContext(SearchContext);
 	const[showTop, setTop] = useState<boolean>(false);
 	const[open, setOpen] = useState<boolean>(false);
 	const [iconDetail, setDetail] = useState<string>("Click/hover on each icon to learn about it");
@@ -88,23 +87,6 @@ const Home:React.FC = (props: any) => {
 			window.removeEventListener('scroll', checkTop)
 		}
     }, [showTop, open])
-
-	useEffect(() => {
-		const queryHandler = async(q: string) => {
-            isLoading(true);
-			if(typingTimeout) clearTimeout(typingTimeout)
-
-			if(q === "") {
-				currentUrl('reviews/all')
-			} else {
-				setTyping(setTimeout(async() => {
-					currentUrl(`reviews/search/?query=${query}`)
-                    if(!viewList) currentView(true);
-				}, 600))
-			}
-		}
-		queryHandler(query)
-	}, [query])
 
 	const logoClick = async() => {
         if(viewList) {

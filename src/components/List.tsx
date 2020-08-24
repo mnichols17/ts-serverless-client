@@ -1,61 +1,71 @@
-import React, {useState, useEffect, useContext} from 'react';
-import request from '../utils/makeRequest';
+import React, {useEffect, useContext} from 'react';
 import ReviewList from './ReviewList';
-import Review from '../utils/Review';
 import ReactLoading from 'react-loading';
 import smoothscroll from 'smoothscroll-polyfill';
-import {SearchContext, FiltersType} from '../utils/context';
+import {SearchContext} from '../utils/context';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards, runtime, ratingRange}: FiltersType) => ({
-	ratings: ratings.value,
-	directors: directors.map((select: any) => select.value).join('@'),
-	sort: sort.value,
-	genres: genres.map((select: any) => select.value).join('@'),
-	subGenres: subGenres.map((select: any) => select.value).join('@'),
-	studiocompanies: studiocompanies.map((select: any) => select.value).join('@'),
-	universes: universes.map((select: any) => select.value).join('@'),
-	subUniverses: subUniverses.map((select: any) => select.value).join('@'),
-	characters: characters.map((select: any) => select.value).join('@'),
-	sportholidays: sportholidays.map((select: any) => select.value).join('@'),
-	years: years.map((select: any) => select.value).join('@'),
-	decades: decades.map((select: any) => select.value).join('@'),
-	providers: providers.map((select: any) => select.value).join('@'),
-	awards: awards.map((select: any) => select.value).join('@'),
-	runtime: runtime.value,
-	ratingRange: ratingRange.join('@'),
-})
+import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+
+interface PaginationProps {
+	changePage: (e:any) => void;
+}
+
+
+const Pagination: React.FC<PaginationProps> = ({changePage}) => {
+	const {page, totalPages} = useContext(SearchContext);
+
+	let pageButtons:(number|string)[] = [];
+
+	if(totalPages <= 5){
+		for(let i = 1; i <= totalPages; i++){
+			pageButtons.push(i);
+		}
+	} else {
+		if(page >= totalPages-3) pageButtons = [1, "...", totalPages-4, totalPages-3, totalPages-2, totalPages-1, totalPages]
+		else {
+			if(page < 5) pageButtons = [1, 2, 3, 4, 5, "...", totalPages]
+			else pageButtons = [1, "...", page-1, page, page+1,"...", totalPages]
+		}
+	}
+
+	return (
+		<div id="list-pagination" className="pagination-buttons" style={{display: totalPages < 2? "none" : "flex"}}>
+			{pageButtons.map((p, index) => {
+					return <button className={page === p? "current" : ""} key={index} id={`${index}`} value={p} disabled={page === p} onClick={changePage}>{p}</button>
+				})}
+		</div>
+	)
+}
 
 const List:React.FC = () => {
 	smoothscroll.polyfill();
 
-	const {loading, url, filters, isLoading} = useContext(SearchContext);
+	const {reviews, loading, url, filters, page, totalPages, more, getReviews, isLoading, currentPage} = useContext(SearchContext);
 
-	const[reviews, setReviews] = useState<Review[]>([]);
-    const[itemSkips, setSkips] = useState<number>(0);
-	const[more, setMore] = useState<boolean>(true);
-	
 	useEffect(() => {
-		if(!loading) isLoading(true);
-		getReviews(true);
-	}, [url, filters])
-	
-	const getReviews = async(reset?: boolean) => {
-		if(itemSkips > 33) return; // Limits # of reviews a single route can get (990)
-		const stringFilters = createStrings(filters);
-        request(url, {...stringFilters, skip: reset? 0 : itemSkips})
-        .then(async(res: any) => {
-			isLoading(false);
-			if(res.data.length < 30) setMore(false);
-			else if(!more) setMore(true);
+		if(reviews.length === 0){
+			if(!loading) isLoading(true);
+			getReviews(url, filters, page, true);
+		}
+	}, [])
 
-			setSkips(reset? 1 : itemSkips+1)
-			setReviews(reset? res.data : [...reviews, ...res.data])
-        })
-        .catch(err => console.error(err))
+	const changePage = (e:any) => {
+		if(e.target.value === "..."){
+			currentPage(e.target.id === '1'? page-3 : page+3)
+		} else currentPage(parseInt(e.target.value))
 	}
 
     return(
-		loading? <ReactLoading type={"spin"} color={"yellow"}/> : <ReviewList reviews={reviews} getReviews={getReviews} more={more}/>
+		loading? <ReactLoading type={"spin"} color={"yellow"}/> : 
+		<>
+			<Pagination changePage={changePage}/>
+			<ReviewList />
+			<div id="list-pagination" className="pagination-arrows" style={{display: (totalPages < 2 || more)? "none" : "flex"}}>
+				<button value={page-1} style={{visibility: page === 1? "hidden" : "visible"}} onClick={changePage}><FontAwesomeIcon style={{marginRight: '2px'}} icon={faAngleLeft} />Prev</button>
+				<button value={page+1} style={{visibility: page === totalPages? "hidden" : "visible"}} onClick={changePage}>Next<FontAwesomeIcon style={{marginLeft: '2px'}} icon={faAngleRight} /></button>
+			</div>
+		</>
     )
 }
 

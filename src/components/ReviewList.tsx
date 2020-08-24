@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Review from '../utils/Review';
 import handleTitle from '../utils/handleTitle';
 import ReactLoading from 'react-loading';
+import {SearchContext, FiltersType} from '../utils/context';
 
 import '../styles/reviewList.css';
 import ButteredIcon from '../media/buttered.png';
@@ -41,18 +42,25 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
     )
 }
 
-interface ReviewListProps {
-    reviews: Review[];
-    getReviews: () => void;
-    more: boolean;
-}
+// interface ReviewListProps {
+//     reviews: Review[];
+//     getReviews: () => void;
+//     more: boolean;
+// }
 
-const ReviewList: React.FC<ReviewListProps> = ({reviews, getReviews, more}) => {
+const ReviewList: React.FC = () => {
+
+    const {reviews, url, filters, page, more, getReviews} = useContext(SearchContext);
+    
+    const moreReviews = () => {
+        getReviews(url, filters, page);
+    }
+
     const LoadingItem = <div id="loading"><ReactLoading type={"spin"} color={"yellow"}/></div>
 
     return (
         !reviews.length ? <h2 id="empty">No results found</h2> : 
-        <InfiniteScroll className="infinitescroll" loader={LoadingItem} dataLength={reviews.length} next={getReviews} hasMore={more}>
+        <InfiniteScroll className="infinitescroll" loader={LoadingItem} dataLength={reviews.length} next={moreReviews} hasMore={more}>
             {reviews.map(({id, avgrank, jlrank, kjrank, avgtotal, jeff, kenjac, movie, poster, oscar_winner, goldenglobes}) => {
                     const total = (jeff as number) >= 0? jeff as number : (kenjac as number) >= 0? kenjac as number : avgtotal;
                     return <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={total} 

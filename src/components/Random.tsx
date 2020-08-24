@@ -169,7 +169,7 @@ const Random: React.FC = (props:any) => {
                     <h4 id="random-error" hidden={!error}>{error}</h4>
                     {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}
                     <div className="filter-select random-select">
-                        <label className="random-label">Range: {min} - {max}</label>
+                        <label className="random-label">Rating: {min} - {max}</label>
                         <div className="double-range">
                             <input hidden={max === 0} id="dr-1" className="double-input-range" type='range' min='0' max='100' value={min} onChange={handleMin} /> 
                             <input hidden={min === 100} id="dr-2" className="double-input-range" type='range' min='0' max='100' value={max} onChange={handleMax} />

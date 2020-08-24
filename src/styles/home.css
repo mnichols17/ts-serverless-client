@@ -17,7 +17,7 @@
     display: flex; 
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 3em;
+    margin-bottom: 1em;
 }
 
 .infinitescroll::-webkit-scrollbar {
@@ -281,7 +281,15 @@
     background: #FEDE16; 
 }
 
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 #landing-credit {
+    order: 2;
     color: white;
     width: 330px;
     display: grid;
@@ -300,13 +308,33 @@
     width: 140px;
 }
 
-/* #landing-credit img {
-    width: 170px;
-} */
-
 #landing-omdb {
     border-radius: 8px;
 }
+
+#footer-podcast {
+    margin: 1em 0 0;
+    width: 90%;
+    max-width: 350px;
+}
+
+.pod-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+}
+
+#footer-podcast a > img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+#footer-podcast > img {
+    grid-column: 1/3;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
 
 /* Filter Panel */
 
@@ -665,6 +693,24 @@
 #butter-row > img {
     width: 20px;
     margin-left: 5px;
+}
+
+#review-pod {
+    margin: 1em 0;
+    width: 92vw;
+    justify-self: end;
+    grid-row: 6/7;
+}
+
+#review-pod a > img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#review-pod > img {
+    grid-column: 1/3;
+    width: 100%;
+    border-radius: 10px;
 }
 
 #review-similar > .review-detail {
@@ -1162,6 +1208,13 @@
         max-width: 430px;
     } 
 
+    #review-pod {
+        margin: 1.5em 0 0;
+        max-width: 250px;
+        justify-self: end;
+        grid-row: 6/7;
+    }
+
     #filters-applied {
         font-size: .95em;
     }
@@ -1339,6 +1392,13 @@
 }
 
 @media screen and (min-width: 700px) {
+
+    #footer {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        max-width: 740px;
+    }
+
     #reviewPage {
         display: grid;
         grid-template-columns: 1fr 2fr;
@@ -1382,7 +1442,7 @@
 
     #review-card {
         grid-column: 2/3;
-        grid-row: 3/8;
+        grid-row: 3/9;
         width: 95%;
         max-width: 900px;
         align-items: start;
@@ -1517,6 +1577,10 @@
 
     #review-streaming > div {
         max-width: 95%;
+    }
+
+    #review-pod {
+        max-width: 300px;
     }
 
     #review-info {

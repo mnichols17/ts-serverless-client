@@ -8,6 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import OMDB from '../media/omdb.png';
+import Subscribe from '../media/subscribe.jpg';
+import Spotify from '../media/spotify.jpg';
+import iTunes from '../media/itunes.jpg';
 
 const Landing:React.FC = (props: any) => {
 
@@ -75,10 +78,17 @@ const Landing:React.FC = (props: any) => {
                     </div>
                 )
             })}
-            <div id="landing-credit">
-                <h4>Movie information and posters from</h4>
-                <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer"><img alt="TMDB" src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" /></a>
-                <a href="http://www.omdbapi.com/" target="_blank" rel="noopener noreferrer"><img id="landing-omdb" alt="OMDB" src={OMDB} /></a>
+            <div id="footer">
+                <div id="landing-credit">
+                    <h4>Movie information and posters from</h4>
+                    <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer"><img alt="TMDB" src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" /></a>
+                    <a href="http://www.omdbapi.com/" target="_blank" rel="noopener noreferrer"><img id="landing-omdb" alt="OMDB" src={OMDB} /></a>
+                </div>
+                <div id='footer-podcast' className="pod-grid">
+                    <img alt="subscribe" src={Subscribe} />
+                    <a href="http://sptfy.com/lcbpod" target="_blank" rel="noopener noreferrer"><img alt="spotify" src={Spotify} /></a>
+                    <a href="https://apple.co/lcbpodcast" target="_blank" rel="noopener noreferrer"><img alt="itunes" src={iTunes} /></a>
+                </div>
             </div>
         </>
     )
