@@ -17,7 +17,7 @@ const Pagination: React.FC<PaginationProps> = ({changePage}) => {
 
 	let pageButtons:(number|string)[] = [];
 
-	if(totalPages <= 5){
+	if(totalPages <= 6){
 		for(let i = 1; i <= totalPages; i++){
 			pageButtons.push(i);
 		}
@@ -54,6 +54,7 @@ const List:React.FC = () => {
 		if(e.target.value === "..."){
 			currentPage(e.target.id === '1'? page-3 : page+3)
 		} else currentPage(parseInt(e.target.value))
+		window.scrollTo({top: 400})
 	}
 
     return(

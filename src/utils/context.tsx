@@ -146,7 +146,6 @@ export const SearchProvider = ({children}: ProviderProps) => {
     const[totalPages, setTotal] = useState<number>(0);
     const[itemSkips, setSkips] = useState<number>(0);
 
-    // pass in url & CURRENT page number, add + 1 in here
     const getReviews = async(searchUrl: string, searchFilters: FiltersType, searchPage: number, reset?: boolean) => {
         const stringFilters = createStrings(searchFilters);
         request(searchUrl, {...stringFilters, skip: reset? 0 : itemSkips, page: searchPage})

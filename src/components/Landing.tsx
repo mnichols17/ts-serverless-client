@@ -48,6 +48,7 @@ const Landing:React.FC = (props: any) => {
         }
         isLoading(true);
         currentView(true); 
+        window.scrollTo({top: 0})
     }
 
     const getReviews = async() => {
