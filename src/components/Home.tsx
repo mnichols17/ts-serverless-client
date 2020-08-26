@@ -31,6 +31,8 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	let total = 0;
 	const runtime = parseInt(filters.runtime.label) < 209? ` ${filters.runtime.label} minutes` : "";
 	const ratingRange = (filters.ratingRange[0] > 0 || filters.ratingRange[1] < 100);
+	const sortLabel = filters.sort.label;
+	const yearSort = (sortLabel === 'Oldest to Newest' || sortLabel === 'Newest to Oldest');
 
 	for(const[key, value] of Object.entries(filters)){
 		if((value as object[]).length && key !== "ratingRange"){
@@ -53,9 +55,10 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	const applied = <p id="filters-applied"><span>{type}</span>{type.length? " movies":"Movies"}{directedBy.length? " by":""}
 		<span>{directedBy}</span>{fromYears.length? " from":""}<span>{fromYears}</span>{watchOn.length? " on":""}
 		<span>{watchOn}</span>{runtime.length? " under":""}<span>{runtime}</span>
-		{ratingRange? " with a rating between":""}<span hidden={!ratingRange}>{` ${filters.ratingRange[0]} and ${filters.ratingRange[1]}`}</span></p>
+		{ratingRange? " with a rating between":""}<span hidden={!ratingRange}>{` ${filters.ratingRange[0]} and ${filters.ratingRange[1]}`}</span>
+		{yearSort? " sorted " : ""}<span hidden={!yearSort}>{sortLabel}</span></p>
 
-	return (total > 0 || runtime.length || ratingRange)? applied : null
+	return (total > 0 || runtime.length || ratingRange || yearSort)? applied : null
 }
 
 const Home:React.FC = (props: any) => {

@@ -99,7 +99,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
     const selects = [
         {label: "Streaming Provider:", onChange: (e:any) => changeFilter(e, 'providers'), options: providerOptions, value: selectedFilters.providers, multi: true, search: false, info: providerInfo},
         {label: "Ratings (Avg., Jeff's or KenJac's):", onChange: (e:any) => changeFilter(e, 'ratings'), options: ratingOptions, value: selectedFilters.ratings, multi: false, search: false},
-        {label: "Sort Ratings (Highest or Lowest):", onChange: (e:any) => changeFilter(e, 'sort'), options: sortOptions, value: selectedFilters.sort, multi: false, search: false},
+        {label: "Sort Reviews:", onChange: (e:any) => changeFilter(e, 'sort'), options: sortOptions, value: selectedFilters.sort, multi: false, search: false},
         {label: "Awards:", onChange: (e:any) => changeFilter(e, 'awards'), options: awardOptions, value: selectedFilters.awards, multi: true, search: false, info: 'Ex: Oscars, Golden Globes'},
         
         {label: "Rating", onChange: (newRange: number[]) => changeFilter(newRange, 'ratingRange'), options: [], value: [], multi: false, search: false, info: selectedFilters.ratingRange},

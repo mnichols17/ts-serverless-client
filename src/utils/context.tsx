@@ -38,8 +38,8 @@ const emptyFilters: FiltersType = {
     },
     directors: [],
     sort: {
-        value: "ASC",
-        label: "Rating High to Low"
+        value: "rating@ASC",
+        label: "High to Low (Rating)"
     },
     genres: [],
     subGenres: [],

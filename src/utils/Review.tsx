@@ -24,6 +24,7 @@ export default interface Review {
     actors?: string;
     video_key?: string;
     runtime?: number;
+    revenue?: number;
     oscar_winner?: boolean;
     oscars?: string;
     oscars_animated?: string;

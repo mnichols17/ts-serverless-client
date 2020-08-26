@@ -7,6 +7,7 @@ import Review from '../utils/Review';
 import handleTitle from '../utils/handleTitle';
 import {ScoreTable} from './Review';
 import {SearchContext, RandomType} from '../utils/context';
+import {ProviderLogos} from './Review';
 
 import Back from '../media/back.png';
 import Home from '../media/home.png';
@@ -32,12 +33,13 @@ const RandomFilterSelect:React.FC<RandomSelectProps> = ({label, onChange, option
 interface RandomReviewProps {
     passedProps: any;
     review: Review;
+    streamingOptions: object[],
     selectNew: () => void;
     getRandom: () => void;
     scores: {icon: string, score: number, rank: number}[]
 }
 
-const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectNew, getRandom, scores}) => {
+const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, streamingOptions, selectNew, getRandom, scores}) => {
     const img_src = review.poster? false
     : review.id === 6969? "https://lh3.googleusercontent.com/-hE37W6LEh0M/XzoUom1xj1I/AAAAAAAAApc/X5_tkwnlmEsCVgNgFaUxEdOyIRgTUteiACK8BGAsYHg/s512/2020-08-16.jpg"
     : 'https://pbs.twimg.com/media/ELsOD8iWwAEd_9b.jpg:large'
@@ -54,6 +56,7 @@ const RandomReview: React.FC<RandomReviewProps> = ({passedProps, review, selectN
                     return <ScoreTable key={icon} icon={icon} score={score as number} rank={rank as number} />
                 })}
             </div>
+            <ProviderLogos providers={streamingOptions} />
         </div>
     )
 }
@@ -67,6 +70,7 @@ const Random: React.FC = (props:any) => {
         movie: "",
         avgtotal: -1
     });
+    const[streamingOptions, setOptions] = useState<object[]>([]);
     const[selectedFilters, setFilters] = useState<RandomType>(randomFilters)
     const[min, setMin] = useState<number>(randomFilters.ratingRange[0]);
     const[max, setMax] = useState<number>(randomFilters.ratingRange[1]);
@@ -116,8 +120,9 @@ const Random: React.FC = (props:any) => {
             setLoading(false);
             if(!res.data) setError('Sorry, there are no reviews that match those categories');
             else {
-                let {movie, poster, avgtotal, jeff, kenjac, avgrank, jlrank, kjrank, id} = res.data
+                let {movie, poster, avgtotal, jeff, kenjac, avgrank, jlrank, kjrank, id} = res.data[0];
                 if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
+                setOptions(res.data[1])
                 setRandom({movie, poster, avgtotal, jeff, kenjac, avgrank, jlrank, kjrank, id})
             }
         })
@@ -164,7 +169,7 @@ const Random: React.FC = (props:any) => {
             </div>
             <img id="logo" hidden={random.avgtotal > -1} src={Logo} onClick={navClick} alt="LOGO" />
             {loading? <ReactLoading className="random-loading" type={"spin"} color={"yellow"}/>:
-                random.avgtotal >= 0? <RandomReview passedProps={props} review={random} selectNew={selectNew} getRandom={getRandom} scores={scores}/> : <>
+                random.avgtotal >= 0? <RandomReview passedProps={props} review={random} streamingOptions={streamingOptions} selectNew={selectNew} getRandom={getRandom} scores={scores}/> : <>
                     <h2>Find a random movie based on</h2>
                     <h4 id="random-error" hidden={!error}>{error}</h4>
                     {selects.map(({label, onChange, options, value}) => <RandomFilterSelect key={label} label={label} onChange={onChange} options={options} value={value}/>)}

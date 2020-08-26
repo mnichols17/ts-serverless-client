@@ -457,9 +457,8 @@ export const genreOptions: DropdownOption[] = [
     {value: "Disaster", label: "Disaster"},
     {value: "Drama", label: "Drama"},
     {value: "Dramedy", label: "Dramedy"},
-    {value: "Family", label: "Family"},
     {value: "Fantasy", label: "Fantasy"},
-    {value: "Horror@Comic, Horror", label: "Horror"},
+    {value: "Horror", label: "Horror"},
     {value: "Musical", label: "Musical"},
     {value: "Mystery", label: "Mystery"},
     {value: "Romance", label: "Romance"},
@@ -1087,6 +1086,8 @@ export const ratingOptions: DropdownOption[] = [
 ]
 
 export const sortOptions: DropdownOption[] = [
-    {value: "ASC", label: "Rating High to Low"},
-    {value: "DESC", label: "Rating Low to High"}
+    {value: "rating@ASC", label: "High to Low (Rating)"},
+    {value: "rating@DESC", label: "Low to High (Rating)"},
+    {value: "year@ASC", label: "Oldest to Newest"},
+    {value: "year@DESC", label: "Newest to Oldest"}
 ]

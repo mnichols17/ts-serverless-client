@@ -15,8 +15,6 @@ import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
 import KenJac from '../media/kenjac.png';
 import GV from '../media/gv.png';
-// import OscarsLogo from '../media/oscars_logo.png';
-// import GlobesLogo from '../media/globes_logo.png';
 import Buttered from '../media/buttered.png';
 import NotButtered from '../media/not_buttered.png';
 import RT from '../media/rt.png';
@@ -26,6 +24,37 @@ import Podcast from '../media/podcast.jpg';
 import Spotify from '../media/spotify.jpg';
 import iTunes from '../media/itunes.jpg';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
+interface AwardProps {
+    awards: (string|undefined)[][];
+}
+
+const ReviewAwards: React.FC<AwardProps> = ({awards}) => {
+
+    const oscars: any[] = [];
+    const gg: any[] = [];
+
+    awards.forEach((award:any) => {
+        if(award[0]){
+            if(award[1] === "GoldenGlobes") gg.push(award)
+            else oscars.push(award)
+        }
+    })
+
+    return (
+        (oscars.length && gg.lastIndexOf)? 
+        <div id="review-awards">
+            <p hidden={!oscars.length} className="review-people">Oscars</p>
+            <ul className="awards-list">
+                {oscars.map((oscar:any, index:number) => <li key={index} className="award">{oscar[1]} {oscar[0]}</li>)}
+            </ul>
+            <p hidden={!gg.length} className="review-people">Golden Globes</p>
+            <ul className="awards-list">
+                {gg.map((globe:any, index:number) => <li key={index} className="award">{globe[0]}</li>)}
+            </ul>
+        </div> : <p className="review-people">N/A</p>
+    )
+}
 
 interface ScoreTableProps {
     icon: string;
@@ -47,7 +76,7 @@ interface ProviderLogosProps {
     providers: object[];
 }
 
-const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
+export const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
     const main:number[] = [8,15,9,337,384,27,386,387,78,350,43]
     let logos:any[] = [];
     providers.forEach((provider:any) => {
@@ -112,16 +141,16 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                 <h3 className="review-detail title-font">Starring</h3>
                 <p className="review-people">{review.actors}</p>
                 <h3 className="review-detail title-font">Awards</h3>
-                {(review.oscar_winner || review.goldenglobes)? <><p hidden={!review.oscars} className="review-people">{review.oscars} at The Oscars</p>
-                <p hidden={!review.oscars_animated} className="review-people">{review.oscars_animated} at The Oscars</p>
-                <p hidden={!review.oscars_foreign} className="review-people">{review.oscars_foreign} at The Oscars</p>
-                <p hidden={!review.oscars_director} className="review-people">Best Director (Oscars): {review.oscars_director}</p>
-                <p hidden={!review.best_actor} className="review-people">Best Actor (Oscars): {review.best_actor}</p>
-                <p hidden={!review.support_actor} className="review-people">Best Supporting Actor (Oscars): {review.support_actor}</p>
-                <p hidden={!review.best_actress} className="review-people">Best Actress (Oscars): {review.best_actress}</p>
-                <p hidden={!review.support_actress} className="review-people">Best Supporting Actress (Oscars): {review.support_actress}</p>
-                <p className="review-people">{review.goldenglobes? `${review.goldenglobes} at The Golden Globes` : null}</p></> : 
-                <p className="review-people">N/A</p>}
+                <ReviewAwards awards={[[review.oscars, ""],
+                            [review.oscars_animated, ""], 
+                            [review.oscars_foreign, ""], 
+                            [review.oscars_director, "Best Director:"], 
+                            [review.best_actor, "Best Actor:"],
+                            [review.support_actor, "Best Supporting Actor:"],
+                            [review.best_actress, "Best Actress:"],
+                            [review.support_actress, "Best Supporting Actress:"],
+                            [review.goldenglobes, "GoldenGlobes"]
+                        ]}/>
                 <ProviderLogos providers={providers} />
                 <div id="review-trailer-wrapper">
                     <h3 className="review-detail title-font">Trailer</h3>
@@ -153,6 +182,10 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                         <td>{review.runtime} minutes</td>
                     </tr>
                     <tr>
+                        <td>Box Office:</td>
+                        <td>{review.revenue? `$${review.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : 'N/A'} </td>
+                    </tr>
+                    <tr>
                         <td>Genre:</td>
                         <td>{review.genre? <button className="review-info-button search-icon" onClick={() => fromCategory('genres', review.genre as string)}>{review.genre} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
 
@@ -180,11 +213,11 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                     </tr>
                     <tr>
                         <td>Sport:</td>
-                        <td>{review.sport? <button className="review-info-button search-icon" onClick={() => fromCategory('sports', review.sport as string)}>{review.sport} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
+                        <td>{review.sport? <button className="review-info-button search-icon" onClick={() => fromCategory('sportholidays', review.sport as string)}>{review.sport} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                     <tr>
                         <td>Holiday:</td>
-                        <td>{review.holiday? <button className="review-info-button search-icon" onClick={() => fromCategory('holidays', review.holiday as string)}>{review.holiday} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
+                        <td>{review.holiday? <button className="review-info-button search-icon" onClick={() => fromCategory('sportholidays', review.holiday as string)}>{review.holiday} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
                 </tbody>
             </table> 
