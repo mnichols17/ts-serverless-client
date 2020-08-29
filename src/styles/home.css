@@ -223,6 +223,7 @@
     margin: 0 .5em 0 .8em;
     color: #FEDE16;
     font-size: 1.4em;
+    letter-spacing: .9px;
 }
 
 .landing-toList {
@@ -1170,7 +1171,7 @@
     }
 
     .landing-title {
-        font-size: 1.5em;
+        font-size: 1.45em;
         letter-spacing: .6px;
     }
     
