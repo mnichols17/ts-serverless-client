@@ -3,10 +3,10 @@ import axios from 'axios';
 // promise type?
 
 export default async(route: string, headers?: object) => new Promise((resolve, reject) => {
+    const url = process.env.NODE_ENV !== "production"? "http://10.0.0.12:5000/" : "https://jdlmoviedb.xyz/";
     axios({
         method: "GET",
-        //url: "http://10.0.0.12:5000/" + route, // DEVELOPMENT
-        url: "https://jdlmoviedb.xyz/" + route, // PRODUCTION
+        url: url + route,
         headers: headers
     })
     .then(res => resolve(res))

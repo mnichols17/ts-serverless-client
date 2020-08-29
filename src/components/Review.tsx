@@ -190,32 +190,32 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                         <td>{review.genre? <button className="review-info-button search-icon" onClick={() => fromCategory('genres', review.genre as string)}>{review.genre} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
 
                     </tr>
-                    <tr>
+                    <tr hidden={!review.subgenre}>
                         <td>Sub-Genre:</td>
                         <td>{review.subgenre? <button className="review-info-button search-icon" onClick={() => fromCategory('subGenres', review.subgenre as string)}>{review.subgenre} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
-                    <tr>
+                    <tr hidden={!review.studiocompany}>
                         <td>Studio/Company:</td>
                         <td>{review.studiocompany? <button className="review-info-button search-icon" onClick={() => fromCategory('studiocompanies', review.studiocompany as string)}>{review.studiocompany} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
 
                     </tr>
-                    <tr>
+                    <tr hidden={!review.universe}>
                         <td>Universe:</td>
                         <td>{review.universe? <button className="review-info-button search-icon" onClick={() => fromCategory('universes', review.universe as string)}>{review.universe} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
-                    <tr>
+                    <tr hidden={!review.subuniverse}>
                         <td>Sub-Universe:</td>
                         <td>{review.subuniverse? <button className="review-info-button search-icon" onClick={() => fromCategory('subUniverses', review.subuniverse as string)}>{review.subuniverse} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
-                    <tr>
+                    <tr hidden={!review.character}>
                         <td>Character/Actor:</td>
                         <td>{review.character? <button className="review-info-button search-icon" onClick={() => fromCategory('characters', review.character as string)}>{review.character} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
-                    <tr>
+                    <tr hidden={!review.sport}>
                         <td>Sport:</td>
                         <td>{review.sport? <button className="review-info-button search-icon" onClick={() => fromCategory('sportholidays', review.sport as string)}>{review.sport} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
-                    <tr>
+                    <tr hidden={!review.holiday}>
                         <td>Holiday:</td>
                         <td>{review.holiday? <button className="review-info-button search-icon" onClick={() => fromCategory('sportholidays', review.holiday as string)}>{review.holiday} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>

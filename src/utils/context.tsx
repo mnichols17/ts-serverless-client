@@ -52,7 +52,7 @@ const emptyFilters: FiltersType = {
     decades: [],
     providers: [],
     awards: [],
-    runtime: {value: "229", label: "229"},
+    runtime: {value: "233", label: "233"},
     ratingRange: [0, 100],
 }
 
@@ -62,7 +62,7 @@ const emptyRandom: RandomType = {
     decades: [],
     providers: [],
     ratingRange: [0, 100],
-    runtime: {value: '229', label:'229'}
+    runtime: {value: '233', label:'233'}
 }
 
 interface Search {

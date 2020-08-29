@@ -18,6 +18,7 @@ const Landing:React.FC = (props: any) => {
     const [reviews, setReviews] = useState<Review[][]>([]);
 
     const landingTitles = [
+        "Remembering the Life of Chadwick Boseman",
         "Newest Releases",
         "Jeff D. Lowe's Picks of the Week",
         "KenJac's Picks of the Week",
@@ -63,18 +64,19 @@ const Landing:React.FC = (props: any) => {
     return (
         loading? <ReactLoading type={"spin"} color={"yellow"}/> :
         <>
-            {reviews.map(r => {
-                const index = reviews.indexOf(r);
+            {reviews.map((r, index) => {
+                index = index - 1;
                 return(
                     <div className="landing-container" key={index}>
                         <div className="landing-label">
-                            <h3 className="landing-title title-font">{landingTitles[index]}</h3>
+                            <h3 className="landing-title title-font">{landingTitles[index+1]}</h3>
                             <h3 id={`${index}`} className="landing-toList" hidden={index < 3} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
                         </div>
                         <div className="landing-list">
-                            {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscar_winner, goldenglobes}) => 
-                                <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal}  poster={poster} 
-                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(index % 3 === 0)? 'average' : (index === 1 || index === 4)? 'jdl' : "kenjac"} /> )}
+                            {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscar_winner, goldenglobes}) => {
+                                return <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal}  poster={poster} 
+                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(index % 3 === 0 || index === -1)? 'average' : (index === 1 || index === 4)? 'jdl' : "kenjac"} /> 
+                            })}
                         </div>
                     </div>
                 )

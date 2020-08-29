@@ -182,7 +182,7 @@ const Random: React.FC = (props:any) => {
                     </div>
                     <div className="filter-select random-select">
                         <label className="random-label">Runtime: <span>Under</span> {selectedFilters.runtime.value} <span>minutes</span></label>
-                        <input id="random-range" className="range" type='range' min='63' max='229' defaultValue={selectedFilters.runtime.value} onChange={(e:any) => changeFilter({label: e.target.value, value: e.target.value}, 'runtime')} />
+                        <input id="random-range" className="range" type='range' min='63' max='233' defaultValue={selectedFilters.runtime.value} onChange={(e:any) => changeFilter({label: e.target.value, value: e.target.value}, 'runtime')} />
                     </div>
 
                     <button id="randomize" className="random-btn title-font" onClick={getRandom}>Randomize</button>
