@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9bfa62afa604a04d234e864dd2dd4725",
+    "revision": "4ab3761bf80989e6ae9129c3df6b5ada",
     "url": "/index.html"
   },
   {
-    "revision": "dad13978e5674a3fd74c",
-    "url": "/static/css/main.85699e14.chunk.css"
+    "revision": "1348160bcf35a1d5a54c",
+    "url": "/static/css/main.efb07e03.chunk.css"
   },
   {
-    "revision": "ba532a95544b4e87653c",
-    "url": "/static/js/2.b214c7d4.chunk.js"
+    "revision": "628e390936bca3b11d33",
+    "url": "/static/js/2.37629393.chunk.js"
   },
   {
-    "revision": "e23d72e353070f497294c1592aa53554",
-    "url": "/static/js/2.b214c7d4.chunk.js.LICENSE.txt"
+    "revision": "c64c486544348f10a6d6c716950bc223",
+    "url": "/static/js/2.37629393.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dad13978e5674a3fd74c",
-    "url": "/static/js/main.8fdd54d3.chunk.js"
+    "revision": "1348160bcf35a1d5a54c",
+    "url": "/static/js/main.f76562a7.chunk.js"
   },
   {
     "revision": "49cb89da10f542d4efa3",
@@ -128,10 +128,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/average.84ebfe6c.png"
   },
   {
-    "revision": "71d1c389d811fe07aa4eb156c153537c",
-    "url": "/static/media/back.71d1c389.png"
-  },
-  {
     "revision": "ff78c5e2b6c3846035dae28cdaa65583",
     "url": "/static/media/big_noodle_titling.ff78c5e2.ttf"
   },
@@ -142,18 +138,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "23776821e9161a2c20fedae79c3cbfb9",
     "url": "/static/media/globes_logo.23776821.png"
-  },
-  {
-    "revision": "32a2b2ee4344d78c8eb8faa459de7d79",
-    "url": "/static/media/gv.32a2b2ee.png"
-  },
-  {
-    "revision": "ff64f5559ed89ec03a2ed1b126f7d297",
-    "url": "/static/media/home.ff64f555.png"
-  },
-  {
-    "revision": "78c96986332d266bf91ceb472117293c",
-    "url": "/static/media/itunes.78c96986.jpg"
   },
   {
     "revision": "f1b59a368dcd19dc5672b20a57c8df9e",
@@ -172,43 +156,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/logo.577ce152.jpg"
   },
   {
-    "revision": "eb3e125e06ca4611d8e5b765ccb0db2b",
-    "url": "/static/media/metacritic.eb3e125e.png"
-  },
-  {
     "revision": "fb6b035ba3ea6178af4de260590c5987",
     "url": "/static/media/not_buttered.fb6b035b.png"
-  },
-  {
-    "revision": "696366dc75c7530d40ed16ae1ddd258c",
-    "url": "/static/media/omdb.696366dc.png"
   },
   {
     "revision": "59711e011e1e11670c38512a6b93184f",
     "url": "/static/media/oscars_logo.59711e01.png"
   },
   {
-    "revision": "b6481741b3c192a1b2aa4b4f2ed638dc",
-    "url": "/static/media/podcast.b6481741.jpg"
-  },
-  {
     "revision": "b35dfe8b12218c835da59ea5841b3d55",
     "url": "/static/media/right.b35dfe8b.png"
   },
   {
-    "revision": "995bbea2a80b05c3a353a61011dee2e6",
-    "url": "/static/media/rt.995bbea2.png"
-  },
-  {
     "revision": "3cab98c37eda5a26ca030d53198e4aae",
     "url": "/static/media/slider.3cab98c3.png"
-  },
-  {
-    "revision": "cf7f868327e50fb2c215d177d996173b",
-    "url": "/static/media/spotify.cf7f8683.jpg"
-  },
-  {
-    "revision": "ca227c72a4bcd78911462e74dab3208a",
-    "url": "/static/media/subscribe.ca227c72.jpg"
   }
 ]);

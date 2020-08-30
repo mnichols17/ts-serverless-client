@@ -115,7 +115,12 @@ const Home:React.FC = (props: any) => {
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
 			<h1 className="title-font">What to watch, and where to watch it.</h1>
 			<h6>(MOVIES STILL BEING ADDED)</h6>
-			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
+			<div id="outage-msg">
+				<h3>8/30 2:30 PM:</h3>
+				<hr />
+				<p>We apologize for the inconvience. We are currently experiencing issues with our server right now due to an external issue. We hope to be up and running shortly</p>
+			</div>
+			{/* <img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
 			<Search open={open} setOpen={setOpen}/>	
 			<div id="glossary-content">
                 <h2 className="title-font glossary-title">Icons Glossary</h2>
@@ -128,7 +133,7 @@ const Home:React.FC = (props: any) => {
             </div>
             <FiltersApplied filters={filters} />
             {viewList? <List />: <Landing />}
-			<button id="send-top" className="title-font" hidden={!(showTop && viewList)} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
+			<button id="send-top" className="title-font" hidden={!(showTop && viewList)} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button> */}
 		</div>
     )
 }
