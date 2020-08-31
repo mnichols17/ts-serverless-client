@@ -10,8 +10,8 @@ const App: React.FC = () => {
 		<Router>
 			<Switch>
 				<Route path="/" exact component={Home} />
-				{/* <Route path="/review/:rank" component={ReviewPage} />
-				<Route path="/random" component={RandomPage} /> */}
+				<Route path="/review/:rank" component={ReviewPage} />
+				<Route path="/random" component={RandomPage} />
 				<Redirect to="/" />
 			</Switch>
 		</Router>
