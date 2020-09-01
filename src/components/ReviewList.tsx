@@ -28,7 +28,7 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
                     <div className="info-review">
                         <img className='rank-type-icon' alt="rank-type" src={require(`../media/${actors}.png`)} />
                         <p className="movie-total">{total !== null? `${total}/100` : "N/A"}</p>
-                        <img className="butter" alt="butter" src={total >= 69 ? ButteredIcon : NotButteredIcon} />
+                        <img hidden={total === null} className="butter" alt="butter" src={total >= 69 ? ButteredIcon : NotButteredIcon} />
                     </div>
                     <p className="movie-title">{movie}</p>
                     <div className="movie-accolades">
@@ -41,12 +41,6 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
         </div>
     )
 }
-
-// interface ReviewListProps {
-//     reviews: Review[];
-//     getReviews: () => void;
-//     more: boolean;
-// }
 
 const ReviewList: React.FC = () => {
 

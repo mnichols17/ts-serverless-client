@@ -165,7 +165,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
             </div>
             <table id="review-info">
                 <tbody>
-                    <tr>
+                    <tr hidden={review.avgrank === null}>
                         <td>Buttered Status:</td>
                         <td><span id="butter-row">{review.buttered? "Officially Buttered" : "Not Buttered"} <img alt="butter" src={review.buttered? Buttered : NotButtered} /></span></td>
                     </tr>
@@ -187,7 +187,11 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                     </tr>
                     <tr>
                         <td>Genre:</td>
-                        <td>{review.genre? <button className="review-info-button search-icon" onClick={() => fromCategory('genres', review.genre as string)}>{review.genre} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
+                        <td>{review.genre? 
+                            review.genre.split(', ').map((genre:string) => 
+                                <button key={genre} className="review-info-button search-icon" onClick={() => fromCategory('genres', genre)}>{genre} <FontAwesomeIcon icon={faSearch} /></button>
+                            ) 
+                            : "N/A"}</td>
 
                     </tr>
                     <tr hidden={!review.subgenre}>
