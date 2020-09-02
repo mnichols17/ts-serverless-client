@@ -181,27 +181,28 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                         <td>Runtime:</td>
                         <td>{review.runtime} minutes</td>
                     </tr>
-                    <tr>
+                    <tr hidden={review.revenue === "0"}>
                         <td>Box Office:</td>
-                        <td>{review.revenue? `$${review.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : 'N/A'} </td>
+                        <td>{review.revenue? `$${review.revenue.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : 'N/A'} </td>
                     </tr>
                     <tr>
                         <td>Genre:</td>
-                        <td>{review.genre? 
-                            review.genre.split(', ').map((genre:string) => 
+                        <td>{(review.genre as string).split(', ').map((genre:string) => 
                                 <button key={genre} className="review-info-button search-icon" onClick={() => fromCategory('genres', genre)}>{genre} <FontAwesomeIcon icon={faSearch} /></button>
-                            ) 
-                            : "N/A"}</td>
+                            )}
+                        </td>
 
                     </tr>
                     <tr hidden={!review.subgenre}>
                         <td>Sub-Genre:</td>
                         <td>{review.subgenre? <button className="review-info-button search-icon" onClick={() => fromCategory('subGenres', review.subgenre as string)}>{review.subgenre} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
                     </tr>
-                    <tr hidden={!review.studiocompany}>
+                    <tr>
                         <td>Studio/Company:</td>
-                        <td>{review.studiocompany? <button className="review-info-button search-icon" onClick={() => fromCategory('studiocompanies', review.studiocompany as string)}>{review.studiocompany} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
-
+                        <td>{(review.studiocompany as string).split(', ').map((sc:string) => 
+                                <button key={sc} className="review-info-button search-icon" onClick={() => fromCategory('studiocompanies', sc)}>{sc} <FontAwesomeIcon icon={faSearch} /></button>
+                            )}
+                        </td>
                     </tr>
                     <tr hidden={!review.universe}>
                         <td>Universe:</td>
