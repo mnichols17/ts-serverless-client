@@ -148,7 +148,7 @@ export const SearchProvider = ({children}: ProviderProps) => {
 
     const getReviews = async(searchUrl: string, searchFilters: FiltersType, searchPage: number, reset?: boolean) => {
         const stringFilters = createStrings(searchFilters);
-        request(searchUrl, {...stringFilters, skip: reset? 0 : itemSkips, page: searchPage})
+        request('GET', searchUrl, {...stringFilters, skip: reset? 0 : itemSkips, page: searchPage})
         .then(async(res: any) => {
             isLoading(false);
 			if(res.data[0].length < 30 || (!reset && itemSkips === 3)) setMore(false); 

@@ -258,7 +258,7 @@ const ReviewPage: React.FC = (props:any) => {
 
     useEffect(() => {
         if(review.id !== rank && review.id !== undefined) setLoading(true);
-        request(`reviews/movie/${rank}`)
+        request('GET', `reviews/movie/${rank}`)
         .then((res: any) => {
             if(!res.data[0]) {
                 alert("No Movie Found!")

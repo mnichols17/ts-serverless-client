@@ -115,7 +115,7 @@ const Random: React.FC = (props:any) => {
         }
         setLoading(true); 
         if(error) setError('');
-        request('reviews/random', headers)
+        request('GET','reviews/random', headers)
         .then(async(res: any) => {
             setLoading(false);
             if(!res.data) setError('Sorry, there are no reviews that match those categories');

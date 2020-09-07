@@ -242,6 +242,8 @@
 }
 
 .landing-container {
+    display: flex;
+    flex-direction: column;
     width: 98%;
     margin: .5em 0em;
     overflow: auto;
@@ -249,6 +251,19 @@
 
 .landing-container:last-of-type {
     margin-bottom: 2em;
+}
+
+.landing-container > img {
+    width: 95%;
+    align-self: center;
+    margin: 1em 0 2em;
+}
+
+.landing-container > hr {
+    width: 90%;
+    border-color: #CCCCCC;
+    margin: 1em 0 2em;
+    align-self: center;
 }
 
 .landing-list {
@@ -1015,6 +1030,129 @@
     color: #643C11;
 }
 
+/* Registration */ 
+
+.user-access-loader {
+    margin-top: 25%;
+}
+
+.user-access {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-form {
+    justify-self: center;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+}
+
+.user-access > h4 {
+    text-align: center;
+    color: white;
+}
+
+.user-access > a > svg {
+    margin-left: 5px;
+}
+
+.user-access > h3 {
+    color: #FEDE16;
+}
+
+.user-access > p {
+    color: tomato;
+    margin: 0px;
+    margin-bottom: 10px; 
+    font-size: .8em;
+    text-align: center;
+    max-width: 350px;
+}
+
+.user-form > label {
+    font-size: .75em;
+    color: #CCCCCC;
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+    cursor: text;
+}
+
+.user-form > label > input {
+    margin: .2em 0 1em;
+    border: none;
+    border-bottom: 1px solid #CCCCCC;
+    padding-top: .25em;
+    padding-bottom: .25em;
+    font-size: 1.2em;
+    background: #282C34;
+    border-radius: 0;
+    color: white;
+}
+
+.user-form > label:focus-within{
+    color: #FEDE16;
+}
+
+.user-form > label:focus-within > input{
+    border-color: #FEDE16;
+    outline: none;
+}
+
+.user-form p {
+    margin: -.8em .1em 2em;
+    font-size: .9em;
+    color: #CCCCCC;
+    align-self: flex-start;
+}
+
+.register-icon {
+    color: #FEDE16;
+    margin-right: 2px;
+}
+
+.user-form > button{
+    border-radius: 6px;
+    padding: .3em;
+    font-size: 1.6em;
+    width: 165px;
+    border: none;
+    background: #FEDE16;
+    color: #643C11;
+    cursor: pointer;
+}
+
+#login-form > button {
+    border-radius: 6px;
+    padding: .3em;
+    font-size: 1.7em;
+    width: 110px;
+}
+
+.user-form > button:hover {
+    background: #ecbf08;
+}
+
+.user-form > h5 {
+    align-self: center;
+    font-size:.8em;
+    color: white;
+}
+
+.user-access a {
+    color: #FEDE16;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-access a:hover {
+    text-decoration: underline;
+}
+
 /* Width Specific */
 
 @media screen and (max-width: 370px) {
@@ -1223,6 +1361,7 @@
 }
 
 @media screen and (min-width: 500px) {
+
     #content > h3 {
         font-size: 1em;
         margin-top: 1.2em;
@@ -1256,6 +1395,11 @@
 }
 
 @media screen and (min-width: 630px) {
+    .landing-container > img {
+        width: 80%;
+        max-width: 575px;
+    }
+
     #content > h3 {
         margin-bottom: 0;
     }

@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import OMDB from '../media/omdb.png';
 import Subscribe from '../media/subscribe.jpg';
+import Weekly from '../media/weekly.png';
 import Spotify from '../media/spotify.jpg';
 import iTunes from '../media/itunes.jpg';
 
@@ -18,10 +19,10 @@ const Landing:React.FC = (props: any) => {
     const [reviews, setReviews] = useState<Review[][]>([]);
 
     const landingTitles = [
-        "Remembering the Life of Chadwick Boseman",
         "Newest Releases",
-        "Jeff D. Lowe's Picks of the Week",
-        "KenJac's Picks of the Week",
+        "Jeff D. Lowe's Picks",
+        "KenJac's Picks",
+        "Guest Picks: Nick Turani (@NickTurani)",
         "Top 10 All-Time",
         "Jeff D. Lowe's Top 10",
         "KenJac's Top 10",
@@ -35,13 +36,13 @@ const Landing:React.FC = (props: any) => {
 
     const showList = (e: any) => {
         switch(e.target.id){
-            case('4'):
+            case('5'):
                 resetPage({ratings: {value: 'jeff', label: <span className="filter-flex">Jeff D. Lowe <img className="filter-icon" src={require(`../media/jdl.png`)} alt={'test'}/></span>}})
                 break;
-            case('5'):
+            case('6'):
                 resetPage({ratings: {value: 'kenjac', label: <span className="filter-flex">KenJac <img className="filter-icon" src={require(`../media/kenjac.png`)} alt={'test'}/></span>}})
                 break;
-            case('6'):
+            case('7'):
                 resetPage({years: [{value: '2020', label: '2020'}]})
                 break;
             default:
@@ -53,29 +54,33 @@ const Landing:React.FC = (props: any) => {
     }
 
     const getReviews = async() => {
-        request('reviews/landing')
+        request('GET', 'reviews/landing')
         .then(async(res: any) => {
             setReviews(res.data)
             isLoading(false);
         })
         .catch(err => console.error(err))
-	}
+    }
+    
+    let looper = -1;
 
     return (
         loading? <ReactLoading type={"spin"} color={"yellow"}/> :
         <>
             {reviews.map((r, index) => {
-                index = index - 1;
+                looper = index === 4? 0 : looper + 1;
                 return(
                     <div className="landing-container" key={index}>
+                        <img hidden={index !== 1} src={Weekly} alt="Weekly"/>
+                        <hr hidden={index !== 4} />
                         <div className="landing-label">
-                            <h3 className="landing-title title-font">{landingTitles[index+1]}</h3>
-                            <h3 id={`${index}`} className="landing-toList" hidden={index < 3} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
+                            <h3 className="landing-title title-font">{landingTitles[index]}</h3>
+                            <h3 id={`${index}`} className="landing-toList" hidden={index < 4} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
                         </div>
                         <div className="landing-list">
                             {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscar_winner, goldenglobes}) => {
                                 return <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal}  poster={poster} 
-                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(index % 3 === 0 || index === -1)? 'average' : (index === 1 || index === 4)? 'jdl' : "kenjac"} /> 
+                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(looper % 3 === 0)? 'average' : (looper === 1 || looper === 4)? 'jdl' : "kenjac"} /> 
                             })}
                         </div>
                     </div>
