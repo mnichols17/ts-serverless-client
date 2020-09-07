@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.976736a6.chunk.css",
-    "main.js": "/static/js/main.6e458276.chunk.js",
-    "main.js.map": "/static/js/main.6e458276.chunk.js.map",
+    "main.css": "/static/css/main.50a837d3.chunk.css",
+    "main.js": "/static/js/main.bcd14272.chunk.js",
+    "main.js.map": "/static/js/main.bcd14272.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.270950e9.js",
     "runtime-main.js.map": "/static/js/runtime-main.270950e9.js.map",
-    "static/js/2.b214c7d4.chunk.js": "/static/js/2.b214c7d4.chunk.js",
-    "static/js/2.b214c7d4.chunk.js.map": "/static/js/2.b214c7d4.chunk.js.map",
+    "static/js/2.b5a3e89b.chunk.js": "/static/js/2.b5a3e89b.chunk.js",
+    "static/js/2.b5a3e89b.chunk.js.map": "/static/js/2.b5a3e89b.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.0c46e3b3a796f2e80e4eac5826407a76.js": "/precache-manifest.0c46e3b3a796f2e80e4eac5826407a76.js",
+    "precache-manifest.2eb160259cdee4d75a6e5d7fa61eaf5e.js": "/precache-manifest.2eb160259cdee4d75a6e5d7fa61eaf5e.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.976736a6.chunk.css.map": "/static/css/main.976736a6.chunk.css.map",
-    "static/js/2.b214c7d4.chunk.js.LICENSE.txt": "/static/js/2.b214c7d4.chunk.js.LICENSE.txt",
+    "static/css/main.50a837d3.chunk.css.map": "/static/css/main.50a837d3.chunk.css.map",
+    "static/js/2.b5a3e89b.chunk.js.LICENSE.txt": "/static/js/2.b5a3e89b.chunk.js.LICENSE.txt",
     "static/media/10.png": "/static/media/10.20c3d93e.png",
     "static/media/105.png": "/static/media/105.e6ecb3c4.png",
     "static/media/123.png": "/static/media/123.07d8d41b.png",
@@ -56,12 +56,13 @@
     "static/media/podcast.jpg": "/static/media/podcast.b6481741.jpg",
     "static/media/rt.png": "/static/media/rt.995bbea2.png",
     "static/media/spotify.jpg": "/static/media/spotify.cf7f8683.jpg",
-    "static/media/subscribe.jpg": "/static/media/subscribe.ca227c72.jpg"
+    "static/media/subscribe.jpg": "/static/media/subscribe.ca227c72.jpg",
+    "static/media/weekly.png": "/static/media/weekly.8a312ed5.png"
   },
   "entrypoints": [
     "static/js/runtime-main.270950e9.js",
-    "static/js/2.b214c7d4.chunk.js",
-    "static/css/main.976736a6.chunk.css",
-    "static/js/main.6e458276.chunk.js"
+    "static/js/2.b5a3e89b.chunk.js",
+    "static/css/main.50a837d3.chunk.css",
+    "static/js/main.bcd14272.chunk.js"
   ]
 }
