@@ -6,8 +6,7 @@ import { faInfoCircle, faAngleDoubleRight } from '@fortawesome/free-solid-svg-ic
 import request from '../utils/makeRequest';
 import ReactLoading from 'react-loading';
 
-
-export const Login:React.FC = (props: any) => {
+const Login:React.FC = (props: any) => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [user, setUser] = useState<string>("");
@@ -54,7 +53,7 @@ export const Login:React.FC = (props: any) => {
                         <input type="text" value={user} onChange={e => setUser(e.target.value)} />
                     </label>
                     <label>Password
-                        <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
+                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                     </label>
                     <br/>
                     <button className="title-font">Sign In</button>
@@ -64,3 +63,5 @@ export const Login:React.FC = (props: any) => {
     </div>
     )
 }
+
+export default Login;

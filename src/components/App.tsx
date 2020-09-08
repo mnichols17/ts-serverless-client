@@ -5,7 +5,8 @@ import Home from './Home';
 import ReviewPage from './Review';
 import RandomPage from './Random';
 // import {Registration, EmailConfirmed} from './Registration';
-// import {Login} from './Login';
+// import Login from './Login';
+// import Profile from './Profile';
 
 const App: React.FC = () => {
 	return (
@@ -14,9 +15,10 @@ const App: React.FC = () => {
 				<Route path="/" exact component={Home} />
 				<Route path="/review/:rank" component={ReviewPage} />
 				<Route path="/random" component={RandomPage} />
-				{/* <Route path="/login" component={Login} />
+				{/* <Route path="/profile" component={Profile} />
+				<Route path="/login" component={Login} />
 				<Route path="/register" component={Registration} />
-				<Route path="/confirm/:code" component={EmailConfirmed} /> */}
+				<Route path="/confirm/:id" component={EmailConfirmed} /> */}
 				<Redirect to="/" />
 			</Switch>
 		</Router>

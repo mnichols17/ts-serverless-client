@@ -9,8 +9,9 @@ export default async(type: Method, route: string, headers?: object, data?: objec
     axios({
         method: type,
         url: url + route,
-        headers: headers,
-        data
+        headers,
+        data,
+        withCredentials: true,
     })
     .then(res => {
         resolve(res)

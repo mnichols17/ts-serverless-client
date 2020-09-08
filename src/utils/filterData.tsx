@@ -785,7 +785,6 @@ export const universeOptions: DropdownOption[] = [
     {value: "Kick-Ass", label: "Kick-Ass"},
     {value: "Kung Fu Panda", label: "Kung Fu Panda"},
     {value: "LEGO", label: "LEGO"},
-    {value: "LEGO, DC (Non-DCEU)", label: "LEGO, DC (Non-DCEU)"},
     {value: "Last Summer Series", label: "Last Summer Series"},
     {value: "Legally Blonde", label: "Legally Blonde"},
     {value: "Leprechaun", label: "Leprechaun"},

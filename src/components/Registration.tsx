@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {Link, useParams} from 'react-router-dom';
 import * as yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
@@ -8,10 +8,26 @@ import ReactLoading from 'react-loading';
 
 
 export const EmailConfirmed:React.FC = () => {
+    const [loading, setLoading] = useState<boolean>(true);
+    const [confirmed, setConfirmed] = useState<boolean>(false);
+
+    const {id} = useParams();
+
+    useEffect(() => {
+        request('GET', `users/confirm/${id}`, {}, {})
+            .then((res: any) => {
+                console.log(res.data)
+                setLoading(false)
+            })
+            .catch(err => {
+                setLoading(false)
+            })
+    }, [])
 
     return(
     <div id="registration">
-        <h3>Email Confirmed! Sign-in to start using your account</h3>
+        {loading? <ReactLoading className="user-access-loader" type={"spin"} color={"yellow"}/> :
+            <h3>Email Confirmed! Sign-in to start using your account</h3>}
     </div>
     )
 }
@@ -94,11 +110,11 @@ export const Registration:React.FC = (props: any) => {
                         <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
                     </label>
                     <label>Password
-                        <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
+                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                         <p><FontAwesomeIcon className='register-icon' icon={faInfoCircle} />Password must contain at least 8 characters</p>
                         </label>
                     <label>Verify Password
-                        <input type="text" value={passwordCheck} onChange={e => setCheck(e.target.value)} />
+                        <input type="password" value={passwordCheck} onChange={e => setCheck(e.target.value)} />
                     </label>
                     <br/>
                     <button className="title-font">Register Account</button>
