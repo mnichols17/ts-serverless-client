@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import request from '../utils/makeRequest';
-import Review from '../utils/Review';
+import {Review} from '../utils/entities';
 import ReactLoading from 'react-loading';
 import {SearchContext} from '../utils/context';
 import {ReviewItem} from './ReviewList';
@@ -72,6 +72,7 @@ const Landing:React.FC = (props: any) => {
                 return(
                     <div className="landing-container" key={index}>
                         <img hidden={index !== 1} src={Weekly} alt="Weekly"/>
+                        <h3 className='landing-weekly' hidden={index !== 1}>Week of 9/6 - 9/12</h3>
                         <hr hidden={index !== 4} />
                         <div className="landing-label">
                             <h3 className="landing-title title-font">{landingTitles[index]}</h3>

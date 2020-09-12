@@ -1,13 +1,43 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import * as yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import request from '../utils/makeRequest';
 import ReactLoading from 'react-loading';
+import { SearchContext } from '../utils/context';
 
-const Login:React.FC = (props: any) => {
+export const Logout:React.FC = (props: any) => {
 
+    const {currentAuth} = useContext(SearchContext);
+    const [valid, setValid] = useState<boolean>(false);
+
+    useEffect(() => {
+        request('POST', 'users/logout', {}, {})
+        .then(async(res: any) => {
+            console.log("SUCCESS LOGOUT")
+            setValid(true);
+            currentAuth(false);
+            setTimeout(() => props.history.push('/'), 3000);
+        })
+        .catch(err => {
+            console.log("NO LOGOUT")
+            props.history.push('/')
+        })
+    }, [])
+
+
+    return(
+        valid? <div className='user-access'>
+            <h3>Logout Successful!</h3>
+            <p>Redirecting you home now</p>
+        </div> : <></>
+    )
+}
+
+export const Login:React.FC = (props: any) => {
+
+    const {currentAuth} = useContext(SearchContext);
     const [loading, setLoading] = useState<boolean>(false);
     const [user, setUser] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -29,8 +59,8 @@ const Login:React.FC = (props: any) => {
             setError("")
             request('POST', 'users/login', {}, data)
             .then(async(res: any) => {
-                console.log(res.data.msg)
-                setLoading(false)
+                currentAuth(true);
+                props.history.push('/profile')
             })
             .catch(err => {
                 setError(err)
@@ -63,5 +93,3 @@ const Login:React.FC = (props: any) => {
     </div>
     )
 }
-
-export default Login;

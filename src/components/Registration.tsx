@@ -27,7 +27,10 @@ export const EmailConfirmed:React.FC = () => {
     return(
     <div id="registration">
         {loading? <ReactLoading className="user-access-loader" type={"spin"} color={"yellow"}/> :
-            <h3>Email Confirmed! Sign-in to start using your account</h3>}
+            <>
+                <h3>Email Confirmed! Sign-in to start using your account</h3>
+                <Link to='/'>Return Home</Link>
+            </>}
     </div>
     )
 }

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createContext, useState, useCallback } from 'react';
 import request from '../utils/makeRequest';
-import Review from '../utils/Review';
+import {Review} from './entities';
+import makeRequest from '../utils/makeRequest';
 
 export type FiltersType = {
     ratings: {value: string, label: string | JSX.Element},
@@ -66,6 +67,8 @@ const emptyRandom: RandomType = {
 }
 
 interface Search {
+    checkAuth: boolean;
+    loggedIn: boolean;
     reviews: Review[];
     loading: boolean;
     viewList: boolean;
@@ -77,6 +80,7 @@ interface Search {
     filters: FiltersType;
     randomFilters: RandomType,
     getReviews: (searchUrl: string, searchFilters: FiltersType, searchPage: number, reset?: boolean) => void;
+    currentAuth: (lin: boolean) => void;
     isLoading: (l: boolean) => void;
     currentView: (isList: boolean) => void;
     currentUrl: (newUrl: string) => void;
@@ -108,6 +112,8 @@ const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompa
 
 
 export const SearchContext = createContext<Search>({
+    checkAuth: true,
+    loggedIn: false,
     reviews: [],
     loading: true,
     viewList: false,
@@ -119,6 +125,7 @@ export const SearchContext = createContext<Search>({
     filters: emptyFilters,
     randomFilters: emptyRandom,
     getReviews: () => {},
+    currentAuth: () => {},
     isLoading: () => {},
     currentView: () => {},
     currentUrl: () => {},
@@ -134,6 +141,8 @@ interface ProviderProps {
 }
 
 export const SearchProvider = ({children}: ProviderProps) => {
+    const[checkAuth, setCheck] = useState<boolean>(true);
+    const[loggedIn, setLoggedIn] = useState<boolean>(false);
     const[reviews, setReviews] = useState<Review[]>([]);
     const[loading, setLoading] = useState<boolean>(true);
     const[viewList, setView] = useState<boolean>(false);
@@ -145,6 +154,20 @@ export const SearchProvider = ({children}: ProviderProps) => {
     const[randomFilters, setRandom] = useState<RandomType>(emptyRandom);
     const[totalPages, setTotal] = useState<number>(0);
     const[itemSkips, setSkips] = useState<number>(0);
+
+    useEffect(() => {
+        makeRequest('GET', 'users/auth', {}, {})
+        .then((res:any) => {
+            console.log("LOG TRUE")
+            setLoggedIn(true)
+            setCheck(false)
+        })
+        .catch(err => {
+            console.log("LOG FALSE")
+            setLoggedIn(false)
+            setCheck(false)
+        })
+    }, [])
 
     const getReviews = async(searchUrl: string, searchFilters: FiltersType, searchPage: number, reset?: boolean) => {
         const stringFilters = createStrings(searchFilters);
@@ -159,7 +182,11 @@ export const SearchProvider = ({children}: ProviderProps) => {
 			setReviews(reset? res.data[0] : [...reviews, ...res.data[0]])
         })
         .catch(err => console.error(err))
-	}
+    }
+    
+    const currentAuth = useCallback((lin: boolean) => {
+        setLoggedIn(lin);
+    }, [])
 
     const isLoading = useCallback((l: boolean) => {
         setLoading(l);
@@ -215,8 +242,8 @@ export const SearchProvider = ({children}: ProviderProps) => {
     }, [])
 
     return (
-        <SearchContext.Provider value={{reviews, loading, viewList, url, query, page, totalPages, more, filters, randomFilters, 
-                            getReviews, isLoading, currentView, currentUrl, currentQuery, currentPage, currentFilters, currentRandom, resetPage}}>
+        <SearchContext.Provider value={{checkAuth, loggedIn, reviews, loading, viewList, url, query, page, totalPages, more, filters, randomFilters, 
+                            getReviews, currentAuth, isLoading, currentView, currentUrl, currentQuery, currentPage, currentFilters, currentRandom, resetPage}}>
             {children}
         </SearchContext.Provider>
     )

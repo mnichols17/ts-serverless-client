@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {useParams, Redirect} from 'react-router-dom';
 import request from '../utils/makeRequest';
-import Review from '../utils/Review';
+import {Review} from '../utils/entities';
 import handleTitle from '../utils/handleTitle';
 import ReactLoading from 'react-loading';
 import ReactPlayer from 'react-player/youtube';

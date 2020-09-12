@@ -3,7 +3,7 @@ import Select from 'react-select';
 import {genreOptions, subGenreOptions, decadeOptions, providerOptions} from '../utils/filterData';
 import request from '../utils/makeRequest';
 import ReactLoading from 'react-loading';
-import Review from '../utils/Review';
+import {Review} from '../utils/entities';
 import handleTitle from '../utils/handleTitle';
 import {ScoreTable} from './Review';
 import {SearchContext, RandomType} from '../utils/context';
@@ -11,7 +11,7 @@ import {ProviderLogos} from './Review';
 
 import Back from '../media/back.png';
 import Home from '../media/home.png';
-import Logo from '../media/logo.jpg';
+import RandomLogo from '../media/random.png';
 import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
 import KenJac from '../media/kenjac.png';
@@ -161,13 +161,7 @@ const Random: React.FC = (props:any) => {
 
 	return (
 		<div className="random" id="content">
-            <div id="review-navbar">
-                <div id="navbar-content">
-                    <img id="nav-back" onClick={navClick} className="img-button" src={Back} alt="Back" />
-                    <img id="nav-home" onClick={navClick} className="img-button" src={Home} alt="Home" /> 
-                </div>
-            </div>
-            <img id="logo" hidden={random.avgtotal > -1} src={Logo} onClick={navClick} alt="LOGO" />
+            <img id="logo" hidden={random.avgtotal > -1} src={RandomLogo} alt="RANDOMLOGO" />
             {loading? <ReactLoading className="random-loading" type={"spin"} color={"yellow"}/>:
                 random.avgtotal >= 0? <RandomReview passedProps={props} review={random} streamingOptions={streamingOptions} selectNew={selectNew} getRandom={getRandom} scores={scores}/> : <>
                     <h2>Find a random movie based on</h2>

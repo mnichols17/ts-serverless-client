@@ -1,34 +1,36 @@
-import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import * as yup from 'yup';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
+import React, {useState, useEffect, useContext} from 'react';
 import request from '../utils/makeRequest';
 import ReactLoading from 'react-loading';
+import { SearchContext } from '../utils/context';
+import {User} from '../utils/entities';
 
 const Profile:React.FC = (props: any) => {
 
-    const [loading, setLoading] = useState<boolean>(false);
+    const {checkAuth, loggedIn, currentAuth} = useContext(SearchContext);
+    const [loading, setLoading] = useState<boolean>(true);
      // TODO: Set up a user entity
-    const [user, setUser] = useState<{username: string, firstName: string, lastName: string}>({username: "", firstName: "", lastName: ""});
+    const [user, setUser] = useState<User>({username: "", firstname: "", lastname: ""});
 
     useEffect(() => {
-        // request('GET', `users/profile`, {}, {})
-        //     .then((res: any) => {
-        //         console.log(res.data)
-        //         setLoading(false)
-        //     })
-        //     .catch(err => {
-        //         setLoading(false)
-        //     })
+        request('GET', `users/profile`, {}, {})
+            .then((res: any) => {
+                setUser(res.data)
+                setLoading(false)
+            })
+            .catch(err => {
+                console.log("NOT SIGNED IN")
+                currentAuth(false);
+                props.history.push('/')
+            })
     }, [])
 
     return(
     <div className='user-profile'>
         {loading? <ReactLoading className="user-access-loader" type={"spin"} color={"yellow"}/> :
             <>
-            <h1>Username: {user.username}</h1>
-            <h1>Name: {user.firstName} {user.lastName}</h1>
+            <h1>{user.username}</h1>
+            <h4>Name: {user.firstname} {user.lastname}</h4>
+            <h4>Email: {user.email}</h4>
             </>}
     </div>
     )

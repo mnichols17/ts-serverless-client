@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
-import Review from '../utils/Review';
+import {Review} from '../utils/entities';
 import handleTitle from '../utils/handleTitle';
 import ReactLoading from 'react-loading';
-import {SearchContext, FiltersType} from '../utils/context';
+import {SearchContext} from '../utils/context';
 
 import '../styles/reviewList.css';
 import ButteredIcon from '../media/buttered.png';

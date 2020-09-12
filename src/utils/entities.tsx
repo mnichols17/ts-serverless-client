@@ -1,4 +1,4 @@
-export default interface Review {
+export interface Review {
     id?: number;
     avgrank?: number;
     movie: string;
@@ -40,4 +40,12 @@ export default interface Review {
     metacritic?: string;
     itunes?: string;
     spotify?: string;
+}
+
+export interface User {
+    email?: string;
+    username: string;
+    firstname?: string;
+    lastname?: string;
+    // password?: string?
 }
