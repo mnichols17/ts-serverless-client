@@ -40,6 +40,8 @@ export interface Review {
     metacritic?: string;
     itunes?: string;
     spotify?: string;
+    listed?: boolean;
+    seen?: boolean;
 }
 
 export interface User {

@@ -3,6 +3,7 @@ import request from '../utils/makeRequest';
 import ReactLoading from 'react-loading';
 import { SearchContext } from '../utils/context';
 import {User} from '../utils/entities';
+import { Link } from 'react-router-dom';
 
 const Profile:React.FC = (props: any) => {
 
@@ -31,6 +32,7 @@ const Profile:React.FC = (props: any) => {
             <h1>{user.username}</h1>
             <h4>Name: {user.firstname} {user.lastname}</h4>
             <h4>Email: {user.email}</h4>
+            <Link to="/lists">LISTS</Link>
             </>}
     </div>
     )

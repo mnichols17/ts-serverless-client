@@ -113,9 +113,9 @@ const Home:React.FC = (props: any) => {
 
     return(
 		<div id="content">
-			{/* <img id="logo" src={Logo} onClick={logoClick} alt="LOGO" /> */}
+			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
 			<h1 className="title-font">What to watch, and where to watch it.</h1>
-			{/* <h6>(MOVIES STILL BEING ADDED)</h6> */}
+			<h6>(MOVIES STILL BEING ADDED)</h6>
 			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
 			<Search open={open} setOpen={setOpen}/>	
 			<div id="glossary-content">

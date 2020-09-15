@@ -5,6 +5,7 @@
     background: #F4F6F7;
     border-radius: 0 0 6px 6px;
     box-shadow: 0px 2px 8px 3px black;
+    position: relative;
 } 
 
 .infinite-scroll-component__outerdiv {
@@ -88,6 +89,53 @@
     margin-left: auto;
     padding-right: 2px;
 }
+
+.movie-icons {
+    /* display: none; */
+    display: flex;
+    position: absolute;
+    background: rgb(39, 43, 51, .5);
+    width: 25px;
+    height: 40px;
+    border-radius: 12px;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px;
+    top: 2px;
+    left: 75px;
+}
+
+.movie-icon {
+    opacity: .8;
+    color: #F4F6F7;
+    margin: 2px 0;
+    cursor: pointer;
+}
+
+/* .movie:hover .movie-icons {
+    display: flex;
+} */
+
+/* .movie-icon:hover ADD BACK ON NON-MOBILE {
+    opacity: 1;
+    color: tomato;
+} */
+
+.watch-active {
+    opacity: 1;
+    color: #FEDE16;
+}
+
+.seen-active {
+    opacity: 1;
+    color: tomato;
+}
+
+/* .movie-icon:first-child:hover ADD BACK ON NON-MOBILE{
+    color: #FEDE16;
+} */
+
+/* Movie Lists */
 
 #list-break {
     width: 60%;

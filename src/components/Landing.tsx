@@ -22,7 +22,7 @@ const Landing:React.FC = (props: any) => {
         "Newest Releases",
         "Jeff D. Lowe's Picks",
         "KenJac's Picks",
-        "Guest Picks: Nick Turani (@NickTurani)",
+        "Guest Picks: Rone (@_rone)",
         "Top 10 All-Time",
         "Jeff D. Lowe's Top 10",
         "KenJac's Top 10",
@@ -72,16 +72,17 @@ const Landing:React.FC = (props: any) => {
                 return(
                     <div className="landing-container" key={index}>
                         <img hidden={index !== 1} src={Weekly} alt="Weekly"/>
-                        <h3 className='landing-weekly' hidden={index !== 1}>Week of 9/6 - 9/12</h3>
+                        <h3 className='landing-weekly' hidden={index !== 1}>Week of 9/13 - 9/19</h3>
                         <hr hidden={index !== 4} />
                         <div className="landing-label">
                             <h3 className="landing-title title-font">{landingTitles[index]}</h3>
                             <h3 id={`${index}`} className="landing-toList" hidden={index < 4} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
                         </div>
                         <div className="landing-list">
-                            {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscar_winner, goldenglobes}) => {
+                            {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscar_winner, goldenglobes, listed, seen}) => {
                                 return <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal}  poster={poster} 
-                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(looper % 3 === 0)? 'average' : (looper === 1 || looper === 4)? 'jdl' : "kenjac"} /> 
+                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(looper % 3 === 0)? 'average' : (looper === 1 || looper === 4)? 'jdl' : "kenjac"} 
+                                listed={listed} seen={seen}/> 
                             })}
                         </div>
                     </div>

@@ -21,6 +21,7 @@ export type FiltersType = {
     awards: object[],
     runtime: {value: string, label: string},
     ratingRange: number[],
+    type: string;
 }
 
 export type RandomType = {
@@ -55,6 +56,7 @@ const emptyFilters: FiltersType = {
     awards: [],
     runtime: {value: "233", label: "233"},
     ratingRange: [0, 100],
+    type: "",
 }
 
 const emptyRandom: RandomType = {
@@ -91,7 +93,7 @@ interface Search {
     resetPage: (newFilters?: object) => void;
 }
 
-const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards, runtime, ratingRange}: FiltersType) => ({
+const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards, runtime, ratingRange, type}: FiltersType) => ({
 	ratings: ratings.value,
 	directors: directors.map((select: any) => select.value).join('@'),
 	sort: sort.value,
@@ -107,7 +109,8 @@ const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompa
 	providers: providers.map((select: any) => select.value).join('@'),
 	awards: awards.map((select: any) => select.value).join('@'),
 	runtime: runtime.value,
-	ratingRange: ratingRange.join('@'),
+    ratingRange: ratingRange.join('@'),
+    type
 })
 
 
@@ -155,19 +158,19 @@ export const SearchProvider = ({children}: ProviderProps) => {
     const[totalPages, setTotal] = useState<number>(0);
     const[itemSkips, setSkips] = useState<number>(0);
 
-    useEffect(() => {
-        makeRequest('GET', 'users/auth', {}, {})
-        .then((res:any) => {
-            console.log("LOG TRUE")
-            setLoggedIn(true)
-            setCheck(false)
-        })
-        .catch(err => {
-            console.log("LOG FALSE")
-            setLoggedIn(false)
-            setCheck(false)
-        })
-    }, [])
+    // useEffect(() => {
+    //     makeRequest('GET', 'users/auth', {}, {})
+    //     .then((res:any) => {
+    //         console.log("LOG TRUE")
+    //         setLoggedIn(true)
+    //         setCheck(false)
+    //     })
+    //     .catch(err => {
+    //         console.log("LOG FALSE")
+    //         setLoggedIn(false)
+    //         setCheck(false)
+    //     })
+    // }, [])
 
     const getReviews = async(searchUrl: string, searchFilters: FiltersType, searchPage: number, reset?: boolean) => {
         const stringFilters = createStrings(searchFilters);

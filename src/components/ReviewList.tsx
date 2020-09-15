@@ -1,10 +1,14 @@
-import React, {useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
 import {Review} from '../utils/entities';
 import handleTitle from '../utils/handleTitle';
 import ReactLoading from 'react-loading';
 import {SearchContext} from '../utils/context';
+import updateList from '../utils/updateList';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faTicketAlt } from '@fortawesome/free-solid-svg-icons'
 
 import '../styles/reviewList.css';
 import ButteredIcon from '../media/buttered.png';
@@ -12,13 +16,31 @@ import NotButteredIcon from '../media/not_buttered.png';
 import OscarsLogo from '../media/oscars_logo.png';
 import GlobesLogo from '../media/globes_logo.png';
 
-export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgrank, oscar_winner, goldenglobes, actors}) => {
+export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgrank, oscar_winner, goldenglobes, actors, listed, seen}) => {
     if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
     const total = avgtotal;
     const rank = avgrank;
     const img_src = poster? false
     : id === 6969? "https://lh3.googleusercontent.com/-hE37W6LEh0M/XzoUom1xj1I/AAAAAAAAApc/X5_tkwnlmEsCVgNgFaUxEdOyIRgTUteiACK8BGAsYHg/s512/2020-08-16.jpg"
     : 'https://pbs.twimg.com/media/ELsOD8iWwAEd_9b.jpg:large'
+
+    // const [watchlist, setWatchlist] = useState<boolean>(listed || false);
+    // const [seenIt, setSeenIt] = useState<boolean>(seen || false);
+
+    // const updateListIcons = (list:string) => {
+    //     console.log(list)
+    //     if(list === 'watchlist'){
+    //         setWatchlist(prev => {
+    //             updateList(id as number, 'watch', !prev)
+    //             return !prev
+    //         })
+    //     } else {
+    //         setSeenIt(prev => {
+    //             updateList(id as number, 'seen', !prev)
+    //             return !prev
+    //         })
+    //     }
+    // }
 
     return(
         <div className="movie">
@@ -38,8 +60,13 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
                     </div>
                 </div>
             </Link>
+            {/* <div className="movie-icons">
+                <FontAwesomeIcon id="watchlist" onClick={() => updateListIcons('watchlist')} className={watchlist? "movie-icon watch-active" : "movie-icon"} icon={faPlus} />
+                <FontAwesomeIcon id='seenIt' onClick={() => updateListIcons('seenit')}  className={seenIt? "movie-icon seen-active" : "movie-icon"} icon={faTicketAlt} />
+            </div> */}
         </div>
     )
+    //onClick={() => console.log("PLUS")} 
 }
 
 const ReviewList: React.FC = () => {
@@ -55,10 +82,11 @@ const ReviewList: React.FC = () => {
     return (
         !reviews.length ? <h2 id="empty">No results found</h2> : 
         <InfiniteScroll className="infinitescroll" loader={LoadingItem} dataLength={reviews.length} next={moreReviews} hasMore={more}>
-            {reviews.map(({id, avgrank, jlrank, kjrank, avgtotal, jeff, kenjac, movie, poster, oscar_winner, goldenglobes}) => {
+            {reviews.map(({id, avgrank, jlrank, kjrank, avgtotal, jeff, kenjac, movie, poster, oscar_winner, goldenglobes, listed, seen}) => {
                     const total = (jeff as number) >= 0? jeff as number : (kenjac as number) >= 0? kenjac as number : avgtotal;
                     return <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={total} 
-                        poster={poster} oscar_winner={oscar_winner} actors={(jeff as number) >= 0? "jdl" : (kenjac as number) >= 0? 'kenjac' : 'average'} goldenglobes={goldenglobes} />
+                        poster={poster} oscar_winner={oscar_winner} actors={(jeff as number) >= 0? "jdl" : (kenjac as number) >= 0? 'kenjac' : 'average'} goldenglobes={goldenglobes} 
+                        listed={listed} seen={seen}/>
                 })}
         </InfiniteScroll>
     );

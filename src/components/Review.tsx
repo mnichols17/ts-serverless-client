@@ -23,7 +23,51 @@ import Metacritic from '../media/metacritic.png';
 import Podcast from '../media/podcast.jpg';
 import Spotify from '../media/spotify.jpg';
 import iTunes from '../media/itunes.jpg';
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faPlus, faTicketAlt} from '@fortawesome/free-solid-svg-icons'
+
+const UserInteractions: React.FC = () => {
+
+    const[text, setText] = useState<{body: string; add: boolean}>({body: "", add: false});
+    const[watchlist, setWatchlist] = useState<boolean>(false);
+    const[seenIt, setSeenIt] = useState<boolean>(false);
+
+    const updateList = (list:string) => {
+        console.log(list)
+        if(list === 'seenit'){
+            setSeenIt(prev => {
+                setText({
+                    body: prev? 'Movie removed from your SEEN IT' : 'Movie added to your SEEN IT',
+                    add: !prev
+                })
+                return !prev
+            });
+        } else {
+            setWatchlist(prev => {
+                setText({
+                    body: prev? 'Movie removed from your Watchlist' : 'Movie added to your Watchlist',
+                    add: !prev
+                })
+                return !prev
+            });
+        }
+    }
+
+    return(
+        <>
+            <p hidden={!text.body.length} style={{color: text.add? '#6CEA4A':'tomato'}} id="review-userInteractions-text">{text.body}</p>
+            <div id="review-userInteractions">
+                <button id="watchlist" className={watchlist? 'active title-font' : 'title-font'} onClick={() => updateList('watchlist')} >
+                    <FontAwesomeIcon icon={faPlus} size='xs'/>
+                    Watchlist
+                </button>
+                <button id="seenit" className={seenIt? 'active title-font' : 'title-font'} onClick={() => updateList('seenit')}>
+                    <FontAwesomeIcon icon={faTicketAlt} size='xs'/>
+                    SEEN IT
+                </button>
+            </div>
+        </>
+    )
+}
 
 interface AwardProps {
     awards: (string|undefined)[][];
@@ -135,6 +179,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                         return <ScoreTable key={icon} icon={icon} score={score as number} rank={rank as number} />
                     })}
                 </div>
+                {/* <UserInteractions /> */}
                 <p id="review-plot">{review.plot}</p>
                 <h3 className="review-detail title-font">Director</h3>
                 <p id="review-director" className="review-people" onClick={() => fromCategory('directors', review.director)}>{review.director} <FontAwesomeIcon icon={faSearch} /></p>

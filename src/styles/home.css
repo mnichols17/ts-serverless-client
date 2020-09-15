@@ -632,6 +632,40 @@
     height: 70px;
 }
 
+#review-userInteractions-text {
+    margin: .5em 0 .5em;
+    font-size: .8em;
+}
+
+#review-userInteractions {
+    margin: 0 0 1em;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+#review-userInteractions button {
+    background: rgb(128, 128, 128, .6);
+    border: none;
+    border-radius: 8px;
+    color: #f4f6f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7em;
+    margin: 0 12px;
+    padding: 5px 10px;
+}
+
+#review-userInteractions .active, #review-userInteractions .active > svg {
+    color: #6CEA4A;
+}
+
+#review-userInteractions svg {
+    margin-right: 10px;
+    color: white;
+}
+
 #review-plot {
     margin: 0 0 .5em;
     font-size: 1em;
@@ -1262,6 +1296,39 @@
 
 .user-profile > h1 {
     align-self: center;
+}
+
+/* User Lists */
+
+#userLists {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 0;
+}
+
+.userLists-tab {
+    display: flex; 
+}
+
+.userLists-tab button {
+    background: #282C34;
+    color: #FEDE16;
+    border: 1px solid #FEDE16;
+    border-radius: 6px;
+    margin: 0 4px;
+    font-size: 1.2em;
+    padding: 6px;
+    text-align: center;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userLists-tab .active {
+    color: #282C34;
+    background: #FEDE16;
 }
 
 /* Width Specific */

@@ -7,9 +7,10 @@ import Filters from './Filters';
 interface SearchProps {
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    hide?: boolean;
 }
 
-const Search: React.FC<SearchProps> = ({open, setOpen}) => {
+const Search: React.FC<SearchProps> = ({open, setOpen, hide}) => {
 
     const {query, isLoading, currentUrl, currentQuery} = useContext(SearchContext);
     const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
@@ -32,7 +33,8 @@ const Search: React.FC<SearchProps> = ({open, setOpen}) => {
 
     return(
         <>
-            <h3>Use filters to find where movies are streaming, and more...</h3>
+            <h3 hidden={hide}>Use filters to find where movies are streaming, and more...</h3>
+            <h3 hidden={!hide}></h3>
             <div id="search">
                 <button id="filter-show" onClick={() => setOpen(!open)}>{open? "Hide" : "Filters"} <FontAwesomeIcon icon={faSort} /></button>
                 <div id="search-input">

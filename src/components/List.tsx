@@ -6,6 +6,7 @@ import {SearchContext} from '../utils/context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import { Review } from '../utils/entities';
 
 interface PaginationProps {
 	changePage: (e:any) => void;
@@ -37,13 +38,18 @@ const Pagination: React.FC<PaginationProps> = ({changePage}) => {
 	)
 }
 
-const List:React.FC = () => {
+interface ListProps {
+	fromUserList?: boolean;
+}
+
+const List:React.FC<ListProps> = ({fromUserList}) => {
 	smoothscroll.polyfill();
 
 	const {reviews, loading, url, filters, page, totalPages, more, getReviews, isLoading, currentPage} = useContext(SearchContext);
 
 	useEffect(() => {
-		if(reviews.length === 0){
+		console.log("HIT?")
+		if(reviews.length === 0 && !fromUserList){
 			if(!loading) isLoading(true);
 			getReviews(url, filters, page, true);
 		}
@@ -56,7 +62,7 @@ const List:React.FC = () => {
 		window.scrollTo({top: 400})
 	}
 
-    return(
+	return(
 		loading? <ReactLoading type={"spin"} color={"yellow"}/> : 
 		<>
 			<Pagination changePage={changePage}/>
@@ -66,7 +72,7 @@ const List:React.FC = () => {
 				<button value={page+1} style={{visibility: page === totalPages? "hidden" : "visible"}} onClick={changePage}>Next<FontAwesomeIcon style={{marginLeft: '2px'}} icon={faAngleRight} /></button>
 			</div>
 		</>
-    )
+	)
 }
 
 export default List;
