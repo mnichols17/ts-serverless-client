@@ -5,27 +5,29 @@ import { faTimes, faSort } from '@fortawesome/free-solid-svg-icons';
 import Filters from './Filters';
 
 interface SearchProps {
+    fromUserList?: boolean;
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     hide?: boolean;
 }
 
-const Search: React.FC<SearchProps> = ({open, setOpen, hide}) => {
+const Search: React.FC<SearchProps> = ({fromUserList, open, setOpen, hide}) => {
 
     const {query, isLoading, currentUrl, currentQuery} = useContext(SearchContext);
     const[typingTimeout, setTyping] = useState<NodeJS.Timeout | undefined>();
 
     const handleQuery = (e?: React.ChangeEvent<HTMLInputElement>) => {
         const input = e? e.target.value : "";
+        const urlBase = fromUserList? 'reviews/lists/username' : 'reviews/all'
     
         isLoading(true);
 
         if(typingTimeout) clearTimeout(typingTimeout)
 
-        if(input === "") currentUrl('reviews/all')
+        if(input === "") currentUrl(urlBase)
         else {
             setTyping(setTimeout(async() => {
-                currentUrl(`reviews/search/?query=${input}`)
+                currentUrl(`${urlBase}/?query=${input}`)
             }, 600))
         }
         currentQuery(input);

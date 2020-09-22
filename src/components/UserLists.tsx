@@ -1,41 +1,55 @@
-import React, {useState, useEffect, useContext, useRef} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import List from './List';
 import Search from './Search';
 import { SearchContext } from '../utils/context';
-import makeRequest from '../utils/makeRequest';
-import { Review } from '../utils/entities';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
-const UserLists:React.FC = () => {
+const UserLists:React.FC = (props:any) => {
 
-    const currList = useRef(true);
-	const {loading, reviews, url, filters, page, getReviews, isLoading, currentUrl} = useContext(SearchContext);
-    const[user_list, setUserList] = useState<Review[]>([])
+	const {isLoading, currentType, checkAuth, loggedIn, viewList} = useContext(SearchContext);
     const[watchlist, setList] = useState<boolean>(true)
     const[open, setOpen] = useState<boolean>(false);
+	const[showTop, setTop] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log("HIT UE on UL")
-        //isLoading(true)
-        //currentUrl('reviews/lists/username')
-        if(!loading) isLoading(true);
-            //type: watchlist? 'watch' : 'seen'
-        console.log("SEARCHING WITH", watchlist? 'watch' : 'seen')
-        getReviews('reviews/lists/username', {...filters, type: watchlist? 'watch' : 'seen'}, page, true);
-    }, [watchlist])
+        if(!loggedIn){
+            isLoading(true);
+            if(!checkAuth) props.history.push('/login')
+        } else if (viewList !== 2){
+            currentType(watchlist? 'watch' : 'seen')
+        }
+    }, [watchlist, checkAuth, viewList])
+
+    useEffect(() => {
+		window.addEventListener('scroll', checkTop)
+
+		return () => window.removeEventListener('scroll', checkTop)
+    }, [showTop, open])
 
     const switchList = (e:any) => {
         setList(e.target.id === 'watchlist')
+        currentType(e.target.id === 'watchlist'? 'watch' : 'seen')
     }
 
-    console.log(watchlist)
+    const checkTop = () => {
+		if(!showTop && window.pageYOffset > (open? 1500:700)){
+			setTop(true)
+		} else if(showTop && window.pageYOffset <= (open? 1500:700)){
+			setTop(false)
+		}
+	}
+
     return(
-        <div id="userLists">
+        checkAuth? null
+        : <div id="userLists">
             <div className="userLists-tab">
                 <button id='watchlist' onClick={switchList} className={watchlist? 'active' : ''} >Watchlist</button>
                 <button id='seenit' onClick={switchList} className={!watchlist? 'active' : ''}>SEEN IT</button>
             </div>
-            <Search open={open} setOpen={setOpen} hide={true}/>
-            <List fromUserList={true} />
+            <Search fromUserList={true} open={open} setOpen={setOpen} hide={true}/>
+            {viewList === 2 && <List />}
+			<button id="send-top" className="title-font" hidden={!(showTop && viewList)} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
         </div>
     )
 }

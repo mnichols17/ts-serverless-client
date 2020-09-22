@@ -73,7 +73,7 @@ interface Search {
     loggedIn: boolean;
     reviews: Review[];
     loading: boolean;
-    viewList: boolean;
+    viewList: number;
     url: string;
     query: string;
     page: number;
@@ -84,13 +84,14 @@ interface Search {
     getReviews: (searchUrl: string, searchFilters: FiltersType, searchPage: number, reset?: boolean) => void;
     currentAuth: (lin: boolean) => void;
     isLoading: (l: boolean) => void;
-    currentView: (isList: boolean) => void;
+    currentView: (newView: number) => void;
     currentUrl: (newUrl: string) => void;
     currentQuery: (newQuery: string) => void;
     currentPage: (newPage: number) => void;
     currentFilters: (newFilters: object, reset?: boolean) => void;
     currentRandom: (newRandom: object, reset?: boolean) => void;
     resetPage: (newFilters?: object) => void;
+    currentType: (newType: string) => void;
 }
 
 const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards, runtime, ratingRange, type}: FiltersType) => ({
@@ -119,7 +120,7 @@ export const SearchContext = createContext<Search>({
     loggedIn: false,
     reviews: [],
     loading: true,
-    viewList: false,
+    viewList: 0,
     url: 'reviews/all',
     query: "",
     page: 1,
@@ -137,6 +138,7 @@ export const SearchContext = createContext<Search>({
     currentFilters: () => {},
     currentRandom: () => {},
     resetPage: () => {},
+    currentType: () => {},
 });
 
 interface ProviderProps {
@@ -148,7 +150,8 @@ export const SearchProvider = ({children}: ProviderProps) => {
     const[loggedIn, setLoggedIn] = useState<boolean>(false);
     const[reviews, setReviews] = useState<Review[]>([]);
     const[loading, setLoading] = useState<boolean>(true);
-    const[viewList, setView] = useState<boolean>(false);
+    const[viewList, setView] = useState<number>(0);
+    // const[viewList, setView] = useState<boolean>(false);
     const[url, setUrl] = useState<string>('reviews/all');
     const[query, setQuery] = useState<string>("");
     const[page, setPage] = useState<number>(1);
@@ -158,22 +161,23 @@ export const SearchProvider = ({children}: ProviderProps) => {
     const[totalPages, setTotal] = useState<number>(0);
     const[itemSkips, setSkips] = useState<number>(0);
 
-    // useEffect(() => {
-    //     makeRequest('GET', 'users/auth', {}, {})
-    //     .then((res:any) => {
-    //         console.log("LOG TRUE")
-    //         setLoggedIn(true)
-    //         setCheck(false)
-    //     })
-    //     .catch(err => {
-    //         console.log("LOG FALSE")
-    //         setLoggedIn(false)
-    //         setCheck(false)
-    //     })
-    // }, [])
+    useEffect(() => {
+        makeRequest('GET', 'users/auth', {}, {})
+        .then((res:any) => {
+            console.log("LOG TRUE")
+            setLoggedIn(true)
+            setCheck(false)
+        })
+        .catch(err => {
+            console.log("LOG FALSE")
+            setLoggedIn(false)
+            setCheck(false)
+        })
+    }, [])
 
     const getReviews = async(searchUrl: string, searchFilters: FiltersType, searchPage: number, reset?: boolean) => {
         const stringFilters = createStrings(searchFilters);
+        console.log(searchUrl, searchFilters.type)
         request('GET', searchUrl, {...stringFilters, skip: reset? 0 : itemSkips, page: searchPage})
         .then(async(res: any) => {
             isLoading(false);
@@ -195,18 +199,18 @@ export const SearchProvider = ({children}: ProviderProps) => {
         setLoading(l);
     }, [])
 
-    const currentView = useCallback((isList: boolean) => {
-        if(!isList) setReviews([])
-        setView(isList);
+    const currentView = useCallback((newView: number) => {
+        setReviews([])
+        setView(newView);
     }, [])
 
     const currentUrl = useCallback((newUrl: string) => {
         setLoading(true);
-        setUrl(newUrl);
-        setView(true);
         setPage(1);
-        getReviews(newUrl, filters, 1, true);
-    }, [filters])
+        setReviews([])
+        setUrl(newUrl);
+        if(viewList === 0) setView(1);
+    }, [filters, viewList])
 
     const currentQuery = useCallback((newQuery: string) => {
         setQuery(newQuery);
@@ -220,10 +224,12 @@ export const SearchProvider = ({children}: ProviderProps) => {
 
     const currentFilters = useCallback((newFilters: object, reset?: boolean) => {
         setLoading(true);
-        setFilters(reset? emptyFilters : newFilters as FiltersType);
+        const f = reset? emptyFilters : newFilters as FiltersType
+        const updateFilters = {...f, type: filters.type}
+        setFilters(updateFilters);
         setPage(1);
-        getReviews(url, reset? emptyFilters : newFilters as FiltersType , 1, true);
-    }, [url])
+        getReviews(url, updateFilters , 1, true);
+    }, [url, filters])
 
     const currentRandom = useCallback((newRandom: object, reset?: boolean) => {
         setRandom(reset? emptyRandom : newRandom as RandomType);
@@ -241,12 +247,25 @@ export const SearchProvider = ({children}: ProviderProps) => {
         }: {
             ...emptyFilters,
         });
-        setView(!!newFilters)
+        setView(!!newFilters? 1 : 0)
     }, [])
 
+    const currentType = useCallback((newType: string) => {
+        setLoading(true);
+        setReviews([])
+        setQuery('')
+        const withType = {...emptyFilters, type: newType}
+        setFilters(withType)
+        setView(2);
+        setPage(1);
+        setUrl('reviews/lists/username')
+    }, []) 
+
     return (
-        <SearchContext.Provider value={{checkAuth, loggedIn, reviews, loading, viewList, url, query, page, totalPages, more, filters, randomFilters, 
-                            getReviews, currentAuth, isLoading, currentView, currentUrl, currentQuery, currentPage, currentFilters, currentRandom, resetPage}}>
+        <SearchContext.Provider value={{checkAuth, loggedIn, reviews, loading, viewList, 
+                            url, query, page, totalPages, more, filters, randomFilters, 
+                            getReviews, currentAuth, isLoading, currentView, currentUrl, currentQuery, 
+                            currentPage, currentFilters, currentRandom, resetPage, currentType}}>
             {children}
         </SearchContext.Provider>
     )

@@ -9,10 +9,9 @@ import ReactLoading from 'react-loading';
 
 export const EmailConfirmed:React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
-    const [confirmed, setConfirmed] = useState<boolean>(false);
-
     const {id} = useParams();
 
+    //@TODO Make sure confirmation code is legit
     useEffect(() => {
         request('GET', `users/confirm/${id}`, {}, {})
             .then((res: any) => {

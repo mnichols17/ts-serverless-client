@@ -10,12 +10,12 @@ const AuthRoute: React.FC<RouteProps> = (props: RouteProps) => {
     const {component, ...rest} = props;
 
     useEffect(() => {
-        console.log("LOGGED IN", loggedIn, "CHECKING", checkAuth)
+        // console.log("LOGGED IN", loggedIn, "CHECKING", checkAuth)
         if(!checkAuth) setData({user: loggedIn})
     }, [checkAuth, loggedIn])
 
     const renderRoute = (routeProps: RouteComponentProps) => {
-        console.log("RENDER PROPER ROUTE", data)
+        // console.log("RENDER PROPER ROUTE", data)
         // loading screen?
         if(!data) return null
 

@@ -8,6 +8,7 @@ import ReactPlayer from 'react-player/youtube';
 import {SearchContext} from '../utils/context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {ReviewItem} from './ReviewList';
+import updateList from '../utils/updateList';
 
 import Back from '../media/back.png';
 import Home from '../media/home.png';
@@ -25,16 +26,22 @@ import Spotify from '../media/spotify.jpg';
 import iTunes from '../media/itunes.jpg';
 import { faSearch, faPlus, faTicketAlt} from '@fortawesome/free-solid-svg-icons'
 
-const UserInteractions: React.FC = () => {
+interface UserInteractionsProps {
+    id: number;
+    watch: boolean;
+    seen: boolean;
+}
+
+const UserInteractions: React.FC<UserInteractionsProps> = ({id, watch, seen}) => {
 
     const[text, setText] = useState<{body: string; add: boolean}>({body: "", add: false});
-    const[watchlist, setWatchlist] = useState<boolean>(false);
-    const[seenIt, setSeenIt] = useState<boolean>(false);
+    const[watchlist, setWatchlist] = useState<boolean>(watch);
+    const[seenIt, setSeenIt] = useState<boolean>(seen);
 
-    const updateList = (list:string) => {
-        console.log(list)
-        if(list === 'seenit'){
+    const updateListIcons = (list:string) => {
+        if(list === 'seen'){
             setSeenIt(prev => {
+                updateList(id, list, !prev)
                 setText({
                     body: prev? 'Movie removed from your SEEN IT' : 'Movie added to your SEEN IT',
                     add: !prev
@@ -43,6 +50,7 @@ const UserInteractions: React.FC = () => {
             });
         } else {
             setWatchlist(prev => {
+                updateList(id, list, !prev)
                 setText({
                     body: prev? 'Movie removed from your Watchlist' : 'Movie added to your Watchlist',
                     add: !prev
@@ -53,19 +61,19 @@ const UserInteractions: React.FC = () => {
     }
 
     return(
-        <>
-            <p hidden={!text.body.length} style={{color: text.add? '#6CEA4A':'tomato'}} id="review-userInteractions-text">{text.body}</p>
-            <div id="review-userInteractions">
-                <button id="watchlist" className={watchlist? 'active title-font' : 'title-font'} onClick={() => updateList('watchlist')} >
+        <div id="userInteractions">
+            <p hidden={!text.body.length} style={{color: text.add? '#6CEA4A':'tomato'}} id="userInteractions-text">{text.body}</p>
+            <div id="userInteractions-btns">
+                <button id="watchlist" className={watchlist? 'active title-font' : 'title-font'} onClick={() => updateListIcons('watch')} >
                     <FontAwesomeIcon icon={faPlus} size='xs'/>
                     Watchlist
                 </button>
-                <button id="seenit" className={seenIt? 'active title-font' : 'title-font'} onClick={() => updateList('seenit')}>
+                <button id="seenit" className={seenIt? 'active title-font' : 'title-font'} onClick={() => updateListIcons('seen')}>
                     <FontAwesomeIcon icon={faTicketAlt} size='xs'/>
                     SEEN IT
                 </button>
             </div>
-        </>
+        </div>
     )
 }
 
@@ -146,11 +154,12 @@ interface ReviewInfoProps {
     review: Review;
     providers: object[];
     similar: Review[];
-    fromCategory: (category?: string, value?: string | number) => void
-    navClick: () => void
+    fromCategory: (category?: string, value?: string | number) => void;
+    navClick: () => void;
+    loggedIn: boolean;
 }
 
-const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, fromCategory, navClick}) => {
+const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, fromCategory, navClick, loggedIn}) => {
 
     const scores = [
         {icon: JDL, score: review.jeff, rank: review.jlrank},
@@ -168,7 +177,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
             <div id="review-navbar">
                 <div id="navbar-content">
                     <img id="nav-back" onClick={navClick} className="img-button" src={Back} alt="Back" />
-                    <img id="nav-home" onClick={() => fromCategory()} className="img-button" src={Home} alt="Home" /> 
+                    {/* <img id="nav-home" onClick={() => fromCategory()} className="img-button" src={Home} alt="Home" />  */}
                 </div>
             </div>
             <h2 id="reviewPage-title">{review.movie}</h2>
@@ -179,7 +188,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                         return <ScoreTable key={icon} icon={icon} score={score as number} rank={rank as number} />
                     })}
                 </div>
-                {/* <UserInteractions /> */}
+                {loggedIn && <UserInteractions id={review.id as number} watch={review.listed as boolean} seen={review.seen as boolean} />}
                 <p id="review-plot">{review.plot}</p>
                 <h3 className="review-detail title-font">Director</h3>
                 <p id="review-director" className="review-people" onClick={() => fromCategory('directors', review.director)}>{review.director} <FontAwesomeIcon icon={faSearch} /></p>
@@ -294,7 +303,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
 const ReviewPage: React.FC = (props:any) => {
 
     const {rank} = useParams();
-    const {resetPage} = useContext(SearchContext);
+    const {resetPage, loggedIn} = useContext(SearchContext);
     
     const[loading, setLoading] = useState<boolean>(true);
     const[review, setReview] = useState<Review>({
@@ -335,7 +344,8 @@ const ReviewPage: React.FC = (props:any) => {
     return(
         <div id="reviewPage">
             {loading? <ReactLoading className="reviewPage-loading" type={"spin"} color={"yellow"} height={"10vh"} width={"10vh"}/> 
-                : <ReviewInfo review={review} providers={providers} similar={similar} fromCategory={fromCategory} navClick={navClick} />}
+                : <ReviewInfo review={review} providers={providers} similar={similar} fromCategory={fromCategory} 
+                                navClick={navClick} loggedIn={loggedIn} />}
         </div>
     )
 }

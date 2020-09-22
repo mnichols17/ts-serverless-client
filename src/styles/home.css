@@ -9,10 +9,16 @@
 /* Header */
 
 #header {
+    background-color: #1E2127;
+    display: flex;
+    justify-content: center;
+}
+
+#header-content {
+    width: 900px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #1E2127;
     padding: 0 15px 0 8px;
 }
 
@@ -23,8 +29,8 @@
     align-items: center;
 }
 
-#header #logo {
-    width: 150px;
+#header-content #logo {
+    width: 160px;
     margin: 10px 0;
 }
 
@@ -39,7 +45,7 @@
     margin: 0;
 }
 
-#header > button {
+#header-content > button {
     background-color: #1E2127;
     border: none;
 }
@@ -48,7 +54,26 @@
     color: #FEDE16;
 }
 
-.header-menu {
+.header-nav {
+    display: flex;
+}
+
+.header-nav button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1E2127;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: .7em;
+}
+
+.header-nav button:hover {
+    color: #FEDE16;
+}
+
+/* .header-menu {
     background-color: #1E2127;
     margin: 0;
     height: 120px;
@@ -64,6 +89,7 @@
     color: white;
     display: flex;
     font-size: 1.3em;
+    cursor: pointer;
 }
 
 .header-menu button:nth-child(2) {
@@ -92,7 +118,7 @@
     height: 0px;
     transition: height 300ms ease;
     -webkit-transition: height .3s ease;
-}
+} */
 
 /* Content */
 
@@ -632,19 +658,29 @@
     height: 70px;
 }
 
-#review-userInteractions-text {
-    margin: .5em 0 .5em;
-    font-size: .8em;
+#userInteractions {
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
-#review-userInteractions {
+#userInteractions-text {
+    margin: .5em 0 .5em;
+    font-size: .8em;
+    text-align: center;
+}
+
+#userInteractions-btns {
     margin: 0 0 1em;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
-#review-userInteractions button {
+#userInteractions-btns button {
     background: rgb(128, 128, 128, .6);
     border: none;
     border-radius: 8px;
@@ -655,13 +691,14 @@
     font-size: 1.7em;
     margin: 0 12px;
     padding: 5px 10px;
+    cursor: pointer;
 }
 
-#review-userInteractions .active, #review-userInteractions .active > svg {
+#userInteractions-btns .active, #userInteractions-btns .active > svg {
     color: #6CEA4A;
 }
 
-#review-userInteractions svg {
+#userInteractions-btns svg {
     margin-right: 10px;
     color: white;
 }
@@ -887,7 +924,8 @@
 
 /* Random Movie Page */
 
-.random > #logo {
+#random-logo {
+    margin-top: 2em;
     max-width: 320px;
 }
 
@@ -1286,16 +1324,47 @@
 
 /* Profile */
 
+/* .user-profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    color: white;
+} */
+
 .user-profile {
-    max-width: 900px; /* Maybe good? */
     display: flex;
     flex-direction: column;
-    padding: 1em 2em;
+    align-items: center;
     color: white;
 }
 
-.user-profile > h1 {
-    align-self: center;
+/* .user-profile > * {
+    grid-column: 2/3;
+} */
+
+#profile-btn-group {
+    display: flex;
+}
+
+.profile-btn {
+    width: 100px;
+    border: none;
+    border-radius: 12px;
+    background: rgb(255, 99, 71);
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.3em;
+    text-decoration: none;
+    color: black;
+    margin: 1em;
+    padding: 8px;
+}
+
+.profile-btn:first-of-type {
+    background: #FEDE16;
+}
+
+.profile-btn:hover {
+    opacity: .5;
 }
 
 /* User Lists */
@@ -1324,6 +1393,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .userLists-tab .active {
@@ -1334,6 +1404,15 @@
 /* Width Specific */
 
 @media screen and (max-width: 370px) {
+    #header-content #logo {
+        width: 140px;
+        margin: 10px 0;
+    }
+
+    .header-nav button {
+        font-size: .6em;
+    }
+
     #content > h1 {
         font-size: 1.3em;
     }
@@ -1539,6 +1618,10 @@
 }
 
 @media screen and (min-width: 500px) {
+    .header-nav button {
+        margin: 0em .5em;
+        font-size: .8em;
+    }
 
     #content > h3 {
         font-size: 1em;

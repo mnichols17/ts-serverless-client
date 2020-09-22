@@ -49,7 +49,7 @@ const Landing:React.FC = (props: any) => {
                 break;
         }
         isLoading(true);
-        currentView(true); 
+        currentView(1); 
         window.scrollTo({top: 0})
     }
 

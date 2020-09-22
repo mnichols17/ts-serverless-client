@@ -36,7 +36,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	const yearSort = (sortLabel === 'Oldest to Newest' || sortLabel === 'Newest to Oldest');
 
 	for(const[key, value] of Object.entries(filters)){
-		if((value as object[]).length && key !== "ratingRange"){
+		if((value as object[]).length && key !== "ratingRange" && key !== 'type'){
 			(value as object[]).forEach((v:any) => {
 				total++;
 				if(key === 'directors') directedBy += ` ${v.value},` 
@@ -65,7 +65,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 const Home:React.FC = (props: any) => {
     smoothscroll.polyfill();
     
-    const {viewList, filters, currentRandom, resetPage} = useContext(SearchContext);
+    const {viewList, filters, currentRandom, resetPage, currentView} = useContext(SearchContext);
 	const[showTop, setTop] = useState<boolean>(false);
 	const[open, setOpen] = useState<boolean>(false);
 	const [iconDetail, setDetail] = useState<string>("Click/hover on each icon to learn about it");
@@ -82,14 +82,16 @@ const Home:React.FC = (props: any) => {
 	
 	useEffect(() => {
 		document.title = `The Movie Ranking Database`;
+		if(viewList === 2) {
+			console.log("CHANGING TO 1")
+			resetPage({type: ""})
+		}
 	}, []);
 
 	useEffect(() => {
 		window.addEventListener('scroll', checkTop)
 
-		return () => {
-			window.removeEventListener('scroll', checkTop)
-		}
+		return () => window.removeEventListener('scroll', checkTop)
     }, [showTop, open])
 
 	const logoClick = async() => {
@@ -113,9 +115,9 @@ const Home:React.FC = (props: any) => {
 
     return(
 		<div id="content">
-			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
+			{/* <img id="logo" src={Logo} onClick={logoClick} alt="LOGO" /> */}
 			<h1 className="title-font">What to watch, and where to watch it.</h1>
-			<h6>(MOVIES STILL BEING ADDED)</h6>
+			{/* <h6>(MOVIES STILL BEING ADDED)</h6> */}
 			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
 			<Search open={open} setOpen={setOpen}/>	
 			<div id="glossary-content">
@@ -128,7 +130,7 @@ const Home:React.FC = (props: any) => {
                 </div>
             </div>
             <FiltersApplied filters={filters} />
-            {viewList? <List />: <Landing />}
+            {viewList? <List /> : <Landing />}
 			<button id="send-top" className="title-font" hidden={!(showTop && viewList)} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Top <FontAwesomeIcon icon={faChevronUp} /></button>
 		</div>
     )

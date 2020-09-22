@@ -6,7 +6,6 @@ import {SearchContext} from '../utils/context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
-import { Review } from '../utils/entities';
 
 interface PaginationProps {
 	changePage: (e:any) => void;
@@ -38,22 +37,18 @@ const Pagination: React.FC<PaginationProps> = ({changePage}) => {
 	)
 }
 
-interface ListProps {
-	fromUserList?: boolean;
-}
-
-const List:React.FC<ListProps> = ({fromUserList}) => {
+const List:React.FC = () => {
 	smoothscroll.polyfill();
 
-	const {reviews, loading, url, filters, page, totalPages, more, getReviews, isLoading, currentPage} = useContext(SearchContext);
+	const {reviews, loading, url, filters, page, totalPages, 
+		more, getReviews, isLoading, currentPage} = useContext(SearchContext);
 
 	useEffect(() => {
-		console.log("HIT?")
-		if(reviews.length === 0 && !fromUserList){
+		if(reviews.length === 0){
 			if(!loading) isLoading(true);
 			getReviews(url, filters, page, true);
 		}
-	}, [])
+	}, [url, filters.type])
 
 	const changePage = (e:any) => {
 		if(e.target.value === "..."){

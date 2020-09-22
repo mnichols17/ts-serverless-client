@@ -9,22 +9,29 @@ import { SearchContext } from '../utils/context';
 
 export const Logout:React.FC = (props: any) => {
 
-    const {currentAuth} = useContext(SearchContext);
+    const {loggedIn, currentAuth, checkAuth, resetPage} = useContext(SearchContext);
     const [valid, setValid] = useState<boolean>(false);
+    const[leavingLogout, setLeaving] = useState<NodeJS.Timeout | undefined>();
 
     useEffect(() => {
-        request('POST', 'users/logout', {}, {})
-        .then(async(res: any) => {
-            console.log("SUCCESS LOGOUT")
-            setValid(true);
-            currentAuth(false);
-            setTimeout(() => props.history.push('/'), 3000);
-        })
-        .catch(err => {
-            console.log("NO LOGOUT")
-            props.history.push('/')
-        })
-    }, [])
+        if(!loggedIn && !checkAuth){
+            props.history.push('/login')
+        } else {
+            request('POST', 'users/logout', {}, {})
+            .then(async(res: any) => {
+                console.log("SUCCESS LOGOUT")
+                setValid(true);
+                currentAuth(false);
+                resetPage();
+                setLeaving(setTimeout(() => props.history.push('/'), 1000))
+            })
+            .catch(err => {
+                console.log("NO LOGOUT")
+                props.history.push('/')
+            })
+        }
+
+    }, [checkAuth])
 
 
     return(
@@ -37,7 +44,7 @@ export const Logout:React.FC = (props: any) => {
 
 export const Login:React.FC = (props: any) => {
 
-    const {currentAuth} = useContext(SearchContext);
+    const {loggedIn, checkAuth, currentAuth} = useContext(SearchContext);
     const [loading, setLoading] = useState<boolean>(false);
     const [user, setUser] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -47,6 +54,13 @@ export const Login:React.FC = (props: any) => {
         user: yup.string().trim().required("Please enter information in each field").min(3, "Invalid email").max(255),
         password: yup.string().trim().required("Please enter information in each field").min(3, "Invalid password").max(255),
     })  
+
+    useEffect(() => {
+        if(loggedIn && !checkAuth) {
+            props.history.replace('/')
+            props.history.push('/profile')
+        }
+    }, [checkAuth])
 
     const onSubmit = (e: any) => {
         e.preventDefault();
@@ -74,7 +88,7 @@ export const Login:React.FC = (props: any) => {
 
     return(
     <div className='user-access'>
-        {loading? <ReactLoading className="user-access-loader" type={"spin"} color={"yellow"}/> :
+        {checkAuth || loading? <ReactLoading className="user-access-loader" type={"spin"} color={"yellow"}/> :
             <>
                 <h3>Log in</h3>
                 {error.length ? <p>{error}</p> : null}

@@ -84,7 +84,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
 
     const handleFilters = (reset?: boolean) => {
         currentFilters(!reset? selectedFilters : {}, reset)
-        if(!viewList) currentView(true); // MOVE TO CONTEXT?
+        if(viewList === 0) currentView(1)
         setOpen(false);
     }
 
