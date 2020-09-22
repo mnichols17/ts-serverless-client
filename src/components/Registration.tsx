@@ -24,7 +24,7 @@ export const EmailConfirmed:React.FC = () => {
     }, [])
 
     return(
-    <div id="registration">
+    <div id="registration-confirmed">
         {loading? <ReactLoading className="user-access-loader" type={"spin"} color={"yellow"}/> :
             <>
                 <h3>Email Confirmed! Sign-in to start using your account</h3>
@@ -34,7 +34,7 @@ export const EmailConfirmed:React.FC = () => {
     )
 }
 
-export const Registration:React.FC = (props: any) => {
+export const Registration:React.FC = () => {
 
     const [created, setCreated] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
@@ -68,17 +68,14 @@ export const Registration:React.FC = (props: any) => {
         })
         .then((data:any) => {
             setError("")
-            console.log("SUBMIT")
             request('POST', 'users/register', {}, data)
             .then(async(res: any) => {
-                console.log(res.data.msg)
                 setLoading(false)
                 setCreated(true);
             })
             .catch(err => {
                 setError("User already exists with that email and/or username. Please try again")
                 setLoading(false)
-                console.log(err)
             })
         })
         .catch((err:any) => {
@@ -93,7 +90,7 @@ export const Registration:React.FC = (props: any) => {
             created? <>
                 <h4>Account successfully created</h4>
                 <h4>Confirm your email to being using your account</h4>
-                <a onClick={() => props.history.push(`/`)}>Return Home<FontAwesomeIcon icon={faAngleDoubleRight} color={'white'}/></a>
+                <Link to="/">Return Home<FontAwesomeIcon icon={faAngleDoubleRight} color={'white'}/></Link>
             </>
             : <>
                 <h3>Create your account</h3>

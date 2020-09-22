@@ -1200,6 +1200,17 @@
 
 /* Registration */ 
 
+#registration-confirmed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+#registration-confirmed a {
+    color: #FEDE16;
+}
+
 .user-access-loader {
     margin-top: 25%;
     align-self: center

@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.52e20d66.chunk.css",
-    "main.js": "/static/js/main.78f6ff81.chunk.js",
-    "main.js.map": "/static/js/main.78f6ff81.chunk.js.map",
+    "main.css": "/static/css/main.38b6aa90.chunk.css",
+    "main.js": "/static/js/main.a7c17266.chunk.js",
+    "main.js.map": "/static/js/main.a7c17266.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.270950e9.js",
     "runtime-main.js.map": "/static/js/runtime-main.270950e9.js.map",
-    "static/js/2.10f64af3.chunk.js": "/static/js/2.10f64af3.chunk.js",
-    "static/js/2.10f64af3.chunk.js.map": "/static/js/2.10f64af3.chunk.js.map",
+    "static/js/2.5c506bb6.chunk.js": "/static/js/2.5c506bb6.chunk.js",
+    "static/js/2.5c506bb6.chunk.js.map": "/static/js/2.5c506bb6.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.51c1496e78e7f282134c2e7bcca8d672.js": "/precache-manifest.51c1496e78e7f282134c2e7bcca8d672.js",
+    "precache-manifest.48b1787dc8d3d7d5cbf3758be05fbac6.js": "/precache-manifest.48b1787dc8d3d7d5cbf3758be05fbac6.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.52e20d66.chunk.css.map": "/static/css/main.52e20d66.chunk.css.map",
-    "static/js/2.10f64af3.chunk.js.LICENSE.txt": "/static/js/2.10f64af3.chunk.js.LICENSE.txt",
+    "static/css/main.38b6aa90.chunk.css.map": "/static/css/main.38b6aa90.chunk.css.map",
+    "static/js/2.5c506bb6.chunk.js.LICENSE.txt": "/static/js/2.5c506bb6.chunk.js.LICENSE.txt",
     "static/media/10.png": "/static/media/10.20c3d93e.png",
     "static/media/105.png": "/static/media/105.e6ecb3c4.png",
     "static/media/123.png": "/static/media/123.07d8d41b.png",
@@ -48,8 +48,8 @@
     "static/media/jdl.png": "/static/media/jdl.f1b59a36.png",
     "static/media/kenjac.png": "/static/media/kenjac.4d72b4b9.png",
     "static/media/home.css": "/static/media/slider.3cab98c3.png",
-    "static/media/logo.jpg": "/static/media/logo.577ce152.jpg",
     "static/media/metacritic.png": "/static/media/metacritic.eb3e125e.png",
+    "static/media/newLogo.jpg": "/static/media/newLogo.be985ca6.jpg",
     "static/media/not_buttered.png": "/static/media/not_buttered.fb6b035b.png",
     "static/media/omdb.png": "/static/media/omdb.696366dc.png",
     "static/media/oscars_logo.png": "/static/media/oscars_logo.59711e01.png",
@@ -61,8 +61,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.270950e9.js",
-    "static/js/2.10f64af3.chunk.js",
-    "static/css/main.52e20d66.chunk.css",
-    "static/js/main.78f6ff81.chunk.js"
+    "static/js/2.5c506bb6.chunk.js",
+    "static/css/main.38b6aa90.chunk.css",
+    "static/js/main.a7c17266.chunk.js"
   ]
 }

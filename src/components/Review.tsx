@@ -11,7 +11,6 @@ import {ReviewItem} from './ReviewList';
 import updateList from '../utils/updateList';
 
 import Back from '../media/back.png';
-import Home from '../media/home.png';
 import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
 import KenJac from '../media/kenjac.png';
