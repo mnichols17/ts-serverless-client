@@ -81,7 +81,7 @@ const Header: React.FC = () => {
                     <img id="logo" onClick={toHome} src={Logo} alt="LOGO" />
                     <HeaderMenu 
                         nav={nav} 
-                        options={[{route: "random", icon: faFilm, text: "RMG"}, ...menuOptions]}
+                        options={[{route: "random", icon: faFilm, text: "Random"}, ...menuOptions]}
                         width={windowDimensions.width}
                     />
                     {/* {windowDimensions.width > 500? <HeaderMenu 

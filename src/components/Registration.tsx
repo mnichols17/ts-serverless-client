@@ -89,7 +89,7 @@ export const Registration:React.FC = () => {
         {loading? <ReactLoading className="user-access-loader" type={"spin"} color={"yellow"}/> :
             created? <>
                 <h4>Account successfully created</h4>
-                <h4>Confirm your email to being using your account</h4>
+                <h4>Confirm your email to being using your account (Check your spam if you don't see it in your inbox)</h4>
                 <Link to="/">Return Home<FontAwesomeIcon icon={faAngleDoubleRight} color={'white'}/></Link>
             </>
             : <>

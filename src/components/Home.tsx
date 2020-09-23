@@ -6,9 +6,7 @@ import {SearchContext, FiltersType} from '../utils/context';
 import List from './List';
 import Landing from './Landing';
 import {provider_names} from '../utils/filterData';
-import { Link } from 'react-router-dom';
 
-import Logo from '../media/logo.jpg';
 import Random from '../media/random.png';
 import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
@@ -17,8 +15,17 @@ import OscarsLogo from '../media/oscars_logo.png';
 import GlobesLogo from '../media/globes_logo.png';
 import Buttered from '../media/buttered.png';
 import NotButtered from '../media/not_buttered.png';
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { faChevronUp, faPlus, faTicketAlt } from '@fortawesome/free-solid-svg-icons'
 import '../styles/home.css';
+
+const ProfileIcons:React.FC = () => {
+	return (
+		<div id="profileIcons">
+			<span><FontAwesomeIcon icon={faPlus} /> - Watchlist</span>
+			<span><FontAwesomeIcon icon={faTicketAlt} /> - SEEN IT</span>
+		</div>
+	)
+}
 
 interface FiltersAppliedProps {
 	filters: FiltersType
@@ -65,7 +72,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 const Home:React.FC = (props: any) => {
     smoothscroll.polyfill();
     
-    const {viewList, filters, currentRandom, resetPage, currentView} = useContext(SearchContext);
+    const {viewList, filters, currentRandom, resetPage, loggedIn} = useContext(SearchContext);
 	const[showTop, setTop] = useState<boolean>(false);
 	const[open, setOpen] = useState<boolean>(false);
 	const [iconDetail, setDetail] = useState<string>("Click/hover on each icon to learn about it");
@@ -83,7 +90,6 @@ const Home:React.FC = (props: any) => {
 	useEffect(() => {
 		document.title = `The Movie Ranking Database`;
 		if(viewList === 2) {
-			console.log("CHANGING TO 1")
 			resetPage({type: ""})
 		}
 	}, []);
@@ -93,12 +99,6 @@ const Home:React.FC = (props: any) => {
 
 		return () => window.removeEventListener('scroll', checkTop)
     }, [showTop, open])
-
-	const logoClick = async() => {
-        if(viewList) {
-			resetPage();
-        }
-	}
 	
 	const toRandom = () => {
 		currentRandom({}, true);
@@ -115,9 +115,7 @@ const Home:React.FC = (props: any) => {
 
     return(
 		<div id="content">
-			{/* <img id="logo" src={Logo} onClick={logoClick} alt="LOGO" /> */}
 			<h1 className="title-font">What to watch, and where to watch it.</h1>
-			{/* <h6>(MOVIES STILL BEING ADDED)</h6> */}
 			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
 			<Search open={open} setOpen={setOpen}/>	
 			<div id="glossary-content">
@@ -128,6 +126,7 @@ const Home:React.FC = (props: any) => {
                         return <img key={source} onMouseEnter={() => setDetail(detail)} onMouseLeave={() => setDetail("Click/hover on each icon to learn about it")} className={iconDetail === detail? "glossary-img glossary-selected" : "glossary-img"} alt={detail} src={source} />
                     })}
                 </div>
+				{loggedIn && <ProfileIcons />}
             </div>
             <FiltersApplied filters={filters} />
             {viewList? <List /> : <Landing />}

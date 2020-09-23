@@ -329,6 +329,25 @@
     border: 2px solid #FEDE16;
 }
 
+#profileIcons {
+    display: flex;
+    justify-content: center;
+    margin: .5em 0;
+}
+
+#profileIcons > span {
+    color: white;
+    margin: 0 1em;
+}
+
+#profileIcons svg {
+    color: tomato;
+}
+
+#profileIcons span:first-child > svg {
+    color: #FEDE16;
+}
+
 .landing-label {
     display: flex;
     align-items: center;
@@ -1659,6 +1678,10 @@
         max-width: 250px;
         justify-self: end;
         grid-row: 6/7;
+    }
+
+    #profileIcons {
+        margin: .5em 0 0;
     }
 
     #filters-applied {
