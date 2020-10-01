@@ -1179,28 +1179,57 @@ export const provider_names: {[key:string]: string} = {
     "192": "YouTube",
 }
 
-const streamingOptions: DropdownOption[] = [
+//     {value: "9", label: "Amazon (Stream)"},
+//     {value: "350", label: "Apple TV"},
+//     {value: "78", label: "CBS"},
+//     {value: "289", label: "Cinemax"},
+//     {value: "258", label: "Critereon"},
+//     {value: "337", label: "Disney+"},
+//     {value: "34", label: "EPiX"},
+//     {value: "331", label: "FlixFling"},
+//     {value: "257", label: "Fubo"},
+//     {value: "123", label: "FXNow"},
+//     {value: "27@31", label: "HBO"},
+//     {value: "384", label: "HBO Max"},
+//     {value: "212", label: "Hoopla"},
+//     {value: "15", label: "Hulu"},
+//     {value: "238", label: "IMDbTV"},
+//     {value: "8", label: "Netflix"},
+//     {value: "386", label: "Peacock"},
+//     {value: "387", label: "Peacock Premium"},
+//     {value: "207", label: "Roku"},
+//     {value: "37", label: "Showtime"},
+//     {value: "43", label: "Starz"},
+//     {value: "215", label: "SyFy"},
+//     {value: "363", label: "TNT"},
+//     {value: "73", label: "Tubi"},
+//     {value: "322", label: "USA"},
+
+const topOptions: DropdownOption[] = [
     {value: "9", label: "Amazon (Stream)"},
-    {value: "350", label: "Apple TV"},
     {value: "78", label: "CBS"},
+    {value: "337", label: "Disney+"},
+    {value: "27@31", label: "HBO"},
+    {value: "384", label: "HBO Max"},
+    {value: "15", label: "Hulu"},
+    {value: "8", label: "Netflix"},
+    {value: "386", label: "Peacock"},
+    {value: "387", label: "Peacock Premium"},
+    {value: "37", label: "Showtime"},
+    {value: "43", label: "Starz"},
+]
+
+const streamingOptions: DropdownOption[] = [
+    {value: "350", label: "Apple TV"},
     {value: "289", label: "Cinemax"},
     {value: "258", label: "Critereon"},
-    {value: "337", label: "Disney+"},
     {value: "34", label: "EPiX"},
     {value: "331", label: "FlixFling"},
     {value: "257", label: "Fubo"},
     {value: "123", label: "FXNow"},
-    {value: "27@31", label: "HBO"},
-    {value: "384", label: "HBO Max"},
     {value: "212", label: "Hoopla"},
-    {value: "15", label: "Hulu"},
     {value: "238", label: "IMDbTV"},
-    {value: "8", label: "Netflix"},
-    {value: "386", label: "Peacock"},
-    {value: "387", label: "Peacock Premium"},
     {value: "207", label: "Roku"},
-    {value: "37", label: "Showtime"},
-    {value: "43", label: "Starz"},
     {value: "215", label: "SyFy"},
     {value: "363", label: "TNT"},
     {value: "73", label: "Tubi"},
@@ -1218,6 +1247,12 @@ const buyrentOptions: DropdownOption[] = [
 ]
 
 export const providerOptions: object[] = [
+    {
+        label: '',
+        options: topOptions.map(({value, label}) => {
+            return {value: value, label: <span className="filter-flex">{label} <img className="filter-icon" src={require(`../media/providers/${value !== '27@31'? value : 27}.png`)} alt={value}/></span>}
+        }),
+    },
     {
         label: 'Streaming',
         options: streamingOptions.map(({value, label}) => {
