@@ -515,6 +515,7 @@ export const subGenreOptions: DropdownOption[] = [
     {value: "Demons & Possession", label: "Demons & Possession"},
     {value: "Disaster", label: "Disaster"},
     {value: "Disaster & Apocalypse", label: "Disaster & Apocalypse"},
+    {value: "Dramedy", label: "Dramedy"},
     {value: "Dystopian", label: "Dystopian"},
     {value: "Family Comedy", label: "Family Comedy"},
     {value: "Family Dynamics", label: "Family Dynamics"},
@@ -788,6 +789,7 @@ export const universeOptions: DropdownOption[] = [
     {value: "Kick-Ass", label: "Kick-Ass"},
     {value: "Kung Fu Panda", label: "Kung Fu Panda"},
     {value: "LEGO", label: "LEGO"},
+    {value: "LEGO, DC (Non-DCEU)", label: "LEGO, DC (Non-DCEU)"},
     {value: "Last Summer Series", label: "Last Summer Series"},
     {value: "Legally Blonde", label: "Legally Blonde"},
     {value: "Leprechaun", label: "Leprechaun"},
@@ -878,6 +880,7 @@ export const universeOptions: DropdownOption[] = [
 ]
 
 export const subUniverseOptions: DropdownOption[] = [
+    {value: "Aaron Sorkin Universe", label: "Aaron Sorkin Universe"},
     {value: "Blues Brothers", label: "Blues Brothers"},
     {value: "Carrie", label: "Carrie"},
     {value: "Disney Animation Studios", label: "Disney Animation Studios"},
@@ -1178,32 +1181,6 @@ export const provider_names: {[key:string]: string} = {
     "3": "Google",
     "192": "YouTube",
 }
-
-//     {value: "9", label: "Amazon (Stream)"},
-//     {value: "350", label: "Apple TV"},
-//     {value: "78", label: "CBS"},
-//     {value: "289", label: "Cinemax"},
-//     {value: "258", label: "Critereon"},
-//     {value: "337", label: "Disney+"},
-//     {value: "34", label: "EPiX"},
-//     {value: "331", label: "FlixFling"},
-//     {value: "257", label: "Fubo"},
-//     {value: "123", label: "FXNow"},
-//     {value: "27@31", label: "HBO"},
-//     {value: "384", label: "HBO Max"},
-//     {value: "212", label: "Hoopla"},
-//     {value: "15", label: "Hulu"},
-//     {value: "238", label: "IMDbTV"},
-//     {value: "8", label: "Netflix"},
-//     {value: "386", label: "Peacock"},
-//     {value: "387", label: "Peacock Premium"},
-//     {value: "207", label: "Roku"},
-//     {value: "37", label: "Showtime"},
-//     {value: "43", label: "Starz"},
-//     {value: "215", label: "SyFy"},
-//     {value: "363", label: "TNT"},
-//     {value: "73", label: "Tubi"},
-//     {value: "322", label: "USA"},
 
 const topOptions: DropdownOption[] = [
     {value: "9", label: "Amazon (Stream)"},
