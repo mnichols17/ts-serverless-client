@@ -72,7 +72,7 @@ const Landing:React.FC = (props: any) => {
                 return(
                     <div className="landing-container" key={index}>
                         <img hidden={index !== 1} src={Weekly} alt="Weekly"/>
-                        <h3 className='landing-weekly' hidden={index !== 1}>11/08 - 11/14</h3>
+                        <h3 className='landing-weekly' hidden={index !== 1}>11/15 - 11/21</h3>
                         <hr hidden={index !== 4} />
                         <div className="landing-label">
                             <h3 className="landing-title title-font">{landingTitles[index]}</h3>
