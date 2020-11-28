@@ -211,7 +211,7 @@ export const directorOptions: DropdownOption[] = [
     {value: "Walter Hill", label: "Hill, Walter"},
     {value: "Oliver Hirschbiegel", label: "Hirschbiegel, Oliver"},
     {value: "Alfred Hitchcock", label: "Hitchcock, Alfred"},
-    {value: "Bong Joon Ho", label: "Ho, Bong Joon"},
+    {value: "Bong Joon-ho", label: "Joon-ho, Bong"},
     {value: "Gregory Hoblit", label: "Hoblit, Gregory"},
     {value: "Paul Hoen", label: "Hoen, Paul"},
     {value: "Gavin Hood", label: "Hood, Gavin"},
