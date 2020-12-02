@@ -620,6 +620,19 @@
     color: #FEDE16;
 }
 
+.score-holiday {
+    /* color: #D83B4A; */
+    color: #9CE38B;
+}
+
+.score-holiday span {
+    color: tomato;
+    /* color: #9CE38B; */
+
+}
+
+
+
 .score-row > h1 {
     margin: .3em 0 .3em;
 }

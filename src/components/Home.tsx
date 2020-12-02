@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 import Logo from '../media/logo.jpg';
 import Random from '../media/random.png';
+import Holiday from '../media/holiday.jpg';
 import Average from '../media/average.png';
 import JDL from '../media/jdl.png';
 import KenJac from '../media/kenjac.png';
@@ -102,6 +103,11 @@ const Home:React.FC = (props: any) => {
 		currentRandom({}, true);
 		props.history.push(`/random`)
 	}
+
+	const toHoliday = () => {
+		currentRandom({}, true);
+		props.history.push(`/holiday`)
+	}
     
 	const checkTop = () => {
 		if(!showTop && window.pageYOffset > (open? 1500:700)){
@@ -115,8 +121,8 @@ const Home:React.FC = (props: any) => {
 		<div id="content">
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
 			<h1 className="title-font">What to watch, and where to watch it.</h1>
-			<h6>(MOVIES STILL BEING ADDED)</h6>
 			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
+			<img className="img-button" id="to-random" src={Holiday} alt="Random" onClick={toHoliday} />
 			<Search open={open} setOpen={setOpen}/>	
 			<div id="glossary-content">
                 <h2 className="title-font glossary-title">Icons Glossary</h2>

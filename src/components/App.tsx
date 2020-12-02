@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-do
 import Home from './Home';
 import ReviewPage from './Review';
 import RandomPage from './Random';
+import HolidayPage from './Holiday';
 // import {Registration, EmailConfirmed} from './Registration';
 // import {Login, Logout} from './Auth';
 // import Profile from './Profile';
@@ -19,6 +20,7 @@ const App: React.FC = () => {
 				<Route path="/" exact component={Home} />
 				<Route path="/review/:rank" component={ReviewPage} />
 				<Route path="/random" component={RandomPage} />
+				<Route path="/holiday" component={HolidayPage} />
 				{/* <Route path="/login" component={Login} />
 				<Route path="/logout" component={Logout} />
 				<Route path="/register" component={Registration} />

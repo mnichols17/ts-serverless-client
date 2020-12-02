@@ -103,24 +103,35 @@ const ReviewAwards: React.FC<AwardProps> = ({awards}) => {
 interface ScoreTableProps {
     icon: string;
     score: number;
-    rank: number
+    rank: number;
+    holiday?: boolean;
 }
 
-export const ScoreTable: React.FC<ScoreTableProps> = ({icon, score, rank}) => {
+export const ScoreTable: React.FC<ScoreTableProps> = ({icon, score, rank, holiday}) => {
     return (
-        <div className="score-row">
+        !holiday? <div className="score-row">
             <h1 className="title-font">{rank !== null? `#${rank}` : 'N/A'}</h1>
             <img className="score-img" alt='icon' src={icon} />
             <h1 className="title-font">{rank !== null? `${score}/100` : "N/A"}</h1>
+        </div> : 
+        <div className="score-row score-holiday">
+            <h1 className="title-font">
+                {rank !== null? <><span className="title-font">#</span>{rank}</> : <span className="title-font">N/A</span>}
+            </h1>
+            <img className="score-img" alt='icon' src={icon} />
+            <h1 className="title-font">
+                {rank !== null? <>{score}<span className="title-font">/</span>100</> : <span className="title-font">N/A</span>}
+            </h1>
         </div>
     )
 }
 
 interface ProviderLogosProps {
+    holiday?: boolean;
     providers: object[];
 }
 
-export const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
+export const ProviderLogos: React.FC<ProviderLogosProps> = ({holiday, providers}) => {
     const main:number[] = [8,15,9,337,384,27,386,387,78,350,43]
     let logos:any[] = [];
     providers.forEach((provider:any) => {
@@ -132,8 +143,8 @@ export const ProviderLogos: React.FC<ProviderLogosProps> = ({providers}) => {
     })
     return (
         <div id="review-streaming">
-            <h3 id="streaming-title" className="title-font">Streaming Options</h3>
-            <hr />
+            <h3 style={{color: holiday? '#9CE38B' : 'auto'}} id="streaming-title" className="title-font">Streaming Options</h3>
+            <hr style={{borderColor: holiday? 'tomato' : 'auto'}} />
             {providers.length? <><p>Click to Watch</p>
             <div>
                 {logos.slice().reverse().map(l => l)}
@@ -258,7 +269,10 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                     </tr>
                     <tr hidden={!review.subuniverse}>
                         <td>Sub-Universe:</td>
-                        <td>{review.subuniverse? <button className="review-info-button search-icon" onClick={() => fromCategory('subUniverses', review.subuniverse as string)}>{review.subuniverse} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
+                        <td>{review.subuniverse? (review.subuniverse as string).split(', ').map((sc:string) => 
+                                <button key={sc} className="review-info-button search-icon" onClick={() => fromCategory('subUniverses', sc)}>{sc} <FontAwesomeIcon icon={faSearch} /></button>
+                            ) : null}
+                        </td>
                     </tr>
                     <tr hidden={!review.character}>
                         <td>Character/Actor:</td>
