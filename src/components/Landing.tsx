@@ -20,9 +20,9 @@ const Landing:React.FC = (props: any) => {
 
     const landingTitles = [
         "Newest Releases",
-        "Jeff D. Lowe's Picks",
+        "Jeff D. Lowe's Top Christmas Movies",
         "KenJac's Picks",
-        "Celebrity Picks: Bryan Cranston",
+        "Celebrity Picks: Joe Manganiello",
         "Top 10 All-Time",
         "Jeff D. Lowe's Top 10",
         "KenJac's Top 10",
@@ -72,7 +72,7 @@ const Landing:React.FC = (props: any) => {
                 return(
                     <div className="landing-container" key={index}>
                         <img hidden={index !== 1} src={Weekly} alt="Weekly"/>
-                        <h3 className='landing-weekly' hidden={index !== 1}>12/04 - 12/10</h3>
+                        <h3 className='landing-weekly' hidden={index !== 1}></h3>
                         <hr hidden={index !== 4} />
                         <div className="landing-label">
                             <h3 className="landing-title title-font">{landingTitles[index]}</h3>

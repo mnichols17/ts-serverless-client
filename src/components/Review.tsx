@@ -251,7 +251,10 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                     </tr>
                     <tr hidden={!review.subgenre}>
                         <td>Sub-Genre:</td>
-                        <td>{review.subgenre? <button className="review-info-button search-icon" onClick={() => fromCategory('subGenres', review.subgenre as string)}>{review.subgenre} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
+                        <td>{review.subgenre? (review.subgenre as string).split(', ').map((sg:string) => 
+                                <button key={sg} className="review-info-button search-icon" onClick={() => fromCategory('subGenres', sg)}>{sg} <FontAwesomeIcon icon={faSearch} /></button>
+                            ): null}
+                        </td>
                     </tr>
                     <tr>
                         <td>Studio/Company:</td>
@@ -276,7 +279,10 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                     </tr>
                     <tr hidden={!review.character}>
                         <td>Character/Actor:</td>
-                        <td>{review.character? <button className="review-info-button search-icon" onClick={() => fromCategory('characters', review.character as string)}>{review.character} <FontAwesomeIcon icon={faSearch} /></button> : "N/A"}</td>
+                        <td>{review.character? (review.character as string).split(', ').map((c:string) => 
+                                <button key={c} className="review-info-button search-icon" onClick={() => fromCategory('characters', c)}>{c} <FontAwesomeIcon icon={faSearch} /></button>
+                            ): null}
+                        </td>
                     </tr>
                     <tr hidden={!review.sport}>
                         <td>Sport:</td>
