@@ -20,7 +20,7 @@ const Landing:React.FC = (props: any) => {
 
     const landingTitles = [
         "Newest Releases",
-        "Jeff D. Lowe's Top Christmas Movies",
+        "Jeff D. Lowe's Picks",
         "KenJac's Picks",
         "Celebrity Picks: Joe Manganiello",
         "Top 10 All-Time",
