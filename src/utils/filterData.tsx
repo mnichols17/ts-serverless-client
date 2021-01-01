@@ -734,6 +734,7 @@ export const universeFeatured: DropdownOption[] = [
     {value: "Middle-earth (Lord of the Rings)", label: "Middle-earth (Lord of the Rings)"},
     {value: "Mission: Impossible", label: "Mission: Impossible"},
     {value: "National Lampoon", label: "National Lampoon"},
+    {value: "Pixar", label: "Pixar"},
     {value: "Planet of the Apes", label: "Planet of the Apes"},
     {value: "Rocky", label: "Rocky"},
     {value: "Star Trek", label: "Star Trek"},
@@ -888,11 +889,11 @@ const subUniverseFeatured: DropdownOption[] = [
     {value: "Disney Animation Studios", label: "Disney Animation Studios"},
     {value: "Disney Channel Original Movie", label: "Disney Channel Original Movie"},
     {value: "Disney Live-Action Remake", label: "Disney Live-Action Remake"},
+    {value: "Disney Pixar", label: "Disney Pixar"},
     {value: "Harry Potter", label: "Harry Potter"},
     {value: "Mummy", label: "Mummy"},
     {value: "Muppets", label: "Muppets"},
     {value: "Pirates of the Caribbean", label: "Pirates of the Caribbean"},
-    {value: "Pixar", label: "Pixar"},
 ]
 
 const subUniverseOther: DropdownOption[] = [

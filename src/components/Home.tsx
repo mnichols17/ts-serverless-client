@@ -122,7 +122,7 @@ const Home:React.FC = (props: any) => {
 			<img id="logo" src={Logo} onClick={logoClick} alt="LOGO" />
 			<h1 className="title-font">What to watch, and where to watch it.</h1>
 			<img className="img-button" id="to-random" src={Random} alt="Random" onClick={toRandom} />
-			<img className="img-button" id="to-random" src={Holiday} alt="Random" onClick={toHoliday} />
+			{/* <img className="img-button" id="to-random" src={Holiday} alt="Random" onClick={toHoliday} /> */}
 			<Search open={open} setOpen={setOpen}/>	
 			<div id="glossary-content">
                 <h2 className="title-font glossary-title">Icons Glossary</h2>
