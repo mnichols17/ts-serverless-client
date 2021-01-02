@@ -1126,6 +1126,7 @@ export const provider_names: {[key:string]: string} = {
     "387": "Peacock Premium",
     "207": "Roku",
     "37": "Showtime",
+    "99": "Shudder",
     "43": "Starz",
     "215": "SyFy",
     "363": "TNT",
