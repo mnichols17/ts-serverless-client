@@ -1166,7 +1166,7 @@ const streamingOptions: DropdownOption[] = [
     {value: "212", label: "Hoopla"},
     {value: "238", label: "IMDbTV"},
     {value: "207", label: "Roku"},
-    {value: "99", label: "Shutter"},
+    {value: "99", label: "Shudder"},
     {value: "215", label: "SyFy"},
     {value: "363", label: "TNT"},
     {value: "73", label: "Tubi"},
