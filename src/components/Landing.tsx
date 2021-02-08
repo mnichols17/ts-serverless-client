@@ -22,7 +22,7 @@ const Landing:React.FC = (props: any) => {
         "Newest Releases",
         "Jeff D. Lowe's Picks",
         "KenJac's Picks",
-        "Super Bowl 6 Pack",
+        "6 Pack (Top Football Movies)",
         "Top 10 All-Time",
         "Jeff D. Lowe's Top 10",
         "KenJac's Top 10",
