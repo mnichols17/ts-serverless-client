@@ -256,11 +256,11 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                             ): null}
                         </td>
                     </tr>
-                    <tr>
+                    <tr hidden={!review.studiocompany}>
                         <td>Studio/Company:</td>
-                        <td>{(review.studiocompany as string).split(', ').map((sc:string) => 
+                        <td>{review.studiocompany? (review.studiocompany as string).split(', ').map((sc:string) => 
                                 <button key={sc} className="review-info-button search-icon" onClick={() => fromCategory('studiocompanies', sc)}>{sc} <FontAwesomeIcon icon={faSearch} /></button>
-                            )}
+                            ): null}
                         </td>
                     </tr>
                     <tr hidden={!review.universe}>

@@ -56,7 +56,7 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
                     <div className="movie-accolades">
                         <img className="accolade-icon" alt="oscar" hidden={!oscar_winner} src={OscarsLogo} />
                         <img className="accolade-icon" alt="oscar" hidden={!(goldenglobes === "Best Picture: Musical or Comedy (Winner)" || goldenglobes === "Best Picture: Drama (Winner)")} src={GlobesLogo} />
-                        <p className="movie-rank">#{rank}</p>
+                        {rank && <p className="movie-rank">#{rank}</p>}
                     </div>
                 </div>
             </Link>
