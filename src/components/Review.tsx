@@ -270,10 +270,10 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                             ) : null}
                         </td>
                     </tr>
-                    <tr hidden={!review.subuniverse}>
-                        <td>Sub-Universe:</td>
-                        <td>{review.subuniverse? (review.subuniverse as string).split(', ').map((sc:string) => 
-                                <button key={sc} className="review-info-button search-icon" onClick={() => fromCategory('subUniverses', sc)}>{sc} <FontAwesomeIcon icon={faSearch} /></button>
+                    <tr hidden={!review.country}>
+                        <td>Country:</td>
+                        <td>{review.country? (review.country as string).split(', ').map((sc:string) => 
+                                <button key={sc} className="review-info-button search-icon" onClick={() => fromCategory('country', sc)}>{sc} <FontAwesomeIcon icon={faSearch} /></button>
                             ) : null}
                         </td>
                     </tr>

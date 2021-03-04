@@ -12,7 +12,7 @@ export type FiltersType = {
     subGenres: object[],
     studiocompanies: object[],
     universes: object[],
-    subUniverses: object[],
+    country: object[],
     characters: object[],
     sportholidays: object[],
     years: object[],
@@ -46,7 +46,7 @@ const emptyFilters: FiltersType = {
     genres: [],
     subGenres: [],
     universes: [],
-    subUniverses: [],
+    country: [],
     studiocompanies: [],
     characters: [],
     sportholidays: [],
@@ -93,7 +93,7 @@ interface Search {
     resetPage: (newFilters?: object) => void;
 }
 
-const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, subUniverses, characters, sportholidays, years, decades, providers, awards, runtime, ratingRange, type}: FiltersType) => ({
+const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompanies, universes, country, characters, sportholidays, years, decades, providers, awards, runtime, ratingRange, type}: FiltersType) => ({
 	ratings: ratings.value,
 	directors: directors.map((select: any) => select.value).join('@'),
 	sort: sort.value,
@@ -101,7 +101,7 @@ const createStrings = ({ratings, sort, directors, genres, subGenres, studiocompa
 	subGenres: subGenres.map((select: any) => select.value).join('@'),
 	studiocompanies: studiocompanies.map((select: any) => select.value).join('@'),
 	universes: universes.map((select: any) => select.value).join('@'),
-	subUniverses: subUniverses.map((select: any) => select.value).join('@'),
+	country: country.map((select: any) => select.value).join('@'),
 	characters: characters.map((select: any) => select.value).join('@'),
 	sportholidays: sportholidays.map((select: any) => select.value).join('@'),
 	years: years.map((select: any) => select.value).join('@'),

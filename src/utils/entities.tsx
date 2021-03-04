@@ -13,7 +13,7 @@ export interface Review {
     subgenre?: string;
     studiocompany?: string;
     universe?: string;
-    subuniverse?: string;
+    country?: string;
     character?: string;
     sport?: string;
     holiday?: string;

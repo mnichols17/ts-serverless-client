@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import Select from 'react-select';
 import {SearchContext, FiltersType} from '../utils/context';
 import {sortOptions, ratingOptions, directorOptions, genreOptions, subGenreOptions, studiocompanyOptions, 
-    universeOptions, subUniverseOptions, characterOptions, sportholidayOptions, 
+    universeOptions, countryOptions, characterOptions, sportholidayOptions, 
     yearOptions, decadeOptions, providerOptions, awardOptions} from '../utils/filterData';
 
 
@@ -112,7 +112,7 @@ const Filters: React.FC<FiltersProps> = ({setOpen}) => {
         {label: "Director:", onChange: (e:any) => changeFilter(e, 'directors'), options: directorOptions, value: selectedFilters.directors, multi: true, search: true, info: "Minimum 3 movies in Database"},
         {label: "Studio/Company:", onChange: (e:any) => changeFilter(e, 'studiocompanies'), options: studiocompanyOptions, value: selectedFilters.studiocompanies, multi: true, search: false, info: 'Ex: A24, Disney, Netflix, etc.'},
         {label: "Universe:", onChange: (e:any) => changeFilter(e, 'universes'), options: universeOptions, value: selectedFilters.universes, multi: true, search: false, info: 'Ex: DCEU, MCU, Star Wars, etc.'},
-        {label: "Sub-Universe:", onChange: (e:any) => changeFilter(e, 'subUniverses'), options: subUniverseOptions, value: selectedFilters.subUniverses, multi: true, search: false, info: 'Ex: Pixar, Disney Remake, etc.'},
+        {label: "Country:", onChange: (e:any) => changeFilter(e, 'country'), options: countryOptions, value: selectedFilters.country, multi: true, search: false,},
         {label: "Sport/Holiday:", onChange: (e:any) => changeFilter(e, 'sportholidays'), options: sportholidayOptions, value: selectedFilters.sportholidays, multi: true, search: false, info: 'Ex: Football, Christmas, etc.'},
         {label: "Character/Actor:", onChange: (e:any) => changeFilter(e, 'characters'), options: characterOptions, value: selectedFilters.characters, multi: true, search: false, info: 'Ex: Batman, Nic Cage, etc.'},
     ]

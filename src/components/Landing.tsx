@@ -22,7 +22,7 @@ const Landing:React.FC = (props: any) => {
         "Newest Releases",
         "Jeff D. Lowe's Picks",
         "KenJac's Picks",
-        "2021 Golden Globes Nominees",
+        "@KBNoSwag (Kyle Bauer):",
         "Top 10 All-Time",
         "Jeff D. Lowe's Top 10",
         "KenJac's Top 10",
