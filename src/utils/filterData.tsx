@@ -1252,19 +1252,19 @@ export const providerOptions: object[] = [
     {
         label: '',
         options: topOptions.map(({value, label}) => {
-            return {value: value, label: <span className="filter-flex">{label} <img className="filter-icon" src={require(`../media/providers/${value !== '27@31'? value : 27}.png`)} alt={value}/></span>}
+            return {value: value, label: <span className="filter-flex">{label} <img className="filter-icon" src={require(`../media/providers/${value.split('@')[0]}.png`)} alt={value}/></span>}
         }),
     },
     {
         label: 'Streaming',
         options: streamingOptions.map(({value, label}) => {
-            return {value: value, label: <span className="filter-flex">{label} <img className="filter-icon" src={require(`../media/providers/${value !== '27@31'? value : 27}.png`)} alt={value}/></span>}
+            return {value: value, label: <span className="filter-flex">{label} <img className="filter-icon" src={require(`../media/providers/${value.split('@')[0]}.png`)} alt={value}/></span>}
         }),
     },
     {
         label: 'Buy/Rent',
         options: buyrentOptions.map(({value, label}) => {
-            return {value: value, label: <span className="filter-flex">{label} <img className="filter-icon" src={require(`../media/providers/${value}.png`)} alt={value}/></span>}
+            return {value: value, label: <span className="filter-flex">{label} <img className="filter-icon" src={require(`../media/providers/${value.split('@')[0]}.png`)} alt={value}/></span>}
         }),
     },
 ]
