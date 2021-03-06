@@ -1169,7 +1169,6 @@ export const decadeOptions: DropdownOption[] = [
 export const provider_names: {[key:string]: string} = {
     "9": "Amazon (Stream)",
     "350": "Apple TV",
-    "78": "CBS",
     "289": "Cinemax",
     "258": "Critereon",
     "337": "Disney+",
@@ -1184,6 +1183,7 @@ export const provider_names: {[key:string]: string} = {
     "238": "IMDbTV",
     "191": "Kanopy",
     "8": "Netflix",
+    "531": "Paramount+",
     "386": "Peacock",
     "387": "Peacock Premium",
     "207": "Roku",
@@ -1194,6 +1194,7 @@ export const provider_names: {[key:string]: string} = {
     "363": "TNT",
     "73": "Tubi",
     "322": "USA",
+    "7@332": "Vudu",
     "10": "Amazon (Buy/Rent)",
     "352": "AMC",
     "2": "Apple",
@@ -1205,12 +1206,12 @@ export const provider_names: {[key:string]: string} = {
 
 const topOptions: DropdownOption[] = [
     {value: "9", label: "Amazon (Stream)"},
-    {value: "78", label: "CBS"},
     {value: "337", label: "Disney+"},
     {value: "27@31", label: "HBO"},
     {value: "384", label: "HBO Max"},
     {value: "15", label: "Hulu"},
     {value: "8", label: "Netflix"},
+    {value: "531", label: "Paramount+"},
     {value: "386", label: "Peacock"},
     {value: "387", label: "Peacock Premium"},
     {value: "37", label: "Showtime"},
@@ -1227,12 +1228,14 @@ const streamingOptions: DropdownOption[] = [
     {value: "123", label: "FXNow"},
     {value: "212", label: "Hoopla"},
     {value: "238", label: "IMDbTV"},
+    {value: "191", label: "Kanopy"},
     {value: "207", label: "Roku"},
     {value: "99", label: "Shudder"},
     {value: "215", label: "SyFy"},
     {value: "363", label: "TNT"},
     {value: "73", label: "Tubi"},
     {value: "322", label: "USA"},
+    {value: "7@332", label: "Vudu"},
 ]
 
 const buyrentOptions: DropdownOption[] = [
