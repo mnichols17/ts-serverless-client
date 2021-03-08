@@ -20,9 +20,20 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
     if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
     const total = avgtotal;
     const rank = avgrank;
-    const img_src = poster? false
-    : id === 6969? "https://lh3.googleusercontent.com/-hE37W6LEh0M/XzoUom1xj1I/AAAAAAAAApc/X5_tkwnlmEsCVgNgFaUxEdOyIRgTUteiACK8BGAsYHg/s512/2020-08-16.jpg"
-    : 'https://pbs.twimg.com/media/ELsOD8iWwAEd_9b.jpg:large'
+    let img_src = poster || false;
+    
+    if(!img_src) {
+        switch(id) {
+            case 6969:
+                img_src = "https://lh3.googleusercontent.com/-hE37W6LEh0M/XzoUom1xj1I/AAAAAAAAApc/X5_tkwnlmEsCVgNgFaUxEdOyIRgTUteiACK8BGAsYHg/s512/2020-08-16.jpg";
+                break;
+            case 82685:
+                img_src = 'https://files.slack.com/files-pri/T039Y1JE4-F01QQBTGH7E/image.png'
+                break;
+            case 69696:
+                img_src = 'https://pbs.twimg.com/media/ELsOD8iWwAEd_9b.jpg:large'
+        }
+    }
 
     // const [watchlist, setWatchlist] = useState<boolean>(listed || false);
     // const [seenIt, setSeenIt] = useState<boolean>(seen || false);

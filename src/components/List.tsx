@@ -12,7 +12,7 @@ interface PaginationProps {
 	changePage: (e:any) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({changePage}) => {
+export const Pagination: React.FC<PaginationProps> = ({changePage}) => {
 	const {page, totalPages} = useContext(SearchContext);
 
 	let pageButtons:(number|string)[] = [];

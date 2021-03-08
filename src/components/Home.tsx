@@ -103,11 +103,6 @@ const Home:React.FC = (props: any) => {
 		currentRandom({}, true);
 		props.history.push(`/random`)
 	}
-
-	const toHoliday = () => {
-		currentRandom({}, true);
-		props.history.push(`/holiday`)
-	}
     
 	const checkTop = () => {
 		if(!showTop && window.pageYOffset > (open? 1500:700)){

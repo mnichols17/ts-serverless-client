@@ -51,3 +51,8 @@ export interface User {
     lastname?: string;
     // password?: string?
 }
+
+export interface Player {
+    name: string;
+    score: number[];
+}
