@@ -20,7 +20,7 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
     if(movie.substring(movie.length-5).toLowerCase() === ", the") movie = handleTitle(movie);
     const total = avgtotal;
     const rank = avgrank;
-    let img_src = poster || false;
+    let img_src = poster? `https://image.tmdb.org/t/p//w220_and_h330_face${poster}` : null;
     
     if(!img_src) {
         switch(id) {
@@ -28,10 +28,11 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
                 img_src = "https://lh3.googleusercontent.com/-hE37W6LEh0M/XzoUom1xj1I/AAAAAAAAApc/X5_tkwnlmEsCVgNgFaUxEdOyIRgTUteiACK8BGAsYHg/s512/2020-08-16.jpg";
                 break;
             case 82685:
-                img_src = 'https://files.slack.com/files-pri/T039Y1JE4-F01QQBTGH7E/image.png'
+                img_src = 'https://m.media-amazon.com/images/M/MV5BMjI3NDgwMTQyNF5BMl5BanBnXkFtZTcwNTYxODMxNw@@._V1_.jpg'
                 break;
             case 69696:
                 img_src = 'https://pbs.twimg.com/media/ELsOD8iWwAEd_9b.jpg:large'
+                break;
         }
     }
 
@@ -56,7 +57,7 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
     return(
         <div className="movie">
             <Link className="movie-link" to={`/review/${id}`}>
-                <img className="movie-poster" src={img_src || `https://image.tmdb.org/t/p//w220_and_h330_face${poster}`} alt={movie}/>
+                <img className="movie-poster" src={img_src || "#"} alt={movie}/>
                 <div className="info">
                     <div className="info-review">
                         <img className='rank-type-icon' alt="rank-type" src={require(`../media/${actors}.png`)} />

@@ -169,18 +169,19 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
         {icon: review.id !== 13767? Average : GV, score: review.avgtotal, rank: review.avgrank}
     ]
 
-    let img_src = review.poster || false;
-
+    let img_src = review.poster? `https://image.tmdb.org/t/p//w220_and_h330_face${review.poster}` : null;
+    
     if(!img_src) {
         switch(review.id) {
             case 6969:
                 img_src = "https://lh3.googleusercontent.com/-hE37W6LEh0M/XzoUom1xj1I/AAAAAAAAApc/X5_tkwnlmEsCVgNgFaUxEdOyIRgTUteiACK8BGAsYHg/s512/2020-08-16.jpg";
                 break;
             case 82685:
-                img_src = 'https://files.slack.com/files-pri/T039Y1JE4-F01QQBTGH7E/image.png'
+                img_src = 'https://m.media-amazon.com/images/M/MV5BMjI3NDgwMTQyNF5BMl5BanBnXkFtZTcwNTYxODMxNw@@._V1_.jpg'
                 break;
             case 69696:
                 img_src = 'https://pbs.twimg.com/media/ELsOD8iWwAEd_9b.jpg:large'
+                break;
         }
     }
 
@@ -194,7 +195,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
                 </div>
             </div>
             <h2 id="reviewPage-title">{review.movie}</h2>
-            <img id="review-poster" src={img_src || `https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}`} alt="POSTER" />
+            <img id="review-poster" src={img_src || '#'} alt="POSTER" />
             <div id="review-card">
                 <div id="review-total">
                     {scores.map(({icon, score, rank}) => {
