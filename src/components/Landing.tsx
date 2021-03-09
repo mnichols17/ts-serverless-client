@@ -26,7 +26,7 @@ const Landing:React.FC = (props: any) => {
         "Top 10 All-Time",
         "Jeff D. Lowe's Top 10",
         "KenJac's Top 10",
-        "Top 10 of 2020",
+        "Top 10 of 2021",
     ]
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const Landing:React.FC = (props: any) => {
                 resetPage({ratings: {value: 'kenjac', label: <span className="filter-flex">KenJac <img className="filter-icon" src={require(`../media/kenjac.png`)} alt={'test'}/></span>}})
                 break;
             case('7'):
-                resetPage({years: [{value: '2020', label: '2020'}]})
+                resetPage({years: [{value: '2021', label: '2021'}]})
                 break;
             default:
                 break;
