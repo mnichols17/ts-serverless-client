@@ -169,7 +169,7 @@ const ReviewInfo: React.FC<ReviewInfoProps> = ({review, providers, similar, from
         {icon: review.id !== 13767? Average : GV, score: review.avgtotal, rank: review.avgrank}
     ]
 
-    let img_src = review.poster? `https://image.tmdb.org/t/p//w220_and_h330_face${review.poster}` : null;
+    let img_src = review.poster? `https://image.tmdb.org/t/p/w600_and_h900_bestv2${review.poster}` : null;
     
     if(!img_src) {
         switch(review.id) {
