@@ -31,7 +31,7 @@ const FiltersApplied:React.FC<FiltersAppliedProps> = ({filters}) => {
 	let fromYears = "";
 	let watchOn = "";
 	let total = 0;
-	const runtime = parseInt(filters.runtime.label) < 209? ` ${filters.runtime.label} minutes` : "";
+	const runtime = parseInt(filters.runtime.label) < 242? ` ${filters.runtime.label} minutes` : "";
 	const ratingRange = (filters.ratingRange[0] > 0 || filters.ratingRange[1] < 100);
 	const sortLabel = filters.sort.label;
 	const yearSort = (sortLabel === 'Oldest to Newest' || sortLabel === 'Newest to Oldest');
