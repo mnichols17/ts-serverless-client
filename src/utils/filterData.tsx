@@ -1028,10 +1028,6 @@ const universeOther: DropdownOption[] = [
 
 export const universeOptions: object[] = [
   {
-    label: 'Featured',
-    options: universeFeatured,
-  },
-  {
     label: 'Marvel',
     options: universeMarvel,
   },
@@ -1054,6 +1050,10 @@ export const universeOptions: object[] = [
   {
     label: 'Wizarding World',
     options: universeWizardWorld,
+  },
+  {
+    label: 'Featured',
+    options: universeFeatured,
   },
   {
     label: 'Other Universes',
