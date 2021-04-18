@@ -33,7 +33,7 @@ const FilterSlider:React.FC<FilterSliderProps> = ({label, onChange, info}) => {
     return(
         runtime? <>
             <label className="filter-info">{label}: Under {info} minutes</label>
-            <input id="filter-range" className="range" type='range' min={'25'} max={'242'} defaultValue={info as string} onChange={onChange} />
+            <input id="filter-range" className="range" type='range' min={'10'} max={'242'} defaultValue={info as string} onChange={onChange} />
         </> :
         <>
             <label className="filter-info">Rating: {info[0]} - {info[1]}</label>
