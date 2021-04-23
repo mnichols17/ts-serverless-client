@@ -698,6 +698,7 @@ const studiocompanyFeatured: DropdownOption[] = [
 ]
 
 const studiocompanyOther: DropdownOption[] = [
+  {value: "40 Acres and a Mule Filmworks", label: "40 Acres and a Mule Filmworks"},
   {value: "AGBO", label: "AGBO"},
   {value: "Aardman Animation", label: "Aardman Animation"},
   {value: "Alliance Films", label: "Alliance Films"},
@@ -920,6 +921,7 @@ const universeOther: DropdownOption[] = [
   {value: "Bad Boys", label: "Bad Boys"},
   {value: "Barbershop", label: "Barbershop"},
   {value: "Before Trilogy", label: "Before Trilogy"},
+  {value: "Benson & Moorhead Universe", label: "Benson & Moorhead Universe"},
   {value: "Beverly Hills Cop", label: "Beverly Hills Cop"},
   {value: "Big Momma's House", label: "Big Momma's House"},
   {value: "Bill & Ted", label: "Bill & Ted"},
@@ -937,6 +939,7 @@ const universeOther: DropdownOption[] = [
   {value: "Chronicles of Riddick", label: "Chronicles of Riddick"},
   {value: "Cloverfield", label: "Cloverfield"},
   {value: "Conjuring Universe", label: "Conjuring Universe"},
+  {value: "Critters Franchise", label: "Critters Franchise"},
   {value: "Da Vinci Code Trilogy", label: "Da Vinci Code Trilogy"},
   {value: "Daddy Universe", label: "Daddy Universe"},
   {value: "Dark Universe", label: "Dark Universe"},
@@ -1006,6 +1009,7 @@ const universeOther: DropdownOption[] = [
   {value: "Minions", label: "Minions"},
   {value: "MonsterVerse", label: "MonsterVerse"},
   {value: "Monty Python", label: "Monty Python"},
+  {value: "Mortal Kombat Franchise", label: "Mortal Kombat Franchise"},
   {value: "Mummy", label: "Mummy"},
   {value: "Naked Gun", label: "Naked Gun"},
   {value: "Narnia", label: "Narnia"},
