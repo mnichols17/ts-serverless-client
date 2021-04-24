@@ -54,6 +54,7 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
     //     }
     // }
 
+    console.log(movie, actors, total)
     return(
         <div className="movie">
             <Link className="movie-link" to={`/review/${id}`}>
@@ -61,7 +62,7 @@ export const ReviewItem: React.FC<Review> = ({id, movie, poster, avgtotal, avgra
                 <div className="info">
                     <div className="info-review">
                         <img className='rank-type-icon' alt="rank-type" src={require(`../media/${actors}.png`)} />
-                        <p className="movie-total">{total !== null? `${total}/100` : "N/A"}</p>
+                        <p className="movie-total">{(total !== null && total !== undefined)? `${total}/100` : "N/A"}</p>
                         <img hidden={total === null} className="butter" alt="butter" src={total >= 69 ? ButteredIcon : NotButteredIcon} />
                     </div>
                     <p className="movie-title">{movie}</p>
