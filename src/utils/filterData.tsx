@@ -831,6 +831,7 @@ export const studiocompanyOptions: object[] = [
 
 export const universeFeatured: DropdownOption[] = [
   { value: 'Adam Sandler-verse', label: 'Adam Sandler-verse' },
+  {value: 'A Quiet Place Franchise', label: 'A Quiet Place Franchise'},
   { value: 'Alien Universe', label: 'Alien Universe' },
   { value: 'Bourne Universe', label: 'Bourne Universe' },
   { value: 'Coen Brothers Universe', label: 'Coen Brothers Universe' },
@@ -1106,6 +1107,7 @@ export const universeOptions: object[] = [
 ]
 
 export const countryOptions: DropdownOption[] = [
+  {value: 'Bosnia and Herzegovina', label: 'Bosnia and Herzegovina'},
   {value: "Canada", label: "Canada"},
   {value: "China", label: "China"},
   {value: "Denmark", label: "Denmark"},
