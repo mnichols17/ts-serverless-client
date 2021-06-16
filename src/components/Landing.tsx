@@ -18,15 +18,43 @@ const Landing:React.FC = (props: any) => {
     const {loading, isLoading, currentView, resetPage} = useContext(SearchContext);
     const [reviews, setReviews] = useState<Review[][]>([]);
 
-    const landingTitles = [
-        "Newest Releases",
-        "Jeff D. Lowe's Picks",
-        "KenJac's Picks",
-        "BEST DISNEY LIVE-ACTION REMAKES",
-        "Top 10 All-Time",
-        "Jeff D. Lowe's Top 10",
-        "KenJac's Top 10",
-        "Top 10 of 2021",
+    const landingLists = [
+        {
+            title: "Newest Releases",
+            rankType: 'average'
+        },
+        {
+            title: "COMING SOON (END OF JUNE - EARLY JULY)",
+            rankType: 'average'
+        },
+        {
+            title: "Jeff D. Lowe's Picks",
+            rankType: 'jdl'
+        },
+        {
+            title: "KenJac's Picks",
+            rankType: 'kenjac'
+        },
+        {
+            title: "BEST HOCKEY & BASKETBALL MOVIES",
+            rankType: 'average'
+        },
+        {
+            title: "Top 10 All-Time",
+            rankType: 'average'
+        },
+        {
+            title: "Jeff D. Lowe's Top 10",
+            rankType: 'jdl'
+        },
+        {
+            title: "KenJac's Top 10",
+            rankType: 'kenjac'
+        },
+        {
+            title: "Top 10 of 2021",
+            rankType: 'average'
+        },
     ]
 
     useEffect(() => {
@@ -36,13 +64,13 @@ const Landing:React.FC = (props: any) => {
 
     const showList = (e: any) => {
         switch(e.target.id){
-            case('5'):
+            case('6'):
                 resetPage({ratings: {value: 'jeff', label: <span className="filter-flex">Jeff D. Lowe <img className="filter-icon" src={require(`../media/jdl.png`)} alt={'test'}/></span>}})
                 break;
-            case('6'):
+            case('7'):
                 resetPage({ratings: {value: 'kenjac', label: <span className="filter-flex">KenJac <img className="filter-icon" src={require(`../media/kenjac.png`)} alt={'test'}/></span>}})
                 break;
-            case('7'):
+            case('8'):
                 resetPage({years: [{value: '2021', label: '2021'}]})
                 break;
             default:
@@ -62,26 +90,24 @@ const Landing:React.FC = (props: any) => {
         .catch(err => console.error(err))
     }
     
-    let looper = -1;
-
     return (
         loading? <ReactLoading type={"spin"} color={"yellow"}/> :
         <>
             {reviews.map((r, index) => {
-                looper = index === 4? 0 : looper + 1;
+                const {title, rankType} = landingLists[index]
                 return(
                     <div className="landing-container" key={index}>
-                        <img hidden={index !== 1} src={Weekly} alt="Weekly"/>
-                        <h3 className='landing-weekly' hidden={index !== 1}></h3>
-                        <hr hidden={index !== 4} />
+                        <img hidden={index !== 2} src={Weekly} alt="Weekly"/>
+                        <h3 className='landing-weekly' hidden={index !== 2} />
+                        <hr hidden={index !== 5} />
                         <div className="landing-label">
-                            <h3 className="landing-title title-font">{landingTitles[index]}</h3>
-                            <h3 id={`${index}`} className="landing-toList" hidden={index < 4} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
+                            <h3 className="landing-title title-font">{title}</h3>
+                            <h3 id={`${index}`} className="landing-toList" hidden={index < 5} onClick={showList}> (Full Rankings <FontAwesomeIcon className="toList-icon" icon={faAngleDoubleRight} />)</h3>
                         </div>
                         <div className="landing-list">
                             {r.map(({id, avgrank, jlrank, kjrank, movie, avgtotal, jeff, kenjac, poster, buttered, oscar_winner, goldenglobes, listed, seen}) => {
                                 return <ReviewItem key={id} id={id} movie={movie} avgrank={jlrank || kjrank || avgrank} avgtotal={jeff || kenjac || avgtotal}  poster={poster} 
-                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={(looper % 3 === 0)? 'average' : (looper === 1 || looper === 4)? 'jdl' : "kenjac"} 
+                                buttered={buttered} oscar_winner={oscar_winner} goldenglobes={goldenglobes} actors={rankType} 
                                 listed={listed} seen={seen}/> 
                             })}
                         </div>
