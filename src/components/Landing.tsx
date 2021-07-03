@@ -36,7 +36,7 @@ const Landing:React.FC = (props: any) => {
             rankType: 'kenjac'
         },
         {
-            title: "BEST HOCKEY & BASKETBALL MOVIES",
+            title: "JULY 4th WEEKEND MOVIES",
             rankType: 'average'
         },
         {
