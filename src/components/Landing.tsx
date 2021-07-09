@@ -24,7 +24,7 @@ const Landing:React.FC = (props: any) => {
             rankType: 'average'
         },
         {
-            title: "COMING SOON (END OF JUNE - EARLY JULY)",
+            title: "COMING SOON (JULY 2021)",
             rankType: 'average'
         },
         {
@@ -36,7 +36,7 @@ const Landing:React.FC = (props: any) => {
             rankType: 'kenjac'
         },
         {
-            title: "JULY 4th WEEKEND MOVIES",
+            title: "VACATION, BEACH & OCEAN MOVIES",
             rankType: 'average'
         },
         {
