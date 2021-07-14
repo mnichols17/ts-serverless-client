@@ -652,7 +652,6 @@ export const subGenreOptions: DropdownOption[] = [
   {value: "Psychological Horror", label: "Psychological Horror"},
   {value: "Psychological Thriller", label: "Psychological Thriller"},
   {value: "Raunchy & Sex Humor", label: "Raunchy & Sex Humor"},
-  {value: "Religion", label: "Religion"},
   {value: "Religious", label: "Religious"},
   {value: "Road & Roadtrip", label: "Road & Roadtrip"},
   {value: "Road/Roadtrip & Travel", label: "Road/Roadtrip & Travel"},
